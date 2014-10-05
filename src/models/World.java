@@ -33,7 +33,8 @@ public class World implements Serializable {
 		/**
 		 * Adding an object to the square if there is no object on the square
 		 * 
-		 * @param object - the object you want to add to the sqaure
+		 * @see replaceObject
+		 * @param object - the object to add to the square
 		 * @return true - iff the object was added to the board
 		 * @return false - the object was not added to the board
 		 */
@@ -45,6 +46,21 @@ public class World implements Serializable {
 			return false; 	
 		}
 		/**
+		 * Replaces the current object on the square.
+		 * If there is no current object, this returns false
+		 * 
+		 * @see addObject
+		 * 
+		 * @param object - the object to add to the square
+		 * @return true - iff the object replaced the old object on the square
+		 * @return false - iff the object did not replace the old object on the square
+		 */
+		public boolean replaceObject(EObject object){
+			if(this.isEmpty()) return false; 
+			this.object = object; 
+			return true; 
+		}
+		/**
 		 * Check if the square is empty
 		 * 
 		 * @return true - iff there is no object in the square
@@ -53,8 +69,6 @@ public class World implements Serializable {
 			if(this.object == null) return true; 
 			return false; 
 		}
-		
-		
 		
 	}
 	Square square = new Square(); //added to shut eclipse up
