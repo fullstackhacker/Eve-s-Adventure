@@ -13,5 +13,8 @@ public class Bamboo extends Item implements Serializable{
 	 * Serializable ID
 	 */
 	private static final long serialVersionUID = 7L;
-
+	
+	public Bamboo(int iD){ 
+		super(iD); 
+	}
 }

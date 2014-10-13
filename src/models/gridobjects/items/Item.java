@@ -12,11 +12,19 @@ import models.gridobjects.GridObject;
  * @author Carmine Iannaccone
  * 
  */
-public class Item extends GridObject implements Serializable {
+public abstract class Item extends GridObject implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5L;
+	/**
+	 * ID of the item to help distinguish it from other items
+	 */
+	private static int iD; 
+
+	public Item(int iD){ 
+		this.iD =  iD; 
+	}
 
 }

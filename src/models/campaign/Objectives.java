@@ -3,7 +3,7 @@ package models.campaign;
 import java.util.ArrayList;
 
 /**
- * Different objectives in the levels
+ * A static class for all objectives that are valid
  * 
  * Can only have one per level
  */
