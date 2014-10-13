@@ -100,6 +100,5 @@ public class World implements Serializable {
 	
 	public World(int height, int width){ 
 		
-	} 
 	}
 }
