@@ -1,4 +1,4 @@
-package models.gridobjects;
+package models;
 
 import java.io.Serializable;
 

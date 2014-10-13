@@ -2,7 +2,7 @@ package models.level;
 
 import java.io.Serializable;
 
-import models.gridobjects.GridObject;
+import models.GridObject;
 
 /**
  * World represents the playing environment with Eve and the different things that Eve can interact with 
