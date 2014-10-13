@@ -31,7 +31,7 @@ public class World implements Serializable {
 		 * Constructor
 		 */
 		public Square(){
-			gObject = null; 
+			this.gObject = null; 
 		}
 		/**
 		 * Adding an object to the square if there is no object on the square
