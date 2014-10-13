@@ -1,6 +1,8 @@
-package models.gridobjects;
+package models.items;
 
 import java.io.Serializable;
+
+import models.GridObject;
 
 /**
  * The Item class extends EObject and acts as a super class for the Bamboo,
