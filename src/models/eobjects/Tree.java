@@ -1,4 +1,6 @@
-package models;
+package models.eobjects;
+
+import java.io.Serializable;
 
 /**
  * 
@@ -10,7 +12,12 @@ package models;
  * 
  *         
  */
-public class Tree extends Item {
+public class Tree extends Item implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9L;
 
 	/**
 	 * Checks to see if the Tree has at least one Bamboo object stored inside of

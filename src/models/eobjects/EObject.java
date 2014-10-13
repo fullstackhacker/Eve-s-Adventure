@@ -1,4 +1,6 @@
-package models;
+package models.eobjects;
+
+import java.io.Serializable;
 
 /**
  * EObjects are interactable objects in Eve's Adventure
@@ -13,7 +15,11 @@ package models;
  * - walls
  *
  */
-public abstract class EObject {
+public abstract class EObject implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
 	/**
 	 * Name of the object 
 	 */

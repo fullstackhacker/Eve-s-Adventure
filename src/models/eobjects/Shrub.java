@@ -1,4 +1,6 @@
-package models;
+package models.eobjects;
+
+import java.io.Serializable;
 
 /**
  * The Shrub object extends Item and acts as a more limited Tree. It blocks
@@ -7,7 +9,12 @@ package models;
  * @author Carmine Iannaccone
  * 
  */
-public class Shrub extends Item {
+public class Shrub extends Item implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8L;
 
 	/**
 	 * Checks to see if the Shrub has at least one Bamboo object stored inside

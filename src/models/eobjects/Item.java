@@ -1,4 +1,6 @@
-package models;
+package models.eobjects;
+
+import java.io.Serializable;
 
 /**
  * The Item class extends EObject and acts as a super class for the Bamboo,
@@ -8,6 +10,11 @@ package models;
  * @author Carmine Iannaccone
  * 
  */
-public class Item extends EObject {
+public class Item extends EObject implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5L;
 
 }

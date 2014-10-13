@@ -1,4 +1,6 @@
-package models;
+package models.eobjects;
+
+import java.io.Serializable;
 
 /**
  * The Wall object extends Item and acts as a pure obstruction in the grid
@@ -7,7 +9,12 @@ package models;
  * @author Carmine Iannaccone
  * 
  */
-public class Wall extends Item {
+public class Wall extends Item implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 10L;
 
 	/**
 	 * Locates the coordinate of the eastern most section of a wall within a

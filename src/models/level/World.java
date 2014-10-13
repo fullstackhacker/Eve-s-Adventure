@@ -1,6 +1,8 @@
-package models;
+package models.level;
 
 import java.io.Serializable;
+
+import models.eobjects.EObject;
 
 /**
  * World represents the playing environment with Eve and the different things that Eve can interact with 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * 
  */
 public class World implements Serializable {
+
 	/**
 	 * Square represents a location in the world. A square can be occupied by Eve,
 	 * one her friends, a stick of bamboo, a wall, or a shrub
@@ -61,16 +64,42 @@ public class World implements Serializable {
 			return true; 
 		}
 		/**
+		 * Removes the object from the square
+		 *  
+		 */
+		public void removeObject(){
+			this.object = null; 
+		}
+		/**
 		 * Check if the square is empty
 		 * 
 		 * @return true - iff there is no object in the square
 		 */
 		public boolean isEmpty(){
-			if(this.object == null) return true; 
-			return false; 
+			return this.object == null;
 		}
 		
 	}
-	Square square = new Square(); //added to shut eclipse up
 	
+	/**
+	 * Serailizable ID for saving
+	 */
+	private static final long serialVersionUID = 2L;
+
+	/**
+	 * Grid of Squares
+	 */
+	private Square[][] world; 
+	
+	/**
+	 * Constructor for the world	 * 
+	 * 
+	 * @param height - The height of the world 
+	 * @param width - The width of the world
+	 */
+	
+	public World(int height, int width){ 
+		
+	} 
+	}
 }
