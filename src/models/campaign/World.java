@@ -1,4 +1,4 @@
-package models.level;
+package models.campaign;
 
 import java.io.Serializable;
 
