@@ -2,7 +2,7 @@ package models.level;
 
 import java.io.Serializable;
 
-import models.eobjects.EObject;
+import models.gridobjects.GridObject;
 
 /**
  * World represents the playing environment with Eve and the different things that Eve can interact with 
@@ -26,7 +26,7 @@ public class World implements Serializable {
 		/**
 		 * Object that is on square
 		 */
-		private EObject object; 
+		private GridObject object; 
 		/**
 		 * Constructor
 		 */
@@ -41,7 +41,7 @@ public class World implements Serializable {
 		 * @return true - iff the object was added to the board
 		 * @return false - the object was not added to the board
 		 */
-		public boolean addObject(EObject object){
+		public boolean addObject(GridObject object){
 			if(this.isEmpty()){
 				this.object = object; 
 				return true; 
@@ -58,7 +58,7 @@ public class World implements Serializable {
 		 * @return true - iff the object replaced the old object on the square
 		 * @return false - iff the object did not replace the old object on the square
 		 */
-		public boolean replaceObject(EObject object){
+		public boolean replaceObject(GridObject object){
 			if(this.isEmpty()) return false; 
 			this.object = object; 
 			return true; 
@@ -97,7 +97,6 @@ public class World implements Serializable {
 	 * @param height - The height of the world 
 	 * @param width - The width of the world
 	 */
-	
 	public World(int height, int width){ 
 		
 	}

@@ -1,4 +1,4 @@
-package models.eobjects;
+package models.gridobjects;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * - walls
  *
  */
-public abstract class EObject implements Serializable{
+public abstract class GridObject implements Serializable{
 	/**
 	 * 
 	 */

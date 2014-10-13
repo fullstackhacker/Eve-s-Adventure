@@ -1,4 +1,4 @@
-package models.eobjects;
+package models.gridobjects;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author Carmine Iannaccone
  * 
  */
-public class Item extends EObject implements Serializable {
+public class Item extends GridObject implements Serializable {
 
 	/**
 	 * 
