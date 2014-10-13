@@ -1,6 +1,6 @@
-package models.creatures;
+package models.gridobjects.creatures;
 
-import models.GridObject;
+import models.gridobjects.GridObject;
 
 public class Creature extends GridObject {
 

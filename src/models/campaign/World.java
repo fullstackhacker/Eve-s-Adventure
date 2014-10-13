@@ -2,7 +2,7 @@ package models.campaign;
 
 import java.io.Serializable;
 
-import models.GridObject;
+import models.gridobjects.GridObject;
 
 /**
  * World represents the playing environment with Eve and the different things that Eve can interact with 
