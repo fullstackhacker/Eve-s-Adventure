@@ -1,8 +1,15 @@
 package models.campaign;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import models.gridobjects.GridObject;
+import models.gridobjects.creatures.Creature;
+import models.gridobjects.items.Bamboo;
+import models.gridobjects.items.Item;
+import models.gridobjects.items.Shrub;
+import models.gridobjects.items.Tree;
+import models.gridobjects.items.Wall;
 
 /**
  * World represents the playing environment with Eve and the different things that Eve can interact with 
@@ -30,7 +37,7 @@ public class World implements Serializable {
 		/**
 		 * Constructor
 		 */
-		public Square(){
+		private Square(){
 			this.gObject = null; 
 		}
 		/**
@@ -41,7 +48,7 @@ public class World implements Serializable {
 		 * @return true - iff the object was added to the board
 		 * @return false - the object was not added to the board
 		 */
-		public boolean addObject(GridObject object){
+		private boolean addObject(GridObject object){
 			if(this.isEmpty()){
 				this.gObject = object; 
 				return true; 
@@ -58,7 +65,7 @@ public class World implements Serializable {
 		 * @return true - iff the object replaced the old object on the square
 		 * @return false - iff the object did not replace the old object on the square
 		 */
-		public boolean replaceObject(GridObject gObject){
+		private boolean replaceObject(GridObject gObject){
 			if(this.isEmpty()) return false; 
 			this.gObject = gObject; 
 			return true; 
@@ -67,7 +74,7 @@ public class World implements Serializable {
 		 * Removes the object from the square
 		 *  
 		 */
-		public void removeObject(){
+		private void removeObject(){
 			this.gObject = null; 
 		}
 		/**
@@ -75,7 +82,7 @@ public class World implements Serializable {
 		 * 
 		 * @return true - iff there is no object in the square
 		 */
-		public boolean isEmpty(){
+		private boolean isEmpty(){
 			return this.gObject == null;
 		}
 		@Override
@@ -107,17 +114,15 @@ public class World implements Serializable {
 	 * @param width - The width of the world
 	 */
 	public World(int height, int width){ 
-		
+		this.world[0][0] = new Square(); 
 	}
 	/**
 	 * Add an object to the world at a specified location
 	 * 
 	 * @param gObject - the GridObject to add to the world
-	 * @param x - the x-coordinate of the location 
-	 * @param y - the y-coordinate of the location
 	 * @return - true iff the GridObject was placed into the world
 	 */
-	public boolean addObject(GridObject gObject, int x, int y){ 
+	public boolean addObject(GridObject gObject){ 
 		return false; //added to make compiler happy #sesh
 	}
 	/**
@@ -125,11 +130,9 @@ public class World implements Serializable {
 	 * 
 	 * @see addObject()
 	 * @param gObject - the GridObject to add to the world
-	 * @param x - the x-coordinate of the location
-	 * @param y - the y-coordinate of the location
 	 * @return true iff the GridObject replaced another object in the world
 	 */
-	public boolean replaceObject(GridObject gObject, int x , int y){ 
+	public boolean replaceObject(GridObject gObject){ 
 		return false; //added to make compiler happy #sesh
 	}
 	/**
@@ -175,6 +178,72 @@ public class World implements Serializable {
 	public int getWidth(){
 		return this.world[0].length; 
 	} 
+	/**
+	 * Gets all the objects in the world.
+	 * This includes all creatures and items -- so everything
+	 * 
+	 * @return - all the objects that are currently in the world
+	 */
+	public ArrayList<GridObject> getObjects(){ 
+		return null; //added to make compiler unhappy 
+	}
+	/**
+	 * Gets only the items in the world. Creatures not included.
+	 * 
+	 * @return -  the items in the world
+	 */
+	public ArrayList<Item> getItems(){ 
+		return null; //shhhhhhut up 
+	}
+	/**
+	 * Gets only bamboo in the world 
+	 * 
+	 * @return - all the bamboo in the world
+	 */
+	public ArrayList<Bamboo> getBamboo(){
+		return null; //compiler be mad yo
+	}
+	/**
+	 * Gets all the creatures EXCLUDING Eve
+	 * 
+	 * @see getEve()
+	 * 
+	 * @return - the creatures in the world EXCLUDING eve
+	 */
+	public ArrayList<Creature> getCreatures(){ 
+		return null; //dat compiler camp
+	}
+	/**
+	 * Gets Eve 
+	 * @return - the Eve Creature Object
+	 */
+	public Creature getEve(){ 
+		return null; //we will return Eve if you meet our demands 
+	}
+	/**
+	 * Gets only the shrubs in the world
+	 * 
+	 * @return - all the shrubs in the world
+	 */
+	public ArrayList<Shrub> getShrubs(){
+		return null; //woot woot compilers
+	}
+	/**
+	 * Gets only the trees in the world
+	 * 
+	 * @return - all the trees in the world
+	 */
+	public ArrayList<Tree> getTrees(){
+		return null; //eclipse's red lines are scary
+	}
+	/**
+	 * Gets only the trees in the world
+	 * 
+	 * @return - all the trees in the world
+	 */
+	public ArrayList<Wall> getWalls(){
+		return null; //no one's gonna read these anyways
+	}
 	/**
 	 * Prints the world out to the console
 	 */
