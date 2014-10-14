@@ -149,7 +149,6 @@ public class Creature extends GridObject {
 	 * Returns the identifier. 
 	 */
 	public String toString(){
-		//TODO
-		return "";
+		return String.valueOf(Character.toUpperCase(this.getName().charAt(0)));
 	}
 }
