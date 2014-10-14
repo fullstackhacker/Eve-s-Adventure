@@ -31,7 +31,7 @@ public class Objectives {
 	/**
 	 * Gets all the possible objectives that a level can have
 	 * 
-	 * @return - the list of all possible objectives
+	 * @return  the list of all possible objectives
 	 */
 	public static ArrayList<String> getPossibleObjectives(){ 
 		ArrayList<String> possibleObjectives = new ArrayList<String>(); 
@@ -45,8 +45,8 @@ public class Objectives {
 	/**
 	 * Checks to see if the objective is valid
 	 * 
-	 * @param objective - the objective to check 
-	 * @return - true iff the objective is valid
+	 * @param objective  the objective to check 
+	 * @return  true iff the objective is valid
 	 */
 	public static boolean validate(String objective){ 
 		return Objectives.getPossibleObjectives().contains(objective); 

@@ -26,7 +26,7 @@ public class Tree extends Item implements Serializable{
 	 * Checks to see if the Tree has at least one Bamboo object stored inside of
 	 * it.
 	 * 
-	 * @return true - If the Tree has a Bamboo object inside it.
+	 * @return true  If the Tree has a Bamboo object inside it.
 	 */
 	public boolean hasBamboo() {
 
@@ -36,7 +36,7 @@ public class Tree extends Item implements Serializable{
 	/**
 	 * Checks to see if the Tree is near a Tree object.
 	 * 
-	 * @return true - If the Tree is near a Tree.
+	 * @return true  If the Tree is near a Tree.
 	 */
 	public boolean nearTree() {
 
@@ -46,7 +46,7 @@ public class Tree extends Item implements Serializable{
 	/**
 	 * Checks to see if the Tree is near a Wall object.
 	 * 
-	 * @return true - If the Tree is near a Wall.
+	 * @return true  If the Tree is near a Wall.
 	 */
 	public boolean nearWall() {
 
@@ -60,9 +60,9 @@ public class Tree extends Item implements Serializable{
 	 * because the space is out of bounds, this method will do nothing.
 	 * 
 	 * @param name
-	 *            - The name to be given to the Tree object being created.
+	 *             The name to be given to the Tree object being created.
 	 * @param direction
-	 *            - Takes an int from 1-4 to specify which neighbor to remove. 1
+	 *             Takes an int from 14 to specify which neighbor to remove. 1
 	 *            (North), 2 (South), 3 (East), 4 (West).
 	 */
 	public void addNearbyTree(String name, int direction) {
@@ -74,7 +74,7 @@ public class Tree extends Item implements Serializable{
 	 * parameter does not exist then this method does nothing.
 	 * 
 	 * @param tree
-	 *            - The name of the Tree object to remove.
+	 *             The name of the Tree object to remove.
 	 */
 	public void removeNearbyTree(Tree tree) {
 
@@ -82,7 +82,7 @@ public class Tree extends Item implements Serializable{
 	
 	/**
 	 * Determines what type the object is and returns the first letter of that types name.
-	 * @return type - Returns the first letter of the type name. (Example: "S" = Shrub)
+	 * @return type  Returns the first letter of the type name. (Example: "S" = Shrub)
 	 */
 	public String toString() {
 		return null;

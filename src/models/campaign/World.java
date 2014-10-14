@@ -46,9 +46,9 @@ public class World implements Serializable {
 		 * Adding an item to the square if there is no item on the square
 		 * 
 		 * @see replaceItem
-		 * @param item - the object to add to the square
-		 * @return true - iff the object was added to the board
-		 * @return false - the object was not added to the board
+		 * @param item  the object to add to the square
+		 * @return true  iff the object was added to the board
+		 * @return false  the object was not added to the board
 		 */
 		private boolean addItem(Item item){
 			if(this.hasItem()){
@@ -63,9 +63,9 @@ public class World implements Serializable {
 		 * 
 		 * @see addItem
 		 * 
-		 * @param item - the object to add to the square
-		 * @return true - iff the object replaced the old object on the square
-		 * @return false - iff the object did not replace the old object on the square
+		 * @param item  the object to add to the square
+		 * @return true  iff the object replaced the old object on the square
+		 * @return false  iff the object did not replace the old object on the square
 		 */
 		private boolean replaceItem(Item item){
 			if(this.hasItem()) return false; 
@@ -84,8 +84,8 @@ public class World implements Serializable {
 		 * 
 		 * @see replaceCreature()
 		 * 
-		 * @param creature - the creature to add the square
-		 * @return - true iff able to add a creature to the square
+		 * @param creature  the creature to add the square
+		 * @return  true iff able to add a creature to the square
 		 */
 		private boolean addCreature(Creature creature){ 
 			return false; 
@@ -95,8 +95,8 @@ public class World implements Serializable {
 		 * 
 		 * @see addCreature()
 		 * 
-		 * @param creature - the new creature for the square
-		 * @return - true iff replaces a creature
+		 * @param creature  the new creature for the square
+		 * @return  true iff replaces a creature
 		 */
 		private boolean replaceCreature(Creature creature){ 
 			return false; 
@@ -110,7 +110,7 @@ public class World implements Serializable {
 		/**
 		 * Check if the square has an item
 		 * 
-		 * @return - true iff there is an object in the square
+		 * @return  true iff there is an object in the square
 		 */
 		private boolean hasItem(){
 			return this.item != null;
@@ -118,7 +118,7 @@ public class World implements Serializable {
 		/**
 		 * Check if the square has a creature
 		 * 
-		 * @return - true iff there is a creature in the square
+		 * @return  true iff there is a creature in the square
 		 */
 		private boolean hasCreature(){
 			return this.creature != null; 
@@ -127,7 +127,7 @@ public class World implements Serializable {
 		/**
 		 * Converts the Square to a string
 		 * 
-		 * @return - a String representation the square based on what object is on the square
+		 * @return  a String representation the square based on what object is on the square
 		 */
 		public String toString(){ 
 			String s = this.hasCreature()? this.creature.toString() : " ";
@@ -153,8 +153,8 @@ public class World implements Serializable {
 	/**
 	 * Constructor for the world
 	 * 
-	 * @param height - The height of the world 
-	 * @param width - The width of the world
+	 * @param height  The height of the world 
+	 * @param width  The width of the world
 	 */
 	public World(int height, int width){ 
 		this.world[0][0] = new Square(); 
@@ -169,6 +169,8 @@ public class World implements Serializable {
 	}
 	/**
 	 * Change the name of the world 
+	 * 
+	 * @param name  the new name for the world
 	 */
 	public void replaceName(String name){
 		
@@ -177,10 +179,10 @@ public class World implements Serializable {
 	/**
 	 * Add an item to the world at a specified location
 	 * 
-	 * @see relaceItem
+	 * @see #replaceItem(Item)
 	 * 
-	 * @param item - the Item to add to the world
-	 * @return - true iff the Item was placed into the world
+	 * @param item  the Item to add to the world
+	 * @return  true iff the Item was placed into the world
 	 */
 	public boolean addItem(Item item){ 
 		return false; //added to make compiler happy #sesh
@@ -188,8 +190,9 @@ public class World implements Serializable {
 	/**
 	 * Replaces the current object on the world at the specified location 
 	 * 
-	 * @see addItem()
-	 * @param item - the Item to add to the world
+	 * @see #addItem(Item)
+	 * 
+	 * @param item  the Item to add to the world
 	 * @return true iff the Item replaced another item in the world
 	 */
 	public boolean replaceItem(Item item){ 
@@ -198,8 +201,8 @@ public class World implements Serializable {
 	/**
 	 * Removes an object from the world at the specified location
 	 * 
-	 * @param x - the x-coordinate of the location
-	 * @param y - the y-coordinate of the location
+	 * @param x  the xcoordinate of the location
+	 * @param y  the ycoordinate of the location
 	 */
 	public void removeItem(int x, int y){ 
 		
@@ -207,10 +210,10 @@ public class World implements Serializable {
 	/**
 	 * Adds a creature if there isn't anything on that square
 	 * 
-	 * @see replaceCreature(); 
+	 * @see #replaceCreature(Creature)
 	 * 
-	 * @param creature - the creature 
-	 * @return - true iff added the creature to the square
+	 * @param creature  the creature 
+	 * @return  true iff added the creature to the square
 	 */
 	public boolean addCreature(Creature creature){
 		return false; 
@@ -218,8 +221,8 @@ public class World implements Serializable {
 	/**
 	 * Replaces the creature on the square
 	 * 
-	 * @param creature - the new creature for the square
-	 * @return - true iff the old creature was replaced by the new creature
+	 * @param creature  the new creature for the square
+	 * @return  true iff the old creature was replaced by the new creature
 	 */
 	public boolean replaceCreature(Creature creature){
 		return false; 
@@ -227,8 +230,8 @@ public class World implements Serializable {
 	/**
 	 * Remove the creature on the specified location
 	 * 
-	 * @param x - the x coordinate of the location
-	 * @param y - the y coordinate of the location
+	 * @param x  the x coordinate of the location
+	 * @param y  the y coordinate of the location
 	 */
 	public void removeCreature(int x, int y){
 		
@@ -236,9 +239,9 @@ public class World implements Serializable {
 	/**
 	 * Checks to see if there is an item on the location
 	 * 
-	 * @param x - the x coordinate of the location
-	 * @param y - the y coordinate of the location
-	 * @return - true iff the specified location has an item
+	 * @param x  the x coordinate of the location
+	 * @param y  the y coordinate of the location
+	 * @return  true iff the specified location has an item
 	 */
 	public boolean hasItem(int x, int y){ 
 		return false; //added to shut up compiler
@@ -246,9 +249,9 @@ public class World implements Serializable {
 	/**
 	 * Checks to see if there is a creature on the location
 	 * 
-	 * @param x - the x coordinate of the location 
-	 * @param y - the y coordinate of the location
-	 * @return - true iff the specified location has a creature
+	 * @param x  the x coordinate of the location 
+	 * @param y  the y coordinate of the location
+	 * @return  true iff the specified location has a creature
 	 */
 	public boolean hasCreature(int x, int y){
 		return false; 
@@ -256,7 +259,7 @@ public class World implements Serializable {
 	/**
 	 * Gets the area of the world
 	 * 
-	 * @return - the area of the world
+	 * @return  the area of the world
 	 */
 	public int getArea(){ 
 		return this.getHeight() * this.getWidth(); 
@@ -264,7 +267,7 @@ public class World implements Serializable {
 	/**
 	 * Gets the height of the world
 	 * 
-	 * @return - the height of the world
+	 * @return  the height of the world
 	 */
 	public int getHeight(){
 		return this.world.length;
@@ -272,16 +275,16 @@ public class World implements Serializable {
 	/**
 	 * Gets the width of the world
 	 * 
-	 * @return - the width of the world 
+	 * @return  the width of the world 
 	 */
 	public int getWidth(){
 		return this.world[0].length; 
 	} 
 	/**
 	 * Gets all the objects in the world.
-	 * This includes all creatures and items -- so everything
+	 * This includes all creatures and items  so everything
 	 * 
-	 * @return - all the objects that are currently in the world
+	 * @return  all the objects that are currently in the world
 	 */
 	public ArrayList<GridObject> getObjects(){ 
 		return null; //added to make compiler unhappy 
@@ -289,7 +292,7 @@ public class World implements Serializable {
 	/**
 	 * Gets only the items in the world. Creatures not included.
 	 * 
-	 * @return -  the items in the world
+	 * @return   the items in the world
 	 */
 	public ArrayList<Item> getItems(){ 
 		return null; //shhhhhhut up 
@@ -297,7 +300,7 @@ public class World implements Serializable {
 	/** * @author Mushaheed Kapadia
 	 * Gets only bamboo in the world 
 	 * 
-	 * @return - all the bamboo in the world
+	 * @return  all the bamboo in the world
 	 */
 	public ArrayList<Bamboo> getBamboo(){
 		return null; //compiler be mad yo
@@ -305,16 +308,16 @@ public class World implements Serializable {
 	/**
 	 * Gets all the creatures EXCLUDING Eve
 	 * 
-	 * @see getEve()
+	 * @see #getEve()
 	 * 
-	 * @return - the creatures in the world EXCLUDING eve
+	 * @return  the creatures in the world EXCLUDING eve
 	 */
 	public ArrayList<Creature> getCreatures(){ 
 		return null; //dat compiler camp
 	}
 	/**
 	 * Gets Eve 
-	 * @return - the Eve Creature Object
+	 * @return  the Eve Creature Object
 	 */
 	public Creature getEve(){ 
 		return null; //we will return Eve if you meet our demands 
@@ -322,7 +325,7 @@ public class World implements Serializable {
 	/**
 	 * Gets only the shrubs in the world
 	 * 
-	 * @return - all the shrubs in the world
+	 * @return  all the shrubs in the world
 	 */
 	public ArrayList<Shrub> getShrubs(){
 		return null; //woot woot compilers
@@ -330,7 +333,7 @@ public class World implements Serializable {
 	/**
 	 * Gets only the trees in the world
 	 * 
-	 * @return - all the trees in the world
+	 * @return  all the trees in the world
 	 */
 	public ArrayList<Tree> getTrees(){
 		return null; //eclipse's red lines are scary
@@ -338,7 +341,7 @@ public class World implements Serializable {
 	/**
 	 * Gets only the trees in the world
 	 * 
-	 * @return - all the trees in the world
+	 * @return  all the trees in the world
 	 */
 	public ArrayList<Wall> getWalls(){
 		return null; //no one's gonna read these anyways
@@ -352,9 +355,9 @@ public class World implements Serializable {
 	@Override
 	/**
 	 * Converts the world into a string based on what is on the squares
-	 * Prints out in a grid-like format
+	 * Prints out in a gridlike format
 	 * 
-	 * @return - a string that resembles an ASCII grid
+	 * @return  a string that resembles an ASCII grid
 	 */
 	public String toString(){ 
 		String s = ""; 
