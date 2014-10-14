@@ -15,6 +15,10 @@ public class Level implements Serializable {
 	 */
 	private static final long serialVersionUID = 11L;
 	/**
+	 * Name of the level
+	 */
+	private String name; 
+	/**
 	 * The world for the level
 	 */
 	private World world; 

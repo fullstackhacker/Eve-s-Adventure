@@ -13,9 +13,7 @@ import models.gridobjects.items.Wall;
 
 /**
  * World represents the playing environment with Eve and the different things that Eve can interact with 
- * 
- * @author Mushaheed Kapadia
- * 
+ *  
  */
 public class World implements Serializable {
 
@@ -138,7 +136,10 @@ public class World implements Serializable {
 			return s;
 		}
 	}
-	
+	/**
+	 * Name of the world
+	 */
+	private String name; 
 	/**
 	 * Serailizable ID for saving
 	 */
@@ -158,6 +159,21 @@ public class World implements Serializable {
 	public World(int height, int width){ 
 		this.world[0][0] = new Square(); 
 	}
+	/**
+	 * Gets the name of the world
+	 * 
+	 * @return the name of the world 
+	 */
+	public String getName(){
+		return null; 
+	}
+	/**
+	 * Change the name of the world 
+	 */
+	public void replaceName(String name){
+		
+	}
+	
 	/**
 	 * Add an item to the world at a specified location
 	 * 
@@ -278,7 +294,7 @@ public class World implements Serializable {
 	public ArrayList<Item> getItems(){ 
 		return null; //shhhhhhut up 
 	}
-	/**
+	/** * @author Mushaheed Kapadia
 	 * Gets only bamboo in the world 
 	 * 
 	 * @return - all the bamboo in the world
