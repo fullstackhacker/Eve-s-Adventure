@@ -15,14 +15,14 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 10L;
-
+	
 	/**
 	 * Locates the coordinate of the eastern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
 	 * @return coordinate - The position of the farthest east wall section.
 	 */
-	public int end_x_east() {
+	public int end_east() {
 
 		return 0;
 	}
@@ -33,7 +33,7 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 * @return coordinate - The position of the farthest north wall section.
 	 */
-	public int end_y_north() {
+	public int end_north() {
 
 		return 0;
 	}
@@ -44,7 +44,7 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 * @return coordinate - The position of the farthest west wall section.
 	 */
-	public int end_x_west() {
+	public int end_west() {
 
 		return 0;
 	}
@@ -55,7 +55,7 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 * @return coordinate - The position of the farthest south wall section.
 	 */
-	public int end_y_south() {
+	public int end_south() {
 
 		return 0;
 	}
