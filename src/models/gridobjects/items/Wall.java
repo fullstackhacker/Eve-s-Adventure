@@ -16,6 +16,10 @@ public class Wall extends Item implements Serializable {
 	 */
 	private static final long serialVersionUID = 10L;
 
+	public Wall(int iD){ 
+		super(iD); 
+	}
+	
 	/**
 	 * Locates the coordinate of the eastern most section of a wall within a
 	 * sequence of Wall objects.
