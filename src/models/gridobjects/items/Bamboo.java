@@ -17,4 +17,9 @@ public class Bamboo extends Item implements Serializable{
 	public Bamboo(int iD){ 
 		super(iD); 
 	}
+	
+	public String returnType() {
+		return null;
+
+	}
 }

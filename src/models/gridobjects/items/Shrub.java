@@ -31,5 +31,10 @@ public class Shrub extends Item implements Serializable{
 		return false;
 	}
 	
+	public String returnType() {
+		return null;
+
+	}
+	
 
 }

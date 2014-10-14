@@ -79,5 +79,10 @@ public class Tree extends Item implements Serializable{
 	public void removeNearbyTree(Tree tree) {
 
 	}
+	
+	public String returnType() {
+		return null;
+
+	}
 
 }

@@ -26,5 +26,10 @@ public abstract class Item extends GridObject implements Serializable {
 	public Item(int iD){ 
 		this.iD =  iD; 
 	}
+	
+	public String returnType() {
+		return null;
+
+	}
 
 }
