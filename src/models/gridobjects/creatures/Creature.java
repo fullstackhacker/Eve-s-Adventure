@@ -89,6 +89,7 @@ public class Creature extends GridObject {
 	public void giveBamboo(Creature creature){
 		this.numberOfBamboo--;
 		creature.incrementBamboo();
+		
 	}
 	
 	/**
