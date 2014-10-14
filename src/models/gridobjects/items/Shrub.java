@@ -24,7 +24,7 @@ public class Shrub extends Item implements Serializable{
 	 * Checks to see if the Shrub has at least one Bamboo object stored inside
 	 * of it.
 	 * 
-	 * @return true - If the Shrub has a Bamboo object inside it.
+	 * @return true  If the Shrub has a Bamboo object inside it.
 	 */
 	public boolean hasBamboo() {
 
@@ -33,7 +33,7 @@ public class Shrub extends Item implements Serializable{
 	
 	/**
 	 * Determines what type the object is and returns the first letter of that types name.
-	 * @return type - Returns the first letter of the type name. (Example: "S" = Shrub)
+	 * @return type  Returns the first letter of the type name. (Example: "S" = Shrub)
 	 */
 	public String toString() {
 		return null;

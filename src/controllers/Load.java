@@ -1,10 +1,8 @@
 package controllers;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import models.campaign.Campaign;
+import models.campaign.Level;
+import models.campaign.World;
 
 
 /**
@@ -16,9 +14,9 @@ public class Load {
 	/**
 	 * Loads the serialized file, deserializes it, and creates the World
 	 * 
-	 * @param world the world to load
+	 * @param world  the world to load
 	 */
-	public void LoadWorld(){
+	public void loadWorld(World world){
 		
 	}
 	
@@ -27,7 +25,7 @@ public class Load {
 	 * 
 	 * @param level the level to load
 	 */
-	public void LoadLevel(){
+	public void loadLevel(Level level){
 		
 	}
 	
@@ -36,7 +34,7 @@ public class Load {
 	 * 
 	 * @param campaign the campaign to load
 	 */
-	public void LoadCampaign(){
+	public void loadCampaign(Campaign campaign){
 		
 	}
 }

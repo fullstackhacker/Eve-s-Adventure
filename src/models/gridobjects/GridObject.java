@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * EObjects are interactable objects in Eve's Adventure
  * 
- * Various Types: - person - Eve - Her friends - bamboos - shrubs - trees -
+ * Various Types:  person  Eve  Her friends  bamboos  shrubs  trees 
  * walls
  * 
  */
@@ -34,7 +34,7 @@ public abstract class GridObject implements Serializable {
 	/**
 	 * Gets the name of the object
 	 * 
-	 * @return - The name of the object
+	 * @return  The name of the object
 	 */
 	public String getName() {
 		return this.name;
@@ -62,7 +62,7 @@ public abstract class GridObject implements Serializable {
 	 * Sets the name of the object
 	 * 
 	 * @param name
-	 *            - The (new) name of the object
+	 *             The (new) name of the object
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -72,9 +72,9 @@ public abstract class GridObject implements Serializable {
 	 * Sets the coordinates of the object
 	 * 
 	 * @param xcoordinate
-	 *            - the (new) x-coordinate of the object
-	 * @param ycoorindate
-	 *            - the (new) y-coordinate of the object
+	 *             the (new) xcoordinate of the object
+	 * @param ycoordinate
+	 *             the (new) ycoordinate of the object
 	 */
 	public void setCoordinates(int xcoordinate, int ycoordinate) {
 		this.xcoordinate = xcoordinate;
@@ -82,20 +82,19 @@ public abstract class GridObject implements Serializable {
 	}
 
 	/**
-	 * Sets the X-coordinate of the object
+	 * Sets the Xcoordinate of the object
 	 * 
 	 * @param xcoordinate
-	 *            - the (new) x-coordinate of the object
+	 *             the (new) xcoordinate of the object
 	 */
 	public void setXCoordinate(int xcoordinate) {
 		this.xcoordinate = xcoordinate;
 	}
 
 	/**
-	 * Sets the Y-coordinate of the object
+	 * Sets the Ycoordinate of the object
 	 * 
-	 * @param ycoorindate
-	 *            - the (new) y-coordinate of the object
+	 * @param ycoordinate  the (new) ycoordinate of the object
 	 */
 	public void setYCoordinate(int ycoordinate) {
 		this.ycoordinate = ycoordinate;
@@ -103,7 +102,7 @@ public abstract class GridObject implements Serializable {
 
 	/**
 	 * Determines what type the object is and returns the first letter of that types name.
-	 * @return type - Returns the first letter of the type name. (Example: "S" = Shrub)
+	 * @return type  Returns the first letter of the type name. (Example: "S" = Shrub)
 	 */
 	public String toString() {
 		return null;

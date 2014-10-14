@@ -34,7 +34,7 @@ public class Level implements Serializable {
 	 * Designates how many bamboo must be picked up 
 	 * Only has a value if the bamboo objective is enabled
 	 * 
-	 * -1 designates the bamboo objective is not enabled	 *  
+	 * 1 designates the bamboo objective is not enabled	 *  
 	 */
 	private int bambooObjective; 
 	/**
@@ -44,10 +44,11 @@ public class Level implements Serializable {
 	/**
 	 * Constructor
 	 * 
-	 * @param world - the world for the level to exist in 
+	 * @param world  the world for the level to exist in 
+	 * @param description  the description for the level
 	 */
 	public Level(World world, String description){ 
-		bambooObjective = -1; 
+		bambooObjective = 1; 
 	}
 	/**
 	 * Gets the name of the level
@@ -60,7 +61,7 @@ public class Level implements Serializable {
 	/**
 	 * Replace the name of the level
 	 * 
-	 * @param name - the new name of the level
+	 * @param name  the new name of the level
 	 */
 	public void replaceName(String name){
 		
@@ -68,7 +69,7 @@ public class Level implements Serializable {
 	/**
 	 * Gets the world for the level 
 	 * 
-	 * @return - The current world for the level
+	 * @return  The current world for the level
 	 */
 	public World getWorld(){ 
 		return null; //shh compiler go to sleep
@@ -76,7 +77,7 @@ public class Level implements Serializable {
 	/**
 	 * Gets the objectives in the level 
 	 * 
-	 * @return - the objectives in the world
+	 * @return  the objectives in the world
 	 */
 	public ArrayList<String> getObjectives(){ 
 		return null; //shh
@@ -84,7 +85,7 @@ public class Level implements Serializable {
 	/**
 	 * Gets the Karel Code in the level
 	 * 
-	 * @return - the karel code in the world
+	 * @return  the karel code in the world
 	 */
 	public ArrayList<String> getKarelCode(){
 		return null; //shh
@@ -92,7 +93,7 @@ public class Level implements Serializable {
 	/**
 	 * Change the world in the level
 	 * 
-	 * @param world -  the new world for the level
+	 * @param world   the new world for the level
 	 */
 	public void changeWorld(World world){ 
 		
@@ -100,7 +101,7 @@ public class Level implements Serializable {
 	/**
 	 * Adds the Karel Code to the end of the list
 	 * 
-	 * @param karelCode - the new code string to add
+	 * @param karelCode  the new code string to add
 	 */
 	public void addKarelCode(String karelCode){ 
 		
@@ -108,9 +109,9 @@ public class Level implements Serializable {
 	/**
 	 * Inserts Karel Code into a specific location in the list
 	 *  
-	 * @param karelCode - the Karel code to add the list 
-	 * @param position - the position in the list to add it too
-	 * @return boolean - true iff able to add the karel code to that position
+	 * @param karelCode  the Karel code to add the list 
+	 * @param position  the position in the list to add it too
+	 * @return boolean  true iff able to add the karel code to that position
 	 */
 	public boolean insertKarelCode(String karelCode, int position){
 		return false; //replace
@@ -118,9 +119,9 @@ public class Level implements Serializable {
 	/**
 	 * Change the position of a Karel code segment
 	 * 
-	 * @param oldposition - the old position of the code segment
-	 * @param newposition - the new position of the code segment
-	 * @return - true iff the position change was a success
+	 * @param oldposition  the old position of the code segment
+	 * @param newposition  the new position of the code segment
+	 * @return  true iff the position change was a success
 	 */
 	public boolean changeKarelCodePosition(int oldposition, int newposition){ 
 		return false; //this is complicated but cool
@@ -128,7 +129,7 @@ public class Level implements Serializable {
 	/**
 	 * Remove Karel code from the list 
 	 * 
-	 * @param position - the position of the code in the list
+	 * @param position  the position of the code in the list
 	 */
 	public void removeKarelCode(int position){
 		
@@ -136,7 +137,7 @@ public class Level implements Serializable {
 	/**
 	 * Adds the objective to the ArrayList
 	 * 
-	 * @param objective - the new objective to add
+	 * @param objective  the new objective to add
 	 */
 	public void addObjective(String objective){
 		
@@ -144,7 +145,7 @@ public class Level implements Serializable {
 	/**
 	 * Removes an objective from the objective list
 	 * 
-	 * @param position - the position of the objective in the list
+	 * @param position  the position of the objective in the list
 	 */
 	public void removeObjective(int position){
 		
@@ -152,8 +153,8 @@ public class Level implements Serializable {
 	/**
 	 * Overwrites the description. 
 	 * 
-	 * @param description - the new description for the level 
-	 * @return true - iff the old description was overwritten by the new description
+	 * @param description  the new description for the level 
+	 * @return true  iff the old description was overwritten by the new description
 	 */
 	public boolean overwriteDescription(String description){ 
 		return false; //don't you cry

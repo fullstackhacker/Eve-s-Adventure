@@ -18,7 +18,7 @@ public class Parser {
 	/**
 	 * Constructor for the parser
 	 * 
-	 * @param karelCode - the Karel code to parse and execute
+	 * @param karelCode  the Karel code to parse and execute
 	 */
 	public Parser(ArrayList<String> karelCode){ 
 		 
@@ -44,7 +44,7 @@ public class Parser {
 	/**
 	 * Set the position of the active code block
 	 * 
-	 * @param activeCodeBlock - the new position for the active code block
+	 * @param activeCodeBlock  the new position for the active code block
 	 */
 	public void setPosition(int activeCodeBlock){
 		
@@ -64,7 +64,7 @@ public class Parser {
 	/**
 	 * Changes the karelCode and resets the activeCodeBlock
 	 * 
-	 * @param karelCode - the new Karel Code to execute
+	 * @param karelCode  the new Karel Code to execute
 	 */
 	public void changeKarelCode(ArrayList<String> karelCode){
 		
