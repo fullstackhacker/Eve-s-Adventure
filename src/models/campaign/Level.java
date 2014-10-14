@@ -50,6 +50,22 @@ public class Level implements Serializable {
 		bambooObjective = -1; 
 	}
 	/**
+	 * Gets the name of the level
+	 * 
+	 * @return the name of the level
+	 */
+	public String getName(){
+		return null; 
+	}
+	/**
+	 * Replace the name of the level
+	 * 
+	 * @param name - the new name of the level
+	 */
+	public void replaceName(String name){
+		
+	}
+	/**
 	 * Gets the world for the level 
 	 * 
 	 * @return - The current world for the level
