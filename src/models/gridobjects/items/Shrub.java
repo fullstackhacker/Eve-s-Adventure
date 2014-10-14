@@ -16,6 +16,10 @@ public class Shrub extends Item implements Serializable{
 	 */
 	private static final long serialVersionUID = 8L;
 
+	public Shrub(int iD){ 
+		super(iD); 
+	}
+	
 	/**
 	 * Checks to see if the Shrub has at least one Bamboo object stored inside
 	 * of it.
@@ -26,4 +30,6 @@ public class Shrub extends Item implements Serializable{
 
 		return false;
 	}
+	
+
 }
