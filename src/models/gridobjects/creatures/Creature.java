@@ -66,14 +66,14 @@ public class Creature extends GridObject {
 	 * Moves the object down one in the World
 	 */
 	public void moveDown(){
-		this.setYCoordinate(this.getY()  1);
+		this.setYCoordinate(this.getY()- 1);
 	}
 	
 	/**
 	 * Moves the object left one in the World 
 	 */
 	public void moveLeft(){
-		this.setXCoordinate(this.getX()  1);
+		this.setXCoordinate(this.getX() - 1);
 	}
 	/**
 	 * Moves the object right one in the World 
@@ -88,7 +88,7 @@ public class Creature extends GridObject {
 	 * @param creature  the creature to give bamboo to 
 	 */
 	public void giveBamboo(Creature creature){
-		this.numberOfBamboo;
+		this.numberOfBamboo--;
 		creature.incrementBamboo();
 		
 	}
@@ -113,7 +113,7 @@ public class Creature extends GridObject {
 	 * Minus 1 bamboo to this creature.
 	 */
 	private void decrementBamboo(){
-		if(this.numberOfBamboo > 0){ this.numberOfBamboo; }
+		if(this.numberOfBamboo > 0){ this.numberOfBamboo--; }
 	}
 	
 	/**
