@@ -22,7 +22,6 @@ public class World implements Serializable {
 	/**
 	 * Square represents a location in the world. A square can be occupied by Eve,
 	 * one her friends, a stick of bamboo, a wall, or a shrub
-	 * @author Mushaheed Kapadia
 	 *
 	 */
 	private class Square implements Serializable { 	
