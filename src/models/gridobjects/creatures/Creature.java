@@ -73,13 +73,13 @@ public class Creature extends GridObject {
 	 * Moves the object left one in the World 
 	 */
 	public void moveLeft(){
-		this.setXCoordiante(this.getX() - 1);
+		this.setXCoordinate(this.getX() - 1);
 	}
 	/**
 	 * Moves the object right one in the World 
 	 */
 	public void moveRight(){ 
-		this.setXCoordiante(this.getX() + 1);
+		this.setXCoordinate(this.getX() + 1);
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class Creature extends GridObject {
 	
 	/**
 	 * Take a bamboo from a creature.
-	 * @param creature
+	 * @param creature Take a bamboo from that creature. 
 	 */
 	public void takeBamboo(Creature creature){
 		this.numberOfBamboo++;

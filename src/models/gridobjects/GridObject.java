@@ -16,6 +16,7 @@ import java.io.Serializable;
  *
  */
 public abstract class GridObject implements Serializable{
+	
 	/**
 	 * 
 	 */
@@ -30,10 +31,12 @@ public abstract class GridObject implements Serializable{
 	 * X Coordinate in the World
 	 */
 	private int xcoordinate;
+	
 	/**
 	 * Y Coordinate in the World
 	 */
 	private int ycoordinate; 
+	
 	/**
 	 * Gets the name of the object
 	 * 
@@ -42,9 +45,9 @@ public abstract class GridObject implements Serializable{
 	public String getName(){
 		return this.name; 
 	}
+	
 	/**
 	 * Gets the X coordinate of the object
-	 * 
 	 * @return The X coordinate of the object
 	 */
 	public int getX(){
@@ -81,7 +84,7 @@ public abstract class GridObject implements Serializable{
 	 * Sets the X-coordinate of the object
 	 * @param xcoordinate - the (new) x-coordinate of the object
 	 */
-	public void setXCoordiante(int xcoordinate){
+	public void setXCoordinate(int xcoordinate){
 		this.xcoordinate = xcoordinate; 
 	}
 	
