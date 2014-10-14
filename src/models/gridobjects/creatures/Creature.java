@@ -82,10 +82,6 @@ public class Creature extends GridObject {
 		this.setXCoordiante(this.getX() + 1);
 	}
 	
-	/****************************************
-	 * Bamboo
-	 ****************************************/
-	
 	/**
 	 * Give a bamboo to a creature.
 	 * @param creature
@@ -93,6 +89,7 @@ public class Creature extends GridObject {
 	public void giveBamboo(Creature creature){
 		this.numberOfBamboo--;
 		creature.incrementBamboo();
+		
 	}
 	
 	/**
