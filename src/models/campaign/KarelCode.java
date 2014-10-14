@@ -90,11 +90,6 @@ public class KarelCode {
 	 * Karel bag is empty check
 	 */
 	public static final String BAGISEMPTY = "(bagIsEmpty){\n";
-	
-	public static void main(String[] args){
-		System.out.print(KarelCode.IFSTATEMENT + KarelCode.FACINGNORTH + KarelCode.MOVE);
-	}
-	
 	/**
 	 * Gets all the possible Karel Code blocks that can exist
 	 * 
