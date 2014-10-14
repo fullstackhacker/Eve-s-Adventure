@@ -26,5 +26,14 @@ public abstract class Item extends GridObject implements Serializable {
 	public Item(int iD){ 
 		this.iD =  iD; 
 	}
+	
+	/**
+	 * Determines what type the object is and returns the first letter of that types name.
+	 * @return type - Returns the first letter of the type name. (Example: "S" = Shrub)
+	 */
+	public char returnType() {
+		return '0';
+
+	}
 
 }

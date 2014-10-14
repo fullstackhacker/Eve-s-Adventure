@@ -2,6 +2,8 @@ package models.gridobjects.items;
 
 import java.io.Serializable;
 
+import models.gridobjects.GridObject;
+
 /**
  * The Wall object extends Item and acts as a pure obstruction in the grid
  * world. No EObject can interact with a Wall beyond being blocked by it.
@@ -15,53 +17,84 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 10L;
+	/**
+	 * If a neighboring wall segment exists in a particular direction then it is
+	 * stored within these variables.
+	 */
+	@SuppressWarnings("unused")
+	private Wall north, south, east, west;
+	/**
+	 * Stores the side of the grid box that the wall exists on ("north", "south", "east", "west").
+	 */
+	@SuppressWarnings("unused")
+	private String side;
 
-	public Wall(int iD){ 
-		super(iD); 
+	public Wall(int iD, String side) {
+		super(iD);
+		north = null;
+		south = null;
+		east = null;
+		west = null;
+		this.side = side;
+
 	}
-	
+
 	/**
 	 * Locates the coordinate of the eastern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate - The position of the farthest east wall section.
+	 * @return coordinate - The farthest east wall section.
 	 */
-	public int end_x_east() {
+	public Wall end_east() {
 
-		return 0;
+		return null;
 	}
 
 	/**
 	 * Locates the coordinate of the northern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate - The position of the farthest north wall section.
+	 * @return coordinate - The farthest north wall section.
 	 */
-	public int end_y_north() {
+	public Wall end_north() {
 
-		return 0;
+		return null;
 	}
 
 	/**
 	 * Locates the coordinate of the western most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate - The position of the farthest west wall section.
+	 * @return coordinate - The farthest west wall section.
 	 */
-	public int end_x_west() {
+	public Wall end_west() {
 
-		return 0;
+		return null;
 	}
 
 	/**
 	 * Locates the coordinate of the southern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate - The position of the farthest south wall section.
+	 * @return coordinate - The farthest south wall section.
 	 */
-	public int end_y_south() {
+	public Wall end_south() {
 
-		return 0;
+		return null;
+	}
+
+	/**
+	 * Returns the next Wall segment in a specified direction. If none exists
+	 * then it returns null;
+	 * 
+	 * @param direction
+	 *            - The direction that the method should search in ("north",
+	 *            "south", "east", "west").
+	 * @return nextWall - The next Wall object in the specified direction.
+	 */
+	public Wall getNextWall(String direction) {
+		return null;
+
 	}
 
 	/**
@@ -72,5 +105,14 @@ public class Wall extends Item implements Serializable {
 	public boolean nearTree() {
 
 		return false;
+	}
+	
+	/**
+	 * Determines what type the object is and returns the first letter of that types name.
+	 * @return type - Returns the first letter of the type name. (Example: "S" = Shrub)
+	 */
+	public char returnType() {
+		return '0';
+
 	}
 }
