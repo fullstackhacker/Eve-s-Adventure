@@ -111,8 +111,8 @@ public class Wall extends Item implements Serializable {
 	 * Determines what type the object is and returns the first letter of that types name.
 	 * @return type - Returns the first letter of the type name. (Example: "S" = Shrub)
 	 */
-	public char returnType() {
-		return '0';
+	public String toString() {
+		return null;
 
 	}
 }

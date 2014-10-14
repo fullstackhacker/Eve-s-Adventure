@@ -18,8 +18,8 @@ public class Bamboo extends Item implements Serializable{
 		super(iD); 
 	}
 	
-	public char returnType() {
-		return '0';
+	public String toString() {
+		return null;
 
 	}
 }
