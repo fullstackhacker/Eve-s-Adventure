@@ -22,7 +22,6 @@ public class World implements Serializable {
 	/**
 	 * Square represents a location in the world. A square can be occupied by Eve,
 	 * one her friends, a stick of bamboo, a wall, or a shrub
-	 * @author Mushaheed Kapadia
 	 *
 	 */
 	private class Square implements Serializable { 	
@@ -31,59 +30,100 @@ public class World implements Serializable {
 		 */
 		private static final long serialVersionUID = 1L;
 		/**
-		 * Object that is on square
+		 * Item that is on square
 		 */
-		private GridObject gObject; 
+		private Item item; 
+		/**
+		 * Creature that on square
+		 */
+		private Creature creature; 
 		/**
 		 * Constructor
 		 */
 		private Square(){
-			this.gObject = null; 
+			this.item = null; 
+			this.creature = null; 
 		}
 		/**
-		 * Adding an object to the square if there is no object on the square
+		 * Adding an item to the square if there is no item on the square
 		 * 
-		 * @see replaceObject
-		 * @param object - the object to add to the square
+		 * @see replaceItem
+		 * @param item - the object to add to the square
 		 * @return true - iff the object was added to the board
 		 * @return false - the object was not added to the board
 		 */
-		private boolean addObject(GridObject object){
-			if(this.isEmpty()){
-				this.gObject = object; 
+		private boolean addItem(Item item){
+			if(this.hasItem()){
+				this.item = item; 
 				return true; 
 			}
 			return false; 	
 		}
 		/**
-		 * Replaces the current object on the square.
-		 * If there is no current object, this returns false
+		 * Replaces the current item on the square.
+		 * If there is no current item, this returns false
 		 * 
-		 * @see addObject
+		 * @see addItem
 		 * 
-		 * @param object - the object to add to the square
+		 * @param item - the object to add to the square
 		 * @return true - iff the object replaced the old object on the square
 		 * @return false - iff the object did not replace the old object on the square
 		 */
-		private boolean replaceObject(GridObject gObject){
-			if(this.isEmpty()) return false; 
-			this.gObject = gObject; 
+		private boolean replaceItem(Item item){
+			if(this.hasItem()) return false; 
+			this.item = item; 
 			return true; 
 		}
 		/**
 		 * Removes the object from the square
 		 *  
 		 */
-		private void removeObject(){
-			this.gObject = null; 
+		private void removeItem(){
+			this.item = null; 
 		}
 		/**
-		 * Check if the square is empty
+		 * Add a creature to the square iff there is no creature
 		 * 
-		 * @return true - iff there is no object in the square
+		 * @see replaceCreature()
+		 * 
+		 * @param creature - the creature to add the square
+		 * @return - true iff able to add a creature to the square
 		 */
-		private boolean isEmpty(){
-			return this.gObject == null;
+		private boolean addCreature(Creature creature){ 
+			return false; 
+		}
+		/**
+		 * Replaces the creature on the square 
+		 * 
+		 * @see addCreature()
+		 * 
+		 * @param creature - the new creature for the square
+		 * @return - true iff replaces a creature
+		 */
+		private boolean replaceCreature(Creature creature){ 
+			return false; 
+		}
+		/**
+		 * Remove the creature on the square
+		 */
+		private void removeCreature(){ 
+			this.creature = null; 
+		}
+		/**
+		 * Check if the square has an item
+		 * 
+		 * @return - true iff there is an object in the square
+		 */
+		private boolean hasItem(){
+			return this.item != null;
+		}
+		/**
+		 * Check if the square has a creature
+		 * 
+		 * @return - true iff there is a creature in the square
+		 */
+		private boolean hasCreature(){
+			return this.creature != null; 
 		}
 		@Override
 		/**
@@ -92,8 +132,10 @@ public class World implements Serializable {
 		 * @return - a String representation the square based on what object is on the square
 		 */
 		public String toString(){ 
-			if(!isEmpty()) return this.gObject.toString(); 
-			return " "; 
+			String s = this.hasCreature()? this.creature.toString() : " ";
+			s += this.hasItem()? this.item.toString() : " " ; 
+			s += " ";
+			return s;
 		}
 	}
 	
@@ -117,22 +159,24 @@ public class World implements Serializable {
 		this.world[0][0] = new Square(); 
 	}
 	/**
-	 * Add an object to the world at a specified location
+	 * Add an item to the world at a specified location
 	 * 
-	 * @param gObject - the GridObject to add to the world
-	 * @return - true iff the GridObject was placed into the world
+	 * @see relaceItem
+	 * 
+	 * @param item - the Item to add to the world
+	 * @return - true iff the Item was placed into the world
 	 */
-	public boolean addObject(GridObject gObject){ 
+	public boolean addItem(Item item){ 
 		return false; //added to make compiler happy #sesh
 	}
 	/**
 	 * Replaces the current object on the world at the specified location 
 	 * 
-	 * @see addObject()
-	 * @param gObject - the GridObject to add to the world
-	 * @return true iff the GridObject replaced another object in the world
+	 * @see addItem()
+	 * @param item - the Item to add to the world
+	 * @return true iff the Item replaced another item in the world
 	 */
-	public boolean replaceObject(GridObject gObject){ 
+	public boolean replaceItem(Item item){ 
 		return false; //added to make compiler happy #sesh
 	}
 	/**
@@ -141,18 +185,57 @@ public class World implements Serializable {
 	 * @param x - the x-coordinate of the location
 	 * @param y - the y-coordinate of the location
 	 */
-	public void removeObject(int x, int y){ 
+	public void removeItem(int x, int y){ 
 		
 	}
 	/**
-	 * Checks if the specified location is empty
+	 * Adds a creature if there isn't anything on that square
+	 * 
+	 * @see replaceCreature(); 
+	 * 
+	 * @param creature - the creature 
+	 * @return - true iff added the creature to the square
+	 */
+	public boolean addCreature(Creature creature){
+		return false; 
+	}
+	/**
+	 * Replaces the creature on the square
+	 * 
+	 * @param creature - the new creature for the square
+	 * @return - true iff the old creature was replaced by the new creature
+	 */
+	public boolean replaceCreature(Creature creature){
+		return false; 
+	}
+	/**
+	 * Remove the creature on the specified location
 	 * 
 	 * @param x - the x coordinate of the location
 	 * @param y - the y coordinate of the location
-	 * @return - true iff the specified location is empty
 	 */
-	public boolean isEmpty(int x, int y){ 
+	public void removeCreature(int x, int y){
+		
+	}
+	/**
+	 * Checks to see if there is an item on the location
+	 * 
+	 * @param x - the x coordinate of the location
+	 * @param y - the y coordinate of the location
+	 * @return - true iff the specified location has an item
+	 */
+	public boolean hasItem(int x, int y){ 
 		return false; //added to shut up compiler
+	}
+	/**
+	 * Checks to see if there is a creature on the location
+	 * 
+	 * @param x - the x coordinate of the location 
+	 * @param y - the y coordinate of the location
+	 * @return - true iff the specified location has a creature
+	 */
+	public boolean hasCreature(int x, int y){
+		return false; 
 	}
 	/**
 	 * Gets the area of the world
