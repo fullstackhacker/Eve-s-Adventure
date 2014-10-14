@@ -6,7 +6,95 @@ import java.util.ArrayList;
  * A static class for the karel code segments that is valid
  */
 public class KarelCode {
-
+	/**
+	 * Karel if-statement 
+	 */
+	public static final String IFSTATEMENT = "if"; 
+	/**
+	 * Karel end of if statement  
+	 */
+	public static final String ENDIFSTATEMENT = "}\n";
+	/**
+	 * Karel else statement 
+	 */
+	public static final String ELSESTATEMENT = "else";
+	/**
+	 * Karel end of else statement 
+	 */
+	public static final String ENDELSESTATEMENT = "}\n";
+	/**
+	 * Karel while statement
+	 */
+	public static final String WHILESTATEMENT = "while";
+	/**
+	 * Karel end of while statement
+	 */
+	public static final String ENDWHILESTATEMENT = "}\n";
+	/**
+	 * Karel loop statement
+	 */
+	public static final String LOOPSTATEMENT = "loop"; 
+	/**
+	 * Karel end of loop statement
+	 */
+	public static final String ENDLOOPSTATEMENT = "}\n";
+	/**
+	 * Karel move function
+	 */
+	public static final String MOVE = "move()\n"; 
+	/**
+	 * Karel sleep function
+	 */
+	public static final String SLEEP = "sleep()\n"; 
+	/**
+	 * Karel wake up function
+	 */
+	public static final String WAKEUP = "wakeUp()\n"; 
+	/**
+	 * Karel turn left function
+	 */
+	public static final String TURNLEFT = "turnleft()\n";
+	/**
+	 * Karel pick up bamboo function
+	 */
+	public static final String PICKBAMBOO = "pickbamboo()\n";
+	/**
+	 * Karel put down bamboo
+	 */
+	public static final String PUTBAMBOO = "putbamboo()\n"; 
+	/**
+	 * Karel front is clear check
+	 */
+	public static final String FRONTISCLEAR = "(frontIsClear()){\n"; 
+	/**
+	 * Karel next to a friend check
+	 */
+	public static final String NEXTTOAFRIEND = "(nextToAFriend()){\n"; 
+	/**
+	 * Karel facing north check
+	 */
+	public static final String FACINGNORTH = "(facingNorth()){\n";
+	/**
+	 * Karel facing south check
+	 */
+	public static final String FACINGSOUTH = "(facingSouth()){\n";
+	/**
+	 * Karel facing east check
+	 */
+	public static final String FACINGEAST = "(facingEast()){\n";
+	/**
+	 * Karel facing west check
+	 */
+	public static final String FACINGWEST = "(facingWest()){\n";
+	/** 
+	 * Karel bag is empty check
+	 */
+	public static final String BAGISEMPTY = "(bagIsEmpty){\n";
+	
+	public static void main(String[] args){
+		System.out.print(KarelCode.IFSTATEMENT + KarelCode.FACINGNORTH + KarelCode.MOVE);
+	}
+	
 	/**
 	 * Gets all the possible Karel Code blocks that can exist
 	 * 
