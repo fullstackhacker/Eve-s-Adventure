@@ -125,9 +125,9 @@ public class Creature extends GridObject {
 	}
 	
 	/**
-	 * Gets the direction of the creature
+	 * Gets the creature direction.
 	 * 
-	 * @return The creature direction.
+	 * @return The one of the integer values of UP, DOWN, LEFT and RIGHT.
 	 */
 	public int getDirection(){
 		return this.direction;
@@ -142,9 +142,14 @@ public class Creature extends GridObject {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Checks to see if the creature is awake or asleep 
 	 * 
 	 * @return true iff the creature is awake.
+=======
+	 * The status of the creature awake.
+	 * @return True if the creature is awake. Otherwise false.
+>>>>>>> 9f7e3a1b7e3abcdd1daa6db910961e3c09d89c0b
 	 */
 	public boolean isAwake(){
 		return this.isAwake;
