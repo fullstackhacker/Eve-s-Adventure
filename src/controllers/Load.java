@@ -16,7 +16,7 @@ public class Load {
 	 * 
 	 * @param world  the world to load
 	 */
-	public void loadWorld(World world){
+	public static void loadWorld(World world){
 		
 	}
 	
@@ -25,7 +25,7 @@ public class Load {
 	 * 
 	 * @param level the level to load
 	 */
-	public void loadLevel(Level level){
+	public static void loadLevel(Level level){
 		
 	}
 	
@@ -34,7 +34,7 @@ public class Load {
 	 * 
 	 * @param campaign the campaign to load
 	 */
-	public void loadCampaign(Campaign campaign){
+	public static void loadCampaign(Campaign campaign){
 		
 	}
 }

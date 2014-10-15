@@ -14,7 +14,7 @@ public class Save {
 	 * 
 	 * @param world  the world to save
 	 */
-	public void saveWorld(World world){
+	public static void saveWorld(World world){
 		
 	}
 	
@@ -23,7 +23,7 @@ public class Save {
 	 * 
 	 * @param level  the level to save
 	 */
-	public void saveLevel(Level level){
+	public static void saveLevel(Level level){
 		
 	}
 	
@@ -33,7 +33,7 @@ public class Save {
 	 * 
 	 * @param campaign  the campaign to save
 	 */
-	public void saveCampaign(Campaign campaign){
+	public static void saveCampaign(Campaign campaign){
 		
 	}
 }
