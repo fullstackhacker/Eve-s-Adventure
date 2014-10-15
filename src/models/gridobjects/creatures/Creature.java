@@ -52,7 +52,7 @@ public class Creature extends GridObject {
 	 */
 	public Creature(String name, int xcoordinate, int ycoordinate){
 		this.setName(name);
-		this.setCoordinates(xcoordinate, ycoordinate);
+		this.setCoordinates(xcoordinate, ycoordinate	);
 	}
 	
 	/**
@@ -125,6 +125,8 @@ public class Creature extends GridObject {
 	}
 	
 	/**
+	 * Gets the direction of the creature
+	 * 
 	 * @return The creature direction.
 	 */
 	public int getDirection(){
@@ -140,7 +142,9 @@ public class Creature extends GridObject {
 	}
 	
 	/**
-	 * @return The status of the creature awake.
+	 * Checks to see if the creature is awake or asleep 
+	 * 
+	 * @return true iff the creature is awake.
 	 */
 	public boolean isAwake(){
 		return this.isAwake;
