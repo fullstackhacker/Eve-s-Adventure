@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.ArrayList;
 
+import models.campaign.World;
+
 /**
  * An object to go through and execute the Karel code
  *
@@ -19,8 +21,9 @@ public class Parser {
 	 * Constructor for the parser
 	 * 
 	 * @param karelCode  the Karel code to parse and execute
+	 * @param world the world where to execute the karel code
 	 */
-	public Parser(ArrayList<String> karelCode){ 
+	public Parser(ArrayList<String> karelCode, World world){ 
 		 
 	}
 	/**
