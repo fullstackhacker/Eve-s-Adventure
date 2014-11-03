@@ -17,10 +17,14 @@ public class Tree extends Item implements Serializable{
 	/**
 	 * 
 	 */
+	
+	private Bamboo bamboo;
+	
 	private static final long serialVersionUID = 9L;
 
-	public Tree(int iD){
+	public Tree(int iD, Bamboo bamboo){
 		super(iD); 
+		this.bamboo = bamboo;
 	}
 	/**
 	 * Checks to see if the Tree has at least one Bamboo object stored inside of
@@ -29,29 +33,32 @@ public class Tree extends Item implements Serializable{
 	 * @return true  If the Tree has a Bamboo object inside it.
 	 */
 	public boolean hasBamboo() {
-
-		return false;
+		if (bamboo != null){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
 	 * Checks to see if the Tree is near a Tree object.
 	 * 
 	 * @return true  If the Tree is near a Tree.
-	 */
+	 *//*
 	public boolean nearTree() {
 
 		return false;
-	}
+	}*/
 
 	/**
 	 * Checks to see if the Tree is near a Wall object.
 	 * 
 	 * @return true  If the Tree is near a Wall.
 	 */
-	public boolean nearWall() {
+	/*public boolean nearWall() {
 
 		return false;
-	}
+	}*/
 
 	/**
 	 * Given a name and a direction, this method will create a new tree and
@@ -65,9 +72,9 @@ public class Tree extends Item implements Serializable{
 	 *             Takes an int from 14 to specify which neighbor to remove. 1
 	 *            (North), 2 (South), 3 (East), 4 (West).
 	 */
-	public void addNearbyTree(String name, int direction) {
+	/*public void addNearbyTree(String name, int direction) {
 
-	}
+	}*/
 
 	/**
 	 * Removes a specified neighboring Tree object. If the Tree passed in by the
@@ -76,9 +83,9 @@ public class Tree extends Item implements Serializable{
 	 * @param tree
 	 *             The name of the Tree object to remove.
 	 */
-	public void removeNearbyTree(Tree tree) {
+	/*public void removeNearbyTree(Tree tree) {
 
-	}
+	}*/
 	
 	/**
 	 * Determines what type the object is and returns the first letter of that types name.
