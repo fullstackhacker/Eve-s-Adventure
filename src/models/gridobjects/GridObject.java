@@ -29,6 +29,14 @@ public abstract class GridObject implements Serializable {
 	private Coordinate coordinate; 
 
 	/**
+	 * Gets the location of the object
+	 * 
+	 * @return A representation of the GridObject's location in the world
+	 */
+	public Coordinate getCoordinates(){ 
+		return this.coordinate; 
+	}
+	/**
 	 * Gets the name of the object
 	 * 
 	 * @return  The name of the object
