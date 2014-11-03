@@ -66,6 +66,30 @@ public class Campaign implements Serializable{
 		return null; 
 	}
 	/**
+	 * Gets the levels in the campaign
+	 * 
+	 * @return the list of levels in this campaign
+	 */
+	public ArrayList<String> getLevels(){ 
+		return null; 
+	}
+	/**
+	 * Gets the description of the campaign
+	 * 
+	 * @return the string representation of the campaign description
+	 */
+	public String getDescription(){ 
+		return null; 
+	}
+	/**
+	 * Gets the current level 
+	 * 
+	 * @return The user's current progress through the campaign
+	 */
+	public int getCurrentLevel(){ 
+		return this.currentLevel; 
+	}
+	/**
 	 * Changes the name of the campaign
 	 * 
 	 * @param name   the new name of the campaign
