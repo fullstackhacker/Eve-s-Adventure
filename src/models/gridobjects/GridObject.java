@@ -2,6 +2,8 @@ package models.gridobjects;
 
 import java.io.Serializable;
 
+import models.Coordinate;
+
 /**
  * EObjects are interactable objects in Eve's Adventure
  * 
@@ -22,14 +24,9 @@ public abstract class GridObject implements Serializable {
 	private String name;
 
 	/**
-	 * X Coordinate in the World
+	 * Location of the GridObject in the world
 	 */
-	private int xcoordinate;
-
-	/**
-	 * Y Coordinate in the World
-	 */
-	private int ycoordinate;
+	private Coordinate coordinate; 
 
 	/**
 	 * Gets the name of the object
@@ -46,7 +43,7 @@ public abstract class GridObject implements Serializable {
 	 * @return The X coordinate of the object
 	 */
 	public int getX() {
-		return this.xcoordinate;
+		return this.coordinate.getX();
 	}
 
 	/**
@@ -55,7 +52,7 @@ public abstract class GridObject implements Serializable {
 	 * @return The Y coordinate of the object
 	 */
 	public int getY() {
-		return this.ycoordinate;
+		return this.coordinate.getY();
 	}
 
 	/**
@@ -72,32 +69,34 @@ public abstract class GridObject implements Serializable {
 	 * Sets the coordinates of the object
 	 * 
 	 * @param xcoordinate
-	 *             the (new) xcoordinate of the object
+	 *             the (new) x of the object
 	 * @param ycoordinate
-	 *             the (new) ycoordinate of the object
+	 *             the (new) y of the object
+	 *             
+	 * @assumes the x and the y coordinates are valid for the world
 	 */
-	public void setCoordinates(int xcoordinate, int ycoordinate) {
-		this.xcoordinate = xcoordinate;
-		this.ycoordinate = ycoordinate;
+	public void setCoordinates(int x, int y) {
+		this.coordinate.setX(x);
+		this.coordinate.setY(y);
 	}
 
 	/**
-	 * Sets the Xcoordinate of the object
+	 * Sets the x coordinate of the object
 	 * 
-	 * @param xcoordinate
-	 *             the (new) xcoordinate of the object
+	 * @param x
+	 *             the (new) x of the object
 	 */
-	public void setXCoordinate(int xcoordinate) {
-		this.xcoordinate = xcoordinate;
+	public void setXCoordinate(int x) {
+		this.coordinate.setX(x); 
 	}
 
 	/**
-	 * Sets the Ycoordinate of the object
+	 * Sets the y coordinate of the object
 	 * 
-	 * @param ycoordinate  the (new) ycoordinate of the object
+	 * @param y  the (new) y of the object
 	 */
-	public void setYCoordinate(int ycoordinate) {
-		this.ycoordinate = ycoordinate;
+	public void setYCoordinate(int y) {
+		this.coordinate.setY(y);
 	}
 
 	/**
