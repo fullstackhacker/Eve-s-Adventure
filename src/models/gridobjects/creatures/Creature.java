@@ -1,5 +1,6 @@
 package models.gridobjects.creatures;
 
+import models.Coordinate;
 import models.gridobjects.GridObject;
 
 public class Creature extends GridObject {
@@ -42,6 +43,11 @@ public class Creature extends GridObject {
 	/**
 	 * 
 	 */
+	private Coordinate coordinate;
+	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 6L;
 	
 	/**
@@ -50,36 +56,36 @@ public class Creature extends GridObject {
 	 * @param xcoordinate The xcoordinate of the creature.
 	 * @param ycoordinate The ycoordinate of the creature.
 	 */
-	public Creature(String name, int xcoordinate, int ycoordinate){
+	public Creature(String name, Coordinate coordinate){
 		this.setName(name);
-		this.setCoordinates(xcoordinate, ycoordinate	);
+		this.setCoordinates(coordinate);
 	}
 	
 	/**
 	 * Moves the object up one in the World
 	 */
 	public void moveUp(){
-		this.setYCoordinate(this.getY() + 1);
+		this.coordinate.moveNorth();
 	}
 	
 	/**
 	 * Moves the object down one in the World
 	 */
 	public void moveDown(){
-		this.setYCoordinate(this.getY()- 1);
+		this.coordinate.moveSouth();
 	}
 	
 	/**
 	 * Moves the object left one in the World 
 	 */
 	public void moveLeft(){
-		this.setXCoordinate(this.getX() - 1);
+		this.coordinate.moveWest();
 	}
 	/**
 	 * Moves the object right one in the World 
 	 */
 	public void moveRight(){ 
-		this.setXCoordinate(this.getX() + 1);
+		this.coordinate.moveEast();
 	}
 	
 	/**
