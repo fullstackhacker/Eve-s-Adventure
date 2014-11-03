@@ -21,7 +21,7 @@ public class Wall extends Item implements Serializable {
 	 * If a neighboring wall segment exists in a particular direction then it is
 	 * stored within these variables.
 	 */
-	private Wall north, south, east, west;
+	// private Wall north, south, east, west;
 	/**
 	 * Stores the side of the grid box that the wall exists on ("north",
 	 * "south", "east", "west").
@@ -36,6 +36,10 @@ public class Wall extends Item implements Serializable {
 		this.side = side;
 
 	}
+	
+	public String getSide(){
+		return side;
+	}
 
 	/**
 	 * Locates the coordinate of the eastern most section of a wall within a
@@ -43,10 +47,11 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 * @return coordinate The farthest east wall section.
 	 */
-	public Wall end_east() {
-
-		return null;
-	}
+	/*
+	 * public Wall end_east() {
+	 * 
+	 * return null; }
+	 */
 
 	/**
 	 * Locates the coordinate of the northern most section of a wall within a
@@ -54,10 +59,11 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 * @return coordinate The farthest north wall section.
 	 */
-	public Wall end_north() {
-
-		return null;
-	}
+	/*
+	 * public Wall end_north() {
+	 * 
+	 * return null; }
+	 */
 
 	/**
 	 * Locates the coordinate of the western most section of a wall within a
@@ -65,10 +71,11 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 * @return coordinate The farthest west wall section.
 	 */
-	public Wall end_west() {
-
-		return null;
-	}
+	/*
+	 * public Wall end_west() {
+	 * 
+	 * return null; }
+	 */
 
 	/**
 	 * Locates the coordinate of the southern most section of a wall within a
@@ -76,10 +83,11 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 * @return coordinate The farthest south wall section.
 	 */
-	public Wall end_south() {
-
-		return null;
-	}
+	/*
+	 * public Wall end_south() {
+	 * 
+	 * return null; }
+	 */
 
 	/**
 	 * Returns the next Wall segment in a specified direction. If none exists
