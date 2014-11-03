@@ -1,6 +1,7 @@
 package models.campaign;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A static class for all objectives that are valid
@@ -33,14 +34,14 @@ public class Objectives {
 	 * 
 	 * @return  the list of all possible objectives
 	 */
-	public static ArrayList<String> getPossibleObjectives(){ 
+	public static Iterator<String> getPossibleObjectives(){ 
 		ArrayList<String> possibleObjectives = new ArrayList<String>(); 
 		possibleObjectives.add(Objectives.PICKXBAMBOO); 
 		possibleObjectives.add(Objectives.IFSTATEMENT);
 		possibleObjectives.add(Objectives.IFELSESTATEMENT);
 		possibleObjectives.add(Objectives.WHILESTATEMENT);
 		possibleObjectives.add(Objectives.LOOP);
-		return possibleObjectives; 
+		return possibleObjectives.iterator(); 
 	}
 	/**
 	 * Checks to see if the objective is valid
@@ -48,7 +49,13 @@ public class Objectives {
 	 * @param objective  the objective to check 
 	 * @return  true iff the objective is valid
 	 */
-	public static boolean validate(String objective){ 
-		return Objectives.getPossibleObjectives().contains(objective); 
+	public static boolean validate(String objective){
+		Iterator<String> possibleObjectives = getPossibleObjectives();
+		while(possibleObjectives.hasNext()){
+			if(possibleObjectives.next().equals(objective)){
+				return true;
+			}
+		}
+		return false;
 	}
 }
