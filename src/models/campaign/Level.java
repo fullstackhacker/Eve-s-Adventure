@@ -48,7 +48,18 @@ public class Level implements Serializable {
 	 * @param description  the description for the level
 	 */
 	public Level(World world, String description){ 
-		bambooObjective = 1; 
+		bambooObjective = -1; 
+	}
+	/**
+	 * Constructor - create a level by giving all the parts
+	 * 
+	 * @param world
+	 * @param description
+	 * @param objectives
+	 * @param karelCode
+	 */
+	public Level(World world, String description, ArrayList<String> objectives, ArrayList<String> karelCode, int bambooObjective){
+		
 	}
 	/**
 	 * Gets the name of the level
