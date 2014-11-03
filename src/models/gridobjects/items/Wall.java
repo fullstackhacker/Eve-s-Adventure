@@ -123,7 +123,7 @@ public class Wall extends Item implements Serializable {
 	 *         Shrub)
 	 */
 	public String toString() {
-		return null;
+		return "W";
 
 	}
 }

@@ -117,7 +117,7 @@ public class Tree extends Item implements Serializable {
 	 *         Shrub)
 	 */
 	public String toString() {
-		return null;
+		return "T";
 
 	}
 

@@ -57,7 +57,7 @@ public class Shrub extends Item implements Serializable{
 	 * @return type  Returns the first letter of the type name. (Example: "S" = Shrub)
 	 */
 	public String toString() {
-		return null;
+		return "S";
 
 	}
 	

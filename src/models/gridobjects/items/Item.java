@@ -32,7 +32,7 @@ public abstract class Item extends GridObject implements Serializable {
 	 * @return type  Returns the first letter of the type name. (Example: "S" = Shrub)
 	 */
 	public String toString() {
-		return null;
+		return "I";
 
 	}
 
