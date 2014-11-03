@@ -16,8 +16,8 @@ public class Load {
 	 * 
 	 * @param world  the world to load
 	 */
-	public static void loadWorld(World world){
-		
+	public static World loadWorld(String worldName){
+		return null; //compiler
 	}
 	
 	/**
@@ -25,8 +25,8 @@ public class Load {
 	 * 
 	 * @param level the level to load
 	 */
-	public static void loadLevel(Level level){
-		
+	public static Level loadLevel(String levelName){
+		return null; 
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class Load {
 	 * 
 	 * @param campaign the campaign to load
 	 */
-	public static void loadCampaign(Campaign campaign){
-		
+	public static Campaign loadCampaign(String campaignName){
+		return null; 
 	}
 }
