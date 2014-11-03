@@ -23,16 +23,16 @@ public class Wall extends Item implements Serializable {
 	 */
 	private Wall north, south, east, west;
 	/**
-	 * Stores the side of the grid box that the wall exists on ("north", "south", "east", "west").
+	 * Stores the side of the grid box that the wall exists on ("north",
+	 * "south", "east", "west").
 	 */
 	private String side;
 
 	public Wall(int iD, String side) {
 		super(iD);
-		north = null;
-		south = null;
-		east = null;
-		west = null;
+		/*
+		 * north = null; south = null; east = null; west = null;
+		 */
 		this.side = side;
 
 	}
@@ -41,7 +41,7 @@ public class Wall extends Item implements Serializable {
 	 * Locates the coordinate of the eastern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate  The farthest east wall section.
+	 * @return coordinate The farthest east wall section.
 	 */
 	public Wall end_east() {
 
@@ -52,7 +52,7 @@ public class Wall extends Item implements Serializable {
 	 * Locates the coordinate of the northern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate  The farthest north wall section.
+	 * @return coordinate The farthest north wall section.
 	 */
 	public Wall end_north() {
 
@@ -63,7 +63,7 @@ public class Wall extends Item implements Serializable {
 	 * Locates the coordinate of the western most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate  The farthest west wall section.
+	 * @return coordinate The farthest west wall section.
 	 */
 	public Wall end_west() {
 
@@ -74,7 +74,7 @@ public class Wall extends Item implements Serializable {
 	 * Locates the coordinate of the southern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
-	 * @return coordinate  The farthest south wall section.
+	 * @return coordinate The farthest south wall section.
 	 */
 	public Wall end_south() {
 
@@ -86,28 +86,33 @@ public class Wall extends Item implements Serializable {
 	 * then it returns null;
 	 * 
 	 * @param direction
-	 *             The direction that the method should search in ("north",
+	 *            The direction that the method should search in ("north",
 	 *            "south", "east", "west").
-	 * @return nextWall  The next Wall object in the specified direction.
+	 * @return nextWall The next Wall object in the specified direction.
 	 */
-	public Wall getNextWall(String direction) {
-		return null;
-
-	}
+	/*
+	 * public Wall getNextWall(String direction) { return null;
+	 * 
+	 * }
+	 */
 
 	/**
 	 * Checks to see if the Wall is near a Tree object.
 	 * 
-	 * @return true  If the Wall is near a Tree.
+	 * @return true If the Wall is near a Tree.
 	 */
-	public boolean nearTree() {
+	/*
+	 * public boolean nearTree() {
+	 * 
+	 * return false; }
+	 */
 
-		return false;
-	}
-	
 	/**
-	 * Determines what type the object is and returns the first letter of that types name.
-	 * @return type  Returns the first letter of the type name. (Example: "S" = Shrub)
+	 * Determines what type the object is and returns the first letter of that
+	 * types name.
+	 * 
+	 * @return type Returns the first letter of the type name. (Example: "S" =
+	 *         Shrub)
 	 */
 	public String toString() {
 		return null;

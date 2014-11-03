@@ -3,6 +3,7 @@ package models.campaign;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import models.Coordinate;
 import models.gridobjects.GridObject;
 import models.gridobjects.creatures.Creature;
 import models.gridobjects.items.Bamboo;
@@ -201,10 +202,9 @@ public class World implements Serializable {
 	/**
 	 * Removes an object from the world at the specified location
 	 * 
-	 * @param x  the xcoordinate of the location
-	 * @param y  the ycoordinate of the location
+	 * @param coordinate The coordinate representation of the object in the world
 	 */
-	public void removeItem(int x, int y){ 
+	public void removeItem(Coordinate coordinate){ 
 		
 	}
 	/**
@@ -230,10 +230,9 @@ public class World implements Serializable {
 	/**
 	 * Remove the creature on the specified location
 	 * 
-	 * @param x  the x coordinate of the location
-	 * @param y  the y coordinate of the location
+	 * @param coordinate A coordinate object representing the location of the creature to remove
 	 */
-	public void removeCreature(int x, int y){
+	public void removeCreature(Coordinate coordiante){
 		
 	}
 	/**

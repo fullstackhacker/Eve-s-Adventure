@@ -47,12 +47,47 @@ public class Campaign implements Serializable{
 		
 	}
 	/**
+	 * Constructor to create a campaign with all of its parts. To be used in Loading Campaigns
+	 * 
+	 * @param name The current name of the campaign
+	 * @param levels The current levels in the campaign
+	 * @param description The current description of the campaign
+	 * @param currentLevel The current level that the user is on
+	 */
+	public Campaign(String name, ArrayList<Level> levels, String description, int currentLevel){ 
+		
+	}
+	/**
 	 * Gets the name of the campaign
 	 * 
 	 * @return  the name of the campaign
 	 */
 	public String getName(){
 		return null; 
+	}
+	/**
+	 * Gets the levels in the campaign
+	 * 
+	 * @return the list of levels in this campaign
+	 */
+	public ArrayList<String> getLevels(){ 
+		return null; 
+	}
+	/**
+	 * Gets the description of the campaign
+	 * 
+	 * @return the string representation of the campaign description
+	 */
+	public String getDescription(){ 
+		return null; 
+	}
+	/**
+	 * Gets the current level 
+	 * 
+	 * @return The user's current progress through the campaign
+	 */
+	public int getCurrentLevel(){ 
+		return this.currentLevel; 
 	}
 	/**
 	 * Changes the name of the campaign

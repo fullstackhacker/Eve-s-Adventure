@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import models.campaign.Campaign;
 import models.campaign.Level;
 import models.campaign.World;
@@ -16,8 +18,8 @@ public class Load {
 	 * 
 	 * @param world  the world to load
 	 */
-	public static void loadWorld(World world){
-		
+	public static World loadWorld(String worldName){
+		return null; //compiler
 	}
 	
 	/**
@@ -25,8 +27,8 @@ public class Load {
 	 * 
 	 * @param level the level to load
 	 */
-	public static void loadLevel(Level level){
-		
+	public static Level loadLevel(String levelName){
+		return null; 
 	}
 	
 	/**
@@ -34,7 +36,36 @@ public class Load {
 	 * 
 	 * @param campaign the campaign to load
 	 */
-	public static void loadCampaign(Campaign campaign){
-		
+	public static Campaign loadCampaign(String campaignName){
+		return null; 
 	}
+	
+	/**
+	 * Gets the worlds that aren't associated with a level
+	 * 
+	 * @return A list of world names
+	 */
+	public static ArrayList<String> getWorlds(){	
+		 return null;
+	}
+	
+	/**
+	 * Gets the levels that aren't associated with a campaign
+	 * 
+	 * @return A list of level names
+	 */
+	public static ArrayList<String> getLevels(){ 
+		return null; 
+	}
+	
+	/**
+	 * Gets a list of the different campaigns
+	 * 
+	 * @return A list of campaign names
+	 */
+	public static ArrayList<String> getCampaigns(){ 
+		return null; 
+	}
+	
+	
 }
