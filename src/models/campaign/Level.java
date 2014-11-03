@@ -70,9 +70,9 @@ public class Level implements Serializable {
 		return null; 
 	}
 	/**
-	 * Replace the name of the level
+	 * Replace the name of this level and the name of the world associated with this level
 	 * 
-	 * @param name  the new name of the level
+	 * @param name  the new name of this level and the world
 	 */
 	public void replaceName(String name){
 		
