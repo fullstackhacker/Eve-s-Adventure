@@ -76,36 +76,14 @@ public abstract class GridObject implements Serializable {
 	/**
 	 * Sets the coordinates of the object
 	 * 
-	 * @param xcoordinate
-	 *             the (new) x of the object
-	 * @param ycoordinate
-	 *             the (new) y of the object
+	 * @param coordinate The new coordinate of this object
 	 *             
-	 * @assumes the x and the y coordinates are valid for the world
+	 * @assumes the coordinate are valid for the world
 	 */
-	public void setCoordinates(int x, int y) {
-		this.coordinate.setX(x);
-		this.coordinate.setY(y);
+	public void setCoordinates(Coordinate coordinate) {
+		this.coordinate = coordinate;
 	}
 
-	/**
-	 * Sets the x coordinate of the object
-	 * 
-	 * @param x
-	 *             the (new) x of the object
-	 */
-	public void setXCoordinate(int x) {
-		this.coordinate.setX(x); 
-	}
-
-	/**
-	 * Sets the y coordinate of the object
-	 * 
-	 * @param y  the (new) y of the object
-	 */
-	public void setYCoordinate(int y) {
-		this.coordinate.setY(y);
-	}
 
 	/**
 	 * Determines what type the object is and returns the first letter of that types name.

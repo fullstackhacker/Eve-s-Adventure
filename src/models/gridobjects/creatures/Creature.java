@@ -105,7 +105,7 @@ public class Creature extends GridObject {
 	/**
 	 * Add 1 bamboo to this creature. 
 	 */
-	private void incrementBamboo(){
+	public void incrementBamboo(){
 		this.numberOfBamboo++;
 	}
 	
