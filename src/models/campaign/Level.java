@@ -2,6 +2,7 @@ package models.campaign;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A level represents a combination of karel code, a world, and a set of objectives
@@ -48,7 +49,9 @@ public class Level implements Serializable {
 	 * @param description  the description for the level
 	 */
 	public Level(World world, String description){ 
-		bambooObjective = -1; 
+		bambooObjective = -1;
+		this.world = world;
+		this.description = description;
 	}
 	/**
 	 * Constructor - create a level by giving all the parts
@@ -59,7 +62,11 @@ public class Level implements Serializable {
 	 * @param karelCode
 	 */
 	public Level(World world, String description, ArrayList<String> objectives, ArrayList<String> karelCode, int bambooObjective){
-		
+		this.world = world;
+		this.description = description;
+		this.objectives = objectives;
+		this.karelCode = karelCode;
+		this.bambooObjective = bambooObjective;
 	}
 	/**
 	 * Gets the name of the level
@@ -67,15 +74,15 @@ public class Level implements Serializable {
 	 * @return the name of the level
 	 */
 	public String getName(){
-		return null; 
+		return this.name; 
 	}
 	/**
-	 * Replace the name of this level and the name of the world associated with this level
+	 * Replace the name of the level
 	 * 
-	 * @param name  the new name of this level and the world
+	 * @param name  the new name of the level
 	 */
 	public void replaceName(String name){
-		
+		this.name = name;
 	}
 	/**
 	 * Gets the world for the level 
@@ -83,15 +90,15 @@ public class Level implements Serializable {
 	 * @return  The current world for the level
 	 */
 	public World getWorld(){ 
-		return null; //shh compiler go to sleep
+		return this.world;
 	}
 	/**
 	 * Gets the objectives in the level 
 	 * 
 	 * @return  the objectives in the world
 	 */
-	public ArrayList<String> getObjectives(){ 
-		return null; //shh
+	public ArrayList<String> getObjectives(){
+		return this.objectives;
 	}
 	/**
 	 * Gets the Karel Code in the level
@@ -99,7 +106,7 @@ public class Level implements Serializable {
 	 * @return  the karel code in the world
 	 */
 	public ArrayList<String> getKarelCode(){
-		return null; //shh
+		return this.karelCode;
 	}
 	/**
 	 * Change the world in the level
@@ -107,7 +114,7 @@ public class Level implements Serializable {
 	 * @param world   the new world for the level
 	 */
 	public void changeWorld(World world){ 
-		
+		this.world = world;
 	}
 	/**
 	 * Adds the Karel Code to the end of the list
@@ -115,7 +122,7 @@ public class Level implements Serializable {
 	 * @param karelCode  the new code string to add
 	 */
 	public void addKarelCode(String karelCode){ 
-		
+		this.karelCode.add(karelCode);
 	}
 	/**
 	 * Inserts Karel Code into a specific location in the list
@@ -125,7 +132,11 @@ public class Level implements Serializable {
 	 * @return boolean  true iff able to add the karel code to that position
 	 */
 	public boolean insertKarelCode(String karelCode, int position){
-		return false; //replace
+		if(this.karelCode.size() > position){
+			this.karelCode.add(position, karelCode);
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * Change the position of a Karel code segment
@@ -135,7 +146,11 @@ public class Level implements Serializable {
 	 * @return  true iff the position change was a success
 	 */
 	public boolean changeKarelCodePosition(int oldposition, int newposition){ 
-		return false; //this is complicated but cool
+		if(oldposition > this.karelCode.size() || oldposition < this.karelCode.size() || newposition < this.karelCode.size() || newposition > this.karelCode.size()){
+			return false;
+		}
+		this.karelCode.add(newposition, this.karelCode.remove(oldposition));
+		return true;
 	}
 	/**
 	 * Remove Karel code from the list 
@@ -143,7 +158,9 @@ public class Level implements Serializable {
 	 * @param position  the position of the code in the list
 	 */
 	public void removeKarelCode(int position){
-		
+		if(this.karelCode.size() > position && position >= 0){
+			this.karelCode.remove(position);
+		}
 	}
 	/**
 	 * Adds the objective to the ArrayList
@@ -151,7 +168,7 @@ public class Level implements Serializable {
 	 * @param objective  the new objective to add
 	 */
 	public void addObjective(String objective){
-		
+		this.objectives.add(objective);
 	}
 	/**
 	 * Removes an objective from the objective list
@@ -159,7 +176,9 @@ public class Level implements Serializable {
 	 * @param position  the position of the objective in the list
 	 */
 	public void removeObjective(int position){
-		
+		if(this.objectives.size() > position && position >= 0){
+			this.objectives.remove(position);
+		}
 	}
 	/**
 	 * Overwrites the description. 
@@ -167,7 +186,21 @@ public class Level implements Serializable {
 	 * @param description  the new description for the level 
 	 * @return true  iff the old description was overwritten by the new description
 	 */
-	public boolean overwriteDescription(String description){ 
-		return false; //don't you cry
+	public void overwriteDescription(String description){ 
+		this.description = description;
+	}
+	
+	/**
+	 * @return Iterator of the karelCode.
+	 */
+	public Iterator<String> listKarelCode(){
+		return this.karelCode.iterator();
+	}
+	
+	/**
+	 * @return Iterator of the objectives.
+	 */
+	public Iterator<String> listObjectives() {
+		return this.objectives.iterator();
 	}
 }
