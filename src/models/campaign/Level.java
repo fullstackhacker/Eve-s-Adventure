@@ -109,6 +109,21 @@ public class Level implements Serializable {
 		return this.karelCode;
 	}
 	/**
+	 * Gets the description for the level
+	 * 
+	 * @return The string description for the level
+	 */
+	public String getDescription(){
+		return this.description; 
+	}
+	/**
+	 * Gets the bamboo bojective
+	 * @return the bamboo objective
+	 */
+	public int getBambooObjective(){ 
+		return this.bambooObjective; 
+	}
+	/**
 	 * Change the world in the level
 	 * 
 	 * @param world   the new world for the level
