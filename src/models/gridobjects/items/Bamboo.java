@@ -19,7 +19,7 @@ public class Bamboo extends Item implements Serializable{
 	}
 	
 	public String toString() {
-		return null;
+		return "B";
 
 	}
 }

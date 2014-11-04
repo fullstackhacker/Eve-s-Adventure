@@ -16,7 +16,11 @@ public class Parser {
 	/**
 	 * The current position of the executing code
 	 */
-	private int activeCodeBlock; 
+	private int activeCodeBlock;
+	/**
+	 * The world that the code should be executed in
+	 */
+	private World world; 
 	/**
 	 * Constructor for the parser
 	 * 
