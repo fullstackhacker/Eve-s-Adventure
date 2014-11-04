@@ -45,8 +45,8 @@ public class Tree extends Item implements Serializable {
 	
 	/**
 	 * Adds Bamboo to the tree.
-	 * @param bamboo
-	 * @return
+	 * @param bamboo The bamboo to add to the this tree
+	 * @return true iff able to add bamboo to this tree
 	 */
 	public boolean addBamboo(Bamboo bamboo) {
 		if (bamboo == null) {
@@ -59,7 +59,7 @@ public class Tree extends Item implements Serializable {
 
 	/**
 	 * Removes bamboo from the tree.
-	 * @return
+	 * @return The bamboo object that was removed from this object
 	 */
 	public Bamboo removeBamboo() {
 		Bamboo temp = bamboo;

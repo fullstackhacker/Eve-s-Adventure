@@ -53,8 +53,7 @@ public class Creature extends GridObject {
 	/**
 	 * Creature's Constructor 
 	 * @param name The name of the creature.
-	 * @param xcoordinate The xcoordinate of the creature.
-	 * @param ycoordinate The ycoordinate of the creature.
+	 * @param coordinate The location of the creature in the world
 	 */
 	public Creature(String name, Coordinate coordinate){
 		super.setName(name);
@@ -158,14 +157,10 @@ public class Creature extends GridObject {
 	
 	/**
 	 * Checks to see if the current object is Eve.
-	 * @return
+	 * @return true iff the creature is eve
 	 */
 	public boolean isEve(){
-		if(super.getName().equals("Eve")){
-			return true;
-		}else{
-			return false;
-		}
+		return super.getName().equals("Eve");
 	}
 	
 	/**

@@ -42,8 +42,8 @@ public class Shrub extends Item implements Serializable{
 	
 	/**
 	 * Adds Bamboo to the tree.
-	 * @param bamboo
-	 * @return
+	 * @param bamboo the bamboo to add to the tree
+	 * @return true iff able to add bamboo successfully
 	 */
 	public boolean addBamboo(Bamboo bamboo){
 		if (bamboo == null){
@@ -56,7 +56,7 @@ public class Shrub extends Item implements Serializable{
 	
 	/**
 	 * Removes bamboo from the tree.
-	 * @return
+	 * @return The bamboo that was removed
 	 */
 	public Bamboo removeBamboo(){
 		Bamboo temp = bamboo;

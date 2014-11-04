@@ -41,20 +41,19 @@ public class Coordinate {
 		return this.y; 
 	}
 	/**
-	 * Sets a new value for the x coordinate
+	 * Sets a new value for the x coordinate. Assumes the new x coordinate is valid 
 	 * 
 	 * @param x The new x coordinate
-	 * @assumes The new x coordinate is valid 
+	 * 
 	 */
 	public void setX(int x){ 
 		this.x = x;
 	}
 	
 	/**
-	 * Sets a new value for the y coordinate
+	 * Sets a new value for the y coordinate. Assumes the new y coordinate is valid 
 	 * 
 	 * @param y The new y coordinate
-	 * @assumes The new y coordinate is valid 
 	 */
 	public void setY(int y){
 		 this.y = y; 

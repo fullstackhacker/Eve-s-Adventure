@@ -199,7 +199,6 @@ public class Level implements Serializable {
 	 * Overwrites the description. 
 	 * 
 	 * @param description  the new description for the level 
-	 * @return true  iff the old description was overwritten by the new description
 	 */
 	public void overwriteDescription(String description){ 
 		this.description = description;

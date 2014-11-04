@@ -237,7 +237,7 @@ public class World implements Serializable {
 	 * 
 	 * @param coordinate A coordinate object representing the location of the creature to remove
 	 */
-	public void removeCreature(Coordinate coordiante){
+	public void removeCreature(Coordinate coordinate){
 		
 	}
 	/**

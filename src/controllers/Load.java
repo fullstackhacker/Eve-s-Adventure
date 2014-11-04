@@ -16,7 +16,7 @@ public class Load {
 	/**
 	 * Loads the serialized file, deserializes it, and creates the World
 	 * 
-	 * @param world  the world to load
+	 * @param worldName The name of the world to load
 	 */
 	public static World loadWorld(String worldName){
 		return null; //compiler
@@ -25,7 +25,7 @@ public class Load {
 	/**
 	 * Loads the serialized file, deserializes it, and creates the Level
 	 * 
-	 * @param level the level to load
+	 * @param levelName The name of the level to load
 	 */
 	public static Level loadLevel(String levelName){
 		return null; 
@@ -34,7 +34,7 @@ public class Load {
 	/**
 	 * Loads the serialized file, deserializes it, and creates the Campaign
 	 * 
-	 * @param campaign the campaign to load
+	 * @param campaignName The name of the campaign to load
 	 */
 	public static Campaign loadCampaign(String campaignName){
 		return null; 

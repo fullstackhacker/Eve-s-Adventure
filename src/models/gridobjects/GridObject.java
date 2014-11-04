@@ -74,11 +74,11 @@ public abstract class GridObject implements Serializable {
 	}
 
 	/**
-	 * Sets the coordinates of the object
+	 * Sets the coordinates of the object. Assumes the coordinate are valid for the world
 	 * 
 	 * @param coordinate The new coordinate of this object
 	 *             
-	 * @assumes the coordinate are valid for the world
+	 * 
 	 */
 	public void setCoordinates(Coordinate coordinate) {
 		this.coordinate = coordinate;
