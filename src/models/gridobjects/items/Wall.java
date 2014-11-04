@@ -17,7 +17,7 @@ public class Wall extends Item implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 10L;
-	/**
+	/*
 	 * If a neighboring wall segment exists in a particular direction then it is
 	 * stored within these variables.
 	 */
@@ -41,7 +41,7 @@ public class Wall extends Item implements Serializable {
 		return side;
 	}
 
-	/**
+	/*
 	 * Locates the coordinate of the eastern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
@@ -53,7 +53,7 @@ public class Wall extends Item implements Serializable {
 	 * return null; }
 	 */
 
-	/**
+	/*
 	 * Locates the coordinate of the northern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
@@ -65,7 +65,7 @@ public class Wall extends Item implements Serializable {
 	 * return null; }
 	 */
 
-	/**
+	/*
 	 * Locates the coordinate of the western most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
@@ -77,7 +77,7 @@ public class Wall extends Item implements Serializable {
 	 * return null; }
 	 */
 
-	/**
+	/*
 	 * Locates the coordinate of the southern most section of a wall within a
 	 * sequence of Wall objects.
 	 * 
@@ -89,7 +89,7 @@ public class Wall extends Item implements Serializable {
 	 * return null; }
 	 */
 
-	/**
+	/*
 	 * Returns the next Wall segment in a specified direction. If none exists
 	 * then it returns null;
 	 * 
@@ -104,7 +104,7 @@ public class Wall extends Item implements Serializable {
 	 * }
 	 */
 
-	/**
+	/*
 	 * Checks to see if the Wall is near a Tree object.
 	 * 
 	 * @return true If the Wall is near a Tree.

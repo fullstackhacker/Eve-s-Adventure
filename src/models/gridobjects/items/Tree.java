@@ -17,9 +17,11 @@ public class Tree extends Item implements Serializable {
 	/**
 	 * 
 	 */
-
 	private Bamboo bamboo;
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 9L;
 
 	public Tree(int iD, Bamboo bamboo) {
@@ -40,7 +42,12 @@ public class Tree extends Item implements Serializable {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Adds Bamboo to the tree.
+	 * @param bamboo
+	 * @return
+	 */
 	public boolean addBamboo(Bamboo bamboo) {
 		if (bamboo == null) {
 			this.bamboo = bamboo;
@@ -50,6 +57,10 @@ public class Tree extends Item implements Serializable {
 		}
 	}
 
+	/**
+	 * Removes bamboo from the tree.
+	 * @return
+	 */
 	public Bamboo removeBamboo() {
 		Bamboo temp = bamboo;
 		bamboo = null;

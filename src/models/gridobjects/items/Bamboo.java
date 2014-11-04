@@ -18,6 +18,13 @@ public class Bamboo extends Item implements Serializable{
 		super(iD); 
 	}
 	
+	/**
+	 * Determines what type the object is and returns the first letter of that
+	 * types name.
+	 * 
+	 * @return type Returns the first letter of the type name. (Example: "S" =
+	 *         Shrub)
+	 */
 	public String toString() {
 		return "B";
 

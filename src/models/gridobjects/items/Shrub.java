@@ -11,6 +11,9 @@ import java.io.Serializable;
  */
 public class Shrub extends Item implements Serializable{
 	
+	/**
+	 * 
+	 */
 	private Bamboo bamboo;
 
 	/**
@@ -37,6 +40,11 @@ public class Shrub extends Item implements Serializable{
 		}
 	}
 	
+	/**
+	 * Adds Bamboo to the tree.
+	 * @param bamboo
+	 * @return
+	 */
 	public boolean addBamboo(Bamboo bamboo){
 		if (bamboo == null){
 			this.bamboo = bamboo;
@@ -46,6 +54,10 @@ public class Shrub extends Item implements Serializable{
 		}
 	}
 	
+	/**
+	 * Removes bamboo from the tree.
+	 * @return
+	 */
 	public Bamboo removeBamboo(){
 		Bamboo temp = bamboo;
 		bamboo = null;
