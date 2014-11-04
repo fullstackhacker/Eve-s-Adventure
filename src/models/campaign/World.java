@@ -2,6 +2,7 @@ package models.campaign;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import models.Coordinate;
 import models.gridobjects.GridObject;
@@ -150,7 +151,10 @@ public class World implements Serializable {
 	 * Grid of Squares
 	 */
 	private Square[][] world; 
-	
+	/**
+	 * 
+	 */
+	private Creature Eve;
 	/**
 	 * Constructor for the world
 	 * 
@@ -216,6 +220,7 @@ public class World implements Serializable {
 	 * @return  true iff added the creature to the square
 	 */
 	public boolean addCreature(Creature creature){
+		
 		return false; 
 	}
 	/**
@@ -285,24 +290,54 @@ public class World implements Serializable {
 	 * 
 	 * @return  all the objects that are currently in the world
 	 */
-	public ArrayList<GridObject> getObjects(){ 
-		return null; //added to make compiler unhappy 
+	public Iterator<GridObject> getObjects(){ 
+		ArrayList<GridObject> objects = new ArrayList<GridObject>();
+		for(int y=0; y<this.world.length; y++){ 
+			for(int x=0; x<this.world[y].length; x++){ 
+				if(world[y][x].hasItem()){
+					objects.add(world[y][x].item);
+				}else if(world[y][x].hasCreature()){
+					objects.add(world[y][x].creature);
+				}
+			}
+		}
+		
+		return objects.iterator();
 	}
 	/**
 	 * Gets only the items in the world. Creatures not included.
 	 * 
 	 * @return   the items in the world
 	 */
-	public ArrayList<Item> getItems(){ 
-		return null; //shhhhhhut up 
+	public Iterator<Item> getItems(){ 
+		ArrayList<Item> items = new ArrayList<Item>();
+		for(int y=0; y<this.world.length; y++){ 
+			for(int x=0; x<this.world[y].length; x++){ 
+				if(world[y][x].hasItem()){
+					items.add(world[y][x].item);
+				}
+			}
+		}
+		
+		return items.iterator();
 	}
-	/** * @author Mushaheed Kapadia
+	/**
 	 * Gets only bamboo in the world 
 	 * 
 	 * @return  all the bamboo in the world
 	 */
-	public ArrayList<Bamboo> getBamboo(){
-		return null; //compiler be mad yo
+	public Iterator<Bamboo> getBamboo(){
+		ArrayList<Bamboo> bamboos = new ArrayList<Bamboo>();
+		for(int y=0; y<this.world.length; y++){ 
+			for(int x=0; x<this.world[y].length; x++){ 
+				if(world[y][x].hasItem()){
+					if(world[y][x].item.toString().equals("B"))
+						bamboos.add((Bamboo) world[y][x].item);
+				}
+			}
+		}
+		
+		return bamboos.iterator();
 	}
 	/**
 	 * Gets all the creatures EXCLUDING Eve
@@ -311,39 +346,84 @@ public class World implements Serializable {
 	 * 
 	 * @return  the creatures in the world EXCLUDING eve
 	 */
-	public ArrayList<Creature> getCreatures(){ 
-		return null; //dat compiler camp
+	public Iterator<Creature> getCreatures(){ 
+		ArrayList<Creature> creatures = new ArrayList<Creature>();
+		for(int y=0; y<this.world.length; y++){ 
+			for(int x=0; x<this.world[y].length; x++){ 
+				if(world[y][x].hasCreature()){
+					if(!world[y][x].creature.isEve()){
+						creatures.add(world[y][x].creature);
+					}
+				}
+			}
+		}
+		
+		return creatures.iterator();
+	}
+	
+	/**
+	 * Gets only the shrubs in the world
+	 * 
+	 * @return  all the shrubs in the world
+	 */
+	public Iterator<Shrub> getShrubs(){
+		ArrayList<Shrub> shrubs = new ArrayList<Shrub>();
+		for(int y=0; y<this.world.length; y++){ 
+			for(int x=0; x<this.world[y].length; x++){ 
+				if(world[y][x].hasItem()){
+					if(world[y][x].item.toString().equals("S")){
+						shrubs.add((Shrub)world[y][x].item);
+					}
+				}
+			}
+		}
+		
+		return shrubs.iterator();
+	}
+	/**
+	 * Gets only the trees in the world
+	 * 
+	 * @return  all the trees in the world
+	 */
+	public Iterator<Tree> getTrees(){
+		ArrayList<Tree> trees = new ArrayList<Tree>();
+		for(int y=0; y<this.world.length; y++){ 
+			for(int x=0; x<this.world[y].length; x++){ 
+				if(world[y][x].hasItem()){
+					if(world[y][x].item.toString().equals("T")){
+						trees.add((Tree)world[y][x].item);
+					}
+				}
+			}
+		}
+		
+		return trees.iterator();
+	}
+	/**
+	 * Gets only the trees in the world
+	 * 
+	 * @return  all the trees in the world
+	 */
+	public Iterator<Wall> getWalls(){
+		ArrayList<Wall> walls = new ArrayList<Wall>();
+		for(int y=0; y<this.world.length; y++){ 
+			for(int x=0; x<this.world[y].length; x++){ 
+				if(world[y][x].hasItem()){
+					if(world[y][x].item.toString().equals("W")){
+						walls.add((Wall)world[y][x].item);
+					}
+				}
+			}
+		}
+		
+		return walls.iterator();
 	}
 	/**
 	 * Gets Eve 
 	 * @return  the Eve Creature Object
 	 */
 	public Creature getEve(){ 
-		return null; //we will return Eve if you meet our demands 
-	}
-	/**
-	 * Gets only the shrubs in the world
-	 * 
-	 * @return  all the shrubs in the world
-	 */
-	public ArrayList<Shrub> getShrubs(){
-		return null; //woot woot compilers
-	}
-	/**
-	 * Gets only the trees in the world
-	 * 
-	 * @return  all the trees in the world
-	 */
-	public ArrayList<Tree> getTrees(){
-		return null; //eclipse's red lines are scary
-	}
-	/**
-	 * Gets only the trees in the world
-	 * 
-	 * @return  all the trees in the world
-	 */
-	public ArrayList<Wall> getWalls(){
-		return null; //no one's gonna read these anyways
+		return Eve;
 	}
 	/**
 	 * Prints the world out to the console

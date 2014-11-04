@@ -35,7 +35,7 @@ public class Creature extends GridObject {
 	 */
 	private int direction;
 	
-	/*
+	/**
 	 * Is the creature awake.
 	 */
 	private boolean isAwake;
@@ -57,8 +57,8 @@ public class Creature extends GridObject {
 	 * @param ycoordinate The ycoordinate of the creature.
 	 */
 	public Creature(String name, Coordinate coordinate){
-		this.setName(name);
-		this.setCoordinates(coordinate);
+		super.setName(name);
+		super.setCoordinates(coordinate);
 	}
 	
 	/**
@@ -154,6 +154,18 @@ public class Creature extends GridObject {
 	 */
 	public boolean isAwake(){
 		return this.isAwake;
+	}
+	
+	/**
+	 * Checks to see if the current object is Eve.
+	 * @return
+	 */
+	public boolean isEve(){
+		if(super.getName().equals("Eve")){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	/**

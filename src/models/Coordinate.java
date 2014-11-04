@@ -8,11 +8,11 @@ public class Coordinate {
 	/**
 	 * Represents the x-coordinate in a Cartesian product representation of the world
 	 */
-	private int x; 
+	private int x;
 	/**
 	 * Represents the y-coordinate in a Cartesian product representation of the world
 	 */
-	private int y; 
+	private int y;
 	
 	/**
 	 * Constructor method. Creates a representation of the x and y coordinates
@@ -20,7 +20,7 @@ public class Coordinate {
 	 * @param x The x-coordinate in a Cartesian product representation of the world
 	 * @param y The y-coordinate in a Cartesian product representation of the world
 	 */
-	public Coordinate(int x, int y){ 
+	public Coordinate(int x, int y){
 		
 	}
 	/**
