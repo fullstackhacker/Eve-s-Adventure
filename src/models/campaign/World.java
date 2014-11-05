@@ -170,7 +170,7 @@ public class World implements Serializable {
 	 * @return the name of the world 
 	 */
 	public String getName(){
-		return null; 
+		return this.name; 
 	}
 	/**
 	 * Change the name of the world 
@@ -190,7 +190,7 @@ public class World implements Serializable {
 	 * @return  true iff the Item was placed into the world
 	 */
 	public boolean addItem(Item item){ 
-		return false; //added to make compiler happy #sesh
+		return this.world[item.getY()][item.getY()].addItem(item);
 	}
 	/**
 	 * Replaces the current object on the world at the specified location 
@@ -201,7 +201,7 @@ public class World implements Serializable {
 	 * @return true iff the Item replaced another item in the world
 	 */
 	public boolean replaceItem(Item item){ 
-		return false; //added to make compiler happy #sesh
+		return this.world[item.getY()][item.getX()].replaceItem(item); 
 	}
 	/**
 	 * Removes an object from the world at the specified location
@@ -209,7 +209,7 @@ public class World implements Serializable {
 	 * @param coordinate The coordinate representation of the object in the world
 	 */
 	public void removeItem(Coordinate coordinate){ 
-		
+		this.world[coordinate.getY()][coordinate.getX()].removeItem();
 	}
 	/**
 	 * Adds a creature if there isn't anything on that square
@@ -220,10 +220,7 @@ public class World implements Serializable {
 	 * @return  true iff added the creature to the square
 	 */
 	public boolean addCreature(Creature creature){
-		if(this.world[creature.getY()][creature.getX()].hasCreature())
-			return false; 
-		this.world[creature.getY()][creature.getX()].addCreature(creature); 
-		return true; 
+		return this.world[creature.getY()][creature.getX()].addCreature(creature); 
 	}
 	/**
 	 * Replaces the creature on the square
@@ -232,7 +229,7 @@ public class World implements Serializable {
 	 * @return  true iff the old creature was replaced by the new creature
 	 */
 	public boolean replaceCreature(Creature creature){
-		return false; 
+		return this.world[creature.getY()][creature.getX()].replaceCreature(creature); 
 	}
 	/**
 	 * Remove the creature on the specified location
@@ -240,7 +237,7 @@ public class World implements Serializable {
 	 * @param coordinate A coordinate object representing the location of the creature to remove
 	 */
 	public void removeCreature(Coordinate coordinate){
-		
+		this.world[coordinate.getY()][coordinate.getX()].removeCreature();
 	}
 	/**
 	 * Checks to see if there is an item on the location
