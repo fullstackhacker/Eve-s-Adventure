@@ -63,15 +63,15 @@ public class Campaign implements Serializable{
 	 * @return  the name of the campaign
 	 */
 	public String getName(){
-		return null; 
+		return this.name; 
 	}
 	/**
 	 * Gets the levels in the campaign
 	 * 
 	 * @return the list of levels in this campaign
 	 */
-	public ArrayList<String> getLevels(){ 
-		return null; 
+	public ArrayList<Level> getLevels(){ 
+		return this.levels; 
 	}
 	/**
 	 * Gets the description of the campaign
@@ -79,7 +79,7 @@ public class Campaign implements Serializable{
 	 * @return the string representation of the campaign description
 	 */
 	public String getDescription(){ 
-		return null; 
+		return this.description; 
 	}
 	/**
 	 * Gets the current level 

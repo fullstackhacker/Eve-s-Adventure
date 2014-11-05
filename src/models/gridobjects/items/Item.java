@@ -21,10 +21,14 @@ public abstract class Item extends GridObject implements Serializable {
 	/**
 	 * ID of the item to help distinguish it from other items
 	 */
-	private static int iD; 
+	private int iD; 
 
 	public Item(int iD){ 
 		this.iD =  iD; 
+	}
+	
+	public int getId(){
+		 return this.iD;
 	}
 	
 	/**

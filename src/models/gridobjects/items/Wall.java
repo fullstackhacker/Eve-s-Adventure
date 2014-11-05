@@ -2,8 +2,6 @@ package models.gridobjects.items;
 
 import java.io.Serializable;
 
-import models.gridobjects.GridObject;
-
 /**
  * The Wall object extends Item and acts as a pure obstruction in the grid
  * world. No EObject can interact with a Wall beyond being blocked by it.

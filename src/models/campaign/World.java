@@ -220,8 +220,10 @@ public class World implements Serializable {
 	 * @return  true iff added the creature to the square
 	 */
 	public boolean addCreature(Creature creature){
-		
-		return false; 
+		if(this.world[creature.getY()][creature.getX()].hasCreature())
+			return false; 
+		this.world[creature.getY()][creature.getX()].addCreature(creature); 
+		return true; 
 	}
 	/**
 	 * Replaces the creature on the square
