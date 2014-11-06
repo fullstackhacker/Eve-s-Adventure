@@ -4,9 +4,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import models.campaign.World;
+import controllers.Load;
+import controllers.Save;
 
 /**
  * Handles the client connection, figures out what the client is trying to do
@@ -59,11 +62,14 @@ public class EveService implements Runnable{
 		switch(fC){ 
 		case "uploadWorld": 
 			uploadWorld(); 
+			break;
+		case "downloadWorld":
+			downloadWorld();
+			break;
 		}
 	}
 	
 	public void uploadWorld(){ 
-
 		/* Tell client ready for file */
 		try{ 
 			String tC = "!"; 
@@ -86,10 +92,50 @@ public class EveService implements Runnable{
 		try{
 			World w = (World) ois.readObject();
 			System.out.println("Read in the world object: " + w.getName()); 
+			w.setName(w.getName() + "_servercopy");
+			Save.saveWorld(w);
 		}
 		catch(Exception e){ 
 			//unable to read world object
 		}
+	}
+	
+	public void downloadWorld(){
+		/* tell client received download notion respond with world name */
+		try{
+			String tC = "!";
+			this.out.writeUTF(tC);
+		}
+		catch(Exception e){
+			System.out.println("Unable to write to client"); 
+		}
+		
+		/* Read world name from the client */
+		String worldName = ""; 
+		try{
+			worldName = this.in.readUTF();
+			System.out.println(worldName); 
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to read from the client"); 
+		}
+		
+		/* load world object */
+		World world = Load.loadWorld(worldName + "_servercopy"); 
+		
+		/* respond with object */
+		ObjectOutputStream oos = null;
+		
+		try{ 
+			oos = new ObjectOutputStream(this.out); 
+			oos.writeObject(world); 
+			oos.close();
+		}
+		catch(Exception e){ 
+			System.out.println("Failed to send world to client"); 
+		}
+		
+	
 		
 	}
 }

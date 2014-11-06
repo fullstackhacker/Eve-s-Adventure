@@ -181,6 +181,14 @@ public class World implements Serializable {
 		return this.name; 
 	}
 	/**
+	 * Sets the name of the world
+	 * 
+	 * @param name The new name of the world
+	 */
+	public void setName(String name){
+		this.name = name;
+	}
+	/**
 	 * Change the name of the world 
 	 * 
 	 * @param name  the new name for the world
