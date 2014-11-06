@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import models.campaign.Campaign;
+import models.campaign.Level;
 import models.campaign.World;
 import controllers.Load;
 import controllers.Save;
@@ -63,8 +65,23 @@ public class EveService implements Runnable{
 		case "uploadWorld": 
 			uploadWorld(); 
 			break;
+		case "uploadLevel":
+			uploadLevel(); 
+			break; 
+		case "uploadCampaign":
+			uploadCampaign(); 
+			break; 
 		case "downloadWorld":
 			downloadWorld();
+			break;
+		case "downloadLevel": 
+			downloadLevel(); 
+			break; 
+		case "downloadCampaign":
+			downloadCampaign(); 
+			break;
+		default: 
+			System.out.println("Invalid message");
 			break;
 		}
 	}
@@ -97,6 +114,66 @@ public class EveService implements Runnable{
 		}
 		catch(Exception e){ 
 			//unable to read world object
+		}
+	}
+	
+	public void uploadLevel(){
+		/* Tell client ready for file */
+		try{ 
+			String tC = "!"; 
+			this.out.writeUTF(tC);
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to write to client"); 
+		}
+		
+		/* Set up the object reader */
+		ObjectInputStream ois = null; 
+		try{ 
+			ois = new ObjectInputStream(this.in);
+		}
+		catch(Exception e){
+			//unable to set up the reader
+		}
+		
+		/* Read in the object */
+		try{
+			Level level = (Level) ois.readObject();
+			level.replaceName(level.getName() + "_servercopy");
+			Save.saveLevel(level, null);
+		}
+		catch(Exception e){ 
+			//unable to read world object
+		}
+	}
+	
+	public void uploadCampaign(){
+		/* Tell client ready for file */
+		try{ 
+			String tC = "!"; 
+			this.out.writeUTF(tC);
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to write to client"); 
+		}
+		
+		/* Set up the object reader */
+		ObjectInputStream ois = null; 
+		try{ 
+			ois = new ObjectInputStream(this.in);
+		}
+		catch(Exception e){
+			//unable to set up the reader
+		}
+		
+		/* read in the object */
+		try{ 
+			Campaign campaign = (Campaign) ois.readObject(); 
+			campaign.replaceName(campaign.getName() + "_servercopy");
+			Save.saveCampaign(campaign); 
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to read the campaign object");
 		}
 	}
 	
@@ -134,8 +211,74 @@ public class EveService implements Runnable{
 		catch(Exception e){ 
 			System.out.println("Failed to send world to client"); 
 		}
-		
+	}
 	
+	public void downloadLevel(){
+		/* Tell client ready for level name */
+		try{ 
+			String tC = "!"; 
+			this.out.writeUTF(tC);
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to write to client"); 
+		}
 		
+		/* read in level name */
+		String levelName = null;
+		try{ 
+			levelName = this.in.readUTF(); 
+		}
+		catch(Exception e){ 
+			System.out.println("Failed to read in level name"); 
+		}
+		
+		/* load the level */
+		Level level = Load.loadLevel(levelName, null);
+		
+		/* send the level */
+		ObjectOutputStream oos; 
+		try{ 
+			oos = new ObjectOutputStream(this.out); 
+			oos.writeObject(level);
+			oos.close();
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to write level to client"); 
+		}
+		
+	}
+	
+	public void downloadCampaign(){
+		/* Tell client ready for campaign name */
+		try{ 
+			String tC = "!"; 
+			this.out.writeUTF(tC);
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to write to client"); 
+		}
+		
+		/* read in campaign name */
+		String campaignName = null; 
+		try{ 
+			campaignName = this.in.readUTF(); 
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to read in the name of the campaign");
+		}
+		
+		/* load the campaign */
+		Campaign campaign = Load.loadCampaign(campaignName); 
+		
+		/* send the campaign */
+		ObjectOutputStream oos; 
+		try{ 
+			oos = new ObjectOutputStream(this.out); 
+			oos.writeObject(campaign); 
+			oos.close(); 
+		}
+		catch(Exception e){ 
+			System.out.println("Unable to write the campaign to the client"); 
+		}
 	}
 }

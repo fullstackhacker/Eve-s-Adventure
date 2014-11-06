@@ -84,6 +84,7 @@ public class Level implements Serializable {
 	 */
 	public void replaceName(String name){
 		this.name = name;
+		this.world.setName(name);
 	}
 	/**
 	 * Gets the world for the level 
