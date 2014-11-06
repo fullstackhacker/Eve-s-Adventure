@@ -80,6 +80,10 @@ public class EveService implements Runnable{
 		case "downloadCampaign":
 			downloadCampaign(); 
 			break;
+		case "listWorlds": 
+		case "listLevels":
+		case "listCampaigns": 
+			break;
 		default: 
 			System.out.println("Invalid message");
 			break;
