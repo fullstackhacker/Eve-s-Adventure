@@ -67,13 +67,15 @@ public class Save {
 		if(!levelsDir.exists()) levelsDir.mkdirs(); 
 		
 		/* create the path and the output stream objects */
-		String levelPath = campaignPath == null? Save.LEVELDIR + level.getName() + File.separator : campaignPath + File.separator + level.getName() + File.separator; 
+		String levelPath = campaignPath == null? Save.LEVELDIR + level.getName() + File.separator : campaignPath + level.getName() + File.separator; 
 		FileOutputStream fos = null; 
 		ObjectOutputStream oos = null; 
 		
+		System.out.println(levelPath); 
+		
 		/* create the directory for the level */
 		File levelDir = new File(levelPath); 
-		levelDir.mkdir(); 
+		levelDir.mkdirs(); 
 		
 		/* save the world */
 		String worldPath = levelPath + File.separator + level.getWorld().getName() + Save.WORLDEXT; 
@@ -160,7 +162,7 @@ public class Save {
 		if(!campaignsDir.exists()) campaignsDir.mkdirs(); 
 		
 		/* set up the campaign path and output stream objects */
-		String campaignPath = Save.CAMPAIGNDIR + File.separator + campaign.getName() + File.separator; 
+		String campaignPath = Save.CAMPAIGNDIR + campaign.getName() + File.separator; 
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null; 
 		
@@ -170,7 +172,7 @@ public class Save {
 		
 		/* save the levels */
 		for(Level level : campaign.getLevels()){
-			if(!saveLevel(level, campaignPath)) return false; //error saving one of the levels
+			if(!saveLevel(level, campaignPath + "levels" + File.separator)) return false; //error saving one of the levels
 		}
 		
 		/* save the name */
@@ -216,14 +218,5 @@ public class Save {
 		}
 		
 		return true;  //save the campaign successfully
-	}
-	
-	/* testing purposes only */
-	public static void main(String[] args){ 
-		World w = new World("Megan", 2, 2); 
-		Level l = new Level(w, "Level with leveling");
-		Campaign c = new Campaign("Tutorial", "Learn Karel the Scratch way"); 
-		c.addLevel(l);
-		Save.saveCampaign(c); 
 	}
 }
