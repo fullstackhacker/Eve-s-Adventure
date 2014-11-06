@@ -20,12 +20,19 @@ public class Save {
 	 * Serializes the current World and stores it in a file
 	 * 
 	 * @param world  the world to save
+	 * @return true iff the world was saved
 	 */
-	public static void saveWorld(World world){
-		String worldPath = WORLDDIR + world.getName(); 
+	public static boolean saveWorld(World world){
+		/* check if the worlds directory exists */
+		File worldsDir = new File(Save.WORLDDIR); 
+		if(!worldsDir.exists()) worldsDir.mkdirs();
+		
+		/* create the save path and the output streams */
+		String worldPath = WORLDDIR + world.getName() + WORLDEXT; 
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null; 
 		
+		/* save the world */
 		try{ 
 			fos = new FileOutputStream(new File(worldPath));
 			oos = new ObjectOutputStream(fos); 
@@ -34,8 +41,11 @@ public class Save {
 			fos.close(); 
 		}
 		catch(Exception e){ 
-			//failed
+			System.out.println("Unable to save the file"); 
+			return false; 
 		}
+		
+		return true; 
 	}
 	
 	/**

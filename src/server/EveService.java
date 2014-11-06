@@ -73,6 +73,7 @@ public class EveService implements Runnable{
 			System.out.println("Unable to write to client"); 
 		}
 		
+		/* Set up the object reader */
 		ObjectInputStream ois = null; 
 		try{ 
 			ois = new ObjectInputStream(this.in);
@@ -81,6 +82,7 @@ public class EveService implements Runnable{
 			//unable to set up the reader
 		}
 		
+		/* Read in the object */
 		try{
 			World w = (World) ois.readObject();
 			System.out.println("Read in the world object: " + w.getName()); 
@@ -88,7 +90,6 @@ public class EveService implements Runnable{
 		catch(Exception e){ 
 			//unable to read world object
 		}
-		
 		
 	}
 }
