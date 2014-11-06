@@ -158,11 +158,19 @@ public class World implements Serializable {
 	/**
 	 * Constructor for the world
 	 * 
+	 * @param name The name of the world
 	 * @param height  The height of the world 
 	 * @param width  The width of the world
 	 */
-	public World(int height, int width){ 
-		this.world[0][0] = new Square(); 
+	public World(String name, int height, int width){ 
+		this.name = name; 
+		this.world = new Square[height][width];
+		
+		for(int y=0; y < height; y++){
+			for(int x=0; x<width; x++){ 
+				this.world[y][x] = new Square(); 
+			}
+		}
 	}
 	/**
 	 * Gets the name of the world
