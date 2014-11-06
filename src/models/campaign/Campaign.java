@@ -34,8 +34,11 @@ public class Campaign implements Serializable{
 	 * 
 	 * @param description  the description for the campaign
 	 */
-	public Campaign(String description){
-		
+	public Campaign(String name, String description){
+		this.name = name; 
+		this.description = description; 
+		this.levels = new ArrayList<Level>();
+		this.currentLevel = 0;
 	}
 	/**
 	 * Constructor to create a campaign with an initial level
@@ -43,8 +46,12 @@ public class Campaign implements Serializable{
 	 * @param level  the initial level for the campaign
 	 * @param description  the description for the campaign
 	 */
-	public Campaign(Level level, String description){ 
-		
+	public Campaign(String name, String description, Level level){ 
+		this.name = name; 
+		this.description = description; 
+		this.levels = new ArrayList<Level>();
+		this.levels.add(level);
+		this.currentLevel = 0;
 	}
 	/**
 	 * Constructor to create a campaign with all of its parts. To be used in Loading Campaigns
@@ -103,7 +110,7 @@ public class Campaign implements Serializable{
 	 * @param level  the level to add
 	 */
 	public void addLevel(Level level){
-		
+		this.levels.add(level);
 	}
 	/**
 	 * Move a level around in the campaign

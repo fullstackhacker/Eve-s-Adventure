@@ -50,6 +50,7 @@ public class Level implements Serializable {
 	 */
 	public Level(World world, String description){ 
 		bambooObjective = -1;
+		this.name = world.getName(); 
 		this.world = world;
 		this.description = description;
 	}

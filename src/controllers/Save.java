@@ -217,4 +217,13 @@ public class Save {
 		
 		return true;  //save the campaign successfully
 	}
+	
+	/* testing purposes only */
+	public static void main(String[] args){ 
+		World w = new World("Megan", 2, 2); 
+		Level l = new Level(w, "Level with leveling");
+		Campaign c = new Campaign("Tutorial", "Learn Karel the Scratch way"); 
+		c.addLevel(l);
+		Save.saveCampaign(c); 
+	}
 }
