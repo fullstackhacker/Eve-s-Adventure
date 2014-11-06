@@ -69,17 +69,125 @@ public class Load {
 	 * @param levelName The name of the level to load
 	 * @param campaignPath The path to campaign's directory if the level is part of a campaign, otherwise null.
 	 */
+	@SuppressWarnings("unchecked")
 	public static Level loadLevel(String levelName, String campaignPath){
 		/* check if the proper directory exists  */
+		String levelsPath = ""; //path to the levels directory
 		if(campaignPath == null){ //loading from data/levels
-			
+			levelsPath = Load.LEVELDIR;
+			File levelsDir = new File(levelsPath); 
+			if(!levelsDir.exists()) return null; //levels folder doesn't exist
 		}
 		else { //loading from data/campaigns/<campaign_name>/levels
-			
+			levelsPath = campaignPath; 
+			File levelsDir = new File(campaignPath); 
+			if(!levelsDir.exists()) return null; //levels folder doesnt exist in the campaigns folder
 		}
 		
+		/* create the load path and the input streams */
+		String levelPath = levelsPath + levelName + File.separator;
+		FileInputStream fis = null; 
+		ObjectInputStream ois = null; 
 		
-		return null; 
+		/* check if the level directory exists */
+		File levelDir = new File(levelsPath);
+		if(!levelDir.exists()) return null; 
+		
+		/* load the world */
+		String worldPath = levelPath + levelName + Load.WORLDEXT;
+		World world = null; 
+		
+		File worldFile = new File(worldPath); 
+		if(!worldFile.exists()) return null; //world file doesn't exist
+		
+		try{ 
+			fis = new FileInputStream(worldFile); 
+			ois = new ObjectInputStream(fis); 
+			world = (World) ois.readObject(); 
+			ois.close();
+			fis.close(); 
+		}
+		catch(Exception e){ 
+			return null;
+		}
+		
+		/* load the objectives */
+		String objectivesPath = levelPath + Load.OBJECTIVEFILENAME; 
+		ArrayList<String> objectives = null;
+		
+		File objectiveFile = new File(objectivesPath);
+		if(!objectiveFile.exists()) return null; //objective file doesn't exist
+		
+		try{ 
+			fis = new FileInputStream(objectiveFile); 
+			ois = new ObjectInputStream(fis); 
+			objectives = (ArrayList<String>) ois.readObject(); 
+			ois.close();
+			fis.close(); 
+		}
+		catch(Exception e){ 
+			return null; 
+		}
+		
+		/* load the karel code */
+		String karelCodePath = levelPath + Load.KARELCODEFILENAME; 
+		ArrayList<String> karelCode = null; 
+		
+		File karelCodeFile = new File(karelCodePath); 
+		if(!karelCodeFile.exists()) return null; //karel code file doesn't exist
+		
+		try{ 
+			fis = new FileInputStream(karelCodeFile); 
+			ois = new ObjectInputStream(fis); 
+			karelCode = (ArrayList<String>) ois.readObject(); 
+			ois.close(); 
+			fis.close(); 
+		}
+		catch(Exception e){ 
+			return null; 
+		}
+		
+		/* load the description */
+		String descriptionPath = levelPath + Load.DESCRIPTIONFILENAME;
+		String description = null; 
+		
+		File descriptionFile = new File(descriptionPath); 
+		if(!descriptionFile.exists()) return null;
+		
+		try{ 
+			fis = new FileInputStream(new File(descriptionPath)); 
+			ois = new ObjectInputStream(fis); 
+			description = (String) ois.readObject(); 
+			ois.close(); 
+			fis.close();
+		}
+		catch(Exception e){ 
+			return null;
+		}
+		
+		/* load the bambooo objective */
+		String bambooObjectivePath = levelPath + Load.BAMBOOBJECTIVEFILENAME; 
+		Integer bambooObjective = null; 
+		
+		File bambooObjectiveFile = new File(bambooObjectivePath); 
+		if(!bambooObjectiveFile.exists()) return null; 
+		
+		try{ 
+			fis = new FileInputStream(new File(bambooObjectivePath)); 
+			ois = new ObjectInputStream(fis); 
+			bambooObjective = (Integer) ois.readObject(); 
+			ois.close(); 
+			fis.close(); 
+		}
+		catch(Exception e){ 
+			return null; 
+		}
+		
+		/* create the level */
+		Level level = new Level(world, description, objectives, karelCode, bambooObjective.intValue());
+		
+		/* return the level */
+		return level; 
 	}
 	
 	/**
@@ -88,7 +196,88 @@ public class Load {
 	 * @param campaignName The name of the campaign to load
 	 */
 	public static Campaign loadCampaign(String campaignName){
-		return null; 
+		/* check if campaigns directory exists */
+		File campaignsDir = new File(Load.CAMPAIGNDIR);
+		if(!campaignsDir.exists()) return null; //campaign doesn't exist
+		
+		/* create the path to the campaign and the input streams */
+		String campaignPath = Load.CAMPAIGNDIR + campaignName + File.separator; 
+		FileInputStream fis = null; 
+		ObjectInputStream ois = null; 
+		
+		/* check if the campaign exists */
+		File campaignDir = new File(campaignPath); 
+		if(!campaignDir.exists()) return null; 
+		
+		/* get level names and check if they exist */
+		File levelsDir = new File(campaignPath + "levels" + File.separator);
+		if(!levelsDir.exists()) return null; 
+		String levelNames[] = levelsDir.list(); 
+		
+		/* load the levels */
+		ArrayList<Level> levels = new ArrayList<Level>(); 
+		for(String levelName : levelNames)
+			levels.add(Load.loadLevel(levelName, campaignPath + "levels" + File.separator)); 
+		
+		/* load the name */
+		String namePath = campaignPath + Load.NAMEFILENAME; 
+		String name = null; 
+		
+		File nameFile = new File(namePath); 
+		if(!nameFile.exists()) return null; //name file doesn't exist
+		
+		try{ 
+			fis = new FileInputStream(nameFile); 
+			ois = new ObjectInputStream(fis); 
+			name = (String) ois.readObject();
+			ois.close(); 
+			fis.close(); 
+		}
+		catch(Exception e){ 
+			return null;
+		}
+		
+		/* load the description */
+		String descriptionPath = campaignPath + Load.DESCRIPTIONFILENAME;
+		String description = null; 
+		
+		File descriptionFile = new File(descriptionPath); 
+		if(!descriptionFile.exists()) return null; //description file doesn't exist
+		
+		try{ 
+			fis = new FileInputStream(descriptionFile); 
+			ois = new ObjectInputStream(fis); 
+			description = (String) ois.readObject(); 
+			ois.close(); 
+			fis.close(); 
+		}
+		catch(Exception e){ 
+			return null;
+		}
+		
+		/* load the current level */
+		String currentLevelPath = campaignPath + Load.CURRENTLEVELFILENAME; 
+		Integer currentLevel = null; 
+		
+		File currentLevelFile = new File(currentLevelPath); 
+		if(!currentLevelFile.exists()) return null; //current level file doesn't exist
+		
+		try{ 
+			fis = new FileInputStream(currentLevelPath); 
+			ois = new ObjectInputStream(fis); 
+			currentLevel = (Integer) ois.readObject(); 
+			ois.close();
+			fis.close(); 
+		}
+		catch(Exception e){ 
+			return null; 
+		}
+		
+		/* create the campaign */
+		Campaign campaign = new Campaign(name, levels, description, currentLevel); 
+		
+		/* return the campaign */
+		return campaign;
 	}
 	
 	/**

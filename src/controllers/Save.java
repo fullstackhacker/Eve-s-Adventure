@@ -71,8 +71,6 @@ public class Save {
 		FileOutputStream fos = null; 
 		ObjectOutputStream oos = null; 
 		
-		System.out.println(levelPath); 
-		
 		/* create the directory for the level */
 		File levelDir = new File(levelPath); 
 		levelDir.mkdirs(); 
