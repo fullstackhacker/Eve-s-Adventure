@@ -13,8 +13,13 @@ import models.campaign.World;
  */
 public class Save {
 	private static final String DATADIR = "data" + File.separator; 
-	private static final String WORLDDIR = DATADIR + "worlds" + File.separator; 
+	private static final String WORLDDIR = Save.DATADIR + "worlds" + File.separator; 
+	private static final String LEVELDIR = Save.DATADIR + "levels" + File.separator; 
+	private static final String CAMPAIGNDIR = Save.DATADIR + "campaigns" + File.separator; 
 	private static final String WORLDEXT = ".world"; 
+	private static final String NAMEFILENAME = "name.dat"; 
+	private static final String DESCRIPTIONFILENAME = "description.dat";
+	private static final String CURRENTLEVELFILENAME = "currentLevel.dat"; 
 
 	/**
 	 * Serializes the current World and stores it in a file
