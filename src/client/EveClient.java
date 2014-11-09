@@ -48,139 +48,111 @@ public class EveClient{
 		this.out = new DataOutputStream(this.server.getOutputStream());
 	}
 	
+	private void disconnect() throws IOException{ 
+		this.out.close();
+		this.in.close(); 
+		this.server.close();
+	}
+	
 	public void uploadWorld(World world) throws UnknownHostException, IOException{
 		/* connect to the server */
 		this.connect();
 		
 		/* read from the server */
-		try{ 
-			String fS = ""; 
-			fS = this.in.readUTF();
-			System.out.println(fS);
-		}
-		catch(IOException e){ 
-			System.out.println(e.getMessage());
-			throw new IOException("Failed to read from the server"); 
+		String fS = ""; 
+		fS = this.in.readUTF(); 
+		if(!fS.equals("?")){
+			throw new UnknownHostException("Invalid Host"); 
 		}
 		
 		/* write to the server */
-		try{ 
-			String tS = "uploadWorld"; 
-			this.out.writeUTF(tS); 
-		}
-		catch(IOException e){ 
-			System.out.println("Unable to write to server");
-		}
+		String tS = "uploadWorld"; 
+		this.out.writeUTF(tS); 
 		
 		/* read the ready from server */
-		try{ 
-			String fS = ""; 
-			fS = this.in.readUTF();
-			System.out.println(fS); 
-		}
-		catch(IOException e){ 
-			System.out.println("failed to read from the server"); 
-		}
+		fS = this.in.readUTF();
+		if(!fS.equals("!")) throw new UnknownHostException("Invalid Host"); 
 		
 		/* Write file to server */
-		ObjectOutputStream oos;
-		try{ 
-			oos = new ObjectOutputStream(this.out); 
-			oos.writeObject(world); 
-			oos.close(); 
-		}
-		catch(IOException e){ 
-			
-		}
+		ObjectOutputStream oos = new ObjectOutputStream(this.out); 
+		oos.writeObject(world); 
+		oos.close();
+		
+		/* disconnect from the server */
+		this.disconnect(); 
 	}
 	
-	public void downloadWorld(String worldName){
+	public World downloadWorld(String worldName) throws UnknownHostException, IOException{
+		/* connect to the server */
+		this.connect();
+		
 		/* read from the server */
-		try{ 
-			String fS = ""; 
-			fS = this.in.readUTF();
-			System.out.println(fS);
-		}
-		catch(Exception e){ 
-			System.out.println("failed to read from the server"); 
-		}
+		String fS = ""; 
+		fS = this.in.readUTF(); 
+		if(!fS.equals("?")) throw new UnknownHostException("Invalid Host"); 
 		
 		/* write to the server */
-		try{ 
-			String tS = "downloadWorld"; 
-			this.out.writeUTF(tS); 
-		}
-		catch(Exception e){ 
-			System.out.println("Unable to write to server");
-		}
+		String tS = "downloadWorld"; 
+		this.out.writeUTF(tS); 
 		
 		/* read the ready from server */
-		try{ 
-			String fS = ""; 
-			fS = this.in.readUTF();
-			System.out.println(fS); 
-		}
-		catch(Exception e){ 
-			System.out.println("failed to read from the server"); 
-		}
+		fS = this.in.readUTF(); 
+		if(!fS.equals("!")) throw new UnknownHostException("Invalid Host"); 
 		
 		/* write world name to server */
-		try{ 
-			this.out.writeUTF(worldName);
-		}
-		catch(Exception e){
-			System.out.println("Unable to write name to server");
-		}
+		this.out.writeUTF(worldName); 
 		
 		/* read in the world object */
-		ObjectInputStream ois; 
-		World world = null; 
-		try{ 
-			ois = new ObjectInputStream(this.in); 
-			world = (World) ois.readObject(); 
-			ois.close();
-		}
-		catch(Exception e){
-			System.out.println("Unable to read object from server"); 
-		}
+		ObjectInputStream ois = new ObjectInputStream(this.in);
+		World world = null;
+		try {
+			world = (World) ois.readObject();
+		} catch (ClassNotFoundException e) {
+			//class not found --
+			return null; //
+		} 
+		ois.close(); 
 		
-		world.setName(world.getName() + "_clientcopy"); 
+		/* edit name for differential ability */
+		world.setName(world.getName() + "_clientcopy"); //remove once server is using separate data folder
+		
+		/* disconnect from the server */
+		this.disconnect(); 
 		
 		/* save the world */
 		Save.saveWorld(world);  
+		
+		/* return the world */
+		return world; 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Iterator<String> getWorlds(){ 
+	public Iterator<String> getWorlds() throws UnknownHostException, IOException{ 
+		/* connect to the server */
+		this.connect(); 
+		
 		/* read from the server */
-		try{ 
-			String fS = ""; 
-			fS = this.in.readUTF(); //should be ?
-		}
-		catch(Exception e){ 
-			
-		}
+		String fS = ""; 
+		fS = this.in.readUTF(); 
+		if(!fS.equals("?")) throw new UnknownHostException(); 
 		
 		/* write to server */
-		try{ 
-			this.out.writeUTF("listWorlds");
-		}
-		catch(Exception e){ 
-			
-		}
+		String tS = "listWorlds"; 
+		this.out.writeUTF(tS); 
 		
 		/* read object from server */
 		ArrayList<String> worldsList = null; 
-		ObjectInputStream ois; 
+		ObjectInputStream ois = new ObjectInputStream(this.in); 
 		try{ 
-			ois = new ObjectInputStream(this.in); 
 			worldsList = (ArrayList<String>) ois.readObject();
-			ois.close(); 
 		}
-		catch(Exception e){ 
+		catch(ClassNotFoundException e){ 
 			//
+			return null; 
 		}
+		ois.close(); 
 		
+		/* return the list of worlds */
 		return worldsList.iterator(); 
 	}
 	
@@ -212,16 +184,23 @@ public class EveClient{
 		catch(Exception e){
 			
 		}
-		ec.downloadWorld("Mushs_World");
-		
 		try{
-			ec = new EveClient();
+			ec.downloadWorld("Mushs_World");
 		}
-		catch(Exception e){
-			
+		catch(Exception e){ 
+			System.out.println("there was an error"); 
+			return;
 		}
 		
-		Iterator<String> worldsList = ec.getWorlds();
+		
+		Iterator<String> worldsList = null; 
+		try{ 
+			worldsList = ec.getWorlds();
+		}
+		catch(Exception e){ 
+			System.out.println("ERrorr"); 
+			return ;
+		}
 		
 		while(worldsList.hasNext()){ 
 			System.out.println(worldsList.next());
