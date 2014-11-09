@@ -2,10 +2,12 @@ package server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import models.campaign.Campaign;
 import models.campaign.Level;
@@ -81,12 +83,32 @@ public class EveService implements Runnable{
 			downloadCampaign(); 
 			break;
 		case "listWorlds": 
+			listWorlds(); 
+			break;
 		case "listLevels":
 		case "listCampaigns": 
 			break;
 		default: 
 			System.out.println("Invalid message");
 			break;
+		}
+	}
+	
+	public void listWorlds(){ 
+		/* send an Iterator<String> of worlds */
+		File file = new File("data/worlds"); 
+		
+		ArrayList<String> worldsList = new ArrayList<String>(); 
+		for(String world : file.list()) worldsList.add(world); 
+		
+		ObjectOutputStream  oos; 
+		try{ 
+			oos = new ObjectOutputStream(this.out);
+			oos.writeObject(worldsList); 
+			oos.close();
+		}
+		catch(Exception e){ 
+			
 		}
 	}
 	
@@ -182,6 +204,8 @@ public class EveService implements Runnable{
 	}
 	
 	public void downloadWorld(){
+		System.out.println("download world"); 
+		
 		/* tell client received download notion respond with world name */
 		try{
 			String tC = "!";
@@ -203,6 +227,8 @@ public class EveService implements Runnable{
 		
 		/* load world object */
 		World world = Load.loadWorld(worldName + "_servercopy"); 
+		
+		if(world == null) System.out.println("world not found");
 		
 		/* respond with object */
 		ObjectOutputStream oos = null;

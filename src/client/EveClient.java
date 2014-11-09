@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import models.campaign.World;
 import controllers.Save;
@@ -35,21 +37,30 @@ public class EveClient{
 	 * @throws IOException
 	 */
 	public EveClient() throws UnknownHostException, IOException{ 
-		this.server = new Socket("localhost", 5000); 
-		System.out.println("Connected to Server..."); 
-		this.in = new DataInputStream(this.server.getInputStream()); 
-		this.out = new DataOutputStream(this.server.getOutputStream()); 
+		this.server = null;
+		this.in = null; 
+		this.out = null;	
 	}
 	
-	public void uploadWorld(World world){ 
+	private void connect() throws UnknownHostException, IOException{ 
+		this.server = new Socket("localhost", 5000); 
+		this.in = new DataInputStream(this.server.getInputStream()); 
+		this.out = new DataOutputStream(this.server.getOutputStream());
+	}
+	
+	public void uploadWorld(World world) throws UnknownHostException, IOException{
+		/* connect to the server */
+		this.connect();
+		
 		/* read from the server */
 		try{ 
 			String fS = ""; 
 			fS = this.in.readUTF();
 			System.out.println(fS);
 		}
-		catch(Exception e){ 
-			System.out.println("failed to read from the server"); 
+		catch(IOException e){ 
+			System.out.println(e.getMessage());
+			throw new IOException("Failed to read from the server"); 
 		}
 		
 		/* write to the server */
@@ -57,7 +68,7 @@ public class EveClient{
 			String tS = "uploadWorld"; 
 			this.out.writeUTF(tS); 
 		}
-		catch(Exception e){ 
+		catch(IOException e){ 
 			System.out.println("Unable to write to server");
 		}
 		
@@ -67,7 +78,7 @@ public class EveClient{
 			fS = this.in.readUTF();
 			System.out.println(fS); 
 		}
-		catch(Exception e){ 
+		catch(IOException e){ 
 			System.out.println("failed to read from the server"); 
 		}
 		
@@ -78,7 +89,7 @@ public class EveClient{
 			oos.writeObject(world); 
 			oos.close(); 
 		}
-		catch(Exception e){ 
+		catch(IOException e){ 
 			
 		}
 	}
@@ -139,6 +150,40 @@ public class EveClient{
 		Save.saveWorld(world);  
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Iterator<String> getWorlds(){ 
+		/* read from the server */
+		try{ 
+			String fS = ""; 
+			fS = this.in.readUTF(); //should be ?
+		}
+		catch(Exception e){ 
+			
+		}
+		
+		/* write to server */
+		try{ 
+			this.out.writeUTF("listWorlds");
+		}
+		catch(Exception e){ 
+			
+		}
+		
+		/* read object from server */
+		ArrayList<String> worldsList = null; 
+		ObjectInputStream ois; 
+		try{ 
+			ois = new ObjectInputStream(this.in); 
+			worldsList = (ArrayList<String>) ois.readObject();
+			ois.close(); 
+		}
+		catch(Exception e){ 
+			//
+		}
+		
+		return worldsList.iterator(); 
+	}
+	
 	/* Main method just to Test */
 	public static void main(String[] args){ 
 		EveClient ec = null; 
@@ -149,9 +194,38 @@ public class EveClient{
 			e.printStackTrace();
 		} 
 		
-		World w = new World("world1", 2,2);
-		Save.saveWorld(w); 
-		ec.downloadWorld("world1");
+		World world = new World("Mushs_World", 2, 2);
+		Save.saveWorld(world); 
+		try {
+			ec.uploadWorld(world);
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try{
+			ec = new EveClient();
+		}
+		catch(Exception e){
+			
+		}
+		ec.downloadWorld("Mushs_World");
+		
+		try{
+			ec = new EveClient();
+		}
+		catch(Exception e){
+			
+		}
+		
+		Iterator<String> worldsList = ec.getWorlds();
+		
+		while(worldsList.hasNext()){ 
+			System.out.println(worldsList.next());
+		}
 	}
 		
 }
