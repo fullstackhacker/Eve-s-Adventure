@@ -166,24 +166,7 @@ public class EveClient{
 			e.printStackTrace();
 		} 
 		
-		World world = new World("Mushs_World", 2, 2);
-		Save.saveWorld(world); 
-		try {
-			ec.uploadWorld(world);
-		} catch (UnknownHostException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
-		try{
-			ec = new EveClient();
-		}
-		catch(Exception e){
-			
-		}
 		try{
 			ec.downloadWorld("Mushs_World");
 		}

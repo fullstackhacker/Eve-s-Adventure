@@ -217,4 +217,18 @@ public class Save {
 		
 		return true;  //save the campaign successfully
 	}
+	
+	public static void main(String args[]){
+		World world = new World("My_World", 1, 1); 
+		
+		Level level = new Level(world, "My_World description");
+		
+		Campaign campaign = new Campaign("My_Campaign", "mycampaign description"); 
+		campaign.addLevel(level);
+		
+		Campaign campaign2 = new Campaign("c2", "asdfa");
+		campaign2.addLevel(new Level(new World("asdfasdf", 1, 1), "description"));
+		
+		Save.saveCampaign(campaign2); 
+	}
 }

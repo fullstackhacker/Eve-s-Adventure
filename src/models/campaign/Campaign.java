@@ -62,7 +62,10 @@ public class Campaign implements Serializable{
 	 * @param currentLevel The current level that the user is on
 	 */
 	public Campaign(String name, ArrayList<Level> levels, String description, int currentLevel){ 
-		
+		this.name = name; 
+		this.levels = levels; 
+		this.description = description; 
+		this.currentLevel = currentLevel; 
 	}
 	/**
 	 * Gets the name of the campaign
@@ -102,7 +105,7 @@ public class Campaign implements Serializable{
 	 * @param name   the new name of the campaign
 	 */
 	public void replaceName(String name){
-		
+		this.name = name; 
 	}
 	/**
 	 * Adds a level to the end of the campaign
@@ -119,7 +122,8 @@ public class Campaign implements Serializable{
 	 * @param newPosition  the new position of the level
 	 */
 	public void moveLevel(int oldPosition, int newPosition){
-		
+		this.levels.add(newPosition, this.levels.get(oldPosition)); 
+		this.levels.remove(oldPosition);
 	}
 	/**
 	 * Inserts a new level at a specified location
@@ -128,15 +132,15 @@ public class Campaign implements Serializable{
 	 * @param position  the position of the level to add
 	 */
 	public void insertLevel(Level level, int position){
-		
+		this.levels.add(position, level);
 	}
 	/**
 	 * Remove a level from the campaign
 	 * 
 	 * @param position  the position of the level to remove
 	 */
-	public void removeLevel(int position){
-		
+	public boolean removeLevel(int position){
+		return this.levels.remove(position) != null;
 	}
 	/**
 	 * Change the description for the campaign
@@ -144,7 +148,7 @@ public class Campaign implements Serializable{
 	 * @param description  the new description of the campaign
 	 */
 	public void changeDescription(String description){
-		
+		this.description =  description;
 	}
 	/**
 	 * Gets the next level in the campaign
@@ -152,7 +156,8 @@ public class Campaign implements Serializable{
 	 * @return  the next level in the campaign
 	 */
 	public Level nextLevel(){ 
-		return null; 
+		this.currentLevel++;
+		return this.levels.get(this.currentLevel); 
 	}
 	/**
 	 * Changes the current level in the campaign and returns it
@@ -161,6 +166,7 @@ public class Campaign implements Serializable{
 	 * @return  the new current levelS
 	 */
 	public Level changeCurrentLevel(int newCurrentLevel){ 
-		return null;
+		this.currentLevel = newCurrentLevel; 
+		return this.levels.get(this.currentLevel);
 	}
 }

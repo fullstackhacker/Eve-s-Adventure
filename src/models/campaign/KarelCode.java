@@ -1,6 +1,7 @@
 package models.campaign;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A static class for the karel code segments that is valid
@@ -95,40 +96,88 @@ public class KarelCode {
 	 * 
 	 * @return  all possible karel code blocks
 	 */
-	public static ArrayList<String> getPossibleKarelCode(){ 
-		return null; 
+	public static Iterator<String> getPossibleKarelCode(){ 
+		ArrayList<String> possibleKarelCode = new ArrayList<String>(); 
+		possibleKarelCode.add(KarelCode.IFSTATEMENT); 
+		possibleKarelCode.add(KarelCode.ENDIFSTATEMENT);
+		possibleKarelCode.add(KarelCode.ELSESTATEMENT);
+		possibleKarelCode.add(KarelCode.ENDELSESTATEMENT);
+		possibleKarelCode.add(KarelCode.WHILESTATEMENT);
+		possibleKarelCode.add(KarelCode.ENDWHILESTATEMENT);
+		possibleKarelCode.add(KarelCode.LOOPSTATEMENT);
+		possibleKarelCode.add(KarelCode.ENDLOOPSTATEMENT);
+		possibleKarelCode.add(KarelCode.MOVE);
+		possibleKarelCode.add(KarelCode.SLEEP);
+		possibleKarelCode.add(KarelCode.WAKEUP);
+		possibleKarelCode.add(KarelCode.TURNLEFT);
+		possibleKarelCode.add(KarelCode.PICKBAMBOO);
+		possibleKarelCode.add(KarelCode.PUTBAMBOO);
+		possibleKarelCode.add(KarelCode.FRONTISCLEAR);
+		possibleKarelCode.add(KarelCode.NEXTTOAFRIEND);
+		possibleKarelCode.add(KarelCode.FACINGNORTH);
+		possibleKarelCode.add(KarelCode.FACINGSOUTH);
+		possibleKarelCode.add(KarelCode.FACINGEAST);
+		possibleKarelCode.add(KarelCode.FACINGWEST);
+		possibleKarelCode.add(KarelCode.BAGISEMPTY);
+		return possibleKarelCode.iterator();
 	}
 	/**
 	 * Gets all the conditionals 
 	 * 
 	 * @return  a list of valid conditionals 
 	 */
-	public static ArrayList<String> getPossibleConditionals(){ 
-		return null; 
+	public static Iterator<String> getPossibleConditionals(){ 
+		ArrayList<String> possibleKarelCode = new ArrayList<String>();
+		possibleKarelCode.add(KarelCode.IFSTATEMENT); 
+		possibleKarelCode.add(KarelCode.ENDIFSTATEMENT);
+		possibleKarelCode.add(KarelCode.ELSESTATEMENT);
+		possibleKarelCode.add(KarelCode.ENDELSESTATEMENT);
+
+		return possibleKarelCode.iterator(); 
 	}
 	/**
 	 * Gets all the operations
 	 * 
 	 * @return  a list of valid operations
 	 */
-	public static ArrayList<String> getPossibleOperations(){ 
-		return null; 
+	public static Iterator<String> getPossibleOperations(){ 
+		ArrayList<String> possibleKarelCode = new ArrayList<String>(); 
+		possibleKarelCode.add(KarelCode.MOVE);
+		possibleKarelCode.add(KarelCode.SLEEP);
+		possibleKarelCode.add(KarelCode.WAKEUP);
+		possibleKarelCode.add(KarelCode.TURNLEFT);
+		possibleKarelCode.add(KarelCode.PICKBAMBOO);
+		possibleKarelCode.add(KarelCode.PUTBAMBOO);
+		return possibleKarelCode.iterator();
 	}
 	/**
 	 * Gets all the possible repetitions
 	 *  
 	 * @return  a list of valid repetitions
 	 */
-	public static ArrayList<String> getPossibleRepetitions(){ 
-		return null; 
+	public static Iterator<String> getPossibleRepetitions(){ 
+		ArrayList<String> possibleKarelCode = new ArrayList<String>();
+		possibleKarelCode.add(KarelCode.WHILESTATEMENT);
+		possibleKarelCode.add(KarelCode.ENDWHILESTATEMENT);
+		possibleKarelCode.add(KarelCode.LOOPSTATEMENT);
+		possibleKarelCode.add(KarelCode.ENDLOOPSTATEMENT);
+		return possibleKarelCode.iterator();
 	}
 	/**
 	 * Gets all the possible variables
 	 * 
 	 * @return  a list of valid variables
 	 */
-	public static ArrayList<String> getPossibleVariables(){
-		return null; 
+	public static Iterator<String> getPossibleVariables(){
+		ArrayList<String> possibleKarelCode = new ArrayList<String>(); 
+		possibleKarelCode.add(KarelCode.FRONTISCLEAR);
+		possibleKarelCode.add(KarelCode.NEXTTOAFRIEND);
+		possibleKarelCode.add(KarelCode.FACINGNORTH);
+		possibleKarelCode.add(KarelCode.FACINGSOUTH);
+		possibleKarelCode.add(KarelCode.FACINGEAST);
+		possibleKarelCode.add(KarelCode.FACINGWEST);
+		possibleKarelCode.add(KarelCode.BAGISEMPTY);
+		return possibleKarelCode.iterator(); 
 	}
 	/**
 	 * Validates the code block to see if it is karel code
@@ -137,6 +186,10 @@ public class KarelCode {
 	 * @return  true iff the karel code is valid
 	 */
 	public static boolean validate(String karelCode){ 
-		return false;
+		Iterator<String> karelCodes = KarelCode.getPossibleKarelCode();
+		while(karelCodes.hasNext()){
+			if(!karelCode.equals(karelCodes.next())) return false; 
+		}
+		return true; 
 	}
 }
