@@ -21,7 +21,8 @@ public class Coordinate {
 	 * @param y The y-coordinate in a Cartesian product representation of the world
 	 */
 	public Coordinate(int x, int y){
-		
+		this.x = x; 
+		this.y = y;
 	}
 	/**
 	 * Gets the x-coordinate
