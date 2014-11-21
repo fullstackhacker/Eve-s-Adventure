@@ -52,8 +52,10 @@ public class Parser {
 	public void execute(){
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		case KarelCode.MOVE: 
-			world.getEve().moveUp(); //suppress warnings
+			world.getEve().moveUp(); //suppress warning
 			break; 
+		case KarelCode.BAGISEMPTY:
+			break;
 		default: 
 			break; 
 		}
