@@ -151,19 +151,75 @@ public class Parser {
 			instructions();
 		}
 		
+		if(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSESTATEMENT)){
+			//error
+		}
+		
 		return;
 	}
 	
+	/**
+	 * handles repetitions in Karel
+	 */
 	public void repetitions(){
+		switch(this.karelCode.get(this.activeCodeBlock)){
+		case KarelCode.WHILESTATEMENT: 
+			while(variable()){
+				instructions();
+			}
+		case KarelCode.LOOPSTATEMENT: 
+			for(int x=0; x< Integer.parseInt(numbers()); x++){
+				instructions(); 
+			}
+			break; 
+		}
 		
 	}
 	
 	public void operations(){
-		
+		switch(this.karelCode.get(this.activeCodeBlock)){ 
+		case KarelCode.MOVE:
+			this.next(); 
+			if(!this.world.getEve().isAwake()) return; 
+			switch(this.world.getEve().getDirection()){
+			case Creature.UP: 
+				if(this.world.hasCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()+1))) return;
+				Creature eve = this.world.removeCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()));
+				eve.moveUp(); 
+				this.world.addCreature(eve); 
+				break; 
+			case Creature.DOWN: 
+				if(this.world.hasCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()-1))) return;
+				eve = this.world.removeCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()));
+				eve.moveDown(); 
+				this.world.addCreature(eve);
+				break;
+			case Creature.LEFT: 
+				if(this.world.hasCreature(new Coordinate(this.world.getEve().getX()-1, this.world.getEve().getY()))) return;
+				eve = this.world.removeCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()));
+				eve.moveLeft(); 
+				this.world.addCreature(eve);
+				break;
+			case Creature.RIGHT: 
+				if(this.world.hasCreature(new Coordinate(this.world.getEve().getX()+1, this.world.getEve().getY()))) return;
+				eve = this.world.removeCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()));
+				eve.moveRight(); 
+				this.world.addCreature(eve);
+				break;
+			default: 
+				//error
+				return; 
+			}
+		case KarelCode.SLEEP: 
+		case KarelCode.WAKEUP: 
+		case KarelCode.TURNLEFT: 
+		case KarelCode.PICKBAMBOO:
+		case KarelCode.PUTBAMBOO: 
+		default:
+		}
 	}
 	
 	public boolean variable(){
-		
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		case KarelCode.FRONTISCLEAR:
 			this.next();
@@ -202,4 +258,28 @@ public class Parser {
 			return false; 
 		}	
 	}	
+	
+	public String numbers(){
+		String number = number();
+		if(isDigit(this.karelCode.get(this.activeCodeBlock))){
+			number += numbers(); 
+		}
+		return number; 
+	}
+	
+	public String number(){ 
+		String digit = this.karelCode.get(this.activeCodeBlock);
+		this.next();
+		return digit;
+	}
+	
+	public static boolean isDigit(String token){ 
+		try{
+			Integer.parseInt(token);
+			return true; 
+		}
+		catch(Exception e){
+			return false; 
+		}
+	}
 }

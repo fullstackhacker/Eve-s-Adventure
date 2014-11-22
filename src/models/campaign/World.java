@@ -106,8 +106,10 @@ public class World implements Serializable {
 		/**
 		 * Remove the creature on the square
 		 */
-		private void removeCreature(){ 
+		private Creature removeCreature(){ 
+			Creature temp = this.creature; 
 			this.creature = null; 
+			return temp; 
 		}
 		/**
 		 * Check if the square has an item
@@ -244,8 +246,8 @@ public class World implements Serializable {
 	 * 
 	 * @param coordinate A coordinate object representing the location of the creature to remove
 	 */
-	public void removeCreature(Coordinate coordinate){
-		this.world[coordinate.getY()][coordinate.getX()].removeCreature();
+	public Creature removeCreature(Coordinate coordinate){
+		return this.world[coordinate.getY()][coordinate.getX()].removeCreature();
 	}
 	/**
 	 * Checks to see if there is an item on the location
