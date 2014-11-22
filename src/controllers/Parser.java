@@ -175,7 +175,7 @@ public class Parser {
 			case Creature.LEFT: 
 				return this.world.getEve().getX()+1 >= this.world.getWidth() ? false : !this.world.hasCreature(new Coordinate(this.world.getEve().getX()-1, this.world.getEve().getY()));
 			case Creature.RIGHT: 
-				return this.world.getEve().getX()-1 < 0 ? false : !this.world.hasCreature(new Coordinate(this.world.getEve().getX()+1, this.world.getEve().getY()-1));
+				return this.world.getEve().getX()-1 < 0 ? false : !this.world.hasCreature(new Coordinate(this.world.getEve().getX()+1, this.world.getEve().getY()));
 			default:
 				return false; //error
 			} 
@@ -186,14 +186,20 @@ public class Parser {
 			this.next(); 
 			return this.world.getEve().getDirection() == Creature.DOWN; 
 		case KarelCode.FACINGEAST: 
+			this.next(); 
 			return this.world.getEve().getDirection() == Creature.RIGHT; 
 		case KarelCode.FACINGWEST: 
-			return this.world.getEve().getDirection() == Creature.LEFT; 
-		default: 
 			this.next(); 
+			return this.world.getEve().getDirection() == Creature.LEFT; 
+		case KarelCode.BAGISEMPTY:
+			this.next(); 
+			return !this.world.getEve().hasBamboo(); 
+		case KarelCode.NEXTTOAFRIEND: 
+			this.next(); 
+			//because java lets me do multiple error checks, create objects, solve boolean expressions and basic math in the same line
+			return this.world.getEve().getY()+1 >= this.world.getHeight() ? false : this.world.hasCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()+1)) || this.world.getEve().getY()-1 < 0 ? false : this.world.hasCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()-1)) || this.world.getEve().getX()+1 >= this.world.getWidth() ? false : this.world.hasCreature(new Coordinate(this.world.getEve().getX()-1, this.world.getEve().getY())) || this.world.getEve().getX()-1 < 0 ? false : this.world.hasCreature(new Coordinate(this.world.getEve().getX()+1, this.world.getEve().getY()));  
+		default: 
 			return false; 
-		}
-		
-	}
-	
+		}	
+	}	
 }

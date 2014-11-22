@@ -107,6 +107,20 @@ public class Creature extends GridObject {
 		creature.decrementBamboo();
 	}
 	
+	/** 
+	 * gets the number of bamboo
+	 */
+	public int getNumberOfBamboo(){
+		return this.numberOfBamboo; 
+	}
+	
+	/** 
+	 * tells if the creature has bamboo or not
+	 */
+	public boolean hasBamboo(){
+		return !(this.numberOfBamboo == 0);
+	}
+	
 	/**
 	 * Add 1 bamboo to this creature. 
 	 */
