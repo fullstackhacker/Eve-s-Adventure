@@ -103,7 +103,8 @@ public class Load {
 		try{ 
 			fis = new FileInputStream(worldFile); 
 			ois = new ObjectInputStream(fis); 
-			world = (World) ois.readObject(); 
+			Object temp = ois.readObject(); 
+			world = temp instanceof World ? (World) temp : null; 
 			ois.close();
 			fis.close(); 
 		}

@@ -188,14 +188,6 @@ public class World implements Serializable {
 	public void setName(String name){
 		this.name = name;
 	}
-	/**
-	 * Change the name of the world 
-	 * 
-	 * @param name  the new name for the world
-	 */
-	public void replaceName(String name){
-		
-	}
 	
 	/**
 	 * Add an item to the world at a specified location
@@ -262,7 +254,7 @@ public class World implements Serializable {
 	 * @param y  the y coordinate of the location
 	 * @return  true iff the specified location has an item
 	 */
-	public boolean hasItem(int x, int y){ 
+	public boolean hasItem(Coordinate coordinate){ 
 		return false; //added to shut up compiler
 	}
 	/**
@@ -272,7 +264,7 @@ public class World implements Serializable {
 	 * @param y  the y coordinate of the location
 	 * @return  true iff the specified location has a creature
 	 */
-	public boolean hasCreature(int x, int y){
+	public boolean hasCreature(Coordinate coordinate){
 		return false; 
 	}
 	/**
