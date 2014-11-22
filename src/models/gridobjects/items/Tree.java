@@ -36,11 +36,7 @@ public class Tree extends Item implements Serializable {
 	 * @return true If the Tree has a Bamboo object inside it.
 	 */
 	public boolean hasBamboo() {
-		if (bamboo != null) {
-			return true;
-		} else {
-			return false;
-		}
+		return this.bamboo !=  null;
 	}
 	
 	/**

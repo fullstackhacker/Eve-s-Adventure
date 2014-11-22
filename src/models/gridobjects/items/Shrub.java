@@ -33,11 +33,7 @@ public class Shrub extends Item implements Serializable{
 	 * @return true  If the Shrub has a Bamboo object inside it.
 	 */
 	public boolean hasBamboo() {
-		if (bamboo != null){
-			return true;
-		} else {
-			return false;
-		}
+		return this.bamboo != null;
 	}
 	
 	/**
