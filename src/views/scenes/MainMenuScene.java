@@ -1,9 +1,11 @@
-package views;
+package views.scenes;
 
+import views.MainApp;
+import controllers.ButtonHandlers;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * 
@@ -23,7 +25,7 @@ public final class MainMenuScene extends Scene {
 	 * The MainMenuPane will be use for the MainMenuScene.java.
 	 * This class extends Pane and it is the design patter singleton. 
 	 */
-	private static final class MainMenuPane extends Pane{
+	private static final class MainMenuPane extends BorderPane{
 	
 		/**
 		 * The Instance of MainMenuPane
@@ -37,8 +39,16 @@ public final class MainMenuScene extends Scene {
 		 * textfields, and more. 
 		 */
 		private MainMenuPane(){
-			Button btn = new Button("Hello World");
-			this.getChildren().addAll(btn);
+			final Button SANDBOX_MODE_BUTTON = new Button("SANDBOX MODE");
+			final Button ADVENTURE_MODE_BUTTON = new Button("ADVENTURE MODE");
+			
+			SANDBOX_MODE_BUTTON.setOnAction(ButtonHandlers::SANDBOX_MODE_BUTTON_HANDLER);
+			ADVENTURE_MODE_BUTTON.setOnAction(ButtonHandlers::ADVENTURE_MODE_BUTTON_HANDLER);
+			
+			this.setStyle("-fx-background-color: yellow");
+			
+			this.setTop(SANDBOX_MODE_BUTTON);
+			this.setBottom(ADVENTURE_MODE_BUTTON);
 		}
 		
 		/**
@@ -48,16 +58,6 @@ public final class MainMenuScene extends Scene {
 			return (instanceOfMainMenuPane ==  null) ? instanceOfMainMenuPane = new MainMenuPane() : instanceOfMainMenuPane;
 		}
 	}
-	
-	/**
-	 * The Height of the MainMenuScene.
-	 */
-	public static float HEIGHT = 70;
-	
-	/**
-	 * The Width of the MainMenuScene.
-	 */
-	public static float WIDTH = 70;
 	
 	/**
 	 * The Instance of MainMenuScene
@@ -81,6 +81,8 @@ public final class MainMenuScene extends Scene {
 	 * @return MainMenuScene's Object.
 	 */
 	public static MainMenuScene getInstance(){
-		return (MainMenuScene.instanceOfMainMenuScene == null) ? instanceOfMainMenuScene = new MainMenuScene(MainMenuPane.getInstance(), WIDTH, HEIGHT) : instanceOfMainMenuScene;
+		return (MainMenuScene.instanceOfMainMenuScene == null) ? instanceOfMainMenuScene = 
+				new MainMenuScene(MainMenuPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
+				instanceOfMainMenuScene;
 	}
 }
