@@ -1,5 +1,6 @@
 package views;
 
+import views.scenes.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -8,21 +9,22 @@ public class MainApp extends Application {
 	
 	private static Stage stage = null; 
 	
+	public static final float WINDOW_HEIGHT = 500;
+	
+	public static final float WINDOW_WIDTH = 500;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		MainApp.stage = primaryStage; 
+		stage.setScene(MainMenuScene.getInstance());
+		stage.show();
 	}
 	
 	public static void main(String[] args){
 		launch(args); 
 	}
-	
-	public static Stage getStage(){
-		if(MainApp.stage == null) launch(); 
-		 return MainApp.stage; 
-	}
 
-	public static void changeScenes(Stage stage, Scene scene){
+	public static void changeScenes(Scene scene){
 		stage.setScene(scene);
 	}
 }
