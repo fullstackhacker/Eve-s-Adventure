@@ -44,6 +44,14 @@ public class World implements Serializable {
 			this.item = null; 
 			this.creature = null; 
 		}
+		
+		private Item currentItem(){
+			return this.item; 
+		}
+		
+		private Creature currentCreature(){
+			return this.creature; 
+		}
 		/**
 		 * Adding an item to the square if there is no item on the square
 		 * 
@@ -90,7 +98,10 @@ public class World implements Serializable {
 		 * @return  true iff able to add a creature to the square
 		 */
 		private boolean addCreature(Creature creature){ 
-			return false; 
+			if(this.hasCreature()) return false; 
+			this.creature = creature;
+			return true; 
+			
 		}
 		/**
 		 * Replaces the creature on the square 
@@ -190,7 +201,12 @@ public class World implements Serializable {
 	public void setName(String name){
 		this.name = name;
 	}
-	
+	public Item itemAt(Coordinate coordinate){
+		return this.world[coordinate.getY()][coordinate.getX()].currentItem();
+	}
+	public Creature creatureAt(Coordinate coordinate){
+		return this.world[coordinate.getY()][coordinate.getX()].currentCreature();
+	}
 	/**
 	 * Add an item to the world at a specified location
 	 * 
@@ -432,7 +448,13 @@ public class World implements Serializable {
 	 * @return  the Eve Creature Object
 	 */
 	public Creature getEve(){ 
-		return Eve;
+		for(int y=0; y<this.getHeight(); y++){
+			for(int x=0; x<this.getWidth(); x++){
+				if(this.world[y][x].hasCreature() && this.world[y][x].currentCreature().getName().equals("Eve"))
+					return this.world[y][x].currentCreature(); 
+			}
+		}
+		return null;
 	}
 	/**
 	 * Prints the world out to the console

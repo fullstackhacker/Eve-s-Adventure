@@ -1,11 +1,14 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import models.Coordinate;
 import models.campaign.KarelCode;
+import models.campaign.Level;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
+import models.gridobjects.items.Bamboo;
 
 /**
  * An object to go through and execute the Karel code
@@ -103,8 +106,11 @@ public class Parser {
 	 * Interprets an instruction and then move instructions  
 	 */
 	public void instructions(){
+		System.out.println("Instructions: " + this.karelCode.get(this.activeCodeBlock));
 		instruction();
-		if(this.activeCodeBlock != -1)
+		System.out.println("Instruction2: " + this.karelCode.get(this.activeCodeBlock));
+
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSESTATEMENT))
 			return; 
 		instructions();
 	}
@@ -113,6 +119,7 @@ public class Parser {
 	 * Directs the interpreter into the various instructions
 	 */
 	public void instruction(){
+		System.out.println("Instruction: " + this.karelCode.get(this.activeCodeBlock));
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		case KarelCode.IFSTATEMENT: 
 			conditionals(); 
@@ -136,8 +143,9 @@ public class Parser {
 	 * Conditional statements in Karel
 	 */
 	public void conditionals(){ 
+		System.out.println("Conditional: " + this.karelCode.get(this.activeCodeBlock));
 		this.next();
-		boolean variable = this.variable();
+		boolean variable = variable();
 		if(variable){
 			instructions();
 		}
@@ -180,7 +188,6 @@ public class Parser {
 		switch(this.karelCode.get(this.activeCodeBlock)){ 
 		case KarelCode.MOVE:
 			this.next(); 
-			if(!this.world.getEve().isAwake()) return; 
 			switch(this.world.getEve().getDirection()){
 			case Creature.UP: 
 				if(this.world.hasCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()+1))) return;
@@ -210,19 +217,40 @@ public class Parser {
 				//error
 				return; 
 			}
-		case KarelCode.SLEEP: 
+		case KarelCode.SLEEP:
+			this.world.getEve().setAwake(false);
+			break; 
 		case KarelCode.WAKEUP: 
+			this.world.getEve().setAwake(true); 
+			break; 
 		case KarelCode.TURNLEFT: 
+			this.world.getEve().setDirection(this.world.getEve().getDirection()%4);
 		case KarelCode.PICKBAMBOO:
+			Coordinate eveLocation = this.world.getEve().getCoordinates(); 
+			if(this.world.itemAt(eveLocation) instanceof Bamboo){ 
+				this.world.removeItem(eveLocation);
+				this.world.getEve().incrementBamboo();
+			}
 		case KarelCode.PUTBAMBOO: 
+			eveLocation = this.world.getEve().getCoordinates(); 
+			if(!this.world.hasItem(eveLocation)){ 
+				this.world.getEve().decrementBamboo();
+				Bamboo newBamboo = new Bamboo(eveLocation.getX() + eveLocation.getY() * new Random().nextInt(10));
+				newBamboo.setCoordinates(eveLocation);
+				this.world.addItem(newBamboo); 
+			}
+			break;
 		default:
+			return; 
 		}
 	}
 	
 	public boolean variable(){
+		System.out.println("Variable: " + this.karelCode.get(this.activeCodeBlock));
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		case KarelCode.FRONTISCLEAR:
 			this.next();
+			System.out.print("frontisclear");
 			switch(this.world.getEve().getDirection()){
 			case Creature.UP:
 				return this.world.getEve().getY()+1 >= this.world.getHeight() ? false : !this.world.hasCreature(new Coordinate(this.world.getEve().getX(), this.world.getEve().getY()+1));
@@ -281,5 +309,31 @@ public class Parser {
 		catch(Exception e){
 			return false; 
 		}
+	}
+	
+	
+	public static void main(String[] args){
+		World world = new World("test_world",5, 5);
+		Level level = new Level(world, "testing the parser");
+		
+		if(world.addCreature(new Creature("Eve", new Coordinate(0,0)))) System.out.println("added eve");
+		else System.out.println("unable to add eve");
+		
+		level.addKarelCode(KarelCode.MOVE);
+		level.addKarelCode(KarelCode.IFSTATEMENT);
+		level.addKarelCode(KarelCode.FRONTISCLEAR);
+		level.addKarelCode(KarelCode.MOVE);
+		level.addKarelCode(KarelCode.ENDIFSTATEMENT);
+		Parser parser = new Parser(level.getKarelCode(), world);
+		
+		if(world.getEve() == null) return;
+		
+		System.out.println("-----------");
+		world.printWorld();
+		System.out.println("-----------");
+		parser.start(); 
+		System.out.println("-----------");
+		world.printWorld();
+		System.out.println("-----------");
 	}
 }

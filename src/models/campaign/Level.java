@@ -53,6 +53,8 @@ public class Level implements Serializable {
 		this.name = world.getName(); 
 		this.world = world;
 		this.description = description;
+		this.karelCode = new ArrayList<String>(); 
+		this.objectives = new ArrayList<String>(); 
 	}
 	/**
 	 * Constructor - create a level by giving all the parts

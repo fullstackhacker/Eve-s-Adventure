@@ -63,6 +63,10 @@ public abstract class GridObject implements Serializable {
 		return this.coordinate.getY();
 	}
 
+	
+	public void moveNorth(){ 
+		this.coordinate.moveNorth();
+	}
 	/**
 	 * Sets the name of the object
 	 * 

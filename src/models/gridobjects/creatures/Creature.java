@@ -13,12 +13,12 @@ public class Creature extends GridObject {
 	/**
 	 * The directional value of Down.
 	 */
-	public static final int DOWN = 1;
+	public static final int DOWN = 2;
 	
 	/**
 	 * The directional value of Left.
 	 */
-	public static final int LEFT = 2;
+	public static final int LEFT = 1;
 	
 	/**
 	 * The directional value of Right.
@@ -43,11 +43,6 @@ public class Creature extends GridObject {
 	/**
 	 * 
 	 */
-	private Coordinate coordinate;
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6L;
 	
 	/**
@@ -58,33 +53,35 @@ public class Creature extends GridObject {
 	public Creature(String name, Coordinate coordinate){
 		super.setName(name);
 		super.setCoordinates(coordinate);
+		this.isAwake =  true; 
+		this.direction = Creature.UP;
 	}
 	
 	/**
 	 * Moves the object up one in the World
 	 */
 	public void moveUp(){
-		this.coordinate.moveNorth();
+		super.getCoordinates().moveNorth();
 	}
 	
 	/**
 	 * Moves the object down one in the World
 	 */
 	public void moveDown(){
-		this.coordinate.moveSouth();
+		super.getCoordinates().moveSouth();
 	}
 	
 	/**
 	 * Moves the object left one in the World 
 	 */
 	public void moveLeft(){
-		this.coordinate.moveWest();
+		super.getCoordinates().moveWest();
 	}
 	/**
 	 * Moves the object right one in the World 
 	 */
 	public void moveRight(){ 
-		this.coordinate.moveEast();
+		super.getCoordinates().moveEast();
 	}
 	
 	/**
@@ -131,7 +128,7 @@ public class Creature extends GridObject {
 	/**
 	 * Minus 1 bamboo to this creature.
 	 */
-	private void decrementBamboo(){
+	public void decrementBamboo(){
 		if(this.numberOfBamboo > 0){ this.numberOfBamboo--; }
 	}
 	
