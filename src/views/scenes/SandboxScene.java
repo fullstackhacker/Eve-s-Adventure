@@ -2,6 +2,7 @@ package views.scenes;
 
 import views.MainApp;
 import views.tabs.GameTabs;
+import views.tibs.ProTips;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,16 +23,17 @@ public final class SandboxScene extends Scene {
 			final Button PLAY = new Button("PLAY");
 			final Button RESET = new Button("RESET");
 
-			this.setFillWidth(BACK, true);
-			this.setHalignment(BACK, HPos.CENTER);
-			this.setFillWidth(FORWARD, true);
-			this.setHalignment(FORWARD, HPos.CENTER);
-			this.setFillWidth(PLAY, true);
-			this.setHalignment(PLAY, HPos.CENTER);
-			this.setFillWidth(RESET, true);
-			this.setHalignment(RESET, HPos.CENTER);
+			GridPane.setFillWidth(BACK, true);
+			GridPane.setHalignment(BACK, HPos.CENTER);
+			GridPane.setFillWidth(FORWARD, true);
+			GridPane.setHalignment(FORWARD, HPos.CENTER);
+			GridPane.setFillWidth(PLAY, true);
+			GridPane.setHalignment(PLAY, HPos.CENTER);
+			GridPane.setFillWidth(RESET, true);
+			GridPane.setHalignment(RESET, HPos.CENTER);
 
 			this.add(GameTabs.getInstance(), 0, 0, 1, 5);
+			this.add(ProTips.getInstance(), 0, 5, 2, 1);
 			this.add(BACK, 2, 0);
 			this.add(FORWARD, 3, 0);
 			this.add(PLAY, 4, 0);
@@ -64,7 +66,9 @@ public final class SandboxScene extends Scene {
 			row4.setPercentHeight(21.5);
 			RowConstraints row5 = new RowConstraints();
 			row5.setPercentHeight(21.5);
-			this.getRowConstraints().addAll(row1, row2, row3, row4, row5);
+			RowConstraints row6 = new RowConstraints();
+			row6.setPercentHeight(9);
+			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6);
 
 		}
 

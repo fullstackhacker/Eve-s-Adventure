@@ -26,6 +26,8 @@ public final class GameTabs extends TabPane{
 		this.getTabs().add(INSTRUCTIONS_TAB);
 		this.getTabs().add(CONDITIONS_TAB);
 		this.getTabs().add(OPERATIONS_TAB);
+		
+
 	}
 
 	public static GameTabs getInstance(){
