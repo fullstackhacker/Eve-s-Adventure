@@ -3,6 +3,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import views.MainApp;
 import views.scenes.LoadMenuScene;
+import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
 /**
  * 
@@ -27,6 +28,7 @@ public final class ButtonHandlers {
 	
 	public static final void NEW_SESSION_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("NEW_SESSION_BUTTON_HANDLER CALLED");
+		MainApp.changeScenes(SandboxScene.getInstance());
 	}
 	
 	public static final void IF_BUTTON_HANDLER(ActionEvent e){
