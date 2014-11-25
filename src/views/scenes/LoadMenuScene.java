@@ -2,11 +2,13 @@ package views.scenes;
 
 import views.MainApp;
 import controllers.ButtonHandlers;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * 
@@ -31,6 +33,8 @@ public final class LoadMenuScene extends Scene {
 		 */
 		private static LoadMenuPane instanceOfMainMenuPane = null;
 		
+		private Button LOAD_SESSION_BUTTON, NEW_SESSION_BUTTON;
+		
 		/**
 		 * MainMenuPane's Constructor
 		 * 
@@ -38,16 +42,33 @@ public final class LoadMenuScene extends Scene {
 		 * textfields, and more. 
 		 */
 		private LoadMenuPane(){
-			final Button LOAD_SESSION_BUTTON = new Button("LOAD SESSION");
-			final Button NEW_SESSION_BUTTON = new Button("NEW SESSION");
+			this.getStylesheets().add("./loadmenu_style.css");
+			setupObjects();
+			this.setCenter(addVBox());
 			
 			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::LOAD_SESSION_BUTTON_HANDLER);
 			NEW_SESSION_BUTTON.setOnAction(ButtonHandlers::NEW_SESSION_BUTTON_HANDLER);
+		}
 		
-			this.setStyle("-fx-background-color: red");
+		private void setupObjects(){
+			LOAD_SESSION_BUTTON = new Button("LOAD SESSION");
+			NEW_SESSION_BUTTON = new Button("NEW SESSION");
+			LOAD_SESSION_BUTTON.setPrefWidth(500);
+			NEW_SESSION_BUTTON.setPrefWidth(500);
 			
-			this.setLeft(LOAD_SESSION_BUTTON);
-			this.setRight(NEW_SESSION_BUTTON);
+			LOAD_SESSION_BUTTON.setId("load-button");
+			NEW_SESSION_BUTTON.setId("new-button");
+		}
+		
+		private VBox addVBox(){
+			VBox vbox = new VBox();
+			
+			vbox.setPrefWidth(500);
+		    vbox.getChildren().add(LOAD_SESSION_BUTTON);
+		    vbox.getChildren().add(NEW_SESSION_BUTTON);
+			vbox.setAlignment(Pos.CENTER);
+			
+			return vbox;
 		}
 		
 		private static LoadMenuPane getInstance(){

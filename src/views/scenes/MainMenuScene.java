@@ -37,9 +37,7 @@ public final class MainMenuScene extends Scene {
 		 */
 		private static MainMenuPane instanceOfMainMenuPane = null;
 		
-		private Button SANDBOX_MODE_BUTTON;
-
-		private Button ADVENTURE_MODE_BUTTON;
+		private Button SANDBOX_MODE_BUTTON, ADVENTURE_MODE_BUTTON;
 		
 		private ImageView LOGO = new ImageView(new Image("./Eve.png"));
 		
