@@ -3,7 +3,7 @@ package views.scenes;
 import controllers.ButtonHandlers;
 import views.MainApp;
 import views.TopMenu;
-import views.karrel.KerrelTable;
+import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
@@ -45,7 +45,7 @@ public final class SandboxScene extends Scene {
 			GameTabs gametabs = GameTabs.getInstance();
 			gametabs.setId("gametabs");
 			ProTips protips = ProTips.getInstance();
-			KerrelTable kerrelTable = KerrelTable.getInstance();
+			KarelTable kerrelTable = KarelTable.getInstance();
 			protips.setId("protips");
 
 			this.add(gametabs, 0, 1, 1, 5);
