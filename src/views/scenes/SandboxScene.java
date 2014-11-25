@@ -1,5 +1,6 @@
 package views.scenes;
 
+import controllers.ButtonHandlers;
 import views.MainApp;
 import views.tabs.GameTabs;
 import views.tibs.ProTips;
@@ -23,6 +24,11 @@ public final class SandboxScene extends Scene {
 			final Button FORWARD = new Button("FORWARD");
 			final Button PLAY = new Button("PLAY");
 			final Button RESET = new Button("RESET");
+			
+			BACK.setOnAction(ButtonHandlers::BACK_BUTTON_HANDLER);
+			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);
+			PLAY.setOnAction(ButtonHandlers::PLAY_BUTTON_HANDLER);
+			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
 
 			GridPane.setFillWidth(BACK, true);
 			GridPane.setHalignment(BACK, HPos.CENTER);
@@ -44,7 +50,7 @@ public final class SandboxScene extends Scene {
 			this.add(PLAY, 4, 0);
 			this.add(RESET, 5, 0);
 
-			this.setGridLinesVisible(true);
+			//this.setGridLinesVisible(true);
 
 			ColumnConstraints column1 = new ColumnConstraints();
 			column1.setPercentWidth(36);
