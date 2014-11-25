@@ -4,7 +4,7 @@ import controllers.ButtonHandlers;
 import views.MainApp;
 import views.TopMenu;
 import views.tabs.GameTabs;
-import views.tibs.ProTips;
+import views.tips.ProTips;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
