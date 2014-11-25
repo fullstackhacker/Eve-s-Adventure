@@ -10,6 +10,8 @@ import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -19,13 +21,22 @@ public final class SandboxScene extends Scene {
 	private static final class SandboxPane extends GridPane {
 
 		private static SandboxPane instanceOfMainMenuPane = null;
+		
+		private ImageView imageBack = new ImageView(new Image("./Images/ArrowLeft.png"));
+		private ImageView imageRight = new ImageView(new Image("./Images/ArrowRight.png"));
+		private ImageView imagePlay = new ImageView(new Image("./Images/PlayButton.png"));
+		private ImageView imageReset = new ImageView(new Image("./Images/ResetButton.png"));
 
 		private SandboxPane() {
 			this.getStylesheets().add("./sandbox_style.css");
-			final Button BACK = new Button("BACK");
-			final Button FORWARD = new Button("FORWARD");
-			final Button PLAY = new Button("PLAY");
-			final Button RESET = new Button("RESET");
+			Button BACK = new Button();
+			Button FORWARD = new Button();
+			final Button PLAY = new Button();
+			final Button RESET = new Button();
+			BACK.setGraphic(imageBack);
+			FORWARD.setGraphic(imageRight);
+			PLAY.setGraphic(imagePlay);
+			RESET.setGraphic(imageReset);
 			
 			BACK.setOnAction(ButtonHandlers::BACK_BUTTON_HANDLER);
 			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);

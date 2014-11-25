@@ -39,7 +39,7 @@ public final class MainMenuScene extends Scene {
 		
 		private Button SANDBOX_MODE_BUTTON, ADVENTURE_MODE_BUTTON;
 		
-		private ImageView LOGO = new ImageView(new Image("./Eve.png"));
+		private ImageView LOGO = new ImageView(new Image("./Images/Eve.png"));
 		
 		private Label TITLE_LABEL;
 		

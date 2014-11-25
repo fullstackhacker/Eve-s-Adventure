@@ -4,7 +4,8 @@
 
 #gametabs{
 	-fx-border-style: solid;
-	-fx-border-width: 5px;
+	-fx-border-width: 3px;
+	-fx-border-color: #dddddd;
 }
 
 #protips{
