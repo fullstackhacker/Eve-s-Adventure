@@ -24,7 +24,7 @@ public class MainApp extends Application {
 		stage.setWidth(1024);
 		stage.setHeight(768);
 		stage.show();
-
+		
 	}
 
 	public static void main(String[] args) {

@@ -5,7 +5,7 @@ import javafx.scene.control.MenuBar;
 
 public final class TopMenu extends MenuBar {
 
-	private static Menu instant = null;
+	private static TopMenu instant = null;
 
 	private TopMenu() {
 		 final Menu menu1 = new Menu("File");
@@ -15,7 +15,7 @@ public final class TopMenu extends MenuBar {
 		 this.getMenus().addAll(menu1, menu2, menu3);
 	}
 
-	public static Menu getInstance() {
-		return (instant == null) ? new Menu() : instant;
+	public static TopMenu getInstance() {
+		return (instant == null) ? new TopMenu() : instant;
 	}
 }
