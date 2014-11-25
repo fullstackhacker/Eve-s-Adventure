@@ -20,6 +20,7 @@ public final class SandboxScene extends Scene {
 		private static SandboxPane instanceOfMainMenuPane = null;
 
 		private SandboxPane() {
+			this.getStylesheets().add("./sandbox_style.css");
 			final Button BACK = new Button("BACK");
 			final Button FORWARD = new Button("FORWARD");
 			final Button PLAY = new Button("PLAY");
@@ -39,8 +40,12 @@ public final class SandboxScene extends Scene {
 			GridPane.setFillWidth(RESET, true);
 			GridPane.setHalignment(RESET, HPos.CENTER);
 
-			this.add(GameTabs.getInstance(), 0, 0, 1, 5);
-			this.add(ProTips.getInstance(), 0, 5, 2, 1);
+			GameTabs gametabs = GameTabs.getInstance();
+			gametabs.setId("gametabs");
+			this.add(gametabs, 0, 0, 1, 5);
+			ProTips protips = ProTips.getInstance();
+			protips.setId("protips");
+			this.add(protips, 0, 5, 2, 1);
 			this.add(BACK, 2, 0);
 			this.add(FORWARD, 3, 0);
 			this.add(PLAY, 4, 0);
