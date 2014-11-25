@@ -23,7 +23,7 @@ public final class KarelTable extends GridPane {
 				" ", " ", " ");
 		ListView<String> listView = new ListView<String>(karelCode);
 		final Button EDIT = new Button("EDIT");
-		final Button delete = new Button("DELEAT");
+		final Button delete = new Button("DELETE");
 		
 		this.add(listView, 0, 0, 2, 1);
 		this.add(EDIT, 0, 1);
