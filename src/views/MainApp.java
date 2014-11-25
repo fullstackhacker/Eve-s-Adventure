@@ -17,6 +17,9 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		MainApp.stage = primaryStage; 
 		stage.setScene(MainMenuScene.getInstance());
+		stage.setResizable(false);
+		stage.setWidth(1024);
+		stage.setHeight(768);
 		stage.show();
 	}
 	
