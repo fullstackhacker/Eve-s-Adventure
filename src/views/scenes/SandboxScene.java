@@ -3,6 +3,7 @@ package views.scenes;
 import controllers.ButtonHandlers;
 import views.MainApp;
 import views.TopMenu;
+import views.karrel.KerrelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
@@ -44,10 +45,12 @@ public final class SandboxScene extends Scene {
 			GameTabs gametabs = GameTabs.getInstance();
 			gametabs.setId("gametabs");
 			ProTips protips = ProTips.getInstance();
+			KerrelTable kerrelTable = KerrelTable.getInstance();
 			protips.setId("protips");
 
 			this.add(gametabs, 0, 1, 1, 5);
 			this.add(topMenu, 0, 0, 6, 1);
+			this.add(kerrelTable, 1, 1, 1, 5);
 			this.add(protips, 0, 6, 2, 1);
 			this.add(BACK, 2, 1);
 			this.add(FORWARD, 3, 1);
@@ -85,6 +88,8 @@ public final class SandboxScene extends Scene {
 			RowConstraints row7 = new RowConstraints();
 			row7.setPercentHeight(10);
 			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7);
+			
+			//this.setGridLinesVisible(true);
 
 		}
 
