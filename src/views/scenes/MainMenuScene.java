@@ -2,10 +2,15 @@ package views.scenes;
 
 import views.MainApp;
 import controllers.ButtonHandlers;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 /**
  * 
@@ -32,6 +37,14 @@ public final class MainMenuScene extends Scene {
 		 */
 		private static MainMenuPane instanceOfMainMenuPane = null;
 		
+		private Button SANDBOX_MODE_BUTTON;
+
+		private Button ADVENTURE_MODE_BUTTON;
+		
+		private ImageView LOGO = new ImageView(new Image("./Eve.png"));
+		
+		private Label TITLE_LABEL;
+		
 		/**
 		 * MainMenuPane's Constructor
 		 * 
@@ -39,16 +52,39 @@ public final class MainMenuScene extends Scene {
 		 * textfields, and more. 
 		 */
 		private MainMenuPane(){
-			final Button SANDBOX_MODE_BUTTON = new Button("SANDBOX MODE");
-			final Button ADVENTURE_MODE_BUTTON = new Button("ADVENTURE MODE");
+			this.getStylesheets().add("./homescreen_style.css");
+			
+			setupObjects();
+			this.setCenter(addVBox());
 			
 			SANDBOX_MODE_BUTTON.setOnAction(ButtonHandlers::SANDBOX_MODE_BUTTON_HANDLER);
 			ADVENTURE_MODE_BUTTON.setOnAction(ButtonHandlers::ADVENTURE_MODE_BUTTON_HANDLER);
 			
-			this.setStyle("-fx-background-color: yellow");
+		}
+		
+		private void setupObjects(){
+			TITLE_LABEL = new Label("EVE'S ADVENTURE");
+			SANDBOX_MODE_BUTTON = new Button("SANDBOX MODE");
+			ADVENTURE_MODE_BUTTON = new Button("ADVENTURE MODE");
+			SANDBOX_MODE_BUTTON.setPrefWidth(300);
+			ADVENTURE_MODE_BUTTON.setPrefWidth(300);
 			
-			this.setTop(SANDBOX_MODE_BUTTON);
-			this.setBottom(ADVENTURE_MODE_BUTTON);
+			TITLE_LABEL.setId("title");
+			SANDBOX_MODE_BUTTON.setId("sandbox-button");
+			ADVENTURE_MODE_BUTTON.setId("adventure-button");
+		}
+		
+		private VBox addVBox(){
+			VBox vbox = new VBox();
+			
+			vbox.setPrefWidth(200);
+			vbox.getChildren().add(LOGO);
+			vbox.getChildren().add(TITLE_LABEL);
+		    vbox.getChildren().add(SANDBOX_MODE_BUTTON);
+		    vbox.getChildren().add(ADVENTURE_MODE_BUTTON);
+			vbox.setAlignment(Pos.CENTER);
+			
+			return vbox;
 		}
 		
 		/**

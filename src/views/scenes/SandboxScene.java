@@ -50,8 +50,6 @@ public final class SandboxScene extends Scene {
 			this.add(PLAY, 4, 0);
 			this.add(RESET, 5, 0);
 
-			//this.setGridLinesVisible(true);
-
 			ColumnConstraints column1 = new ColumnConstraints();
 			column1.setPercentWidth(36);
 			ColumnConstraints column2 = new ColumnConstraints();
