@@ -2,6 +2,7 @@ package views.scenes;
 
 import controllers.ButtonHandlers;
 import views.MainApp;
+import views.TopMenu;
 import views.tabs.GameTabs;
 import views.tibs.ProTips;
 import javafx.geometry.HPos;
@@ -13,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public final class SandboxScene extends Scene {
-
+	
 	private static final class SandboxPane extends GridPane {
 
 		private static SandboxPane instanceOfMainMenuPane = null;
@@ -44,6 +45,7 @@ public final class SandboxScene extends Scene {
 			this.add(FORWARD, 3, 0);
 			this.add(PLAY, 4, 0);
 			this.add(RESET, 5, 0);
+			
 
 			//this.setGridLinesVisible(true);
 
