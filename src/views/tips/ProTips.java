@@ -1,4 +1,4 @@
-package views.tibs;
+package views.tips;
 
 import views.tabs.GameTabs;
 import javafx.geometry.HPos;
