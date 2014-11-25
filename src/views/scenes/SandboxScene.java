@@ -45,6 +45,7 @@ public final class SandboxScene extends Scene {
 			gametabs.setId("gametabs");
 			ProTips protips = ProTips.getInstance();
 			protips.setId("protips");
+
 			this.add(gametabs, 0, 1, 1, 5);
 			this.add(topMenu, 0, 0, 6, 1);
 			this.add(protips, 0, 6, 2, 1);
@@ -53,7 +54,6 @@ public final class SandboxScene extends Scene {
 			this.add(PLAY, 4, 1);
 			this.add(RESET, 5, 1);
 			
-			//this.setGridLinesVisible(true);
 
 			ColumnConstraints column1 = new ColumnConstraints();
 			column1.setPercentWidth(36);
