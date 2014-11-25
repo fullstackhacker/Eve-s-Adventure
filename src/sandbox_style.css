@@ -1,0 +1,12 @@
+.root{
+	
+}
+
+#gametabs{
+	-fx-border-style: solid;
+	-fx-border-width: 5px;
+}
+
+#protips{
+	-fx-border-right: 5px solid #DDDDDD;
+}
