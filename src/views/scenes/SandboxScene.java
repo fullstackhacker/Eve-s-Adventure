@@ -2,6 +2,7 @@ package views.scenes;
 
 import controllers.ButtonHandlers;
 import views.MainApp;
+import views.TopMenu;
 import views.tabs.GameTabs;
 import views.tibs.ProTips;
 import javafx.geometry.HPos;
@@ -13,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public final class SandboxScene extends Scene {
-
+	
 	private static final class SandboxPane extends GridPane {
 
 		private static SandboxPane instanceOfMainMenuPane = null;
@@ -39,16 +40,20 @@ public final class SandboxScene extends Scene {
 			GridPane.setFillWidth(RESET, true);
 			GridPane.setHalignment(RESET, HPos.CENTER);
 
+			TopMenu topMenu = TopMenu.getInstance();
 			GameTabs gametabs = GameTabs.getInstance();
 			gametabs.setId("gametabs");
-			this.add(gametabs, 0, 0, 1, 5);
 			ProTips protips = ProTips.getInstance();
 			protips.setId("protips");
-			this.add(protips, 0, 5, 2, 1);
-			this.add(BACK, 2, 0);
-			this.add(FORWARD, 3, 0);
-			this.add(PLAY, 4, 0);
-			this.add(RESET, 5, 0);
+
+			this.add(gametabs, 0, 1, 1, 5);
+			this.add(topMenu, 0, 0, 6, 1);
+			this.add(protips, 0, 6, 2, 1);
+			this.add(BACK, 2, 1);
+			this.add(FORWARD, 3, 1);
+			this.add(PLAY, 4, 1);
+			this.add(RESET, 5, 1);
+			
 
 			ColumnConstraints column1 = new ColumnConstraints();
 			column1.setPercentWidth(36);
@@ -66,18 +71,20 @@ public final class SandboxScene extends Scene {
 					column4, column5, column6);
 
 			RowConstraints row1 = new RowConstraints();
-			row1.setPercentHeight(5);
+			row1.setPercentHeight(3);
 			RowConstraints row2 = new RowConstraints();
-			row2.setPercentHeight(21.5);
+			row2.setPercentHeight(5);
 			RowConstraints row3 = new RowConstraints();
-			row3.setPercentHeight(21.5);
+			row3.setPercentHeight(20.5);
 			RowConstraints row4 = new RowConstraints();
-			row4.setPercentHeight(21.5);
+			row4.setPercentHeight(20.5);
 			RowConstraints row5 = new RowConstraints();
-			row5.setPercentHeight(21.5);
+			row5.setPercentHeight(20.5);
 			RowConstraints row6 = new RowConstraints();
-			row6.setPercentHeight(9);
-			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6);
+			row6.setPercentHeight(20.5);
+			RowConstraints row7 = new RowConstraints();
+			row7.setPercentHeight(10);
+			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7);
 
 		}
 
