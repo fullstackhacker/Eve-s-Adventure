@@ -18,11 +18,11 @@ public final class Cols extends GridPane {
 
 		
 
-		C1 = new Label("1");
-		C2 = new Label("2");
-		C3 = new Label("3");
-		C4 = new Label("4");
-		C5 = new Label("5");
+		C1 = new Label("0");
+		C2 = new Label("1");
+		C3 = new Label("2");
+		C4 = new Label("3");
+		C5 = new Label("4");
 
 
 		GridPane.setHalignment(C1, HPos.CENTER);
