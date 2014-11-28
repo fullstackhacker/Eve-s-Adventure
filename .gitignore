@@ -5,3 +5,4 @@ data/*
 .classpath
 /bin/
 *.png
+.DS_Store
