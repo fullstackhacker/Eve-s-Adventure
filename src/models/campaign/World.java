@@ -106,10 +106,10 @@ public class World implements Serializable {
 		 * @return  true iff replaces a creature
 		 * @throws Exception 
 		 */
-		private boolean replaceCreature(Creature creature) throws Exception{ 
+		private boolean replaceCreature(Creature creature){ 
 			
 			if(creature == null){
-				throw new IllegalValueException();
+				//throw new IllegalValueException();
 			}
 			
 			if (this.hasCreature()){
