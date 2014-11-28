@@ -103,7 +103,7 @@ public final class SandboxScene extends Scene {
 			world.printWorld();
 			Coordinate coordEve = new Coordinate(1,1);
 			Creature CreatureEve = new Creature("Eve", coordEve);
-			world.addCreature(CreatureEve);
+			world.addCreature(null);
 			world.printWorld();
 			Label Eve = new Label("Eve!");
 			GridPane.setHalignment(Eve, HPos.CENTER);

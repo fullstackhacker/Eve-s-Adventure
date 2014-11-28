@@ -61,11 +61,16 @@ public class World implements Serializable {
 		 * @return false  the object was not added to the board
 		 */
 		private boolean addItem(Item item){
-			if(this.hasItem()){
-				this.item = item; 
-				return true; 
+			if(item == null){
+				try {
+					throw new IllegalValueException();
+				} catch (IllegalValueException e) {
+					e.printStackTrace();
+				}
 			}
-			return false; 	
+			if(this.hasItem()) return false;
+			this.item = item; 
+			return true; 	
 		}
 		/**
 		 * Replaces the current item on the square.
@@ -78,6 +83,13 @@ public class World implements Serializable {
 		 * @return false  iff the object did not replace the old object on the square
 		 */
 		private boolean replaceItem(Item item){
+			if(item == null){
+				try {
+					throw new IllegalValueException();
+				} catch (IllegalValueException e) {
+					e.printStackTrace();
+				}
+			}
 			if(this.hasItem()) return false; 
 			this.item = item; 
 			return true; 
@@ -98,7 +110,11 @@ public class World implements Serializable {
 		 * @return  true iff able to add a creature to the square
 		 */
 		private boolean addCreature(Creature creature){ 
-			if(this.hasCreature()) return false; 
+			if(creature == null){
+				System.out.println("SOS WE GOT A PROBLEM");
+				return false;
+			}
+			if(this.hasCreature()) return false;
 			this.creature = creature;
 			return true; 
 		}
@@ -112,18 +128,15 @@ public class World implements Serializable {
 		 * @throws Exception 
 		 */
 		private boolean replaceCreature(Creature creature){ 
-			
 			if(creature == null){
-				//throw new IllegalValueException();
+				try {
+					throw new IllegalValueException();
+				} catch (IllegalValueException e) {
+					e.printStackTrace();
+				}
 			}
-			
-			if (this.hasCreature()){
-				this.creature = creature;
-				return true;
-			}else{
-				this.creature = creature;
-				return false;
-			}
+			this.creature = creature;
+			return true;
 		}
 		/**
 		 * Remove the creature on the square
@@ -257,6 +270,14 @@ public class World implements Serializable {
 	 * @return  true iff added the creature to the square
 	 */
 	public boolean addCreature(Creature creature){
+		if(creature == null){
+			try {
+				throw new IllegalValueException();
+			} catch (IllegalValueException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
 		return this.world[creature.getY()][creature.getX()].addCreature(creature); 
 	}
 	/**
