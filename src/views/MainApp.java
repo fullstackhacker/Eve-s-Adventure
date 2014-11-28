@@ -3,8 +3,6 @@ package views;
 import views.scenes.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {

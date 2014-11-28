@@ -8,7 +8,6 @@ import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,22 +28,13 @@ public final class SandboxScene extends Scene {
 		private ImageView imageRight = new ImageView(new Image("./Images/ArrowRight.png"));
 		private ImageView imagePlay = new ImageView(new Image("./Images/PlayButton.png"));
 		private ImageView imageReset = new ImageView(new Image("./Images/ResetButton.png"));
+		
+		private Button BACK, FORWARD, PLAY, RESET;
 
 		private SandboxPane() {
 			this.getStylesheets().add("./sandbox_style.css");
-			Button BACK = new Button();
-			Button FORWARD = new Button();
-			Button PLAY = new Button();
-			Button RESET = new Button();
-			BACK.setGraphic(imageBack);
-			FORWARD.setGraphic(imageRight);
-			PLAY.setGraphic(imagePlay);
-			RESET.setGraphic(imageReset);
 			
-			BACK.setOnAction(ButtonHandlers::BACK_BUTTON_HANDLER);
-			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);
-			PLAY.setOnAction(ButtonHandlers::PLAY_BUTTON_HANDLER);
-			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
+			buttonSetup();
 
 			GridPane.setFillWidth(BACK, true);
 			GridPane.setHalignment(BACK, HPos.CENTER);
@@ -59,14 +49,14 @@ public final class SandboxScene extends Scene {
 			GameTabs gametabs = GameTabs.getInstance();
 			gametabs.setId("gametabs");
 			ProTips protips = ProTips.getInstance();
-			KarelTable kerrelTable = KarelTable.getInstance();
+			KarelTable karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			GridWorld gridWorld = GridWorld.getInstance();
 
 			this.add(gametabs, 0, 1, 1, 5);
 			this.add(topMenu, 0, 0, 6, 1);
 			this.add(gridWorld, 2, 2, 4, 5);
-			this.add(kerrelTable, 1, 1, 1, 5);
+			this.add(karelTable, 1, 1, 1, 5);
 			this.add(protips, 0, 6, 2, 1);
 			this.add(BACK, 2, 1);
 			this.add(FORWARD, 3, 1);
@@ -112,8 +102,24 @@ public final class SandboxScene extends Scene {
 			//failed
 			
 			
-			//this.setGridLinesVisible(true);
+			this.setGridLinesVisible(true);
 
+		}
+		
+		private void buttonSetup(){
+			BACK = new Button();
+			FORWARD = new Button();
+			PLAY = new Button();
+			RESET = new Button();
+			BACK.setGraphic(imageBack);
+			FORWARD.setGraphic(imageRight);
+			PLAY.setGraphic(imagePlay);
+			RESET.setGraphic(imageReset);
+			
+			BACK.setOnAction(ButtonHandlers::BACK_BUTTON_HANDLER);
+			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);
+			PLAY.setOnAction(ButtonHandlers::PLAY_BUTTON_HANDLER);
+			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
 		}
 
 		private static SandboxPane getInstance() {
