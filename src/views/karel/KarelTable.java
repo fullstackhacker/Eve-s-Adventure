@@ -22,7 +22,7 @@ public final class KarelTable extends GridPane {
 
 		ObservableList<String> karelCode = FXCollections.observableArrayList(
 				"Top", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-				" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+				" ", " ", " ", " ", " ", " ", "Test Text ", " ", " ", " ", " ", " ",
 				" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
 				" ", " ", "Bottom");
 		ListView<String> listView = new ListView<String>(karelCode);

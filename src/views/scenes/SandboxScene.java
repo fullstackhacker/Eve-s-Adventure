@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -103,6 +104,12 @@ public final class SandboxScene extends Scene {
 			RowConstraints row7 = new RowConstraints();
 			row7.setPercentHeight(10);
 			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7);
+			
+			//Just a test to see if we can add items outside the GridWorld class retroactively
+			Label Eve = new Label("Eve!");
+			GridWorld.getInstance().add(Eve, 0, 0);
+			Eve.setVisible(true);
+			//failed
 			
 			
 			//this.setGridLinesVisible(true);
