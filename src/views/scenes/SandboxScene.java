@@ -106,6 +106,7 @@ public final class SandboxScene extends Scene {
 			world.addCreature(CreatureEve);
 			world.printWorld();
 			Label Eve = new Label("Eve!");
+			GridPane.setHalignment(Eve, HPos.CENTER);
 			gridWorld.add(Eve, 1, 1);
 			Eve.setVisible(true);
 			
