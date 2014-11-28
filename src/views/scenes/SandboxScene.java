@@ -6,11 +6,14 @@ import models.gridobjects.creatures.Creature;
 import controllers.ButtonHandlers;
 import views.MainApp;
 import views.TopMenu;
+import views.grid.Cols;
 import views.grid.GridWorld;
+import views.grid.Rows;
 import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -55,16 +58,22 @@ public final class SandboxScene extends Scene {
 			KarelTable karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			GridWorld gridWorld = GridWorld.getInstance();
+			Rows rows = Rows.getInstance();
+			Cols cols = Cols.getInstance();
 
-			this.add(gametabs, 0, 1, 1, 5);
-			this.add(topMenu, 0, 0, 6, 1);
-			this.add(gridWorld, 2, 2, 4, 5);
-			this.add(karelTable, 1, 1, 1, 5);
-			this.add(protips, 0, 6, 2, 1);
-			this.add(BACK, 2, 1);
-			this.add(FORWARD, 3, 1);
-			this.add(PLAY, 4, 1);
-			this.add(RESET, 5, 1);
+			this.add(topMenu, 0, 0, 7, 1);
+			this.add(BACK, 2, 1, 2, 1);
+			this.add(FORWARD, 4, 1);
+			this.add(PLAY, 5, 1);
+			this.add(RESET, 6, 1);
+			this.add(gametabs, 0, 1, 1, 3);
+			this.add(karelTable, 1, 1, 1, 3);
+			this.add(cols, 3, 2, 4, 1);
+			this.add(rows, 2, 3, 1, 2);
+			this.add(gridWorld, 3, 3, 4, 2);
+			this.add(protips, 0, 4, 2, 1);
+			
+			GridPane.setHalignment(rows, HPos.RIGHT);
 			
 
 			ColumnConstraints column1 = new ColumnConstraints();
@@ -72,43 +81,49 @@ public final class SandboxScene extends Scene {
 			ColumnConstraints column2 = new ColumnConstraints();
 			column2.setPercentWidth(36);
 			ColumnConstraints column3 = new ColumnConstraints();
-			column3.setPercentWidth(8);
+			column3.setPercentWidth(4);
 			ColumnConstraints column4 = new ColumnConstraints();
-			column4.setPercentWidth(8);
+			column4.setPercentWidth(4);
 			ColumnConstraints column5 = new ColumnConstraints();
 			column5.setPercentWidth(8);
 			ColumnConstraints column6 = new ColumnConstraints();
 			column6.setPercentWidth(8);
+			ColumnConstraints column7 = new ColumnConstraints();
+			column7.setPercentWidth(8);
 			this.getColumnConstraints().addAll(column1, column2, column3,
-					column4, column5, column6);
+					column4, column5, column6, column7);
 
 			RowConstraints row1 = new RowConstraints();
 			row1.setPercentHeight(3);
 			RowConstraints row2 = new RowConstraints();
 			row2.setPercentHeight(5);
 			RowConstraints row3 = new RowConstraints();
-			row3.setPercentHeight(20.5);
+			row3.setPercentHeight(4);
 			RowConstraints row4 = new RowConstraints();
-			row4.setPercentHeight(20.5);
+			row4.setPercentHeight(78);
 			RowConstraints row5 = new RowConstraints();
-			row5.setPercentHeight(20.5);
-			RowConstraints row6 = new RowConstraints();
+			row5.setPercentHeight(10);
+			/*RowConstraints row6 = new RowConstraints();
 			row6.setPercentHeight(20.5);
 			RowConstraints row7 = new RowConstraints();
-			row7.setPercentHeight(10);
-			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7);
+			row7.setPercentHeight(20.5);
+			RowConstraints row8 = new RowConstraints();
+			row8.setPercentHeight(10);*/
+			this.getRowConstraints().addAll(row1, row2, row3, row4, row5);
 			
 			//BACKEND-FRONTEND Integration
 			World world = new World("SandboxWorld", 10, 5);
 			world.printWorld();
 			Coordinate coordEve = new Coordinate(1,1);
 			Creature CreatureEve = new Creature("Eve", coordEve);
-			world.addCreature(null);
+			world.addCreature(CreatureEve);
 			world.printWorld();
 			Label Eve = new Label("Eve!");
 			GridPane.setHalignment(Eve, HPos.CENTER);
-			gridWorld.add(Eve, 1, 1);
+			gridWorld.add(Eve, 0, 0);
 			Eve.setVisible(true);
+			
+			this.setPadding(new Insets(0, 5, 5, 5));
 			
 			//this.setGridLinesVisible(true);
 
