@@ -66,4 +66,12 @@ public final class ButtonHandlers {
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("RESET_BUTTON_HANDLER CALLED");
 	}
+	
+	public static final void EDIT_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("EDIT_BUTTON_HANDLER CALLED");
+	}
+
+	public static final void DELETE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("DELETE_BUTTON_HANDLER CALLED");
+	}
 }

@@ -1,5 +1,6 @@
 package views.tabs;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -26,6 +27,8 @@ public final class GameTabs extends TabPane{
 		this.getTabs().add(INSTRUCTIONS_TAB);
 		this.getTabs().add(CONDITIONS_TAB);
 		this.getTabs().add(OPERATIONS_TAB);
+		
+		this.setPadding(new Insets(5, 5, 5, 5));
 		
 
 	}

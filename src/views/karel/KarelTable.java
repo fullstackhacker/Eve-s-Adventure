@@ -1,8 +1,10 @@
 package views.karel;
 
+import controllers.ButtonHandlers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -19,32 +21,39 @@ public final class KarelTable extends GridPane {
 	private KarelTable() {
 
 		ObservableList<String> karelCode = FXCollections.observableArrayList(
+				"Top", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+				" ", " ", " ", " ", " ", " ", "Test Text ", " ", " ", " ", " ", " ",
 				" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-				" ", " ", " ");
+				" ", " ", "Bottom");
 		ListView<String> listView = new ListView<String>(karelCode);
-		final Button EDIT = new Button("EDIT");
-		final Button delete = new Button("DELETE");
-		
+		Button EDIT = new Button("EDIT");
+		Button DELETE = new Button("DELETE");
+
 		this.add(listView, 0, 0, 2, 1);
 		this.add(EDIT, 0, 1);
-		this.add(delete, 1, 1);
+		this.add(DELETE, 1, 1);
 		
+		EDIT.setOnAction(ButtonHandlers::EDIT_BUTTON_HANDLER);
+		DELETE.setOnAction(ButtonHandlers::DELETE_BUTTON_HANDLER);
+
 		GridPane.setFillWidth(EDIT, true);
 		GridPane.setHalignment(EDIT, HPos.CENTER);
-		GridPane.setFillWidth(delete, true);
-		GridPane.setHalignment(delete, HPos.CENTER);
-		
+		GridPane.setFillWidth(DELETE, true);
+		GridPane.setHalignment(DELETE, HPos.CENTER);
+
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(50);
 		ColumnConstraints column2 = new ColumnConstraints();
 		column2.setPercentWidth(50);
 		this.getColumnConstraints().addAll(column1, column2);
-		
+
 		RowConstraints row1 = new RowConstraints();
 		row1.setPercentHeight(95);
 		RowConstraints row2 = new RowConstraints();
 		row2.setPercentHeight(5);
 		this.getRowConstraints().addAll(row1, row2);
+		
+		this.setPadding(new Insets(5, 5, 5, 5));
 
 	}
 

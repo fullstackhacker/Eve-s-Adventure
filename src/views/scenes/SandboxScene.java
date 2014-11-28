@@ -3,13 +3,16 @@ package views.scenes;
 import controllers.ButtonHandlers;
 import views.MainApp;
 import views.TopMenu;
+import views.grid.GridWorld;
 import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -31,8 +34,8 @@ public final class SandboxScene extends Scene {
 			this.getStylesheets().add("./sandbox_style.css");
 			Button BACK = new Button();
 			Button FORWARD = new Button();
-			final Button PLAY = new Button();
-			final Button RESET = new Button();
+			Button PLAY = new Button();
+			Button RESET = new Button();
 			BACK.setGraphic(imageBack);
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
@@ -58,9 +61,11 @@ public final class SandboxScene extends Scene {
 			ProTips protips = ProTips.getInstance();
 			KarelTable kerrelTable = KarelTable.getInstance();
 			protips.setId("protips");
+			GridWorld gridWorld = GridWorld.getInstance();
 
 			this.add(gametabs, 0, 1, 1, 5);
 			this.add(topMenu, 0, 0, 6, 1);
+			this.add(gridWorld, 2, 2, 4, 5);
 			this.add(kerrelTable, 1, 1, 1, 5);
 			this.add(protips, 0, 6, 2, 1);
 			this.add(BACK, 2, 1);
@@ -70,17 +75,17 @@ public final class SandboxScene extends Scene {
 			
 
 			ColumnConstraints column1 = new ColumnConstraints();
-			column1.setPercentWidth(36);
+			column1.setPercentWidth(32);
 			ColumnConstraints column2 = new ColumnConstraints();
 			column2.setPercentWidth(36);
 			ColumnConstraints column3 = new ColumnConstraints();
-			column3.setPercentWidth(7);
+			column3.setPercentWidth(8);
 			ColumnConstraints column4 = new ColumnConstraints();
-			column4.setPercentWidth(7);
+			column4.setPercentWidth(8);
 			ColumnConstraints column5 = new ColumnConstraints();
-			column5.setPercentWidth(7);
+			column5.setPercentWidth(8);
 			ColumnConstraints column6 = new ColumnConstraints();
-			column6.setPercentWidth(7);
+			column6.setPercentWidth(8);
 			this.getColumnConstraints().addAll(column1, column2, column3,
 					column4, column5, column6);
 
@@ -99,6 +104,13 @@ public final class SandboxScene extends Scene {
 			RowConstraints row7 = new RowConstraints();
 			row7.setPercentHeight(10);
 			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7);
+			
+			//Just a test to see if we can add items outside the GridWorld class retroactively
+			Label Eve = new Label("Eve!");
+			GridWorld.getInstance().add(Eve, 0, 0);
+			Eve.setVisible(true);
+			//failed
+			
 			
 			//this.setGridLinesVisible(true);
 
