@@ -3,34 +3,42 @@ package views.grid;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public final class GridWorld extends GridPane {
+public final class Rows extends GridPane {
 
-	private static GridWorld instant = null;
+	private static Rows instant = null;
 
-	private GridWorld() {
+	private Rows() {
 
 		this.setGridLinesVisible(true);
 
+		Label R1, R2, R3, R4, R5, R6, R7, R8, R9, R10;
 
+		R1 = new Label("1");
+		R2 = new Label("2");
+		R3 = new Label("3");
+		R4 = new Label("4");
+		R5 = new Label("5");
+		R6 = new Label("6");
+		R7 = new Label("7");
+		R8 = new Label("8");
+		R9 = new Label("9");
+		R10 = new Label("10");
 
+		GridPane.setHalignment(R1, HPos.CENTER);
+		GridPane.setHalignment(R2, HPos.CENTER);
+		GridPane.setHalignment(R3, HPos.CENTER);
+		GridPane.setHalignment(R4, HPos.CENTER);
+		GridPane.setHalignment(R5, HPos.CENTER);
+		GridPane.setHalignment(R6, HPos.CENTER);
+		GridPane.setHalignment(R7, HPos.CENTER);
+		GridPane.setHalignment(R8, HPos.CENTER);
+		GridPane.setHalignment(R9, HPos.CENTER);
+		GridPane.setHalignment(R10, HPos.CENTER);
 
-
-		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(20);
-		ColumnConstraints column2 = new ColumnConstraints();
-		column2.setPercentWidth(20);
-		ColumnConstraints column3 = new ColumnConstraints();
-		column3.setPercentWidth(20);
-		ColumnConstraints column4 = new ColumnConstraints();
-		column4.setPercentWidth(20);
-		ColumnConstraints column5 = new ColumnConstraints();
-		column5.setPercentWidth(20);
-		this.getColumnConstraints().addAll(column1, column2, column3, column4,
-				column5);
+		this.addColumn(0, R1, R2, R3, R4, R5, R6, R7, R8, R9, R10);
 
 		RowConstraints row1 = new RowConstraints();
 		row1.setPercentHeight(10);
@@ -55,12 +63,12 @@ public final class GridWorld extends GridPane {
 		this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6,
 				row7, row8, row9, row10);
 
-		this.setPadding(new Insets(5, 5, 5, 0));
+		this.setPadding(new Insets(5, 0, 5, 5));
 
 	}
 
-	public static GridWorld getInstance() {
-		return (instant == null) ? new GridWorld() : instant;
+	public static Rows getInstance() {
+		return (instant == null) ? new Rows() : instant;
 	}
 
 }
