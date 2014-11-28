@@ -57,6 +57,27 @@ public class Creature extends GridObject {
 		this.direction = Creature.UP;
 	}
 	
+	public boolean facingNorth(){ 
+		return this.direction == Creature.UP; 
+	}
+	
+	public boolean facingSouth(){ 
+		return this.direction == Creature.DOWN; 
+	}
+	
+	public boolean facingEast(){ 
+		return this.direction == Creature.RIGHT; 
+	}
+	
+	public boolean facingWest(){
+		return this.direction == Creature.LEFT;
+	}
+	
+	public void turnLeft(){ 
+		this.direction++; 
+		this.direction = this.direction%4; 
+	}
+	
 	/**
 	 * Moves the object up one in the World
 	 */

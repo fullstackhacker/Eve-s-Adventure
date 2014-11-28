@@ -61,12 +61,8 @@ public abstract class GridObject implements Serializable {
 	 */
 	public int getY() {
 		return this.coordinate.getY();
-	}
-
+	}	
 	
-	public void moveNorth(){ 
-		this.coordinate.moveNorth();
-	}
 	/**
 	 * Sets the name of the object
 	 * 
@@ -88,13 +84,12 @@ public abstract class GridObject implements Serializable {
 		this.coordinate = coordinate;
 	}
 
-
 	/**
 	 * Determines what type the object is and returns the first letter of that types name.
 	 * @return type  Returns the first letter of the type name. (Example: "S" = Shrub)
 	 */
 	public String toString() {
-		return null;
+		return "G";
 
 	}
 }
