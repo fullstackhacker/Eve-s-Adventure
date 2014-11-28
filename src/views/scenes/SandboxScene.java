@@ -109,7 +109,7 @@ public final class SandboxScene extends Scene {
 			gridWorld.add(Eve, 1, 1);
 			Eve.setVisible(true);
 			
-			this.setGridLinesVisible(true);
+			//this.setGridLinesVisible(true);
 
 		}
 		

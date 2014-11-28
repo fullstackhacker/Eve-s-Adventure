@@ -15,27 +15,28 @@ public final class ProTips extends GridPane {
 	private static ProTips instant = null;
 
 	private ProTips() {
-		final Label LTips = new Label("Pro Tips! - ");
+		final Label LTips = new Label("Pro Tip! - ");
 		final Label TFTips = new Label(
-				"This is a long example message to see how far out this message will go. In the future I may need to make this have a text wrap. Who knows. Man, I really hope this is long enough. I mean, will our tips really be longer then this. Maaaybe the objectives...whatever.");
-		//this.getChildren().addAll(LTips, TFTips);
+				"This is Sandbox Mode! You can create your own senarios here. Check out the tabs to drop objects into the grid world!");
+		// this.getChildren().addAll(LTips, TFTips);
 
-		/*LTips.setMinSize(100, 200);
-		TFTips.setMinSize(100, 200);*/
-		
+		/*
+		 * LTips.setMinSize(100, 200); TFTips.setMinSize(100, 200);
+		 */
+
 		this.add(LTips, 0, 0);
 		this.add(TFTips, 1, 0);
-		
+
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(10);
 		ColumnConstraints column2 = new ColumnConstraints();
 		column2.setPercentWidth(90);
 		this.getColumnConstraints().addAll(column1, column2);
-		
+
 		GridPane.setHalignment(LTips, HPos.LEFT);
 		GridPane.setHalignment(TFTips, HPos.LEFT);
 		TFTips.setWrapText(true);
-		
+
 		this.setPadding(new Insets(5, 5, 5, 5));
 
 	}
