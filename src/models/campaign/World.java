@@ -101,7 +101,6 @@ public class World implements Serializable {
 			if(this.hasCreature()) return false; 
 			this.creature = creature;
 			return true; 
-			
 		}
 		/**
 		 * Replaces the creature on the square 
@@ -110,9 +109,21 @@ public class World implements Serializable {
 		 * 
 		 * @param creature  the new creature for the square
 		 * @return  true iff replaces a creature
+		 * @throws Exception 
 		 */
 		private boolean replaceCreature(Creature creature){ 
-			return false; 
+			
+			if(creature == null){
+				//throw new IllegalValueException();
+			}
+			
+			if (this.hasCreature()){
+				this.creature = creature;
+				return true;
+			}else{
+				this.creature = creature;
+				return false;
+			}
 		}
 		/**
 		 * Remove the creature on the square
@@ -147,7 +158,7 @@ public class World implements Serializable {
 		public String toString(){ 
 			String s = this.hasCreature()? this.creature.toString() : " ";
 			s += this.hasItem()? this.item.toString() : " " ; 
-			s += " ";
+			s += "_";
 			return s;
 		}
 	}
@@ -470,7 +481,7 @@ public class World implements Serializable {
 	 * @return  a string that resembles an ASCII grid
 	 */
 	public String toString(){ 
-		String s = ""; 
+		String s = "\n"; 
 		for(int y=0; y<this.world.length; y++){ 
 			for(int x=0; x<this.world[y].length; x++){ 
 				s += this.world[y][x].toString(); 

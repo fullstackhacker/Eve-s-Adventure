@@ -21,11 +21,13 @@ final class ConditionalsTab extends VBox {
 		final Button TASK_BUTTON = new Button("FACING NORTH");
 		final Button LOOP_BUTTON = new Button("FACING SOUTH");
 		
-		IF_BUTTON.setMaxWidth(Double.MAX_VALUE);
-		ELSE_BUTTON.setMaxWidth(Double.MAX_VALUE);
-		WHILE_BUTTON.setMaxWidth(Double.MAX_VALUE);
-		TASK_BUTTON.setMaxWidth(Double.MAX_VALUE);
-		LOOP_BUTTON.setMaxWidth(Double.MAX_VALUE);
+		//TODO Add setOnAction
+		
+		IF_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		ELSE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		WHILE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		TASK_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		LOOP_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		
 		//TODO Add setOnAction for each buttons
 		
