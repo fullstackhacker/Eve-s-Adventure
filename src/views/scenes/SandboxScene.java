@@ -1,5 +1,8 @@
 package views.scenes;
 
+import models.Coordinate;
+import models.campaign.World;
+import models.gridobjects.creatures.Creature;
 import controllers.ButtonHandlers;
 import views.MainApp;
 import views.TopMenu;
@@ -95,16 +98,20 @@ public final class SandboxScene extends Scene {
 			row7.setPercentHeight(10);
 			this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7);
 			
-			//Just a test to see if we can add items outside the GridWorld class retroactively
+			//BACKEND-FRONTEND Integration
+			World world = new World("SandboxWorld", 10, 5);
+			Coordinate coordEve = new Coordinate(1,1);
+			Creature CreatureEve = new Creature("Eve", coordEve);
+			world.addCreature(CreatureEve);
 			Label Eve = new Label("Eve!");
-			GridWorld.getInstance().add(Eve, 0, 0);
+			gridWorld.add(Eve, 1, 1);
 			Eve.setVisible(true);
-			//failed
-			
 			
 			this.setGridLinesVisible(true);
 
 		}
+		
+		
 		
 		private void buttonSetup(){
 			BACK = new Button();
