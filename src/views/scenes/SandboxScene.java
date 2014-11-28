@@ -100,9 +100,11 @@ public final class SandboxScene extends Scene {
 			
 			//BACKEND-FRONTEND Integration
 			World world = new World("SandboxWorld", 10, 5);
+			world.printWorld();
 			Coordinate coordEve = new Coordinate(1,1);
 			Creature CreatureEve = new Creature("Eve", coordEve);
 			world.addCreature(CreatureEve);
+			world.printWorld();
 			Label Eve = new Label("Eve!");
 			gridWorld.add(Eve, 1, 1);
 			Eve.setVisible(true);
