@@ -3,6 +3,7 @@ package models.gridobjects.creatures;
 import models.Coordinate;
 import models.campaign.IllegalValueException;
 import models.gridobjects.GridObject;
+import models.gridobjects.items.Shrub;
 
 public class Creature extends GridObject {
 
@@ -136,7 +137,37 @@ public class Creature extends GridObject {
 	 * @param creature Take a bamboo from that creature. 
 	 */
 	public void takeBamboo(Creature creature){
-		creature.giveBamboo(this);
+		if(creature.numberOfBamboo > 0){
+			this.numberOfBamboo--;
+			creature.incrementBamboo();
+		}
+	}
+	
+	/**
+	 * Removes bamboo from shrub.
+	 * 
+	 * @param shrub
+	 */
+	public void takeBambooFromShrub(Shrub shrub){
+		//TODO: Verify that shrub is within one space away from creature.
+		verifyShrubLoc(shrub);
+		if(shrub.hasBamboo()){
+			this.numberOfBamboo++;
+			shrub.removeBamboo();
+		}
+	}
+	
+	private void verifyShrubLoc(Shrub shrub){
+		int creatureX = this.getCoordinates().getX();
+		int creatureY = this.getCoordinates().getY();
+		
+		if(creatureX == shrub.getX()){
+			if((creatureX + 1) == shrub.getX() || (creatureX - 1) == shrub.getX()) return;
+		}else if(creatureY == shrub.getY()){
+			if((creatureY + 1) == shrub.getY() || (creatureY - 1) == shrub.getY()) return;
+		}
+			
+		throw new IllegalValueException("Shrub is not within reach of Eve.");
 	}
 	
 	/** 
