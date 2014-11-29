@@ -11,3 +11,19 @@
 #protips{
 	-fx-border-right: 5px solid #DDDDDD;
 }
+
+#WorldButton{
+	-fx-background-color: white;
+	-fx-border-radius: 0;
+	-fx-border-style: solid;
+	-fx-border-width: 1px;
+	-fx-border-color: #dddddd;
+}
+
+#WorldButton:hover{
+	-fx-background-color: #ddd;
+}
+
+#WorldButton:active, #WorldButton:focused{
+	-fx-background-color: #ddd;
+}

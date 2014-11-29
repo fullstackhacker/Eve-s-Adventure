@@ -16,16 +16,16 @@ public final class Rows extends GridPane {
 
 		Label R1, R2, R3, R4, R5, R6, R7, R8, R9, R10;
 
-		R1 = new Label("1");
-		R2 = new Label("2");
-		R3 = new Label("3");
-		R4 = new Label("4");
-		R5 = new Label("5");
-		R6 = new Label("6");
-		R7 = new Label("7");
-		R8 = new Label("8");
-		R9 = new Label("9");
-		R10 = new Label("10");
+		R1 = new Label(" 0 ");
+		R2 = new Label(" 1 ");
+		R3 = new Label(" 2 ");
+		R4 = new Label(" 3 ");
+		R5 = new Label(" 4 ");
+		R6 = new Label(" 5 ");
+		R7 = new Label(" 6 ");
+		R8 = new Label(" 7 ");
+		R9 = new Label(" 8 ");
+		R10 = new Label(" 9 ");
 
 		GridPane.setHalignment(R1, HPos.CENTER);
 		GridPane.setHalignment(R2, HPos.CENTER);
@@ -62,8 +62,10 @@ public final class Rows extends GridPane {
 		row10.setPercentHeight(10);
 		this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6,
 				row7, row8, row9, row10);
+		
+		//this.setMinWidth(15);
 
-		this.setPadding(new Insets(5, 0, 5, 5));
+		this.setPadding(new Insets(5, 5, 5, 5));
 
 	}
 

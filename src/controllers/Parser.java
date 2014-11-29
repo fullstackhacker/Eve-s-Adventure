@@ -312,28 +312,28 @@ public class Parser {
 	}
 	
 	
-	public static void main(String[] args){
-		World world = new World("test_world",5, 5);
-		Level level = new Level(world, "testing the parser");
-		
-		if(world.addCreature(new Creature("Eve", new Coordinate(0,0)))) System.out.println("added eve");
-		else System.out.println("unable to add eve");
-		
-		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.IFSTATEMENT);
-		level.addKarelCode(KarelCode.FRONTISCLEAR);
-		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.ENDIFSTATEMENT);
-		Parser parser = new Parser(level.getKarelCode(), world);
-		
-		if(world.getEve() == null) return;
-		
-		System.out.println("-----------");
-		world.printWorld();
-		System.out.println("-----------");
-		parser.start(); 
-		System.out.println("-----------");
-		world.printWorld();
-		System.out.println("-----------");
-	}
+//	public static void main(String[] args){
+//		World world = new World("test_world",5, 5);
+//		Level level = new Level(world, "testing the parser");
+//		
+//		if(world.addCreature(new Creature("Eve", new Coordinate(0,0)))) System.out.println("added eve");
+//		else System.out.println("unable to add eve");
+//		
+//		level.addKarelCode(KarelCode.MOVE);
+//		level.addKarelCode(KarelCode.IFSTATEMENT);
+//		level.addKarelCode(KarelCode.FRONTISCLEAR);
+//		level.addKarelCode(KarelCode.MOVE);
+//		level.addKarelCode(KarelCode.ENDIFSTATEMENT);
+//		Parser parser = new Parser(level.getKarelCode(), world);
+//		
+//		if(world.getEve() == null) return;
+//		
+//		System.out.println("-----------");
+//		world.printWorld();
+//		System.out.println("-----------");
+//		parser.start(); 
+//		System.out.println("-----------");
+//		world.printWorld();
+//		System.out.println("-----------");
+//	}
 }
