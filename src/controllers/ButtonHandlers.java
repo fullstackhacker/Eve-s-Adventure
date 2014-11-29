@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import views.MainApp;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
+import views.scenes.MainMenuScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
 /**
@@ -77,5 +78,10 @@ public final class ButtonHandlers {
 
 	public static final void DELETE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("DELETE_BUTTON_HANDLER CALLED");
+	}
+	
+	public static final void QUIT_MENU_HANDLER(ActionEvent e){
+		System.out.println("Quit sandbox mode. Returned to home screen.");
+		MainApp.changeScenes(MainMenuScene.getInstance());
 	}
 }
