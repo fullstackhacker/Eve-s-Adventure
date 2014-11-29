@@ -1,7 +1,10 @@
 package views.grid;
 
+import java.util.ArrayList;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -10,14 +13,12 @@ import javafx.scene.layout.RowConstraints;
 public final class GridWorld extends GridPane {
 
 	private static GridWorld instant = null;
+	
+	public static Button[][] gridButtons = new Button[5][10];
 
 	private GridWorld() {
 
 		this.setGridLinesVisible(true);
-
-
-
-
 
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(20);
@@ -54,6 +55,15 @@ public final class GridWorld extends GridPane {
 		row10.setPercentHeight(10);
 		this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6,
 				row7, row8, row9, row10);
+		
+		for(int i = 0; i < 5; i++){
+			for(int j = 0; j < 10; j++){
+				GridWorld.gridButtons[i][j] = new Button("   ");
+				GridPane.setHalignment(GridWorld.gridButtons[i][j], HPos.CENTER);
+				this.add(GridWorld.gridButtons[i][j], i, j);
+			}
+		}
+		//this.getChildren().addAll(GridWorld.gridButtons);
 
 		this.setPadding(new Insets(5, 5, 5, 5));
 
