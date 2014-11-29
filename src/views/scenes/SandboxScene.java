@@ -58,6 +58,7 @@ public final class SandboxScene extends Scene {
 			KarelTable karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			GridWorld gridWorld = GridWorld.getInstance();
+			
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
 

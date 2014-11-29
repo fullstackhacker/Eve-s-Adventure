@@ -18,6 +18,7 @@ public final class GridWorld extends GridPane {
 	public static Button[][] gridButtons = new Button[5][10];
 
 	private GridWorld() {
+		this.getStylesheets().add("./sandbox_style.css");
 
 		this.setGridLinesVisible(true);
 
@@ -64,6 +65,7 @@ public final class GridWorld extends GridPane {
 				GridPane.setHgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
 				GridPane.setVgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
 				GridWorld.gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				GridWorld.gridButtons[i][j].setId("WorldButton");
 				this.add(GridWorld.gridButtons[i][j], i, j);
 			}
 		}
