@@ -1,5 +1,6 @@
 package views.tabs;
 
+import controllers.ButtonHandlers;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -22,6 +23,8 @@ final class InstructionsTab extends VBox{
 		final Button LOOP_BUTTON = new Button("LOOP");
 		
 		//TODO Add setOnAction
+		IF_BUTTON.setOnAction(ButtonHandlers::IF_BUTTON_HANDLER);
+		ELSE_BUTTON.setOnAction(ButtonHandlers::ELSE_BUTTON_HANDLER);
 		
 		IF_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		ELSE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);

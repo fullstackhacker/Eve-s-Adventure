@@ -1,7 +1,9 @@
 package controllers;
 
+import models.campaign.KarelCode;
 import javafx.event.ActionEvent;
 import views.MainApp;
+import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
@@ -33,10 +35,12 @@ public final class ButtonHandlers {
 	
 	public static final void IF_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("IF_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.IFSTATEMENT);
 	}
 	
 	public static final void ELSE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("ELSE_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.ELSESTATEMENT);
 	}
 	
 	public static final void WHILE_BUTTON_HANDLER(ActionEvent e){

@@ -3,6 +3,8 @@ package views.karel;
 import controllers.ButtonHandlers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -16,25 +18,35 @@ import views.tips.ProTips;
 
 public final class KarelTable extends GridPane {
 
-	private static KarelTable instant = null;
+	private static final KarelTable instant = new KarelTable();
 
+	private ObservableList<String> karelCode;
+	
+	private ListView<String> listView;
+	
 	private KarelTable() {
-
-		ObservableList<String> karelCode = FXCollections.observableArrayList(
-				"Top", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-				" ", " ", " ", " ", " ", " ", "Test Text ", " ", " ", " ", " ", " ",
-				" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-				" ", " ", "Bottom");
-		ListView<String> listView = new ListView<String>(karelCode);
+		this.karelCode = FXCollections.observableArrayList();
+		this.listView = new ListView<String>(karelCode);
+		
 		Button EDIT = new Button("EDIT");
 		Button DELETE = new Button("DELETE");
-
+		
 		this.add(listView, 0, 0, 2, 1);
 		this.add(EDIT, 0, 1);
 		this.add(DELETE, 1, 1);
 		
 		EDIT.setOnAction(ButtonHandlers::EDIT_BUTTON_HANDLER);
-		DELETE.setOnAction(ButtonHandlers::DELETE_BUTTON_HANDLER);
+		DELETE.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				String item = listView.getSelectionModel().getSelectedItem();
+				if(item != null){
+					karelCode.remove(item);
+				}
+			}
+			
+		});
 
 		GridPane.setFillWidth(EDIT, true);
 		GridPane.setHalignment(EDIT, HPos.CENTER);
@@ -54,10 +66,18 @@ public final class KarelTable extends GridPane {
 		this.getRowConstraints().addAll(row1, row2);
 		
 		this.setPadding(new Insets(5, 5, 5, 5));
+	}
+	
 
+	/**
+	 * Adding a piece a code to the Karel Table
+	 * @param code Karel Code
+	 */
+	public void addCode(String code){
+		this.karelCode.add(code);
 	}
 
 	public static KarelTable getInstance() {
-		return (instant == null) ? new KarelTable() : instant;
+		return instant;
 	}
 }
