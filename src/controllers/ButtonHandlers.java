@@ -34,28 +34,56 @@ public final class ButtonHandlers {
 		MainApp.changeScenes(SandboxScene.getInstance());
 	}
 	
+	
+	/**
+	 * InstuctionsTab.java
+	 */
+	
 	public static final void IF_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("IF_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.IFSTATEMENT);
-		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
 	}
 	
 	public static final void ELSE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("ELSE_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.ELSESTATEMENT);
+		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
 	}
 	
 	public static final void WHILE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("WHILE_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.WHILESTATEMENT);
+		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
 	}
 	
 	public static final void TASK_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("TASK_BUTTON_HANDLER CALLED");
+
+		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
 	}
 
 	public static final void LOOP_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("LOOP_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.LOOPSTATEMENT);
+		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+	}
+	
+	/**
+	 * ConditionalsTab.java
+	 */
+	
+	/**
+	 * OperationsTab.java
+	 */
+	public static final void MOVE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("MOVE_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.MOVE);
 	}
 	
 	public static final void BACK_BUTTON_HANDLER(ActionEvent e){

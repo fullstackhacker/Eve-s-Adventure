@@ -22,17 +22,17 @@ final class InstructionsTab extends VBox{
 		final Button TASK_BUTTON = new Button("TASK");
 		final Button LOOP_BUTTON = new Button("LOOP");
 		
-		//TODO Add setOnAction
 		IF_BUTTON.setOnAction(ButtonHandlers::IF_BUTTON_HANDLER);
 		ELSE_BUTTON.setOnAction(ButtonHandlers::ELSE_BUTTON_HANDLER);
+		WHILE_BUTTON.setOnAction(ButtonHandlers::WHILE_BUTTON_HANDLER);
+		TASK_BUTTON.setOnAction(ButtonHandlers::TASK_BUTTON_HANDLER);
+		LOOP_BUTTON.setOnAction(ButtonHandlers::LOOP_BUTTON_HANDLER);
 		
 		IF_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		ELSE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		WHILE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		TASK_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		LOOP_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
-		
-		//TODO Add setOnAction for each buttons
 		
 		this.getChildren().addAll(IF_BUTTON, ELSE_BUTTON, WHILE_BUTTON, TASK_BUTTON, LOOP_BUTTON);
 	}

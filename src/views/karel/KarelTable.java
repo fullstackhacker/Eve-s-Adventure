@@ -1,6 +1,9 @@
 package views.karel;
 
+import models.campaign.KarelCode;
 import controllers.ButtonHandlers;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +17,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import views.tabs.GameTabs;
 import views.tips.ProTips;
 
 public final class KarelTable extends GridPane {
@@ -45,6 +49,34 @@ public final class KarelTable extends GridPane {
 					karelCode.remove(item);
 				}
 			}
+			
+		});
+		
+		this.listView.getSelectionModel().selectedItemProperty().addListener(new 
+				ChangeListener<String>(){
+
+			/**
+			 * The list would change the tab based on the selected item
+			 */
+					@Override
+					public void changed(
+							ObservableValue<? extends String> observable,
+							String oldValue, String newValue) {
+						System.out.println("Old Value:" + oldValue);
+						System.out.println("New Value:" + newValue);
+						
+						switch(newValue){
+							case KarelCode.IFSTATEMENT:
+							case KarelCode.WHILESTATEMENT:
+							case KarelCode.LOOPSTATEMENT:
+								GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+								GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+								break;
+							default:
+								GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+						}
+						
+					}
 			
 		});
 
