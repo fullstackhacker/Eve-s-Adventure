@@ -8,6 +8,10 @@
 	-fx-border-color: #dddddd;
 }
 
+#tabheader{
+	-fx-font-size: .61em;
+}
+
 #protips{
 	-fx-border-right: 5px solid #DDDDDD;
 }
