@@ -1,6 +1,7 @@
 package models.gridobjects.creatures;
 
 import models.Coordinate;
+import models.campaign.IllegalValueException;
 import models.gridobjects.GridObject;
 
 public class Creature extends GridObject {
@@ -11,14 +12,14 @@ public class Creature extends GridObject {
 	public static final int UP = 0;
 	
 	/**
-	 * The directional value of Down.
-	 */
-	public static final int DOWN = 2;
-	
-	/**
 	 * The directional value of Left.
 	 */
 	public static final int LEFT = 1;
+	
+	/**
+	 * The directional value of Down.
+	 */
+	public static final int DOWN = 2;
 	
 	/**
 	 * The directional value of Right.
@@ -41,6 +42,16 @@ public class Creature extends GridObject {
 	private boolean isAwake;
 	
 	/**
+	 * Width of the current world.
+	 */
+	private int worldWidth;
+	
+	/**
+	 * Height of the current world.
+	 */
+	private int worldHeight;
+	
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6L;
@@ -50,11 +61,14 @@ public class Creature extends GridObject {
 	 * @param name The name of the creature.
 	 * @param coordinate The location of the creature in the world
 	 */
-	public Creature(String name, Coordinate coordinate){
+	public Creature(String name, Coordinate coordinate, int worldwidth, int worldheight){
 		super.setName(name);
 		super.setCoordinates(coordinate);
 		this.isAwake =  true; 
 		this.direction = Creature.UP;
+		this.numberOfBamboo = 0;
+		this.setWorldWidth(worldwidth);
+		this.setWorldHeight(worldheight);
 	}
 	
 	public boolean facingNorth(){ 
@@ -82,27 +96,27 @@ public class Creature extends GridObject {
 	 * Moves the object up one in the World
 	 */
 	public void moveUp(){
-		super.getCoordinates().moveNorth();
+		if ((super.getCoordinates().getY() + 1) < this.worldHeight) super.getCoordinates().moveNorth();
 	}
 	
 	/**
 	 * Moves the object down one in the World
 	 */
 	public void moveDown(){
-		super.getCoordinates().moveSouth();
+		if((super.getCoordinates().getY() - 1) >= 0) super.getCoordinates().moveSouth();
 	}
 	
 	/**
 	 * Moves the object left one in the World 
 	 */
 	public void moveLeft(){
-		super.getCoordinates().moveWest();
+		if ((super.getCoordinates().getX() - 1) >= 0) super.getCoordinates().moveWest();
 	}
 	/**
 	 * Moves the object right one in the World 
 	 */
 	public void moveRight(){ 
-		super.getCoordinates().moveEast();
+		if ((super.getCoordinates().getX() - 1) < this.worldWidth) super.getCoordinates().moveEast();
 	}
 	
 	/**
@@ -111,9 +125,10 @@ public class Creature extends GridObject {
 	 * @param creature  the creature to give bamboo to 
 	 */
 	public void giveBamboo(Creature creature){
-		this.numberOfBamboo--;
-		creature.incrementBamboo();
-		
+		if(this.numberOfBamboo > 0){
+			this.numberOfBamboo--;
+			creature.incrementBamboo();
+		}
 	}
 	
 	/**
@@ -121,8 +136,7 @@ public class Creature extends GridObject {
 	 * @param creature Take a bamboo from that creature. 
 	 */
 	public void takeBamboo(Creature creature){
-		this.numberOfBamboo++;
-		creature.decrementBamboo();
+		creature.giveBamboo(this);
 	}
 	
 	/** 
@@ -150,7 +164,7 @@ public class Creature extends GridObject {
 	 * Minus 1 bamboo to this creature.
 	 */
 	public void decrementBamboo(){
-		if(this.numberOfBamboo > 0){ this.numberOfBamboo--; }
+		if(this.numberOfBamboo > 0) this.numberOfBamboo--;
 	}
 	
 	/**
@@ -158,6 +172,7 @@ public class Creature extends GridObject {
 	 * @param direction  the (new) direction of the creature
 	 */
 	public void setDirection(int direction){
+		if(direction < 0 || direction > 3) throw new IllegalValueException();
 		this.direction = direction;
 	}
 	
@@ -193,6 +208,28 @@ public class Creature extends GridObject {
 	 */
 	public boolean isEve(){
 		return super.getName().equals("Eve");
+	}
+	
+	/**
+	 * Must be set before any program is executed. Setter for worldWidth which is used 
+	 * within other methods to determine whether the current creature is in the bounds 
+	 * of the world.
+	 * 
+	 * @param width
+	 */
+	public void setWorldWidth(int width){
+		this.worldWidth = width;
+	}
+	
+	/**
+	 * Must be set before any program is executed. Setter for worldHeight which is used 
+	 * within other methods to determine whether the current creature is in the bounds 
+	 * of the world.
+	 * 
+	 * @param width
+	 */
+	public void setWorldHeight(int height){
+		this.worldHeight = height;
 	}
 	
 	/**

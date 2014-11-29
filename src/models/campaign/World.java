@@ -155,7 +155,7 @@ public class World implements Serializable {
 	 */
 	private String name; 
 	/**
-	 * Serailizable ID for saving
+	 * Serializable ID for saving
 	 */
 	private static final long serialVersionUID = 2L;
 
@@ -196,10 +196,26 @@ public class World implements Serializable {
 	public void setName(String name){
 		this.name = name;
 	}
+	
+	/**
+	 * Retrieves the item at the given coordinate
+	 * 
+	 * @param coordinate
+	 * @return
+	 */
 	public Item itemAt(Coordinate coordinate){
+		verifyCoordinate(coordinate);
 		return this.world[coordinate.getY()][coordinate.getX()].currentItem();
 	}
+	
+	/**
+	 * Retrieves the creature at the given coordinate
+	 * 
+	 * @param coordinate
+	 * @return
+	 */
 	public Creature creatureAt(Coordinate coordinate){
+		verifyCoordinate(coordinate);
 		return this.world[coordinate.getY()][coordinate.getX()].currentCreature();
 	}
 	/**
@@ -212,7 +228,7 @@ public class World implements Serializable {
 	 */
 	public boolean addItem(Item item){ 
 		if(item == null) throw new IllegalValueException();
-		return this.world[item.getY()][item.getY()].addItem(item);
+		return this.world[item.getY()][item.getX()].addItem(item);
 	}
 	/**
 	 * Replaces the current object on the world at the specified location 
@@ -232,6 +248,7 @@ public class World implements Serializable {
 	 * @param coordinate The coordinate representation of the object in the world
 	 */
 	public void removeItem(Coordinate coordinate){ 
+		verifyCoordinate(coordinate);
 		this.world[coordinate.getY()][coordinate.getX()].removeItem();
 	}
 	/**
@@ -262,6 +279,7 @@ public class World implements Serializable {
 	 * @param coordinate A coordinate object representing the location of the creature to remove
 	 */
 	public Creature removeCreature(Coordinate coordinate){
+		verifyCoordinate(coordinate);
 		return this.world[coordinate.getY()][coordinate.getX()].removeCreature();
 	}
 	/**
@@ -272,7 +290,8 @@ public class World implements Serializable {
 	 * @return  true iff the specified location has an item
 	 */
 	public boolean hasItem(Coordinate coordinate){ 
-		return false; 
+		verifyCoordinate(coordinate);
+		return this.world[coordinate.getY()][coordinate.getX()].hasItem();
 	}
 	/**
 	 * Checks to see if there is a creature on the location
@@ -282,7 +301,8 @@ public class World implements Serializable {
 	 * @return  true iff the specified location has a creature
 	 */
 	public boolean hasCreature(Coordinate coordinate){
-		return false; 
+		verifyCoordinate(coordinate);
+		return this.world[coordinate.getY()][coordinate.getX()].hasCreature();
 	}
 	/**
 	 * Gets the area of the world
@@ -308,6 +328,18 @@ public class World implements Serializable {
 	public int getWidth(){
 		return this.world[0].length; 
 	} 
+	/**
+	 * Verifies that the provided coordinate is within the bounds of the world and is not null.
+	 * 
+	 * @param coordinate
+	 */
+	private void verifyCoordinate(Coordinate coordinate){
+		if(coordinate == null 
+				|| coordinate.getY() > this.getHeight() 
+				|| coordinate.getX() > this.getWidth()){ 
+			throw new IllegalValueException();
+		}
+	}
 	/**
 	 * Gets all the objects in the world.
 	 * This includes all creatures and items  so everything

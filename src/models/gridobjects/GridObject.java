@@ -90,6 +90,5 @@ public abstract class GridObject implements Serializable {
 	 */
 	public String toString() {
 		return "G";
-
 	}
 }
