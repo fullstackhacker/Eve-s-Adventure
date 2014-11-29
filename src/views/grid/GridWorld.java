@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public final class GridWorld extends GridPane {
@@ -60,6 +61,9 @@ public final class GridWorld extends GridPane {
 			for(int j = 0; j < 10; j++){
 				GridWorld.gridButtons[i][j] = new Button("   ");
 				GridPane.setHalignment(GridWorld.gridButtons[i][j], HPos.CENTER);
+				GridPane.setHgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
+				GridPane.setVgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
+				GridWorld.gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 				this.add(GridWorld.gridButtons[i][j], i, j);
 			}
 		}
