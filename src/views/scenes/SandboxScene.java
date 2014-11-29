@@ -116,7 +116,7 @@ public final class SandboxScene extends Scene {
 			World world = new World("SandboxWorld", 10, 5);
 			world.printWorld();
 			Coordinate coordEve = new Coordinate(1,1);
-			Creature CreatureEve = new Creature("Eve", coordEve);
+			Creature CreatureEve = new Creature("Eve", coordEve, 5, 10);
 			world.addCreature(CreatureEve);
 			world.printWorld();
 			Label Eve = new Label("Eve!");

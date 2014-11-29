@@ -1,5 +1,7 @@
 package models;
 
+import models.campaign.IllegalValueException;
+
 /**
  * Coordinate class to represent coordinates in the world
  *
@@ -21,6 +23,7 @@ public class Coordinate {
 	 * @param y The y-coordinate in a Cartesian product representation of the world
 	 */
 	public Coordinate(int x, int y){
+		if(x < 0 || y < 0) throw new IllegalValueException("Given coordinates must be >= 0.");
 		this.x = x; 
 		this.y = y;
 	}
@@ -48,6 +51,7 @@ public class Coordinate {
 	 * 
 	 */
 	public void setX(int x){ 
+		if(x < 0) throw new IllegalValueException("Value for X must be >= 0.");
 		this.x = x;
 	}
 	
@@ -57,6 +61,7 @@ public class Coordinate {
 	 * @param y The new y coordinate
 	 */
 	public void setY(int y){
+		if(y < 0) throw new IllegalValueException("Value for Y must be >= 0.");
 		 this.y = y; 
 	}
 	
