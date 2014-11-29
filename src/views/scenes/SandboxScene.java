@@ -120,7 +120,7 @@ public final class SandboxScene extends Scene {
 			world.printWorld();
 			Label Eve = new Label("Eve!");
 			GridPane.setHalignment(Eve, HPos.CENTER);
-			gridWorld.add(Eve, 1, 1);
+			gridWorld.add(Eve, 0, 0);
 			Eve.setVisible(true);
 			
 			this.setPadding(new Insets(0, 5, 5, 5));

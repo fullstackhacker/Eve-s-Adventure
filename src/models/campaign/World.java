@@ -61,11 +61,9 @@ public class World implements Serializable {
 		 * @return false  the object was not added to the board
 		 */
 		private boolean addItem(Item item){
-			if(this.hasItem()){
-				this.item = item; 
-				return true; 
-			}
-			return false; 	
+			if(this.hasItem()) return false;
+			this.item = item; 
+			return true; 	
 		}
 		/**
 		 * Replaces the current item on the square.
@@ -98,7 +96,7 @@ public class World implements Serializable {
 		 * @return  true iff able to add a creature to the square
 		 */
 		private boolean addCreature(Creature creature){ 
-			if(this.hasCreature()) return false; 
+			if(this.hasCreature()) return false;
 			this.creature = creature;
 			return true; 
 		}
@@ -111,19 +109,9 @@ public class World implements Serializable {
 		 * @return  true iff replaces a creature
 		 * @throws Exception 
 		 */
-		private boolean replaceCreature(Creature creature){ 
-			
-			if(creature == null){
-				//throw new IllegalValueException();
-			}
-			
-			if (this.hasCreature()){
-				this.creature = creature;
-				return true;
-			}else{
-				this.creature = creature;
-				return false;
-			}
+		private boolean replaceCreature(Creature creature){
+			this.creature = creature;
+			return true;
 		}
 		/**
 		 * Remove the creature on the square
@@ -176,10 +164,6 @@ public class World implements Serializable {
 	 */
 	private Square[][] world; 
 	/**
-	 * 
-	 */
-	private Creature Eve;
-	/**
 	 * Constructor for the world
 	 * 
 	 * @param name The name of the world
@@ -227,6 +211,7 @@ public class World implements Serializable {
 	 * @return  true iff the Item was placed into the world
 	 */
 	public boolean addItem(Item item){ 
+		if(item == null) throw new IllegalValueException();
 		return this.world[item.getY()][item.getY()].addItem(item);
 	}
 	/**
@@ -238,6 +223,7 @@ public class World implements Serializable {
 	 * @return true iff the Item replaced another item in the world
 	 */
 	public boolean replaceItem(Item item){ 
+		if(item == null) throw new IllegalValueException();
 		return this.world[item.getY()][item.getX()].replaceItem(item); 
 	}
 	/**
@@ -257,6 +243,7 @@ public class World implements Serializable {
 	 * @return  true iff added the creature to the square
 	 */
 	public boolean addCreature(Creature creature){
+		if(creature == null) throw new IllegalValueException();
 		return this.world[creature.getY()][creature.getX()].addCreature(creature); 
 	}
 	/**
@@ -266,6 +253,7 @@ public class World implements Serializable {
 	 * @return  true iff the old creature was replaced by the new creature
 	 */
 	public boolean replaceCreature(Creature creature){
+		if(creature == null) throw new IllegalValueException();
 		return this.world[creature.getY()][creature.getX()].replaceCreature(creature); 
 	}
 	/**
@@ -284,7 +272,7 @@ public class World implements Serializable {
 	 * @return  true iff the specified location has an item
 	 */
 	public boolean hasItem(Coordinate coordinate){ 
-		return false; //added to shut up compiler
+		return false; 
 	}
 	/**
 	 * Checks to see if there is a creature on the location
