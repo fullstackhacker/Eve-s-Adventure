@@ -37,6 +37,8 @@ public final class ButtonHandlers {
 	public static final void IF_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("IF_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.IFSTATEMENT);
+		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 	}
 	
 	public static final void ELSE_BUTTON_HANDLER(ActionEvent e){

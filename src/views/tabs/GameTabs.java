@@ -6,19 +6,29 @@ import javafx.scene.control.TabPane;
 
 public final class GameTabs extends TabPane{
 	
-	private static GameTabs instant = null;
+	private static GameTabs INSTANCE = new GameTabs();
 	
 	protected static final double GAMETABS_MAX_WIDTH = Double.MAX_VALUE;
 	
+	public static final int INSTRUCTIONS_TAB_VALUE = 0;
+	
+	public static final int CONDITIONS_TAB_VALUE = 1;
+	
+	public static final int OPERATIONS_TAB_VALUE = 2;
+	
+	public static final int CREATURES_TAB_VALUE = 3;
+	
+	public static final int ITEMS_TAB_VALUE = 4;
+	
 	private GameTabs() {
-		/* Declare All the tabs */
+		this.setPadding(new Insets(5, 5, 5, 5));
+		
 		final Tab INSTRUCTIONS_TAB = new Tab("INSTRUCTIONS");
 		final Tab CONDITIONS_TAB = new Tab("CONDITIONS");
 		final Tab OPERATIONS_TAB = new Tab("OPERATIONS");
 		final Tab CREATURES_TAB = new Tab("CREATURES");
 		final Tab ITEMS_TAB = new Tab("ITEMS");
-		
-		/* Setting the closableProperty */
+
 		INSTRUCTIONS_TAB.closableProperty().set(false);
 		CONDITIONS_TAB.closableProperty().set(false);
 		OPERATIONS_TAB.closableProperty().set(false);
@@ -37,19 +47,22 @@ public final class GameTabs extends TabPane{
 		CREATURES_TAB.setId("tabheader");
 		ITEMS_TAB.setId("tabheader");
 		
-		/* Adding all the tabs to the TabPane */
-		this.getTabs().add(INSTRUCTIONS_TAB);
-		this.getTabs().add(CONDITIONS_TAB);
-		this.getTabs().add(OPERATIONS_TAB);
-		this.getTabs().add(CREATURES_TAB);
-		this.getTabs().add(ITEMS_TAB);
-		
-		this.setPadding(new Insets(5, 5, 5, 5));
-		
-
+		this.getTabs().addAll(INSTRUCTIONS_TAB, CONDITIONS_TAB, OPERATIONS_TAB, CREATURES_TAB, ITEMS_TAB);
+	}
+	
+	public void switchTab(int tab){
+		this.getSelectionModel().select(tab);
+	}
+	
+	public void enableTab(int tab){
+		this.getTabs().get(tab).setDisable(false);
+	}
+	
+	public void disableTab(int tab){
+		this.getTabs().get(tab).setDisable(true);
 	}
 
 	public static GameTabs getInstance(){
-		return (instant == null) ? new GameTabs() : instant;
+		return INSTANCE;
 	}
 }
