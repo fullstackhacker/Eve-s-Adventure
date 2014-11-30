@@ -31,13 +31,6 @@ public final class InstructionsTab extends VBox{
 		final Button TASK_BUTTON = new Button("TASK");
 		final Button LOOP_BUTTON = new Button("LOOP");
 		
-		
-		ELSE_BUTTON.setVisible(false);
-		END_IF_BUTTON.setVisible(false);
-		END_ELSE_BUTTON.setVisible(false);
-		END_WHILE_BUTTON.setVisible(false);
-		END_LOOP_BUTTON.setVisible(false);
-		
 		IF_BUTTON.setOnAction(ButtonHandlers::IF_BUTTON_HANDLER);
 		ELSE_BUTTON.setOnAction(ButtonHandlers::ELSE_BUTTON_HANDLER);
 		WHILE_BUTTON.setOnAction(ButtonHandlers::WHILE_BUTTON_HANDLER);
@@ -59,6 +52,13 @@ public final class InstructionsTab extends VBox{
 		END_ELSE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		END_WHILE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		END_LOOP_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		
+		TASK_BUTTON.setVisible(false);
+		ELSE_BUTTON.setVisible(false);
+		END_IF_BUTTON.setVisible(false);
+		END_ELSE_BUTTON.setVisible(false);
+		END_WHILE_BUTTON.setVisible(false);
+		END_LOOP_BUTTON.setVisible(false);
 		
 		this.getChildren().addAll(IF_BUTTON, ELSE_BUTTON, WHILE_BUTTON, TASK_BUTTON, LOOP_BUTTON, END_IF_BUTTON, END_ELSE_BUTTON, END_WHILE_BUTTON, END_LOOP_BUTTON);
 	}
