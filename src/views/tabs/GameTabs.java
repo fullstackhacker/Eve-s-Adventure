@@ -46,9 +46,9 @@ public final class GameTabs extends TabPane{
 		ITEMS_TAB.setContent(ItemsTab.getInstance());
 		NUMBERS_TAB.setContent(NumbersTab.getInstance());
 		
+		CONDITIONS_TAB.setDisable(true);
 		CREATURES_TAB.setDisable(true);
 		ITEMS_TAB.setDisable(true);
-		CONDITIONS_TAB.setDisable(true);
 		NUMBERS_TAB.setDisable(true);
 		
 		INSTRUCTIONS_TAB.setId("tabheader");
