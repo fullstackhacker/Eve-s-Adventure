@@ -1,6 +1,7 @@
 package models;
 
 import models.campaign.IllegalValueException;
+import models.gridobjects.GridObject;
 
 /**
  * Coordinate class to represent coordinates in the world
@@ -69,14 +70,14 @@ public class Coordinate {
 	 * Moves the coordinate forward one
 	 */
 	public void moveNorth(){ 
-		this.y++; 
+		this.y--; 
 	}
 	
 	/**
 	 * Moves the coordinate back one
 	 */
 	public void moveSouth(){ 
-		this.y--; 
+		this.y++; 
 	}
 	
 	/**
