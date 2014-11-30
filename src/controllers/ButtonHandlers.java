@@ -2,7 +2,6 @@ package controllers;
 
 import models.campaign.KarelCode;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import views.MainApp;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
@@ -248,6 +247,8 @@ public final class ButtonHandlers {
 		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.CREATURES_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.ITEMS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.CREATURES_TAB_VALUE);
 	}
 	

@@ -1,11 +1,6 @@
 package views.karel;
 
-import java.util.ArrayList;
-
-import com.sun.org.apache.regexp.internal.RE;
-
 import models.campaign.KarelCode;
-import controllers.ButtonHandlers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,14 +10,11 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import views.tabs.GameTabs;
-import views.tips.ProTips;
 
 public final class KarelTable extends GridPane {
 
@@ -53,7 +45,7 @@ public final class KarelTable extends GridPane {
 				if(code == null){
 					return;
 				}
-				
+				//TODO
 				switch(code){
 					case KarelCode.IFSTATEMENT:
 					case KarelCode.WHILESTATEMENT:
