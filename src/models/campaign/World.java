@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.gridobjects.GridObject;
 import models.gridobjects.creatures.Creature;
@@ -333,29 +334,29 @@ public class World implements Serializable {
 	 * 
 	 * @param coordinate
 	 */
-	private void verifyCoordinate(Coordinate coordinate){
+	private boolean verifyCoordinate(Coordinate coordinate){
 		if(coordinate == null 
 				|| coordinate.getY() > this.getHeight() 
-				|| coordinate.getX() > this.getWidth()){ 
-			throw new IllegalValueException();
+				|| coordinate.getX() > this.getWidth()
+				|| coordinate.getY() < 0
+				|| coordinate.getX() < 0){ 
+			return false;
 		}
+		return true;
 	}
 	
 	/**
 	 * Moves Eve east on the board. Updates coordinate for the Creature Eve and updates world (2D array).
 	 * 
+	 * Does not do anything if the move is invalid
+	 * 
 	 */
 	public void moveEveEast(){
-		int EveX = getEve().getX();
-		int EveY = getEve().getY();
-		if(!this.world[EveY][EveX+1].hasItem() &&
-				!this.world[EveY][EveX+1].hasCreature()){
-			
-			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
-			this.world[EveY][EveX+1].addCreature(Eve);
-			Eve.moveRight();
-			
-		}
+		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX()+1, this.getEve().getCoordinates().getY()); 
+		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
+		this.getEve().move();
+		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
+		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
 	}
 	
 	/**
@@ -363,16 +364,11 @@ public class World implements Serializable {
 	 * 
 	 */
 	public void moveEveNorth(){
-		int EveX = getEve().getX();
-		int EveY = getEve().getY();
-		if(!this.world[EveY - 1][EveX].hasItem() &&
-				!this.world[EveY - 1][EveX].hasCreature()){
-			
-			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
-			this.world[EveY - 1][EveX].addCreature(Eve);
-			Eve.moveUp();
-			
-		}
+		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()+1); 
+		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
+		this.getEve().move();
+		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
+		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
 	}
 	
 	/**
@@ -380,16 +376,11 @@ public class World implements Serializable {
 	 * 
 	 */
 	public void moveEveWest(){
-		int EveX = getEve().getX();
-		int EveY = getEve().getY();
-		if(!this.world[EveY][EveX - 1].hasItem() &&
-				!this.world[EveY][EveX - 1].hasCreature()){
-			
-			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
-			this.world[EveY][EveX - 1].addCreature(Eve);
-			Eve.moveLeft();
-			
-		}
+		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX()-1, this.getEve().getCoordinates().getY()); 
+		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
+		this.getEve().move();
+		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
+		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
 	}
 	
 	/**
@@ -397,15 +388,80 @@ public class World implements Serializable {
 	 * 
 	 */
 	public void moveEveSouth(){
-		int EveX = getEve().getX();
-		int EveY = getEve().getY();
-		if(!this.world[EveY + 1][EveX].hasItem() &&
-				!this.world[EveY + 1][EveX].hasCreature()){
-			
-			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
-			this.world[EveY + 1][EveX].addCreature(Eve);
-			Eve.moveDown();
-			
+		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()-1); 
+		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
+		this.getEve().move();
+		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
+		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
+	}
+	/**
+	 * Take bamboo from nearby shrub
+	 */
+	public void takeBambooFromShrub(){
+		Coordinate shrubCoordinate = null; 
+		switch(this.getEve().getDirection()){
+		case Creature.UP: 
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()+1);
+			break;
+		case Creature.DOWN: 
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()-1);
+			verifyCoordinate(shrubCoordinate);
+			break;
+		case Creature.LEFT: 
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()-1, this.getEve().getCoordinates().getY());
+			break;
+		case Creature.RIGHT:
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()+1, this.getEve().getCoordinates().getY());
+			break;
+		default: 
+			throw new IllegalValueException("Eve is facing an illegal direction");
+		}
+		
+		if(!verifyCoordinate(shrubCoordinate)){ //eve is not facing a near by bush
+			return; //dont do anything
+		}
+		
+		if(this.world[shrubCoordinate.getY()][shrubCoordinate.getX()].item instanceof Shrub){
+			if(((Shrub)this.world[shrubCoordinate.getY()][shrubCoordinate.getX()].item).hasBamboo()){
+				((Shrub)this.world[shrubCoordinate.getY()][shrubCoordinate.getX()].item).removeBamboo();
+				this.getEve().incrementBamboo();
+			}
+		}
+	}
+	
+	/**
+	 * Put bamboo in a nearby shrub
+	 * 
+	 */
+	public void putBambooInShrub(){
+		Coordinate shrubCoordinate = null; 
+		switch(this.getEve().getDirection()){
+		case Creature.UP: 
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()+1);
+			break;
+		case Creature.DOWN: 
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()-1);
+			verifyCoordinate(shrubCoordinate);
+			break;
+		case Creature.LEFT: 
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()-1, this.getEve().getCoordinates().getY());
+			break;
+		case Creature.RIGHT:
+			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()+1, this.getEve().getCoordinates().getY());
+			break;
+		default: 
+			throw new IllegalValueException("Eve is facing an illegal direction");
+		}
+		
+		if(!verifyCoordinate(shrubCoordinate)){ //eve is not facing a near by bush
+			return; //dont do anything
+		}
+		
+		if(this.world[shrubCoordinate.getY()][shrubCoordinate.getX()].item instanceof Shrub){
+			if(((Shrub)this.world[shrubCoordinate.getY()][shrubCoordinate.getX()].item).hasBamboo()){
+				((Shrub)this.world[shrubCoordinate.getY()][shrubCoordinate.getX()].item).addBamboo();
+				this.getEve().decrementBamboo();
+			}
 		}
 	}
 	/**

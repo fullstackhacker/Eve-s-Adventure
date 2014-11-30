@@ -1,6 +1,6 @@
 package models;
 
-import models.campaign.IllegalValueException;
+import exceptions.IllegalValueException;
 
 /**
  * Coordinate class to represent coordinates in the world

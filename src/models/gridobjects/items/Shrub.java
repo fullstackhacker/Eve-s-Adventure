@@ -14,14 +14,14 @@ public class Shrub extends Item implements Serializable{
 	/**
 	 * A shrub can only contain one piece bamboo.
 	 */
-	private Bamboo bamboo;
+	private boolean bamboo;
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8L;
 
-	public Shrub(int iD, Bamboo bamboo){ 
+	public Shrub(int iD, boolean bamboo){ 
 		super(iD); 
 		this.bamboo = bamboo;
 	}
@@ -33,7 +33,7 @@ public class Shrub extends Item implements Serializable{
 	 * @return true  If the Shrub has a Bamboo object inside it.
 	 */
 	public boolean hasBamboo() {
-		return this.bamboo != null;
+		return this.bamboo;
 	}
 	
 	/**
@@ -41,23 +41,17 @@ public class Shrub extends Item implements Serializable{
 	 * @param bamboo the bamboo to add to the shrub
 	 * @return true iff able to add bamboo successfully
 	 */
-	public boolean addBamboo(Bamboo bamboo){
-		if (bamboo == null){
-			this.bamboo = bamboo;
-			return true;
-		} else {
-			return false;
-		}
+	public boolean addBamboo(){
+		if(this.bamboo) return false; 
+		this.bamboo = true; 
+		return true; 
 	}
 	
 	/**
 	 * Removes bamboo from the tree.
-	 * @return The bamboo that was removed
 	 */
-	public Bamboo removeBamboo(){
-		Bamboo temp = bamboo;
-		bamboo = null;
-		return temp;
+	public void removeBamboo(){
+		this.bamboo = false;
 	}
 	
 	/**

@@ -2,7 +2,7 @@ package models.gridobjects.items;
 
 import java.io.Serializable;
 
-import models.campaign.IllegalValueException;
+import exceptions.IllegalValueException;
 
 /**
  * The Wall object extends Item and acts as a pure obstruction in the grid
