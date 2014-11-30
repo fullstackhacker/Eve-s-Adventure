@@ -431,7 +431,6 @@ public class World implements Serializable {
 	
 	/**
 	 * Put bamboo in a nearby shrub
-	 * 
 	 */
 	public void putBambooInShrub(){
 		Coordinate shrubCoordinate = null; 

@@ -1,14 +1,13 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Random;
 
+import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.Level;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
-import models.gridobjects.items.Bamboo;
 
 /**
  * An object to go through and execute the Karel code
@@ -40,9 +39,9 @@ public class Parser {
 	/**
 	 * Moves onto the next code block WITHOUT executing it
 	 */
-	public int next(){
+	public boolean next(){
 		this.activeCodeBlock++;
-		return this.activeCodeBlock; 
+		return this.activeCodeBlock < this.karelCode.size(); 
 	}
 	/**
 	 * Moves to the previous code block WITHOUT executing it
@@ -55,15 +54,7 @@ public class Parser {
 	 * Executes the current code block and then moves to the next one
 	 */
 	public void execute(){
-		switch(this.karelCode.get(this.activeCodeBlock)){
-		case KarelCode.MOVE: 
-			world.getEve().moveUp(); //suppress warning
-			break; 
-		case KarelCode.BAGISEMPTY:
-			break;
-		default: 
-			break; 
-		}
+		
 	}
 	/**
 	 * Set the position of the active code block
@@ -96,7 +87,109 @@ public class Parser {
 	}
 	
 	public void start(){ 
+		instructions();
+	}
 	
+	public void instructions(){ 
+		instruction();
+		if(!this.next()) return; 
+		instructions();
+	}
+	
+	public void instruction(){
+		switch(this.karelCode.get(this.activeCodeBlock)){
+		//end statements
+		case KarelCode.ENDBLOCK: 
+			return; 
+		//repetitions
+		case KarelCode.LOOPSTATEMENT:
+		case KarelCode.WHILESTATEMENT: 
+			repetition(); 
+			break; 
+		//conditionals
+		case KarelCode.IFSTATEMENT: 
+			conditional(); 
+			break; 
+		//operations
+		case KarelCode.MOVE:
+		case KarelCode.WAKEUP: 
+		case KarelCode.SLEEP: 
+		case KarelCode.TURNLEFT: 
+		case KarelCode.PICKBAMBOO: 
+		case KarelCode.PUTBAMBOO:
+			operation(); 
+			break;
+		default: 
+			throw new IllegalValueException("Illegal Karel Code Segment: " + this.karelCode.get(this.activeCodeBlock));
+		}
+	}
+	
+	public void repetition(){
+		switch(this.karelCode.get(this.activeCodeBlock)){
+		case KarelCode.WHILESTATEMENT:
+			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
+			boolean result = variable(); 
+			if(result){
+				if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
+				instructions(); 
+			}
+			else{
+				do{
+					if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
+				}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK)); 
+			}
+			break; 
+		case KarelCode.LOOPSTATEMENT:
+			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
+			int times = positiveNumbers(); 
+			int currentInstruction = this.activeCodeBlock;
+			for(int counter = 0; counter < positiveNumbers(); counter++){
+				this.activeCodeBlock = currentInstruction; 
+				instructions();
+			}
+			break; 
+		default: 
+			throw new IllegalValueException("Ill formed Karel Code" + this.karelCode.get(this.activeCodeBlock)); 
+		}
+		
+	}
+	
+	public void conditional(){ //if statement
+		if(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.IFSTATEMENT)) return; //error
+		if(!this.next()) throw new IllegalValueException("Ill formed code"); 
+		boolean result = variable(); 
+		if(result){
+			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
+			instructions(); 
+		}
+		else{ 
+			do{
+				this.next(); 
+			}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK));
+		}
+		if(!this.next()) return; 
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && !result){
+			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
+			instructions(); 
+		}
+	}
+	
+	public void operation(){
+		
+	}
+	
+	public boolean variable(){
+		return false; 
+	}
+	
+	public int positiveNumbers(){
+		String number = "";
+		
+		return Integer.parseInt(number); 
+	}
+	
+	public void positiveNumber(){
+		
 	}
 	
 	public static void main(String[] args){
@@ -110,7 +203,7 @@ public class Parser {
 		level.addKarelCode(KarelCode.IFSTATEMENT);
 		level.addKarelCode(KarelCode.FRONTISCLEAR);
 		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.ENDIFSTATEMENT);
+		level.addKarelCode(KarelCode.ENDBLOCK);
 		Parser parser = new Parser(level.getKarelCode(), world);
 		
 		if(world.getEve() == null) return;

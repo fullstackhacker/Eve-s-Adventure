@@ -10,59 +10,51 @@ public class KarelCode {
 	/**
 	 * Karel ifstatement 
 	 */
-	public static final String IFSTATEMENT = "if"; 
+	public static final String IFSTATEMENT = "if{"; 
 	/**
 	 * Karel end of if statement  
 	 */
-	public static final String ENDIFSTATEMENT = "}\n";
+	public static final String ENDBLOCK = "}\n";
 	/**
 	 * Karel else statement 
 	 */
-	public static final String ELSESTATEMENT = "else";
-	/**
-	 * Karel end of else statement 
-	 */
-	public static final String ENDELSESTATEMENT = "}\n";
+	public static final String ELSESTATEMENT = "else{";
 	/**
 	 * Karel while statement
 	 */
-	public static final String WHILESTATEMENT = "while";
-	/**
-	 * Karel end of while statement
-	 */
-	public static final String ENDWHILESTATEMENT = "}\n";
+	public static final String WHILESTATEMENT = "while(";
 	/**
 	 * Karel loop statement
 	 */
-	public static final String LOOPSTATEMENT = "loop"; 
+	public static final String LOOPSTATEMENT = "loop(";
 	/**
-	 * Karel end of loop statement
+	 * close statement
 	 */
-	public static final String ENDLOOPSTATEMENT = "}\n";
+	public static final String CLOSESTATEMENT = "){\n";
 	/**
 	 * Karel move function
 	 */
-	public static final String MOVE = "move()\n"; 
+	public static final String MOVE = "move();\n"; 
 	/**
 	 * Karel sleep function
 	 */
-	public static final String SLEEP = "sleep()\n"; 
+	public static final String SLEEP = "sleep();\n"; 
 	/**
 	 * Karel wake up function
 	 */
-	public static final String WAKEUP = "wakeUp()\n"; 
+	public static final String WAKEUP = "wakeUp();\n"; 
 	/**
 	 * Karel turn left function
 	 */
-	public static final String TURNLEFT = "turnleft()\n";
+	public static final String TURNLEFT = "turnleft();\n";
 	/**
 	 * Karel pick up bamboo function
 	 */
-	public static final String PICKBAMBOO = "pickbamboo()\n";
+	public static final String PICKBAMBOO = "pickbamboo();\n";
 	/**
 	 * Karel put down bamboo
 	 */
-	public static final String PUTBAMBOO = "putbamboo()\n"; 
+	public static final String PUTBAMBOO = "putbamboo();\n"; 
 	/**
 	 * Karel front is clear check
 	 */
@@ -110,13 +102,9 @@ public class KarelCode {
 	public static Iterator<String> getPossibleKarelCode(){ 
 		ArrayList<String> possibleKarelCode = new ArrayList<String>(); 
 		possibleKarelCode.add(KarelCode.IFSTATEMENT); 
-		possibleKarelCode.add(KarelCode.ENDIFSTATEMENT);
 		possibleKarelCode.add(KarelCode.ELSESTATEMENT);
-		possibleKarelCode.add(KarelCode.ENDELSESTATEMENT);
 		possibleKarelCode.add(KarelCode.WHILESTATEMENT);
-		possibleKarelCode.add(KarelCode.ENDWHILESTATEMENT);
 		possibleKarelCode.add(KarelCode.LOOPSTATEMENT);
-		possibleKarelCode.add(KarelCode.ENDLOOPSTATEMENT);
 		possibleKarelCode.add(KarelCode.MOVE);
 		possibleKarelCode.add(KarelCode.SLEEP);
 		possibleKarelCode.add(KarelCode.WAKEUP);
@@ -140,9 +128,7 @@ public class KarelCode {
 	public static Iterator<String> getPossibleConditionals(){ 
 		ArrayList<String> possibleKarelCode = new ArrayList<String>();
 		possibleKarelCode.add(KarelCode.IFSTATEMENT); 
-		possibleKarelCode.add(KarelCode.ENDIFSTATEMENT);
 		possibleKarelCode.add(KarelCode.ELSESTATEMENT);
-		possibleKarelCode.add(KarelCode.ENDELSESTATEMENT);
 
 		return possibleKarelCode.iterator(); 
 	}
@@ -169,9 +155,7 @@ public class KarelCode {
 	public static Iterator<String> getPossibleRepetitions(){ 
 		ArrayList<String> possibleKarelCode = new ArrayList<String>();
 		possibleKarelCode.add(KarelCode.WHILESTATEMENT);
-		possibleKarelCode.add(KarelCode.ENDWHILESTATEMENT);
 		possibleKarelCode.add(KarelCode.LOOPSTATEMENT);
-		possibleKarelCode.add(KarelCode.ENDLOOPSTATEMENT);
 		return possibleKarelCode.iterator();
 	}
 	/**
@@ -188,6 +172,24 @@ public class KarelCode {
 		possibleKarelCode.add(KarelCode.FACINGEAST);
 		possibleKarelCode.add(KarelCode.FACINGWEST);
 		possibleKarelCode.add(KarelCode.BAGISEMPTY);
+		return possibleKarelCode.iterator(); 
+	}
+	/** Gets all the numbers in karel
+	 * 
+	 * @retun an interator that goes through all the numbers in Karel
+	 */
+	public static Iterator<String> getPossibleDigits(){
+		ArrayList<String> possibleKarelCode = new ArrayList<String>();
+		possibleKarelCode.add(KarelCode.ONE); 
+		possibleKarelCode.add(KarelCode.TWO); 
+		possibleKarelCode.add(KarelCode.THREE);
+		possibleKarelCode.add(KarelCode.FOUR); 
+		possibleKarelCode.add(KarelCode.FIVE);
+		possibleKarelCode.add(KarelCode.SIX); 
+		possibleKarelCode.add(KarelCode.SEVEN); 
+		possibleKarelCode.add(KarelCode.EIGHT); 
+		possibleKarelCode.add(KarelCode.NINE); 
+		possibleKarelCode.add(KarelCode.ZERO); 
 		return possibleKarelCode.iterator(); 
 	}
 	/**
