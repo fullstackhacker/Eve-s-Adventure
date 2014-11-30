@@ -1,18 +1,20 @@
 package views.tips;
 
-import views.tabs.GameTabs;
+import java.util.Iterator;
+import java.util.Timer;
+import models.campaign.Tips;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 public final class ProTips extends GridPane {
 
 	private static ProTips instant = null;
+
+	long delay = 30000;
+	Iterator<String> tips = Tips.getPossibleTips();
 
 	private ProTips() {
 		final Label LTips = new Label("Pro Tip! - ");
@@ -26,7 +28,7 @@ public final class ProTips extends GridPane {
 
 		this.add(LTips, 0, 0);
 		this.add(TFTips, 1, 0);
-
+		
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(10);
 		ColumnConstraints column2 = new ColumnConstraints();
@@ -38,6 +40,40 @@ public final class ProTips extends GridPane {
 		TFTips.setWrapText(true);
 
 		this.setPadding(new Insets(5, 5, 5, 5));
+
+		System.out.println(tips.next());
+		System.out.println(tips.next());
+		System.out.println(tips.next());
+
+		//Timer timer = new Timer(true);
+		/*
+		 * int i = 0; while(i < 5){ if (!tips.hasNext()){ tips =
+		 * Tips.getPossibleTips(); } TFTips.setText(tips.next()); i++; }
+		 */
+		/*
+		 * timer.scheduleAtFixedRate(new TimerTask() {
+		 * 
+		 * @Override public void run() { if (!tips.hasNext()){ tips =
+		 * Tips.getPossibleTips(); } TFTips.setText(tips.next()); } }, delay,
+		 * delay);
+		 */
+
+		/*long startTime = System.nanoTime();
+
+		while (true) {
+			if (System.nanoTime() - startTime >= delay) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						if (!tips.hasNext()) {
+							tips = Tips.getPossibleTips();
+						}
+						TFTips.setText(tips.next());
+					}
+				});
+				startTime = System.nanoTime();
+			}
+		}*/
 
 	}
 
