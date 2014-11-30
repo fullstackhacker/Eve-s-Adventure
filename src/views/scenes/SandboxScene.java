@@ -75,7 +75,6 @@ public final class SandboxScene extends Scene {
 			this.add(protips, 0, 4, 2, 1);
 			
 			GridPane.setHalignment(rows, HPos.RIGHT);
-			
 
 			ColumnConstraints column1 = new ColumnConstraints();
 			column1.setPercentWidth(32);

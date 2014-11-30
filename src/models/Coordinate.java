@@ -1,7 +1,6 @@
 package models;
 
 import models.campaign.IllegalValueException;
-import models.gridobjects.GridObject;
 
 /**
  * Coordinate class to represent coordinates in the world

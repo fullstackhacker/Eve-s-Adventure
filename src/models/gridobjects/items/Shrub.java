@@ -37,8 +37,8 @@ public class Shrub extends Item implements Serializable{
 	}
 	
 	/**
-	 * Adds Bamboo to the tree.
-	 * @param bamboo the bamboo to add to the tree
+	 * Adds Bamboo to the shrub.
+	 * @param bamboo the bamboo to add to the shrub
 	 * @return true iff able to add bamboo successfully
 	 */
 	public boolean addBamboo(Bamboo bamboo){
