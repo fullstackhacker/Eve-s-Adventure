@@ -28,6 +28,6 @@
 	-fx-background-color: #ddd;
 }
 
-#WorldButton:active, #WorldButton:focused{
-	-fx-background-color: #ddd;
+#WorldButton:selected{
+	-fx-background-color: #aaa;
 }

@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Shrub extends Item implements Serializable{
 	
 	/**
-	 * 
+	 * A shrub can only contain one piece bamboo.
 	 */
 	private Bamboo bamboo;
 

@@ -13,7 +13,6 @@ import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
