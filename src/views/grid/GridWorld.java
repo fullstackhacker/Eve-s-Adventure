@@ -1,9 +1,13 @@
 package views.grid;
 
+import views.tabs.GameTabs;
 import controllers.ButtonHandlers;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -65,6 +69,19 @@ public final class GridWorld extends GridPane {
 				GridWorld.gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 				GridWorld.gridButtons[i][j].setId("WorldButton");
 				GridWorld.gridButtons[i][j].setOnAction(ButtonHandlers::GridWorld_BUTTON_HANDLER);
+				GridWorld.gridButtons[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent mouseEvent) {
+						if(mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2){
+							GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+							GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+							GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+						}
+					}
+
+				});
+				
 				this.add(GridWorld.gridButtons[i][j], i, j);
 			}
 		}
