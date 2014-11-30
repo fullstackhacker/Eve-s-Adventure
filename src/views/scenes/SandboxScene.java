@@ -116,13 +116,24 @@ public final class SandboxScene extends Scene {
 			World world = new World("SandboxWorld", 10, 5);
 			world.printWorld();
 			Coordinate coordEve = new Coordinate(1,1);
-			Creature CreatureEve = new Creature("Eve", coordEve, 5, 10);
+			Creature CreatureEve = new Creature("Eve", coordEve, world);
 			world.addCreature(CreatureEve);
 			world.printWorld();
+			
 			Label Eve = new Label("Eve!");
 			GridPane.setHalignment(Eve, HPos.CENTER);
-			gridWorld.add(Eve, 0, 0);
+			gridWorld.add(Eve, 1, 1);
 			Eve.setVisible(true);
+			
+			world.moveEveEast();
+			gridWorld.getChildren().remove(Eve);
+			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
+			world.printWorld();
+			
+			world.moveEveSouth();
+			gridWorld.getChildren().remove(Eve);
+			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
+			world.printWorld();
 			
 			this.setPadding(new Insets(0, 5, 5, 5));
 			

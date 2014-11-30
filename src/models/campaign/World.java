@@ -144,9 +144,9 @@ public class World implements Serializable {
 		 * @return  a String representation the square based on what object is on the square
 		 */
 		public String toString(){ 
-			String s = this.hasCreature()? this.creature.toString() : " ";
-			s += this.hasItem()? this.item.toString() : " " ; 
-			s += "_";
+			String s = this.hasCreature()? this.creature.toString() : "_";
+			s += this.hasItem()? this.item.toString() : "_" ;
+			s += "|";
 			return s;
 		}
 	}
@@ -340,6 +340,74 @@ public class World implements Serializable {
 			throw new IllegalValueException();
 		}
 	}
+	
+	/**
+	 * Moves Eve east on the board. Updates coordinate for the Creature Eve and updates world (2D array).
+	 * 
+	 */
+	public void moveEveEast(){
+		int EveX = getEve().getX();
+		int EveY = getEve().getY();
+		if(!this.world[EveY][EveX+1].hasItem() &&
+				!this.world[EveY][EveX+1].hasCreature()){
+			
+			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
+			this.world[EveY][EveX+1].addCreature(Eve);
+			Eve.moveRight();
+			
+		}
+	}
+	
+	/**
+	 * Moves Eve north on the board. Updates coordinate for the Creature Eve and updates world (2D array).
+	 * 
+	 */
+	public void moveEveNorth(){
+		int EveX = getEve().getX();
+		int EveY = getEve().getY();
+		if(!this.world[EveY - 1][EveX].hasItem() &&
+				!this.world[EveY - 1][EveX].hasCreature()){
+			
+			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
+			this.world[EveY - 1][EveX].addCreature(Eve);
+			Eve.moveUp();
+			
+		}
+	}
+	
+	/**
+	 * Moves Eve west on the board. Updates coordinate for the Creature Eve and updates world (2D array).
+	 * 
+	 */
+	public void moveEveWest(){
+		int EveX = getEve().getX();
+		int EveY = getEve().getY();
+		if(!this.world[EveY][EveX - 1].hasItem() &&
+				!this.world[EveY][EveX - 1].hasCreature()){
+			
+			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
+			this.world[EveY][EveX - 1].addCreature(Eve);
+			Eve.moveLeft();
+			
+		}
+	}
+	
+	/**
+	 * Moves Eve south on the board. Updates coordinate for the Creature Eve and updates world (2D array).
+	 * 
+	 */
+	public void moveEveSouth(){
+		int EveX = getEve().getX();
+		int EveY = getEve().getY();
+		if(!this.world[EveY + 1][EveX].hasItem() &&
+				!this.world[EveY + 1][EveX].hasCreature()){
+			
+			Creature Eve = this.world[getEve().getY()][getEve().getX()].removeCreature();
+			this.world[EveY + 1][EveX].addCreature(Eve);
+			Eve.moveDown();
+			
+		}
+	}
 	/**
 	 * Gets all the objects in the world.
 	 * This includes all creatures and items  so everything
@@ -503,6 +571,7 @@ public class World implements Serializable {
 	public String toString(){ 
 		String s = "\n"; 
 		for(int y=0; y<this.world.length; y++){ 
+			s += "|";
 			for(int x=0; x<this.world[y].length; x++){ 
 				s += this.world[y][x].toString(); 
 			}

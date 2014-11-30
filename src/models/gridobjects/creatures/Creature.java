@@ -2,7 +2,9 @@ package models.gridobjects.creatures;
 
 import models.Coordinate;
 import models.campaign.IllegalValueException;
+import models.campaign.World;
 import models.gridobjects.GridObject;
+import models.gridobjects.items.Shrub;
 
 public class Creature extends GridObject {
 
@@ -51,6 +53,7 @@ public class Creature extends GridObject {
 	 */
 	private int worldHeight;
 	
+	private World world;
 	/**
 	 * 
 	 */
@@ -61,14 +64,16 @@ public class Creature extends GridObject {
 	 * @param name The name of the creature.
 	 * @param coordinate The location of the creature in the world
 	 */
-	public Creature(String name, Coordinate coordinate, int worldwidth, int worldheight){
+	public Creature(String name, Coordinate coordinate, World World){
 		super.setName(name);
 		super.setCoordinates(coordinate);
 		this.isAwake =  true; 
 		this.direction = Creature.UP;
 		this.numberOfBamboo = 0;
-		this.setWorldWidth(worldwidth);
-		this.setWorldHeight(worldheight);
+		this.world = World;
+		this.setWorldWidth(World.getWidth());
+		this.setWorldHeight(World.getHeight());
+		
 	}
 	
 	public boolean facingNorth(){ 
@@ -115,8 +120,10 @@ public class Creature extends GridObject {
 	/**
 	 * Moves the object right one in the World 
 	 */
-	public void moveRight(){ 
-		if ((super.getCoordinates().getX() - 1) < this.worldWidth) super.getCoordinates().moveEast();
+	public void moveRight(){
+		if ((super.getCoordinates().getX() + 1) < this.world.getWidth()){
+			super.getCoordinates().moveEast();
+		}
 	}
 	
 	/**
@@ -136,7 +143,41 @@ public class Creature extends GridObject {
 	 * @param creature Take a bamboo from that creature. 
 	 */
 	public void takeBamboo(Creature creature){
-		creature.giveBamboo(this);
+		if(creature.numberOfBamboo > 0){
+			this.numberOfBamboo--;
+			creature.incrementBamboo();
+		}
+	}
+	
+	/**
+	 * Removes bamboo from shrub.
+	 * 
+	 * @param shrub
+	 */
+	public void takeBambooFromShrub(Shrub shrub){
+		verifyShrubLocation(shrub);
+		if(shrub.hasBamboo()){
+			this.numberOfBamboo++;
+			shrub.removeBamboo();
+		}
+	}
+	
+	/**
+	 * Verifies that shrub is within one space away from the creature.
+	 * 
+	 * @param shrub
+	 */
+	private void verifyShrubLocation(Shrub shrub){
+		int creatureX = this.getCoordinates().getX();
+		int creatureY = this.getCoordinates().getY();
+		
+		if(creatureX == shrub.getX()){
+			if((creatureX + 1) == shrub.getX() || (creatureX - 1) == shrub.getX()) return;
+		}else if(creatureY == shrub.getY()){
+			if((creatureY + 1) == shrub.getY() || (creatureY - 1) == shrub.getY()) return;
+		}
+			
+		throw new IllegalValueException("Shrub is not within reach of Eve.");
 	}
 	
 	/** 
