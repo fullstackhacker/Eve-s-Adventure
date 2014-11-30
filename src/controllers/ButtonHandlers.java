@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import views.MainApp;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
+import views.scenes.LoadSessionScene;
 import views.scenes.MainMenuScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
@@ -29,11 +30,22 @@ public final class ButtonHandlers {
 	
 	public static final void LOAD_SESSION_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("LOAD_SESSION_BUTTON_HANDLER CALLED");
+		MainApp.changeScenes(LoadSessionScene.getInstance());
 	}
 	
 	public static final void NEW_SESSION_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("NEW_SESSION_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(SandboxScene.getInstance());
+	}
+	
+	public static final void CANCEL_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("CANCEL_BUTTON_HANDLER CALLED");
+		MainApp.changeScenes(LoadMenuScene.getInstance());
+	}
+	
+	public static final void BACK_HOMESCREEN_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("BACK_HOMESCREEN_BUTTON_HANDLER CALLED");
+		MainApp.changeScenes(MainMenuScene.getInstance());
 	}
 	
 	/**
@@ -255,5 +267,9 @@ public final class ButtonHandlers {
 	public static final void QUIT_MENU_HANDLER(ActionEvent e){
 		System.out.println("Quit sandbox mode. Returned to home screen.");
 		MainApp.changeScenes(MainMenuScene.getInstance());
+	}
+	
+	public static final void SAVE_MENU_HANDLER(ActionEvent e){
+		System.out.println("Saved!");
 	}
 }

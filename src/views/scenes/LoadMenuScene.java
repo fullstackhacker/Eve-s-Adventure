@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -29,14 +30,14 @@ public final class LoadMenuScene extends Scene {
 	private static final class LoadMenuPane extends BorderPane{
 	
 		/**
-		 * The Instance of MainMenuPane
+		 * The Instance of LoadMenuPane
 		 */
-		private static LoadMenuPane instanceOfMainMenuPane = null;
+		private static LoadMenuPane instanceOfLoadMenuPane = null;
 		
-		private Button LOAD_SESSION_BUTTON, NEW_SESSION_BUTTON;
+		private Button LOAD_SESSION_BUTTON, NEW_SESSION_BUTTON, BACK_BUTTON;
 		
 		/**
-		 * MainMenuPane's Constructor
+		 * LoadMenuPane's Constructor
 		 * 
 		 * This will generate all the buttons,
 		 * textfields, and more. 
@@ -45,19 +46,24 @@ public final class LoadMenuScene extends Scene {
 			this.getStylesheets().add("./loadmenu_style.css");
 			setupObjects();
 			this.setCenter(addVBox());
+			this.setBottom(addHBox());
 			
 			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::LOAD_SESSION_BUTTON_HANDLER);
 			NEW_SESSION_BUTTON.setOnAction(ButtonHandlers::NEW_SESSION_BUTTON_HANDLER);
+			BACK_BUTTON.setOnAction(ButtonHandlers::BACK_HOMESCREEN_BUTTON_HANDLER);
 		}
 		
 		private void setupObjects(){
 			LOAD_SESSION_BUTTON = new Button("LOAD SESSION");
 			NEW_SESSION_BUTTON = new Button("NEW SESSION");
+			BACK_BUTTON = new Button("BACK TO HOME SCREEN");
 			LOAD_SESSION_BUTTON.setPrefWidth(500);
 			NEW_SESSION_BUTTON.setPrefWidth(500);
+			BACK_BUTTON.setPrefWidth(300);
 			
 			LOAD_SESSION_BUTTON.setId("load-button");
 			NEW_SESSION_BUTTON.setId("new-button");
+			BACK_BUTTON.setId("back-button");
 		}
 		
 		private VBox addVBox(){
@@ -71,8 +77,18 @@ public final class LoadMenuScene extends Scene {
 			return vbox;
 		}
 		
+		private HBox addHBox(){
+			HBox hbox = new HBox();
+			
+			hbox.setPrefWidth(300);
+			hbox.getChildren().add(BACK_BUTTON);
+			hbox.setAlignment(Pos.CENTER);
+			
+			return hbox;
+		}
+		
 		private static LoadMenuPane getInstance(){
-			return (instanceOfMainMenuPane ==  null) ? instanceOfMainMenuPane = new LoadMenuPane() : instanceOfMainMenuPane;
+			return (instanceOfLoadMenuPane ==  null) ? instanceOfLoadMenuPane = new LoadMenuPane() : instanceOfLoadMenuPane;
 		}
 	}
 	
