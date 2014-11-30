@@ -1,5 +1,6 @@
 package views.grid;
 
+import controllers.ButtonHandlers;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -63,6 +64,7 @@ public final class GridWorld extends GridPane {
 				GridPane.setVgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
 				GridWorld.gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 				GridWorld.gridButtons[i][j].setId("WorldButton");
+				GridWorld.gridButtons[i][j].setOnAction(ButtonHandlers::GridWorld_BUTTON_HANDLER);
 				this.add(GridWorld.gridButtons[i][j], i, j);
 			}
 		}

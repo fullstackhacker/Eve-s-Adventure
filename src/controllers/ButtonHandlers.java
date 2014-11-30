@@ -244,6 +244,13 @@ public final class ButtonHandlers {
 		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 	}
 	
+	public static final void GridWorld_BUTTON_HANDLER(ActionEvent e){
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.CREATURES_TAB_VALUE);
+	}
+	
 	public static final void BACK_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("BACK_BUTTON_HANDLER CALLED");
 	}

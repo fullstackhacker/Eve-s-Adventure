@@ -1,5 +1,9 @@
 package views.karel;
 
+import java.util.ArrayList;
+
+import com.sun.org.apache.regexp.internal.RE;
+
 import models.campaign.KarelCode;
 import controllers.ButtonHandlers;
 import javafx.beans.value.ChangeListener;
@@ -109,6 +113,10 @@ public final class KarelTable extends GridPane {
 						}
 						
 						switch(newValue){
+							case "ADD CODE HERE":
+								REPLACE_BUTTON.setDisable(true);
+								DELETE_BUTTON.setDisable(true);
+								return;
 							case KarelCode.IFSTATEMENT:
 							case KarelCode.WHILESTATEMENT:
 							case KarelCode.LOOPSTATEMENT:
@@ -116,7 +124,6 @@ public final class KarelTable extends GridPane {
 								GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 								GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
 								GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
-								break;
 							case KarelCode.FRONTISCLEAR:
 							case KarelCode.NEXTTOAFRIEND:
 							case KarelCode.FACINGNORTH:
@@ -132,8 +139,8 @@ public final class KarelTable extends GridPane {
 								GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 								GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
 						}
-						//listView.getSelectionModel().clearAndSelect(karelCode.size()-1);
-						//System.out.println(karelCode.size()-1);
+						REPLACE_BUTTON.setDisable(false);
+						DELETE_BUTTON.setDisable(false);
 					}
 		});
 
