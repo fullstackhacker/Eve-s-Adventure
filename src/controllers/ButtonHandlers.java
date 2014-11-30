@@ -218,4 +218,8 @@ public final class ButtonHandlers {
 		System.out.println("Quit sandbox mode. Returned to home screen.");
 		MainApp.changeScenes(MainMenuScene.getInstance());
 	}
+	
+	public static final void SAVE_MENU_HANDLER(ActionEvent e){
+		System.out.println("Saved!");
+	}
 }

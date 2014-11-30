@@ -135,7 +135,7 @@ public final class SandboxScene extends Scene {
 			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
 			world.printWorld();
 			
-			this.setPadding(new Insets(0, 5, 5, 5));
+			//this.setPadding(new Insets(0, 5, 5, 5));
 			
 			//this.setGridLinesVisible(true);
 
