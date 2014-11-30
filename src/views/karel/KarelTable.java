@@ -29,19 +29,57 @@ public final class KarelTable extends GridPane {
 	private ListView<String> listView;
 	
 	private KarelTable() {
-		this.karelCode = FXCollections.observableArrayList();
+		this.karelCode = FXCollections.observableArrayList("ADD CODE HERE");
 		this.listView = new ListView<String>(karelCode);
 		
-		
-		Button EDIT = new Button("EDIT");
-		Button DELETE = new Button("DELETE");
+		Button REPLACE_BUTTON = new Button("REPLACE");
+		Button DELETE_BUTTON = new Button("DELETE");
 		
 		this.add(listView, 0, 0, 2, 1);
-		this.add(EDIT, 0, 1);
-		this.add(DELETE, 1, 1);
+		this.add(REPLACE_BUTTON, 0, 1);
+		this.add(DELETE_BUTTON, 1, 1);
 		
-		EDIT.setOnAction(ButtonHandlers::EDIT_BUTTON_HANDLER);
-		DELETE.setOnAction(new EventHandler<ActionEvent>(){
+		//REPLACE_BUTTON.setOnAction(ButtonHandlers::REPLACE_BUTTON_HANDLER);
+		REPLACE_BUTTON.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+				String code = listView.getSelectionModel().getSelectedItem();
+				
+				if(code == null){
+					return;
+				}
+				
+				switch(code){
+					case KarelCode.IFSTATEMENT:
+					case KarelCode.WHILESTATEMENT:
+					case KarelCode.LOOPSTATEMENT:
+						break;
+					case KarelCode.MOVE:
+					case KarelCode.SLEEP:
+					case KarelCode.WAKEUP:
+					case KarelCode.TURNLEFT:
+					case KarelCode.PICKBAMBOO:
+					case KarelCode.PUTBAMBOO:
+						break;
+					case KarelCode.FRONTISCLEAR:
+					case KarelCode.NEXTTOAFRIEND:
+					case KarelCode.FACINGNORTH:
+					case KarelCode.FACINGSOUTH:
+					case KarelCode.FACINGEAST:
+					case KarelCode.FACINGWEST:
+						GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+						GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+						GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
+						break;
+					default:
+						/* Do Nothing */
+				}
+			}
+			
+		});
+		
+		DELETE_BUTTON.setOnAction(new EventHandler<ActionEvent>(){
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -65,6 +103,10 @@ public final class KarelTable extends GridPane {
 							String oldValue, String newValue) {
 						System.out.println("Old Value:" + oldValue);
 						System.out.println("New Value:" + newValue);
+						
+						if(newValue == null){
+							return;
+						}
 						
 						switch(newValue){
 							case KarelCode.IFSTATEMENT:
@@ -95,10 +137,10 @@ public final class KarelTable extends GridPane {
 					}
 		});
 
-		GridPane.setFillWidth(EDIT, true);
-		GridPane.setHalignment(EDIT, HPos.CENTER);
-		GridPane.setFillWidth(DELETE, true);
-		GridPane.setHalignment(DELETE, HPos.CENTER);
+		GridPane.setFillWidth(REPLACE_BUTTON, true);
+		GridPane.setHalignment(REPLACE_BUTTON, HPos.CENTER);
+		GridPane.setFillWidth(DELETE_BUTTON, true);
+		GridPane.setHalignment(DELETE_BUTTON, HPos.CENTER);
 
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(50);
@@ -121,6 +163,9 @@ public final class KarelTable extends GridPane {
 	 */
 	public void addCode(String code){
 		this.karelCode.add(code);
+		this.listView.getSelectionModel().clearSelection(karelCode.size()-1);
+		this.listView.getSelectionModel().clearAndSelect(karelCode.size()-1);
+		System.out.println(karelCode.size()-1);
 	}
 
 	public static KarelTable getInstance() {

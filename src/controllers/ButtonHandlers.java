@@ -2,6 +2,7 @@ package controllers;
 
 import models.campaign.KarelCode;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import views.MainApp;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
@@ -35,11 +36,9 @@ public final class ButtonHandlers {
 		MainApp.changeScenes(SandboxScene.getInstance());
 	}
 	
-	
 	/**
 	 * InstuctionsTab.java
 	 */
-	
 	public static final void IF_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("IF_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.IFSTATEMENT);
@@ -60,10 +59,10 @@ public final class ButtonHandlers {
 	public static final void ELSE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("ELSE_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.ELSESTATEMENT);
-		GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
-		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
-		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
-		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 		
 		InstructionsTab.END_ELSE_BUTTON.setVisible(true);
 	}
@@ -188,6 +187,49 @@ public final class ButtonHandlers {
 	public static final void MOVE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("MOVE_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.MOVE);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void SLEEP_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("SLEEP_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.SLEEP);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void WAKE_UP_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("WAKE_UP_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.WAKEUP);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void TURN_LEFT_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("TURN_LEFT_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.TURNLEFT);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void PICK_UP_BAMBOO_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("PICK_UP_BAMBOO_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.PICKBAMBOO);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void PUT_BAMBOO_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("PUT_BAMBOO_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.PUTBAMBOO);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 	}
 	
 	public static final void BACK_BUTTON_HANDLER(ActionEvent e){
@@ -206,12 +248,8 @@ public final class ButtonHandlers {
 		System.out.println("RESET_BUTTON_HANDLER CALLED");
 	}
 	
-	public static final void EDIT_BUTTON_HANDLER(ActionEvent e){
-		System.out.println("EDIT_BUTTON_HANDLER CALLED");
-	}
-
-	public static final void DELETE_BUTTON_HANDLER(ActionEvent e){
-		System.out.println("DELETE_BUTTON_HANDLER CALLED");
+	public static final void REPLACE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("REPLACE_BUTTON_HANDLER CALLED");
 	}
 	
 	public static final void QUIT_MENU_HANDLER(ActionEvent e){
