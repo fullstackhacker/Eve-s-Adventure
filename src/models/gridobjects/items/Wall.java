@@ -2,6 +2,8 @@ package models.gridobjects.items;
 
 import java.io.Serializable;
 
+import models.campaign.IllegalValueException;
+
 /**
  * The Wall object extends Item and acts as a pure obstruction in the grid
  * world. No EObject can interact with a Wall beyond being blocked by it.
@@ -31,7 +33,11 @@ public class Wall extends Item implements Serializable {
 		/*
 		 * north = null; south = null; east = null; west = null;
 		 */
+		if(side.equals("north") || side.equals("east") || side.equals("south") || side.equals("west")){
 		this.side = side;
+		}else{
+			throw new IllegalValueException("Side must be have one of the following values: 'north', 'east', 'south', 'west'");
+		}
 
 	}
 	
