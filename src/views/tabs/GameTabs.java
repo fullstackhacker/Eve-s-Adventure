@@ -20,6 +20,8 @@ public final class GameTabs extends TabPane{
 	
 	public static final int ITEMS_TAB_VALUE = 4;
 	
+	public static final int NUMBERS_TAB_VALUE = 5;
+	
 	private GameTabs() {
 		this.setPadding(new Insets(5, 5, 5, 5));
 		
@@ -28,31 +30,35 @@ public final class GameTabs extends TabPane{
 		final Tab OPERATIONS_TAB = new Tab("OPERATIONS");
 		final Tab CREATURES_TAB = new Tab("CREATURES");
 		final Tab ITEMS_TAB = new Tab("ITEMS");
+		final Tab NUMBERS_TAB = new Tab("NUMBERS");
 
 		INSTRUCTIONS_TAB.closableProperty().set(false);
 		CONDITIONS_TAB.closableProperty().set(false);
 		OPERATIONS_TAB.closableProperty().set(false);
 		CREATURES_TAB.closableProperty().set(false);
 		ITEMS_TAB.closableProperty().set(false);
+		NUMBERS_TAB.closableProperty().set(false);
 		
 		INSTRUCTIONS_TAB.setContent(InstructionsTab.getInstance());
 		CONDITIONS_TAB.setContent(ConditionalsTab.getInstance());
 		OPERATIONS_TAB.setContent(OperationsTab.getInstance());
 		CREATURES_TAB.setContent(CreaturesTab.getInstance());
 		ITEMS_TAB.setContent(ItemsTab.getInstance());
+		NUMBERS_TAB.setContent(NumbersTab.getInstance());
 		
 		CREATURES_TAB.setDisable(true);
 		ITEMS_TAB.setDisable(true);
+		CONDITIONS_TAB.setDisable(true);
+		NUMBERS_TAB.setDisable(true);
 		
 		INSTRUCTIONS_TAB.setId("tabheader");
 		CONDITIONS_TAB.setId("tabheader");
 		OPERATIONS_TAB.setId("tabheader");
 		CREATURES_TAB.setId("tabheader");
 		ITEMS_TAB.setId("tabheader");
+		NUMBERS_TAB.setId("tabheader");
 		
-		CONDITIONS_TAB.setDisable(true);
-		
-		this.getTabs().addAll(INSTRUCTIONS_TAB, CONDITIONS_TAB, OPERATIONS_TAB, CREATURES_TAB, ITEMS_TAB);
+		this.getTabs().addAll(INSTRUCTIONS_TAB, CONDITIONS_TAB, OPERATIONS_TAB, CREATURES_TAB, ITEMS_TAB, NUMBERS_TAB);
 	}
 	
 	public void switchTab(int tab){

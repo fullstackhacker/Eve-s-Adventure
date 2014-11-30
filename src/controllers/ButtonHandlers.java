@@ -2,6 +2,7 @@ package controllers;
 
 import models.campaign.KarelCode;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import views.MainApp;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
@@ -111,10 +112,11 @@ public final class ButtonHandlers {
 	public static final void LOOP_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("LOOP_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.LOOPSTATEMENT);
-		GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
-		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.NUMBERS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.NUMBERS_TAB_VALUE);
 		
 		InstructionsTab.END_LOOP_BUTTON.setVisible(true);
 	}
@@ -239,6 +241,14 @@ public final class ButtonHandlers {
 		System.out.println("PUT_BAMBOO_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.PUTBAMBOO);
 		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void NUMBERS_BUTTON_HANDLER(ActionEvent e){
+		String value = ((Button)e.getSource()).getText();
+		KarelTable.getInstance().addCode(value);
+		GameTabs.getInstance().disableTab(GameTabs.NUMBERS_TAB_VALUE);
 		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 	}
