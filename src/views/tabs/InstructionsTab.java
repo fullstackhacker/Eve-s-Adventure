@@ -10,6 +10,8 @@ public final class InstructionsTab extends VBox{
 
 	private static InstructionsTab instant = null;
 	
+	public static final Button ELSE_BUTTON = new Button("ELSE");
+	
 	public static final Button END_IF_BUTTON = new Button("END IF");
 	
 	public static final Button END_ELSE_BUTTON = new Button("END ELSE");
@@ -25,11 +27,12 @@ public final class InstructionsTab extends VBox{
 		
 		/* Making all the buttons */
 		final Button IF_BUTTON = new Button("IF");
-		final Button ELSE_BUTTON = new Button("ELSE");
 		final Button WHILE_BUTTON = new Button("WHILE");
 		final Button TASK_BUTTON = new Button("TASK");
 		final Button LOOP_BUTTON = new Button("LOOP");
 		
+		
+		ELSE_BUTTON.setVisible(false);
 		END_IF_BUTTON.setVisible(false);
 		END_ELSE_BUTTON.setVisible(false);
 		END_WHILE_BUTTON.setVisible(false);

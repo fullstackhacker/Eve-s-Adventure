@@ -15,6 +15,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import views.tabs.GameTabs;
+import views.tabs.InstructionsTab;
 
 public final class KarelTable extends GridPane {
 
@@ -28,6 +29,7 @@ public final class KarelTable extends GridPane {
 		this.karelCode = FXCollections.observableArrayList("ADD CODE HERE");
 		this.listView = new ListView<String>(karelCode);
 		
+		this.listView.getSelectionModel().clearAndSelect(0);
 		Button REPLACE_BUTTON = new Button("REPLACE");
 		Button DELETE_BUTTON = new Button("DELETE");
 		
@@ -116,6 +118,10 @@ public final class KarelTable extends GridPane {
 								GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 								GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
 								GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+								break;
+							case "}":
+								InstructionsTab.ELSE_BUTTON.setVisible(true);
+								return;
 							case KarelCode.FRONTISCLEAR:
 							case KarelCode.NEXTTOAFRIEND:
 							case KarelCode.FACINGNORTH:
@@ -131,6 +137,7 @@ public final class KarelTable extends GridPane {
 								GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 								GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
 						}
+						InstructionsTab.ELSE_BUTTON.setVisible(false);
 						REPLACE_BUTTON.setDisable(false);
 						DELETE_BUTTON.setDisable(false);
 					}
@@ -161,10 +168,8 @@ public final class KarelTable extends GridPane {
 	 * @param code Karel Code
 	 */
 	public void addCode(String code){
-		this.karelCode.add(code);
-		this.listView.getSelectionModel().clearSelection(karelCode.size()-1);
-		this.listView.getSelectionModel().clearAndSelect(karelCode.size()-1);
-		System.out.println(karelCode.size()-1);
+		this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 1, code);
+		this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 	}
 
 	public static KarelTable getInstance() {

@@ -58,7 +58,7 @@ public final class ButtonHandlers {
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
-		
+		END_ELSE_BUTTON_HANDLER(e);
 		InstructionsTab.END_IF_BUTTON.setVisible(true);
 	}
 	
