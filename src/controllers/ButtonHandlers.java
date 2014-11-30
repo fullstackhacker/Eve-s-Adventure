@@ -8,6 +8,7 @@ import views.scenes.LoadMenuScene;
 import views.scenes.MainMenuScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
+import views.tabs.InstructionsTab;
 /**
  * 
  * @author Anthony Wong
@@ -42,22 +43,52 @@ public final class ButtonHandlers {
 	public static final void IF_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("IF_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.IFSTATEMENT);
+		GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+		
+		InstructionsTab.END_IF_BUTTON.setVisible(true);
+	}
+	
+	public static final void END_IF_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("END_IF_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.ENDIFSTATEMENT);
+		InstructionsTab.END_IF_BUTTON.setVisible(false);
 	}
 	
 	public static final void ELSE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("ELSE_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.ELSESTATEMENT);
+		GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+		
+		InstructionsTab.END_ELSE_BUTTON.setVisible(true);
+	}
+	
+	public static final void END_ELSE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("END_ELSE_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.ENDELSESTATEMENT);
+		InstructionsTab.END_ELSE_BUTTON.setVisible(false);
 	}
 	
 	public static final void WHILE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("WHILE_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.WHILESTATEMENT);
+		GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+	
+		InstructionsTab.END_WHILE_BUTTON.setVisible(true);
+	}
+	
+	public static final void END_WHILE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("END_WHILE_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.ENDWHILESTATEMENT);
+		InstructionsTab.END_WHILE_BUTTON.setVisible(false);
 	}
 	
 	public static final void TASK_BUTTON_HANDLER(ActionEvent e){
@@ -70,13 +101,86 @@ public final class ButtonHandlers {
 	public static final void LOOP_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("LOOP_BUTTON_HANDLER CALLED");
 		KarelTable.getInstance().addCode(KarelCode.LOOPSTATEMENT);
+		GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+		
+		InstructionsTab.END_LOOP_BUTTON.setVisible(true);
+	}
+	
+	public static final void END_LOOP_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("END_LOOP_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.ENDLOOPSTATEMENT);
+		InstructionsTab.END_LOOP_BUTTON.setVisible(false);
 	}
 	
 	/**
 	 * ConditionalsTab.java
 	 */
+	
+	public static final void FRONT_IS_CLEAR_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("FRONT_IS_CLEAR_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.FRONTISCLEAR);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void NEXT_TO_A_FRIEND_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("NEXT_TO_A_FRIEND_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.NEXTTOAFRIEND);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void FACING_NORTH_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("FACING_NORTH_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.FACINGNORTH);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void FACING_SOUTH_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("FACING_SOUTH_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.FACINGSOUTH);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+
+	public static final void FACING_EAST_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("FACING_EAST_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.FACINGEAST);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void FACING_WEST_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("FACING_WEST_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.FACINGWEST);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}
+	
+	public static final void BAG_IS_EMPTY_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("BAG_IS_EMPTY_BUTTON_HANDLER CALLED");
+		KarelTable.getInstance().addCode(KarelCode.BAGISEMPTY);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+	}	
 	
 	/**
 	 * OperationsTab.java

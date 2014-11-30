@@ -47,6 +47,8 @@ public final class GameTabs extends TabPane{
 		CREATURES_TAB.setId("tabheader");
 		ITEMS_TAB.setId("tabheader");
 		
+		CONDITIONS_TAB.setDisable(true);
+		
 		this.getTabs().addAll(INSTRUCTIONS_TAB, CONDITIONS_TAB, OPERATIONS_TAB, CREATURES_TAB, ITEMS_TAB);
 	}
 	

@@ -32,6 +32,7 @@ public final class KarelTable extends GridPane {
 		this.karelCode = FXCollections.observableArrayList();
 		this.listView = new ListView<String>(karelCode);
 		
+		
 		Button EDIT = new Button("EDIT");
 		Button DELETE = new Button("DELETE");
 		
@@ -70,14 +71,28 @@ public final class KarelTable extends GridPane {
 							case KarelCode.WHILESTATEMENT:
 							case KarelCode.LOOPSTATEMENT:
 								GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+								GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+								GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
 								GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+								break;
+							case KarelCode.FRONTISCLEAR:
+							case KarelCode.NEXTTOAFRIEND:
+							case KarelCode.FACINGNORTH:
+							case KarelCode.FACINGSOUTH:
+							case KarelCode.FACINGEAST:
+							case KarelCode.FACINGWEST:
+								GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+								GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+								GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+								GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 								break;
 							default:
 								GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+								GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
 						}
-						
+						//listView.getSelectionModel().clearAndSelect(karelCode.size()-1);
+						//System.out.println(karelCode.size()-1);
 					}
-			
 		});
 
 		GridPane.setFillWidth(EDIT, true);
@@ -99,7 +114,6 @@ public final class KarelTable extends GridPane {
 		
 		this.setPadding(new Insets(5, 5, 5, 5));
 	}
-	
 
 	/**
 	 * Adding a piece a code to the Karel Table
