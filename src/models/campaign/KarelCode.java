@@ -14,7 +14,10 @@ public class KarelCode {
 	/**
 	 * Karel end of if statement  
 	 */
-	public static final String ENDBLOCK = "}\n";
+	public static final String ENDIF = "ENDIF\n";
+	public static final String ENDELSE = "ENDELSE\n"; 
+	public static final String ENDWHILE = "ENDWHILE\n"; 
+	public static final String ENDLOOP = "ENDLOOP\n";
 	/**
 	 * Karel else statement 
 	 */

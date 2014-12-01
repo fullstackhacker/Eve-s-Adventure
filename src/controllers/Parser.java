@@ -94,7 +94,10 @@ public class Parser {
 		System.out.println("Instructions: " + this.karelCode.get(this.activeCodeBlock)); 
 		instruction();
 		if(!this.next()) return;
-		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK)) return;
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF)) return;
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSE)) return;
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDWHILE)) return;
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP)) return;
 		instructions();
 	}
 	
@@ -103,8 +106,14 @@ public class Parser {
 
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		//end statements
-		case KarelCode.ENDBLOCK: 
+		case KarelCode.ENDIF:
+		case KarelCode.ENDWHILE:
+		case KarelCode.ENDELSE: 
+		case KarelCode.ENDLOOP:
 			return; 
+		//close statements
+		case KarelCode.CLOSESTATEMENT:
+			return;
 		//repetitions
 		case KarelCode.LOOPSTATEMENT:
 		case KarelCode.WHILESTATEMENT: 
@@ -145,7 +154,7 @@ public class Parser {
 			if(!result){
 				do{
 					if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
-				}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK)); 
+				}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDWHILE)); 
 			}
 			break; 
 		case KarelCode.LOOPSTATEMENT:
@@ -168,7 +177,10 @@ public class Parser {
 		System.out.println("Conditional: CURRENT LOCATION: " + this.world.getEve().getCoordinates());
 		if(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.IFSTATEMENT)) return; //error
 		if(!this.next()) throw new IllegalValueException("Ill formed code"); 
+		if(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.CLOSESTATEMENT)) return;
+		if(!this.next()) throw new IllegalValueException("Ill formed code"); 
 		System.out.println("Conditional (variable): " + this.karelCode.get(this.activeCodeBlock)); 
+		
 		boolean result = variable(); 
 		if(result){
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
@@ -177,7 +189,7 @@ public class Parser {
 		else{ 
 			do{
 				this.next(); 
-			}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK));
+			}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF));
 			System.out.println("Conditional (variable false): " + this.karelCode.get(this.activeCodeBlock)); 
 		}
 		if(!this.next()) return; 
@@ -185,6 +197,11 @@ public class Parser {
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && !result){
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
 			instructions(); 
+		}
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT)&& result){
+			do{
+				this.next(); 
+			}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF));
 		}
 		System.out.println("Conditional (end): " + this.karelCode.get(this.activeCodeBlock)); 
 
@@ -252,7 +269,7 @@ public class Parser {
 		do{ 
 			number += this.karelCode.get(this.activeCodeBlock);
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
-		}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK)); 
+		}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.CLOSESTATEMENT)); 
 		return Integer.parseInt(number); 
 	}
 	
@@ -266,12 +283,19 @@ public class Parser {
 		level.addKarelCode(KarelCode.MOVE);
 		level.addKarelCode(KarelCode.WHILESTATEMENT);
 		level.addKarelCode(KarelCode.FRONTISCLEAR);
+		level.addKarelCode(KarelCode.CLOSESTATEMENT);
 		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.ENDBLOCK);
+		level.addKarelCode(KarelCode.ENDWHILE);
 		level.addKarelCode(KarelCode.TURNLEFT); 
 		level.addKarelCode(KarelCode.TURNLEFT); 
 		level.addKarelCode(KarelCode.TURNLEFT); 
 		level.addKarelCode(KarelCode.MOVE);
+		level.addKarelCode(KarelCode.PUTBAMBOO);
+		level.addKarelCode(KarelCode.IFSTATEMENT);
+		level.addKarelCode(KarelCode.FRONTISCLEAR);
+		level.addKarelCode(KarelCode.CLOSESTATEMENT);
+		level.addKarelCode(KarelCode.MOVE);
+		level.addKarelCode(KarelCode.ENDIF);
 		Parser parser = new Parser(level.getKarelCode(), world);
 		
 		if(world.getEve() == null) return;
