@@ -10,7 +10,7 @@ public class KarelCode {
 	/**
 	 * Karel ifstatement 
 	 */
-	public static final String IFSTATEMENT = "if{"; 
+	public static final String IFSTATEMENT = "if("; 
 	/**
 	 * Karel end of if statement  
 	 */

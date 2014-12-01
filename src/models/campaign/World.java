@@ -3,8 +3,8 @@ package models.campaign;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
-import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.gridobjects.GridObject;
 import models.gridobjects.creatures.Creature;
@@ -13,6 +13,7 @@ import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import models.gridobjects.items.Wall;
+import exceptions.IllegalValueException;
 
 /**
  * World represents the playing environment with Eve and the different things that Eve can interact with 
@@ -335,64 +336,70 @@ public class World implements Serializable {
 	 * @param coordinate
 	 */
 	private boolean verifyCoordinate(Coordinate coordinate){
-		if(coordinate == null 
-				|| coordinate.getY() > this.getHeight() 
-				|| coordinate.getX() > this.getWidth()
-				|| coordinate.getY() < 0
-				|| coordinate.getX() < 0){ 
-			return false;
+		System.out.println("VERIFY: " + coordinate);
+		System.out.println("VERIFY WIDTH: " + this.getWidth()); 
+		System.out.println("VERIFY HEIGHT: " + this.getHeight());
+		
+		if(coordinate.getX() > -1 && coordinate.getX() < this.getWidth() && coordinate.getY() > -1 && coordinate.getY() < this.getHeight()) return true; 
+		return false;
+	}
+	
+	/**
+	 * Moves Eve in the direction that she is facing
+	 */
+	public void moveEve(){ 
+		System.out.println("MOVE: CURRENT DIRECTION: " + this.getEve().getDirection()); 
+		
+		Coordinate currentEveLocation = this.getEve().getCoordinates(); 
+		Coordinate newEveLocation = null; 
+		
+		switch(this.getEve().getDirection()){
+		case Creature.UP:
+			newEveLocation = new Coordinate(currentEveLocation.getX(), currentEveLocation.getY()+1);
+			break;
+		case Creature.DOWN:
+			newEveLocation = new Coordinate(currentEveLocation.getX(), currentEveLocation.getY()-1);
+			break;
+		case Creature.LEFT: 
+			newEveLocation = new Coordinate(currentEveLocation.getX()-1, currentEveLocation.getY());
+			break;
+		case Creature.RIGHT: 
+			newEveLocation = new Coordinate(currentEveLocation.getX()+1, currentEveLocation.getY()); 
+			break;
+		default: 
+			throw new IllegalValueException("Eve facing illegal direction");
 		}
-		return true;
-	}
-	
-	/**
-	 * Moves Eve east on the board. Updates coordinate for the Creature Eve and updates world (2D array).
-	 * 
-	 * Does not do anything if the move is invalid
-	 * 
-	 */
-	public void moveEveEast(){
-		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX()+1, this.getEve().getCoordinates().getY()); 
-		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
+		
+		if(!verifyCoordinate(newEveLocation)) return;
+		if(this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
+		System.out.println("eve current: " + currentEveLocation);
+		System.out.println("new local: " + newEveLocation);
+		this.world[newEveLocation.getY()][newEveLocation.getX()].addCreature(this.world[currentEveLocation.getY()][currentEveLocation.getX()].removeCreature());
 		this.getEve().move();
-		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
-		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
+		
+		System.out.println("MOVE: CURRENT LOCATION: " + this.getEve().getCoordinates());
+		System.out.println("MOVE: END DIRECTION: " + this.getEve().getDirection()); 
+
 	}
-	
 	/**
-	 * Moves Eve north on the board. Updates coordinate for the Creature Eve and updates world (2D array).
-	 * 
+	 * Put bamboo on current square 
 	 */
-	public void moveEveNorth(){
-		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()+1); 
-		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
-		this.getEve().move();
-		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
-		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
+	public void evePutBamboo(){
+		Coordinate currentEveLocation = this.getEve().getCoordinates(); 
+		if(this.world[currentEveLocation.getY()][currentEveLocation.getX()].hasItem()) return; 
+		this.world[currentEveLocation.getY()][currentEveLocation.getX()].addItem(new Bamboo(new Random().nextInt(5)));
+		this.getEve().decrementBamboo();
+		
 	}
-	
 	/**
-	 * Moves Eve west on the board. Updates coordinate for the Creature Eve and updates world (2D array).
-	 * 
+	 * Pick up bamboo on current square
 	 */
-	public void moveEveWest(){
-		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX()-1, this.getEve().getCoordinates().getY()); 
-		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
-		this.getEve().move();
-		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
-		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
-	}
-	
-	/**
-	 * Moves Eve south on the board. Updates coordinate for the Creature Eve and updates world (2D array).
-	 * 
-	 */
-	public void moveEveSouth(){
-		Coordinate newEveLocation = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()-1); 
-		if(!verifyCoordinate(newEveLocation) && this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
-		this.getEve().move();
-		this.world[newEveLocation.getY()][newEveLocation.getY()].addCreature(this.getEve());
-		this.world[this.getEve().getCoordinates().getY()][this.getEve().getCoordinates().getX()].removeCreature();
+	public void evePickBamboo(){
+		Coordinate currentEveLocation = this.getEve().getCoordinates(); 
+		if(!this.world[currentEveLocation.getY()][currentEveLocation.getX()].hasItem()) return;
+		if(!(this.world[currentEveLocation.getY()][currentEveLocation.getX()].currentItem() instanceof Bamboo)) return; 
+		this.world[currentEveLocation.getY()][currentEveLocation.getX()].removeItem();
+		this.getEve().incrementBamboo();
 	}
 	/**
 	 * Take bamboo from nearby shrub
@@ -462,6 +469,41 @@ public class World implements Serializable {
 				this.getEve().decrementBamboo();
 			}
 		}
+	}
+	/**
+	 * Check's to see if the square in front of eve is open or not
+	 */
+	public boolean frontIsClear(){
+		System.out.println("WORLD: FRONT IS CLEAR CHECKING BEGIN"); 
+		System.out.println("FRONTISCLEAR: CURRENT DIRECTION: " + this.getEve().getDirection()); 
+
+		Coordinate eveLocation = this.getEve().getCoordinates();
+		Coordinate front = null; 
+		switch(this.getEve().getDirection()){
+		case Creature.UP: 
+			front = new Coordinate(eveLocation.getX(), eveLocation.getY()+1); 
+			break; 
+		case Creature.DOWN: 
+			front = new Coordinate(eveLocation.getX(), eveLocation.getY()-1);
+			break; 
+		case Creature.LEFT: 
+			front = new Coordinate(eveLocation.getX()-1, eveLocation.getY()); 
+			break;
+		case Creature.RIGHT: 
+			front = new Coordinate(eveLocation.getX()+1, eveLocation.getY()); 
+			break;
+		default:
+			throw new IllegalValueException("Eve facing illegal direction"); 
+		}
+		
+		System.out.println(this.getEve().getDirection());
+		System.out.println("FRONT IS CLEAR: EVE'S LOCATION: " + eveLocation);
+		System.out.println("FRONT IS CLEAR: FRONT LOCATION: " + front);
+		
+		if(!verifyCoordinate(front)) return false; 
+		
+		System.out.println("HERE");
+		return !this.world[front.getY()][front.getX()].hasCreature(); 
 	}
 	/**
 	 * Gets all the objects in the world.

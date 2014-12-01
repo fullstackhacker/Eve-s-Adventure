@@ -23,7 +23,6 @@ public class Coordinate {
 	 * @param y The y-coordinate in a Cartesian product representation of the world
 	 */
 	public Coordinate(int x, int y){
-		if(x < 0 || y < 0) throw new IllegalValueException("Given coordinates must be >= 0.");
 		this.x = x; 
 		this.y = y;
 	}
@@ -69,14 +68,14 @@ public class Coordinate {
 	 * Moves the coordinate forward one
 	 */
 	public void moveNorth(){ 
-		this.y--; 
+		this.y++; 
 	}
 	
 	/**
 	 * Moves the coordinate back one
 	 */
 	public void moveSouth(){ 
-		this.y++; 
+		this.y--; 
 	}
 	
 	/**
@@ -91,6 +90,10 @@ public class Coordinate {
 	 */
 	public void moveWest(){ 
 		this.x--; 
+	}
+	
+	public String toString(){
+		return "X: " + this.x + " Y: " + this.y; 
 	}
 }
 

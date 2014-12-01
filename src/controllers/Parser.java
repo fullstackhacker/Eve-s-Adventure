@@ -91,12 +91,16 @@ public class Parser {
 	}
 	
 	public void instructions(){ 
+		System.out.println("Instructions: " + this.karelCode.get(this.activeCodeBlock)); 
 		instruction();
-		if(!this.next()) return; 
+		if(!this.next()) return;
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK)) return;
 		instructions();
 	}
 	
 	public void instruction(){
+		System.out.println("Instruction: " + this.karelCode.get(this.activeCodeBlock)); 
+
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		//end statements
 		case KarelCode.ENDBLOCK: 
@@ -125,15 +129,20 @@ public class Parser {
 	}
 	
 	public void repetition(){
+		System.out.println("Repetition: " + this.karelCode.get(this.activeCodeBlock)); 
+
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		case KarelCode.WHILESTATEMENT:
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
+			int variableCode = this.activeCodeBlock;
 			boolean result = variable(); 
-			if(result){
-				if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
+			while(result){
+				if(!this.next()) return; 
 				instructions(); 
+				this.activeCodeBlock = variableCode; 
+				result = variable();
 			}
-			else{
+			if(!result){
 				do{
 					if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
 				}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK)); 
@@ -143,7 +152,7 @@ public class Parser {
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
 			int times = positiveNumbers(); 
 			int currentInstruction = this.activeCodeBlock;
-			for(int counter = 0; counter < positiveNumbers(); counter++){
+			for(int counter = 0; counter < times; counter++){
 				this.activeCodeBlock = currentInstruction; 
 				instructions();
 			}
@@ -155,8 +164,11 @@ public class Parser {
 	}
 	
 	public void conditional(){ //if statement
+		System.out.println("Conditional: " + this.karelCode.get(this.activeCodeBlock)); 
+		System.out.println("Conditional: CURRENT LOCATION: " + this.world.getEve().getCoordinates());
 		if(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.IFSTATEMENT)) return; //error
 		if(!this.next()) throw new IllegalValueException("Ill formed code"); 
+		System.out.println("Conditional (variable): " + this.karelCode.get(this.activeCodeBlock)); 
 		boolean result = variable(); 
 		if(result){
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
@@ -166,30 +178,82 @@ public class Parser {
 			do{
 				this.next(); 
 			}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK));
+			System.out.println("Conditional (variable false): " + this.karelCode.get(this.activeCodeBlock)); 
 		}
 		if(!this.next()) return; 
+		System.out.println("Conditional (else check): " + this.karelCode.get(this.activeCodeBlock)); 
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && !result){
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
 			instructions(); 
 		}
+		System.out.println("Conditional (end): " + this.karelCode.get(this.activeCodeBlock)); 
+
 	}
 	
 	public void operation(){
+		if(!this.world.getEve().isAwake()){
+			if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.WAKEUP)){
+				this.world.getEve().setAwake(true);
+			}
+			else{
+				return;
+			}
+		}
 		
+		System.out.println("OPERATION: CURRENT LOCATION: " + this.world.getEve().getCoordinates());
+		
+		switch(this.karelCode.get(this.activeCodeBlock)){
+		case KarelCode.MOVE:
+			this.world.moveEve(); 
+			return;
+		case KarelCode.TURNLEFT:
+			this.world.getEve().turnLeft();
+			return;
+		case KarelCode.SLEEP:
+			this.world.getEve().setAwake(false); 
+			return;
+		case KarelCode.PUTBAMBOO:
+			this.world.evePutBamboo();
+			return;
+		case KarelCode.PICKBAMBOO:
+			this.world.evePickBamboo();
+			return;
+		default:
+			throw new IllegalValueException("Ill forme Karel Code"); 
+		}
 	}
 	
-	public boolean variable(){
-		return false; 
+	public boolean variable(){		
+		
+		System.out.println("VARIABLE: CURRENT DIRECTION: " + this.world.getEve().getDirection()); 
+		System.out.println("VARIABLE: CURRENT LOCATION: " + this.world.getEve().getCoordinates());
+		
+		
+		switch(this.karelCode.get(this.activeCodeBlock)){
+		case KarelCode.FRONTISCLEAR:
+			return this.world.frontIsClear();  
+		case KarelCode.BAGISEMPTY: 
+			return !this.world.getEve().hasBamboo();
+		case KarelCode.FACINGNORTH: 
+			return this.world.getEve().getDirection() == Creature.UP;
+		case KarelCode.FACINGSOUTH:
+			return this.world.getEve().getDirection() == Creature.DOWN; 
+		case KarelCode.FACINGEAST: 
+			return this.world.getEve().getDirection() == Creature.RIGHT;
+		case KarelCode.FACINGWEST:
+			return this.world.getEve().getDirection() == Creature.LEFT;
+		default: 
+			throw new IllegalValueException("Ill formed Karel Code " + this.karelCode.get(this.activeCodeBlock));
+		}
 	}
 	
 	public int positiveNumbers(){
 		String number = "";
-		
+		do{ 
+			number += this.karelCode.get(this.activeCodeBlock);
+			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
+		}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDBLOCK)); 
 		return Integer.parseInt(number); 
-	}
-	
-	public void positiveNumber(){
-		
 	}
 	
 	public static void main(String[] args){
@@ -200,10 +264,14 @@ public class Parser {
 		else System.out.println("unable to add eve");
 		
 		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.IFSTATEMENT);
+		level.addKarelCode(KarelCode.WHILESTATEMENT);
 		level.addKarelCode(KarelCode.FRONTISCLEAR);
 		level.addKarelCode(KarelCode.MOVE);
 		level.addKarelCode(KarelCode.ENDBLOCK);
+		level.addKarelCode(KarelCode.TURNLEFT); 
+		level.addKarelCode(KarelCode.TURNLEFT); 
+		level.addKarelCode(KarelCode.TURNLEFT); 
+		level.addKarelCode(KarelCode.MOVE);
 		Parser parser = new Parser(level.getKarelCode(), world);
 		
 		if(world.getEve() == null) return;

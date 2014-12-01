@@ -1,10 +1,8 @@
 package models.gridobjects.creatures;
 
-import exceptions.IllegalValueException;
 import models.Coordinate;
-import models.campaign.World;
 import models.gridobjects.GridObject;
-import models.gridobjects.items.Shrub;
+import exceptions.IllegalValueException;
 
 public class Creature extends GridObject {
 
@@ -77,7 +75,7 @@ public class Creature extends GridObject {
 	}
 	
 	public void turnLeft(){ 
-		this.direction++; 
+		this.direction++;
 		this.direction = this.direction%4; 
 	}
 	
