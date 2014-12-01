@@ -13,7 +13,7 @@ import models.gridobjects.creatures.Creature;
  * An object to go through and execute the Karel code
  *
  */
-public class Parser {
+public class Interpreter {
 	/**
 	 * The karel code to parse through
 	 */
@@ -32,7 +32,7 @@ public class Parser {
 	 * @param karelCode  the Karel code to parse and execute
 	 * @param world the world where to execute the karel code
 	 */
-	public Parser(ArrayList<String> karelCode, World world){ 
+	public Interpreter(ArrayList<String> karelCode, World world){ 
 		 this.karelCode = karelCode; 
 		 this.world = world; 
 	}
@@ -301,40 +301,40 @@ public class Parser {
 		//level.addKarelCode(KarelCode.CLOSESTATEMENT);
 		level.addKarelCode(KarelCode.MOVE);
 		level.addKarelCode(KarelCode.ENDIF);
-		Parser parser = new Parser(level.getKarelCode(), world);
+		Interpreter interpreter = new Interpreter(level.getKarelCode(), world);
 		
 		if(world.getEve() == null) return;
 		
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		world.printWorld(); 
-		parser.executeOne();
-		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		interpreter.executeOne();
+		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
 		
 		
 	}
