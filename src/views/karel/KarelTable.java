@@ -1,5 +1,7 @@
 package views.karel;
 
+import java.util.ArrayList;
+
 import com.sun.org.apache.regexp.internal.RE;
 
 import models.campaign.KarelCode;
@@ -130,11 +132,16 @@ public final class KarelTable extends GridPane {
 							REPLACE_BUTTON_ON = false;
 						}
 						
+						InstructionsTab.ELSE_BUTTON.setVisible(false);
+						
 						switch(newValue){
 							case "ADD CODE HERE":
 								REPLACE_BUTTON.setDisable(true);
 								DELETE_BUTTON.setDisable(true);
 								return;
+							case KarelCode.ENDIF:
+								InstructionsTab.ELSE_BUTTON.setVisible(true);
+								break;
 							case KarelCode.IFSTATEMENT:
 							case KarelCode.WHILESTATEMENT:
 								GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
@@ -207,22 +214,22 @@ public final class KarelTable extends GridPane {
 		switch(code){
 			case KarelCode.IFSTATEMENT:
 				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 1 , code);
-				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDIFSTATEMENT);
+				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDIF);
 				this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 				break;
 			case KarelCode.ELSESTATEMENT:
 				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 1 , code);
-				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDELSESTATEMENT);
+				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDELSE);
 				this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 				break;
 			case KarelCode.WHILESTATEMENT:
 				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 1 , code);
-				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDWHILESTATEMENT);
+				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDWHILE);
 				this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 				break;
 			case KarelCode.LOOPSTATEMENT:
 				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 1 , code);
-				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDLOOPSTATEMENT);
+				this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 2 , KarelCode.ENDLOOP);
 				this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 				break;
 			default:
@@ -230,6 +237,19 @@ public final class KarelTable extends GridPane {
 		}
 	}
 
+	public ArrayList<String> getKarelCode(){
+		ArrayList<String> karelCodeArrayList = new ArrayList<String>();
+		
+		for(String code : this.karelCode){
+			karelCodeArrayList.add(code);
+		}
+		
+		/* Remove Add Code Here */
+		karelCodeArrayList.remove(0);
+		
+		return karelCodeArrayList;
+	}
+	
 	public static KarelTable getInstance() {
 		return instant;
 	}

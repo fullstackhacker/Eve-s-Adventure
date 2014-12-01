@@ -24,6 +24,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public final class SandboxScene extends Scene {
+
+	private static World world;
+	
+	private static GridWorld gridWorld;
 	
 	private static final class SandboxPane extends GridPane {
 
@@ -56,7 +60,7 @@ public final class SandboxScene extends Scene {
 			ProTips protips = ProTips.getInstance();
 			KarelTable karelTable = KarelTable.getInstance();
 			protips.setId("protips");
-			GridWorld gridWorld = GridWorld.getInstance();
+			gridWorld = GridWorld.getInstance();
 			
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -111,10 +115,10 @@ public final class SandboxScene extends Scene {
 			this.getRowConstraints().addAll(row1, row2, row3, row4, row5);
 			
 			//BACKEND-FRONTEND Integration
-			World world = new World("SandboxWorld", 10, 5);
+			world = new World("SandboxWorld", 10, 5);
 			world.printWorld();
 			Coordinate coordEve = new Coordinate(1,1);
-			Creature CreatureEve = new Creature("Eve", coordEve, world);
+			Creature CreatureEve = new Creature("Eve", coordEve);
 			world.addCreature(CreatureEve);
 			world.printWorld();
 			
@@ -123,12 +127,14 @@ public final class SandboxScene extends Scene {
 			gridWorld.add(Eve, 1, 1);
 			Eve.setVisible(true);
 			
-			world.moveEveEast();
+			//world.moveEveEast();
+			world.moveEve();
 			gridWorld.getChildren().remove(Eve);
 			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
 			world.printWorld();
 			
-			world.moveEveSouth();
+			//world.moveEveSouth();
+			world.moveEve();
 			gridWorld.getChildren().remove(Eve);
 			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
 			world.printWorld();
@@ -164,9 +170,25 @@ public final class SandboxScene extends Scene {
 	}
 
 	private static SandboxScene instanceOfSandboxScene = null;
-
+	
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
+	}
+	
+	public static void setWorld(World world1){
+		world = world1;
+	}
+	
+	public static void setGridWorld(GridWorld gridworld1){
+		gridWorld = gridworld1;
+	}
+	
+	public static World getWorld(){
+		return world;
+	}
+	
+	public static GridWorld getGridWorld(){
+		return gridWorld;
 	}
 
 	public static SandboxScene getInstance() {

@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Arrays;
+
 import models.campaign.KarelCode;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -69,13 +71,14 @@ public final class ButtonHandlers {
 	public static final void ELSE_BUTTON_HANDLER(ActionEvent e){
 		KarelTable.getInstance().addInstructionsCode(KarelCode.ELSESTATEMENT);
 		if(KarelTable.getInstance().isREPLACE_BUTTON_ON()){
+			//TODO
 			KarelTable.getInstance().replaceCode(KarelCode.ELSESTATEMENT);
 			return;
 		}
-		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
-		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
-		GameTabs.getInstance().enableTab(GameTabs.CONDITIONS_TAB_VALUE);
-		GameTabs.getInstance().switchTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 	}
 	
 	public static final void END_ELSE_BUTTON_HANDLER(ActionEvent e){
@@ -297,6 +300,7 @@ public final class ButtonHandlers {
 	
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("PLAY_BUTTON_HANDLER CALLED");
+		System.out.println(KarelTable.getInstance().getKarelCode());
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e){
