@@ -53,8 +53,8 @@ public class Parser {
 	/**
 	 * Executes the current code block and then moves to the next one
 	 */
-	public void execute(){
-		
+	public void executeOne(){
+		this.instruction();
 	}
 	/**
 	 * Set the position of the active code block
@@ -93,7 +93,8 @@ public class Parser {
 	public void instructions(){ 
 		System.out.println("Instructions: " + this.karelCode.get(this.activeCodeBlock)); 
 		instruction();
-		if(!this.next()) return;
+		//if(!this.next()) return;
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.CLOSESTATEMENT)) return; 
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF)) return;
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSE)) return;
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDWHILE)) return;
@@ -110,6 +111,7 @@ public class Parser {
 		case KarelCode.ENDWHILE:
 		case KarelCode.ENDELSE: 
 		case KarelCode.ENDLOOP:
+			this.next();
 			return; 
 		//close statements
 		case KarelCode.CLOSESTATEMENT:
@@ -118,10 +120,12 @@ public class Parser {
 		case KarelCode.LOOPSTATEMENT:
 		case KarelCode.WHILESTATEMENT: 
 			repetition(); 
+			this.next();
 			break; 
 		//conditionals
 		case KarelCode.IFSTATEMENT: 
 			conditional(); 
+			this.next();
 			break; 
 		//operations
 		case KarelCode.MOVE:
@@ -131,6 +135,7 @@ public class Parser {
 		case KarelCode.PICKBAMBOO: 
 		case KarelCode.PUTBAMBOO:
 			operation(); 
+			this.next();
 			break;
 		default: 
 			throw new IllegalValueException("Illegal Karel Code Segment: " + this.karelCode.get(this.activeCodeBlock));
@@ -221,7 +226,7 @@ public class Parser {
 		
 		switch(this.karelCode.get(this.activeCodeBlock)){
 		case KarelCode.MOVE:
-			this.world.moveEve(); 
+			this.world.moveEve();
 			return;
 		case KarelCode.TURNLEFT:
 			this.world.getEve().turnLeft();
@@ -283,7 +288,7 @@ public class Parser {
 		level.addKarelCode(KarelCode.MOVE);
 		level.addKarelCode(KarelCode.WHILESTATEMENT);
 		level.addKarelCode(KarelCode.FRONTISCLEAR);
-		level.addKarelCode(KarelCode.CLOSESTATEMENT);
+		//level.addKarelCode(KarelCode.CLOSESTATEMENT);
 		level.addKarelCode(KarelCode.MOVE);
 		level.addKarelCode(KarelCode.ENDWHILE);
 		level.addKarelCode(KarelCode.TURNLEFT); 
@@ -293,19 +298,44 @@ public class Parser {
 		level.addKarelCode(KarelCode.PUTBAMBOO);
 		level.addKarelCode(KarelCode.IFSTATEMENT);
 		level.addKarelCode(KarelCode.FRONTISCLEAR);
-		level.addKarelCode(KarelCode.CLOSESTATEMENT);
+		//level.addKarelCode(KarelCode.CLOSESTATEMENT);
 		level.addKarelCode(KarelCode.MOVE);
 		level.addKarelCode(KarelCode.ENDIF);
 		Parser parser = new Parser(level.getKarelCode(), world);
 		
 		if(world.getEve() == null) return;
 		
-		System.out.println("-----------");
-		world.printWorld();
-		System.out.println("-----------");
-		parser.start(); 
-		System.out.println("-----------");
-		world.printWorld();
-		System.out.println("-----------");
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		world.printWorld(); 
+		parser.executeOne();
+		System.out.println("Active Code Block: " + parser.activeCodeBlock +  "total size: " + level.getKarelCode().size());
+		
+		
 	}
 }

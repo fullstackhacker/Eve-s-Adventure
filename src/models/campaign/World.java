@@ -667,6 +667,10 @@ public class World implements Serializable {
 	 */
 	public String toString(){ 
 		String s = "\n"; 
+		for(int y=0; y<this.world.length; y++){
+			s += " __";
+		}
+		s += "\n";
 		for(int y=0; y<this.world.length; y++){ 
 			s += "|";
 			for(int x=0; x<this.world[y].length; x++){ 
