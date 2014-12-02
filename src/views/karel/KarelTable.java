@@ -20,6 +20,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -45,10 +46,9 @@ public final class KarelTable extends GridPane {
 	private int line;
 	
 	private KarelTable() {
-		this.karelCode = FXCollections.observableArrayList("ADD CODE HERE");
+		this.karelCode = FXCollections.observableArrayList();
 		this.listView = new ListView<String>(karelCode);
 		
-		this.listView.getSelectionModel().clearAndSelect(0);
 		Button REPLACE_BUTTON = new Button("REPLACE");
 		Button DELETE_BUTTON = new Button("DELETE");
 		
@@ -77,6 +77,7 @@ public final class KarelTable extends GridPane {
                 cell.setOnDragDetected(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
+                    	listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
                         if (! cell.isEmpty()) {
                         	switch(cell.getText()){
                         		case "ADD CODE HERE":
@@ -86,11 +87,25 @@ public final class KarelTable extends GridPane {
                         		case KarelCode.FACINGSOUTH:
                         		case KarelCode.FACINGEAST:
                         		case KarelCode.FACINGWEST:
+                        		case KarelCode.ELSESTATEMENT:
                         		case KarelCode.ENDIF:
 		                		case KarelCode.ENDELSE:
 		                		case KarelCode.ENDLOOP:
 		                		case KarelCode.ENDWHILE:
                         			return;
+		                		case KarelCode.IFSTATEMENT:
+		                		case KarelCode.WHILESTATEMENT:
+		                		case KarelCode.LOOPSTATEMENT:
+		                			listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		                			for(int i = cell.getIndex(); i < karelCode.size(); i++){
+		                				listView.getSelectionModel().select(i);
+		                				if(karelCode.get(i).equals(KarelCode.ENDIF) || 
+		                						karelCode.get(i).equals(KarelCode.ENDWHILE) ||
+		                						karelCode.get(i).equals(KarelCode.ENDLOOP)){
+		                					break;
+		                				}
+		                			}
+		                			break;
                         	}
                         	
                             dragFromIndex.set(cell.getIndex());
@@ -108,6 +123,9 @@ public final class KarelTable extends GridPane {
                     @Override
                     public void handle(DragEvent event) {
                     	if(!cell.isEmpty()){
+                    		if(listView.getSelectionModel().getSelectedIndices().contains(cell.getIndex())){
+                    			return;
+                    		}
 	                    	switch(cell.getText()){
 		                    	case "ADD CODE HERE":
 		                		case KarelCode.FRONTISCLEAR:
@@ -207,7 +225,11 @@ public final class KarelTable extends GridPane {
                     @Override
                     public void handle(DragEvent event) {
                     	dragFromIndex.set(-1);
-                    	System.out.println(line);
+                    	System.out.println("line: " + line);
+                    	System.out.println(listView.getSelectionModel().getSelectedIndex());
+                    	if(line == 0){
+                            return;
+                    	}
                         listView.getSelectionModel().clearAndSelect(line);
                     }
                 });
@@ -356,6 +378,10 @@ public final class KarelTable extends GridPane {
 								GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 								return;
 							case KarelCode.ENDIF:
+								GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+								GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+								GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+								GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 								InstructionsTab.ELSE_BUTTON.setVisible(true);
 								break;
 							case KarelCode.IFSTATEMENT:
