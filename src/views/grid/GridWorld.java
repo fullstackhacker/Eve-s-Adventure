@@ -1,5 +1,6 @@
 package views.grid;
 
+import models.Coordinate;
 import views.tabs.GameTabs;
 import controllers.ButtonHandlers;
 import javafx.beans.value.ChangeListener;

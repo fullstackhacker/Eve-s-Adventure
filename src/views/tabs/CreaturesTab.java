@@ -15,13 +15,13 @@ final class CreaturesTab extends VBox{
 		this.setAlignment(Pos.CENTER);
 		
 		/* Making all the buttons */
-		final Button EVE = new Button("Eve");
+		final Button EVE_BUTTON = new Button("Eve");
 
 		/* Width */
-		EVE.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		EVE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		
 		/* Add to Pane */
-		this.getChildren().addAll(EVE);
+		this.getChildren().addAll(EVE_BUTTON);
 		
 	}
 	

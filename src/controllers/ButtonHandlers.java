@@ -287,6 +287,27 @@ public final class ButtonHandlers {
 		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 	}
 	
+	
+	
+	
+	/**
+	 * ItemsTab.java
+	 */
+	
+	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("SHRUB_BUTTON_HANDLER");
+	}
+	public static final void TREE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("TREE_BUTTON_HANDLER");
+	}
+	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("BAMBOO_BUTTON_HANDLER");
+	}
+		
+		
+		
+		
+	
 	public static final void GridWorld_BUTTON_HANDLER(ActionEvent e){
 	}
 	

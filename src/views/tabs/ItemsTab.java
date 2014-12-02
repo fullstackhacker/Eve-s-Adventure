@@ -1,5 +1,6 @@
 package views.tabs;
 
+import controllers.ButtonHandlers;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -15,15 +16,22 @@ final class ItemsTab extends VBox{
 		this.setAlignment(Pos.CENTER);
 		
 		/* Making all the buttons */
-		final Button SHRUB = new Button("Shrub");
-		final Button TREE = new Button("Tree");
+		final Button SHRUB_BUTTON = new Button("Shrub");
+		final Button TREE_BUTTON = new Button("Tree");
+		final Button BAMBOO_BUTTON = new Button("Bamboo");
 		
 		/* Width */
-		SHRUB.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
-		TREE.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		SHRUB_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		TREE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		BAMBOO_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		
-		/* Add to Pane */
-		this.getChildren().addAll(SHRUB, TREE);
+		/* Listeners */
+		SHRUB_BUTTON.setOnAction(ButtonHandlers::SHRUB_BUTTON_HANDLER);
+		TREE_BUTTON.setOnAction(ButtonHandlers::TREE_BUTTON_HANDLER);
+		BAMBOO_BUTTON.setOnAction(ButtonHandlers::BAMBOO_BUTTON_HANDLER);
+		
+		/* Add to Tab */
+		this.getChildren().addAll(SHRUB_BUTTON, TREE_BUTTON, BAMBOO_BUTTON);
 	}
 	
 	protected static ItemsTab getInstance(){
