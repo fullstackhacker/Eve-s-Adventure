@@ -34,7 +34,23 @@ public class World implements Serializable {
 		/**
 		 * Item that is on square
 		 */
-		private Item item; 
+		private Item item;
+		/**
+		 * Wall on upside of the square
+		 */
+		private Wall upWall; 
+		/**
+		 * Wall on downside of the square
+		 */
+		private Wall downWall; 
+		/**
+		 * Wall on left of the square
+		 */
+		private Wall leftWall; 
+		/**
+		 * Wall on right of the square
+		 */
+		private Wall rightWall; 
 		/**
 		 * Creature that on square
 		 */
@@ -45,8 +61,11 @@ public class World implements Serializable {
 		private Square(){
 			this.item = null; 
 			this.creature = null; 
+			this.upWall = null; 
+			this.downWall = null; 
+			this.leftWall = null; 
+			this.rightWall = null; 
 		}
-		
 		private Item currentItem(){
 			return this.item; 
 		}
@@ -139,6 +158,23 @@ public class World implements Serializable {
 		private boolean hasCreature(){
 			return this.creature != null; 
 		}
+		/**
+		 * Check if there is an up wall
+		 * 
+		 * @return true iff there is an up wall
+		 */
+		private boolean hasUpWall(){
+			return this.upWall != null; 
+		}
+		private boolean hasDownWall(){
+			return this.downWall != null; 
+		}
+		private boolean hasLeftWall(){
+			return this.leftWall != null; 
+		}
+		private boolean hasRightWall(){
+			return this.rightWall != null; 
+		}
 		@Override
 		/**
 		 * Converts the Square to a string
@@ -146,9 +182,10 @@ public class World implements Serializable {
 		 * @return  a String representation the square based on what object is on the square
 		 */
 		public String toString(){ 
-			String s = this.hasCreature()? this.creature.toString() : "_";
-			s += this.hasItem()? this.item.toString() : "_" ;
-			s += "|";
+			String s = this.hasLeftWall()? "x" : "|"; 
+			s  += this.hasCreature()? this.creature.toString() : " ";
+			s += this.hasItem()? this.item.toString() : " " ;
+			s += this.hasRightWall()? " x" : " |";
 			return s;
 		}
 	}
@@ -355,15 +392,19 @@ public class World implements Serializable {
 		
 		switch(this.getEve().getDirection()){
 		case Creature.UP:
+			if(this.getSquareAt(currentEveLocation).hasUpWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(), currentEveLocation.getY()+1);
 			break;
 		case Creature.DOWN:
+			if(this.getSquareAt(currentEveLocation).hasDownWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(), currentEveLocation.getY()-1);
 			break;
 		case Creature.LEFT: 
+			if(this.getSquareAt(currentEveLocation).hasLeftWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX()-1, currentEveLocation.getY());
 			break;
 		case Creature.RIGHT: 
+			if(this.getSquareAt(currentEveLocation).hasRightWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX()+1, currentEveLocation.getY()); 
 			break;
 		default: 
@@ -371,10 +412,10 @@ public class World implements Serializable {
 		}
 		
 		if(!verifyCoordinate(newEveLocation)) return;
-		if(this.world[newEveLocation.getY()][newEveLocation.getX()].hasCreature()) return; 
+		if(this.getSquareAt(newEveLocation).hasCreature()) return; 
 		System.out.println("eve current: " + currentEveLocation);
 		System.out.println("new local: " + newEveLocation);
-		this.world[newEveLocation.getY()][newEveLocation.getX()].addCreature(this.world[currentEveLocation.getY()][currentEveLocation.getX()].removeCreature());
+		this.getSquareAt(newEveLocation).addCreature(this.getSquareAt(currentEveLocation).removeCreature());
 		this.getEve().move();
 		
 		System.out.println("MOVE: CURRENT LOCATION: " + this.getEve().getCoordinates());
@@ -386,8 +427,8 @@ public class World implements Serializable {
 	 */
 	public void evePutBamboo(){
 		Coordinate currentEveLocation = this.getEve().getCoordinates(); 
-		if(this.world[currentEveLocation.getY()][currentEveLocation.getX()].hasItem()) return; 
-		this.world[currentEveLocation.getY()][currentEveLocation.getX()].addItem(new Bamboo(new Random().nextInt(5)));
+		if(this.getSquareAt(currentEveLocation).hasItem()) return; 
+		this.getSquareAt(currentEveLocation).addItem(new Bamboo(new Random().nextInt(5)));
 		this.getEve().decrementBamboo();
 		
 	}
@@ -396,9 +437,9 @@ public class World implements Serializable {
 	 */
 	public void evePickBamboo(){
 		Coordinate currentEveLocation = this.getEve().getCoordinates(); 
-		if(!this.world[currentEveLocation.getY()][currentEveLocation.getX()].hasItem()) return;
-		if(!(this.world[currentEveLocation.getY()][currentEveLocation.getX()].currentItem() instanceof Bamboo)) return; 
-		this.world[currentEveLocation.getY()][currentEveLocation.getX()].removeItem();
+		if(!this.getSquareAt(currentEveLocation).hasItem()) return;
+		if(!(this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo)) return; 
+		this.getSquareAt(currentEveLocation).removeItem();
 		this.getEve().incrementBamboo();
 	}
 	/**
@@ -481,15 +522,19 @@ public class World implements Serializable {
 		Coordinate front = null; 
 		switch(this.getEve().getDirection()){
 		case Creature.UP: 
+			if(this.getSquareAt(eveLocation).hasUpWall()) return false; 
 			front = new Coordinate(eveLocation.getX(), eveLocation.getY()+1); 
 			break; 
 		case Creature.DOWN: 
+			if(this.getSquareAt(eveLocation).hasDownWall()) return false; 
 			front = new Coordinate(eveLocation.getX(), eveLocation.getY()-1);
 			break; 
 		case Creature.LEFT: 
+			if(this.getSquareAt(eveLocation).hasLeftWall()) return false; 
 			front = new Coordinate(eveLocation.getX()-1, eveLocation.getY()); 
 			break;
 		case Creature.RIGHT: 
+			if(this.getSquareAt(eveLocation).hasRightWall()) return false; 
 			front = new Coordinate(eveLocation.getX()+1, eveLocation.getY()); 
 			break;
 		default:
@@ -503,7 +548,7 @@ public class World implements Serializable {
 		if(!verifyCoordinate(front)) return false; 
 		
 		System.out.println("HERE");
-		return !this.world[front.getY()][front.getX()].hasCreature(); 
+		return !this.getSquareAt(front).hasCreature();
 	}
 	/**
 	 * Gets all the objects in the world.
@@ -652,6 +697,10 @@ public class World implements Serializable {
 		}
 		return null;
 	}
+	
+	private Square getSquareAt(Coordinate coordinate){
+		return this.world[coordinate.getY()][coordinate.getX()];
+	}
 	/**
 	 * Prints the world out to the console
 	 */
@@ -667,14 +716,17 @@ public class World implements Serializable {
 	 */
 	public String toString(){ 
 		String s = "\n"; 
-		for(int y=0; y<this.world.length; y++){
-			s += " __";
-		}
-		s += "\n";
-		for(int y=0; y<this.world.length; y++){ 
-			s += "|";
-			for(int x=0; x<this.world[y].length; x++){ 
+		for(int y=this.world.length-1; y>-1; y--){ 
+			for(int x=0; x< this.world[y].length; x++){
+				s+= this.world[y][x].hasUpWall()? " -x- " : " ___ "; 
+			}
+			s += "\n";
+			for(int x=0; x<this.world[y].length; x++){
 				s += this.world[y][x].toString(); 
+			}
+			s += "\n";
+			for(int x=0; x< this.world[y].length; x++){
+				s+= this.world[y][x].hasDownWall()? " -x- " : "|___|"; 
 			}
 			s += "\n";
 		}
