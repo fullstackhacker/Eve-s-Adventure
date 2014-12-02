@@ -671,7 +671,7 @@ public class World implements Serializable {
 			s += " __";
 		}
 		s += "\n";
-		for(int y=0; y<this.world.length; y++){ 
+		for(int y=this.world.length-1; y>-1; y--){ 
 			s += "|";
 			for(int x=0; x<this.world[y].length; x++){ 
 				s += this.world[y][x].toString(); 

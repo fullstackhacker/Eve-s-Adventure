@@ -18,6 +18,8 @@ final class ItemsTab extends VBox{
 		final Button SHRUB = new Button("Shrub");
 		final Button TREE = new Button("Tree");
 		
+		
+		
 		/* Width */
 		SHRUB.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		TREE.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
