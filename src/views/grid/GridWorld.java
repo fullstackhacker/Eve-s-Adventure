@@ -43,7 +43,7 @@ public final class GridWorld extends GridPane {
 		column5.setPercentWidth(20);
 		this.getColumnConstraints().addAll(column1, column2, column3, column4,
 				column5);
-
+		
 		RowConstraints row1 = new RowConstraints();
 		row1.setPercentHeight(10);
 		RowConstraints row2 = new RowConstraints();
