@@ -271,20 +271,46 @@ public final class KarelTable extends GridPane {
 				String item = listView.getSelectionModel().getSelectedItem();
 				if(item != null){
 					switch(item){
+						case KarelCode.ENDIF:
+						case KarelCode.ENDELSE:
+						case KarelCode.ENDWHILE:
+						case KarelCode.ENDLOOP:
+							/* Fine the beginning of the block */
+							System.out.println(true);
+							for(int i = listView.getSelectionModel().getSelectedIndex(); i > 0; i--){
+								String code = karelCode.get(i);
+								System.out.println("For Loop: " + code);
+								if(code.equals(KarelCode.IFSTATEMENT) || 
+									code.equals(KarelCode.ELSESTATEMENT) || 
+									code.equals(KarelCode.WHILESTATEMENT) || 
+									code.equals(KarelCode.LOOPSTATEMENT)){
+									listView.getSelectionModel().clearAndSelect(i);
+									System.out.println("i == " + i);
+									break;
+								}
+							}
 						case KarelCode.IFSTATEMENT:
 						case KarelCode.ELSESTATEMENT:
 						case KarelCode.WHILESTATEMENT:
 						case KarelCode.LOOPSTATEMENT:
 							/* Delete the whole code block */
-							String line = item;
-							int start = listView.getSelectionModel().getSelectedIndex();
-							
+							System.out.println("Called");
+							int line = listView.getSelectionModel().getSelectedIndex();
+							for(; line < karelCode.size();){
+								String code = listView.getSelectionModel().getSelectedItem();
+								if(code.equals(KarelCode.ENDIF) || code.equals(KarelCode.ENDELSE) || code.equals(KarelCode.ENDWHILE) || code.equals(KarelCode.ENDLOOP)){
+									break;
+								}
+								karelCode.remove(line);
+								listView.getSelectionModel().clearAndSelect(line);
+							}
+							/* Remove last line of code */
+							karelCode.remove(line);
+							return;
+					default:
+							karelCode.remove(listView.getSelectionModel().getSelectedIndex());
 							break;
-						default:
 					}
-					
-					//TODO Conditonals
-					karelCode.remove(item);
 				}
 			}
 			
