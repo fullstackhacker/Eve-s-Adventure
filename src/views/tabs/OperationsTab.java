@@ -19,7 +19,7 @@ final class OperationsTab extends VBox{
 		final Button MOVE_BUTTON = new Button("MOVE");
 		final Button SLEEP_BUTTON = new Button("SLEEP");
 		final Button WAKE_UP_BUTTON = new Button("WAKE UP");
-		final Button TURN_LEFT_BUTTON = new Button("TURN LEFT");
+		final Button TURN_LEFT_BUTTON = new Button("TURN RIGHT");
 		final Button PICK_UP_BAMBOO_BUTTON = new Button("PICK UP BAMBOO");
 		final Button PUT_BAMBOO_BUTTON = new Button("PUT BAMBOO");
 		
