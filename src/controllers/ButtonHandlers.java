@@ -400,6 +400,7 @@ public final class ButtonHandlers {
 			Tree tree = new Tree(4);
 			
 			tree.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+			if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
 			GridWorld.getInstance().getWorld().addItem(tree); 
 			GridWorld.getInstance().getWorld().printWorld();
         }	
