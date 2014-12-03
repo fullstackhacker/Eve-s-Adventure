@@ -42,6 +42,6 @@ final class OperationsTab extends VBox{
 	}
 	
 	protected static OperationsTab getInstance(){
-		return (instant == null) ? new OperationsTab(): instant;
+		return (instant == null) ? instant = new OperationsTab(): instant;
 	}
 }

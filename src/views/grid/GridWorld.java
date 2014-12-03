@@ -158,10 +158,6 @@ public final class GridWorld extends GridPane {
 	
 
 	public static GridWorld getInstance() {
-		if(instant == null){
-			instant = new GridWorld();
-		}
-		return instant;
+		return (instant == null) ? instant = new GridWorld() : instant;
 	}
-
 }

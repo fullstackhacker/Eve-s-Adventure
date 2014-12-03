@@ -45,6 +45,6 @@ final class ConditionalsTab extends VBox {
 	}
 	
 	protected static ConditionalsTab getInstance(){
-		return (instant == null) ? new ConditionalsTab() : instant;
+		return (instant == null) ? instant = new ConditionalsTab() : instant;
 	}
 }
