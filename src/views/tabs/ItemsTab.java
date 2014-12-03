@@ -19,19 +19,23 @@ final class ItemsTab extends VBox{
 		final Button SHRUB_BUTTON = new Button("Shrub");
 		final Button TREE_BUTTON = new Button("Tree");
 		final Button BAMBOO_BUTTON = new Button("Bamboo");
+		final Button RMITEM_BUTTON = new Button("Remove Item");
 		
 		/* Width */
 		SHRUB_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		TREE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		BAMBOO_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		RMITEM_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		
 		/* Listeners */
 		SHRUB_BUTTON.setOnAction(ButtonHandlers::SHRUB_BUTTON_HANDLER);
 		TREE_BUTTON.setOnAction(ButtonHandlers::TREE_BUTTON_HANDLER);
 		BAMBOO_BUTTON.setOnAction(ButtonHandlers::BAMBOO_BUTTON_HANDLER);
+		RMITEM_BUTTON.setOnAction(ButtonHandlers::RMITEM_BUTTON_HANDLER);
+		
 		
 		/* Add to Tab */
-		this.getChildren().addAll(SHRUB_BUTTON, TREE_BUTTON, BAMBOO_BUTTON);
+		this.getChildren().addAll(SHRUB_BUTTON, TREE_BUTTON, BAMBOO_BUTTON, RMITEM_BUTTON);
 	}
 	
 	protected static ItemsTab getInstance(){

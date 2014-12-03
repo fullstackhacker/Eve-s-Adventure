@@ -16,6 +16,7 @@ import models.campaign.KarelCode;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import models.gridobjects.items.Bamboo;
+import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import views.MainApp;
@@ -393,6 +394,25 @@ public final class ButtonHandlers {
 	/**
 	 * ItemsTab.java
 	 */
+	public static final void RMITEM_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("RMITEM_BUTTON_HANDLER");
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
+		switch(oldObject){
+		case "Tree":
+			GridWorld.getInstance().getWorld().removeItem(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("");
+			break;
+		case "Shrub":
+			GridWorld.getInstance().getWorld().removeItem(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("");
+			break; 
+		case "Bamboo":
+			GridWorld.getInstance().getWorld().removeItem(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("");			
+		default: 
+			break;
+		}
+	}
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("SHRUB_BUTTON_HANDLER");
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
@@ -453,6 +473,10 @@ public final class ButtonHandlers {
 	/**
 	 * CreaturesTab.java
 	 */
+	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("RMCREATURE_BUTTON_HANDLER");
+		GridWorld.getInstance().getWorld().removeCreature(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+	}
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("EVE_BUTTON_HANDLER");
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
@@ -467,6 +491,7 @@ public final class ButtonHandlers {
 					System.out.println("X: " + x  + "Y: " + y); 
 					Creature eve = GridWorld.getInstance().getWorld().removeCreature(new Coordinate(y,x)); 
 					eve.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
+					eve.setDirection(Coordinate.DOWN);
 					GridWorld.getInstance().getWorld().addCreature(eve);
 				}
 			}
