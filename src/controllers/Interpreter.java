@@ -45,6 +45,9 @@ public class Interpreter {
 		this.activeCodeBlock++;
 		return this.activeCodeBlock < this.karelCode.size(); 
 	}
+	public boolean validPosition(){
+		return this.activeCodeBlock < this.karelCode.size();
+	}
 	/**
 	 * Moves to the previous code block WITHOUT executing it
 	 */
@@ -95,6 +98,7 @@ public class Interpreter {
 	public void instructions(){ 
 		System.out.println("Instructions: " + this.karelCode.get(this.activeCodeBlock)); 
 		instruction();
+		if(!validPosition()) return;
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.CLOSESTATEMENT)) return; 
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF)) return;
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSE)) return;
