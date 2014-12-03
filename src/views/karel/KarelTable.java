@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.sun.javafx.sg.prism.NGShape.Mode;
+
 import models.campaign.KarelCode;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -81,13 +83,13 @@ public final class KarelTable extends GridPane {
                         if (! cell.isEmpty()) {
                         	switch(cell.getText()){
                         		case "ADD CODE HERE":
+		                		case KarelCode.ELSESTATEMENT:
                         		case KarelCode.FRONTISCLEAR:
                         		case KarelCode.NEXTTOAFRIEND:
                         		case KarelCode.FACINGNORTH:
                         		case KarelCode.FACINGSOUTH:
                         		case KarelCode.FACINGEAST:
                         		case KarelCode.FACINGWEST:
-                        		case KarelCode.ELSESTATEMENT:
                         		case KarelCode.ENDIF:
 		                		case KarelCode.ENDELSE:
 		                		case KarelCode.ENDLOOP:
@@ -97,13 +99,25 @@ public final class KarelTable extends GridPane {
 		                		case KarelCode.WHILESTATEMENT:
 		                		case KarelCode.LOOPSTATEMENT:
 		                			listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		                			for(int i = cell.getIndex(); i < karelCode.size(); i++){
+		                			int i = cell.getIndex();
+		                			for(; i < karelCode.size(); i++){
 		                				listView.getSelectionModel().select(i);
 		                				if(karelCode.get(i).equals(KarelCode.ENDIF) || 
 		                						karelCode.get(i).equals(KarelCode.ENDWHILE) ||
 		                						karelCode.get(i).equals(KarelCode.ENDLOOP)){
+		                					System.out.println(listView.getSelectionModel().getSelectedIndices());
+		                					if(i + 1 > karelCode.size() && 
+		                							karelCode.get(i + 1).equals(KarelCode.ELSESTATEMENT)){
+		                						for(int z = i + 1; z < karelCode.size(); z++){
+		                							listView.getSelectionModel().select(z);
+		                							if(karelCode.get(z).equals(KarelCode.ENDELSE)){
+		                								break;
+		                							}
+		                						}
+		                					}
 		                					break;
 		                				}
+		                				
 		                			}
 		                			break;
                         	}
@@ -134,6 +148,7 @@ public final class KarelTable extends GridPane {
 		                		case KarelCode.FACINGSOUTH:
 		                		case KarelCode.FACINGEAST:
 		                		case KarelCode.FACINGWEST:
+		                		case KarelCode.ELSESTATEMENT:
 		                			return;
 	                    	}
 	                        if (dragFromIndex.get() >= 0 && dragFromIndex.get() != cell.getIndex()) {
@@ -148,7 +163,10 @@ public final class KarelTable extends GridPane {
                     @Override
                     public void handle(DragEvent event) {
                     	if(!cell.isEmpty()){
-	                    	switch(cell.getText()){
+                    		if(listView.getSelectionModel().getSelectedIndices().contains(cell.getIndex())){
+                    			return;
+                    		}
+                    		switch(cell.getText()){
 		                    	case "ADD CODE HERE":
 		                		case KarelCode.FRONTISCLEAR:
 		                		case KarelCode.NEXTTOAFRIEND:
@@ -211,6 +229,47 @@ public final class KarelTable extends GridPane {
                         
                         System.out.println("dragItemsStartIndex: " + dragItemsStartIndex);
                         System.out.println("dragItemsEndIndex: " + dragItemsEndIndex);
+                        if(listView.getSelectionModel().getSelectionMode() == SelectionMode.MULTIPLE){
+                        	System.out.println(listView.getSelectionModel().getSelectedIndices());
+                        	List<String> copy = new ArrayList<>(listView.getSelectionModel().getSelectedItems());
+                        	
+                        	int beginngingLine = listView.getSelectionModel().getSelectedIndices().get(0);
+                        	System.out.println("beginngingLine: " + beginngingLine);
+                        	
+                        	int enddingLine = listView.getSelectionModel().getSelectedIndices().get(copy.size()-1);
+                    		System.out.println("endingLine: " + enddingLine);
+                        	
+                    		System.out.println("times:" + (enddingLine - beginngingLine));
+                    		
+                    		int times = enddingLine - beginngingLine + 1;
+                    		
+                        	if(beginngingLine > line){
+                        		/* Moving the code upwards */
+                        		for(int i = 0; i < times; i++){
+                        			karelCode.remove(beginngingLine);
+                        		}
+                        	
+                        		for(int i = copy.size()-1; i >= 0 ;i--){
+                        			karelCode.add(line, copy.get(i));
+                        		}
+                        		
+                        	}else{
+                        		/* Moving the code downwards */
+                        		int newLine = line - times + 1;
+                        		
+                        		for(int i = 0; i < times; i++){
+                        			karelCode.remove(beginngingLine);
+                        		}
+                        		
+                        		for(int i = copy.size()-1; i >= 0 ;i--){
+                        			karelCode.add(newLine, copy.get(i));
+                        		}
+                        		
+                        		line = newLine;
+                        		System.out.println("newLine: " + newLine);
+                        	}
+                        	return;
+                        }
                         
                         List<String> rotatingItems = listView.getItems().subList(dragItemsStartIndex, dragItemsEndIndex);
                         List<String> rotatingItemsCopy = new ArrayList<>(rotatingItems);
@@ -227,9 +286,6 @@ public final class KarelTable extends GridPane {
                     	dragFromIndex.set(-1);
                     	System.out.println("line: " + line);
                     	System.out.println(listView.getSelectionModel().getSelectedIndex());
-                    	if(line == 0){
-                            return;
-                    	}
                         listView.getSelectionModel().clearAndSelect(line);
                     }
                 });
