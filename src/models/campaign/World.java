@@ -353,7 +353,11 @@ public class World implements Serializable {
 		case Coordinate.UP: 
 			return this.getSquareAt(coordinate).addUpWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
 		case Coordinate.DOWN: 
-			return this.getSquareAt(coordinate).addDownWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction)); 
+			return this.getSquareAt(coordinate).addDownWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
+		case Coordinate.LEFT: 
+			return this.getSquareAt(coordinate).addLeftWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
+		case Coordinate.RIGHT:
+			return this.getSquareAt(coordinate).addRightWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
 		default: 
 			return false; 
 		}
