@@ -108,6 +108,8 @@ public final class GridWorld extends GridPane {
 			}
 		}
 		
+		GridWorld.gridButtons[2][2].setText("Eve!");
+		
 		//gridButtons[2][2].setText("Eve!");
 		
 		//this.getChildren().addAll(GridWorld.gridButtons);
