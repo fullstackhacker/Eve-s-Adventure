@@ -233,10 +233,6 @@ public class Interpreter {
 	}
 
 	public void conditional() { // if statement
-		System.out.println("Conditional: "
-				+ this.karelCode.get(this.activeCodeBlock));
-		System.out.println("Conditional: CURRENT LOCATION: "
-				+ this.world.getEve().getCoordinates());
 		if (!this.karelCode.get(this.activeCodeBlock).equals(
 				KarelCode.IFSTATEMENT))
 			return; // error
@@ -247,9 +243,6 @@ public class Interpreter {
 			return;
 		if (!this.next())
 			throw new IllegalValueException("Ill formed code");
-		System.out.println("Conditional (variable): "
-				+ this.karelCode.get(this.activeCodeBlock));
-
 		boolean result = variable();
 		if (result) {
 			if (!this.next())
@@ -265,8 +258,6 @@ public class Interpreter {
 		}
 		if (!this.next())
 			return;
-		System.out.println("Conditional (else check): "
-				+ this.karelCode.get(this.activeCodeBlock));
 		if (this.karelCode.get(this.activeCodeBlock).equals(
 				KarelCode.ELSESTATEMENT)
 				&& !result) {
@@ -274,31 +265,23 @@ public class Interpreter {
 				throw new IllegalValueException("Ill formed Karel Code");
 			instructions();
 		}
-		if (this.karelCode.get(this.activeCodeBlock).equals(
-				KarelCode.ELSESTATEMENT)
-				&& result) {
+		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result) {
 			do {
 				this.next();
 			} while (!this.karelCode.get(this.activeCodeBlock).equals(
 					KarelCode.ENDIF));
 		}
-		System.out.println("Conditional (end): "
-				+ this.karelCode.get(this.activeCodeBlock));
 
 	}
 
 	public void operation() {
 		if (!this.world.getEve().isAwake()) {
-			if (this.karelCode.get(this.activeCodeBlock).equals(
-					KarelCode.WAKEUP)) {
+			if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.WAKEUP)) {
 				this.world.getEve().setAwake(true);
 			} else {
 				return;
 			}
 		}
-
-		System.out.println("OPERATION: CURRENT LOCATION: "
-				+ this.world.getEve().getCoordinates());
 
 		switch (this.karelCode.get(this.activeCodeBlock)) {
 		case KarelCode.MOVE:

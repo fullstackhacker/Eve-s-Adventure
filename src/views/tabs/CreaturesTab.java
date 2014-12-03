@@ -1,5 +1,6 @@
 package views.tabs;
 
+import controllers.ButtonHandlers;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,12 +17,18 @@ final class CreaturesTab extends VBox{
 		
 		/* Making all the buttons */
 		final Button EVE_BUTTON = new Button("Eve");
+		final Button FRIENDS_BUTTON = new Button("Friends");
 
 		/* Width */
 		EVE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		FRIENDS_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		
+		/* Listeners */
+		EVE_BUTTON.setOnAction(ButtonHandlers::EVE_BUTTON_HANDLER);
+		FRIENDS_BUTTON.setOnAction(ButtonHandlers::FRIENDS_BUTTON_HANDLER);
 		
 		/* Add to Pane */
-		this.getChildren().addAll(EVE_BUTTON);
+		this.getChildren().addAll(EVE_BUTTON, FRIENDS_BUTTON);
 		
 	}
 	

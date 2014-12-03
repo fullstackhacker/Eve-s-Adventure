@@ -101,12 +101,35 @@ public final class GridWorld extends GridPane {
 									GameTabs.ITEMS_TAB_VALUE);
 							GameTabs.getInstance().switchTab(
 									GameTabs.CREATURES_TAB_VALUE);
-							GetXCoordinate();
-							GetYCoordinate();
+							getXCoordinate();
+							getYCoordinate();
 						}
 					}
 				});
 
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+		    public void changed(ObservableValue<? extends Toggle> ov,
+		        Toggle toggle, Toggle new_toggle) {
+		            if(new_toggle == null){
+		            	GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
+						GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		        		GameTabs.getInstance().disableTab(GameTabs.CREATURES_TAB_VALUE);
+		        		GameTabs.getInstance().disableTab(GameTabs.ITEMS_TAB_VALUE);
+						GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
+		            }else{
+		            	GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
+		        		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+		        		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		        		GameTabs.getInstance().disableTab(GameTabs.NUMBERS_TAB_VALUE);
+		        		GameTabs.getInstance().enableTab(GameTabs.CREATURES_TAB_VALUE);
+		        		GameTabs.getInstance().enableTab(GameTabs.ITEMS_TAB_VALUE);
+		        		GameTabs.getInstance().switchTab(GameTabs.CREATURES_TAB_VALUE);
+		        		getXCoordinate();
+		        		getYCoordinate();
+		            }
+		         }
+		});
+		
 		gridButtons = new ToggleButton[5][10];
 
 		System.out.println("OVERWERITINEG BUTTONGS");
@@ -144,29 +167,32 @@ public final class GridWorld extends GridPane {
 	public World getWorld() {
 		return world;
 	}
+	
+	
 
-	public static int GetXCoordinate() {
-		for (int x = 0; x < 5; x++) {
-			for (int y = 0; y < 10; y++) {
-				if (GridWorld.gridButtons[x][y].isSelected()) {
-					System.out.println(x);
-					return x;
+	public static int getXCoordinate(){
+		for(int y = 0; y < gridButtons.length; y++){
+			for(int x = 0; x < gridButtons[y].length; x++){
+				if (GridWorld.gridButtons[y][x].isSelected()){
+					System.out.println("X: " + y);
+					return y;
 				}
 			}
 		}
 		System.out.println("no X coordinate");
 		return 0;
 	}
-
-	public static int GetYCoordinate() {
-		for (int x = 0; x < 5; x++) {
-			for (int y = 0; y < 10; y++) {
-				if (GridWorld.gridButtons[x][y].isSelected()) {
-					System.out.println(y);
-					return y;
+	
+	public static int getYCoordinate(){
+		for(int y = 0; y < gridButtons.length; y++){
+			for(int x = 0; x < gridButtons[y].length; x++){
+				if (GridWorld.gridButtons[y][x].isSelected()){
+					System.out.println("Y: " +  x);
+					return x;
 				}
 			}
-		}
+    	}
+
 		System.out.println("no Y coordinate");
 		return 0;
 	}
