@@ -190,22 +190,22 @@ public class World implements Serializable {
 			return true;
 		}
 
-		
-		private void removeUpWall(){
-			this.upWall = null; 
+		private void removeUpWall() {
+			this.upWall = null;
 		}
-		
-		private void removeDownWall(){
-			this.downWall = null; 
+
+		private void removeDownWall() {
+			this.downWall = null;
 		}
-		
-		private void removeLeftWall(){
-			this.leftWall = null; 
+
+		private void removeLeftWall() {
+			this.leftWall = null;
 		}
-		
-		private void removeRightWall(){
-			this.rightWall = null; 
+
+		private void removeRightWall() {
+			this.rightWall = null;
 		}
+
 		/**
 		 * 
 		 * Check if the square has an item
@@ -426,40 +426,50 @@ public class World implements Serializable {
 	 * Add a wall to a square The direction should be from Coordinate (UP, DOWN,
 	 * LEFT, RIGHT)
 	 */
-	public boolean addWall(Coordinate coordinate, int direction){
-		switch(direction){
-		case Coordinate.UP: 
-			return this.getSquareAt(coordinate).addUpWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
-		case Coordinate.DOWN: 
-			return this.getSquareAt(coordinate).addDownWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
-		case Coordinate.LEFT: 
-			return this.getSquareAt(coordinate).addLeftWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
+	public boolean addWall(Coordinate coordinate, int direction) {
+		switch (direction) {
+		case Coordinate.UP:
+			return this.getSquareAt(coordinate).addUpWall(
+					new Wall(new Random().nextInt(5) * this.hashCode(),
+							direction));
+		case Coordinate.DOWN:
+			return this.getSquareAt(coordinate).addDownWall(
+					new Wall(new Random().nextInt(5) * this.hashCode(),
+							direction));
+		case Coordinate.LEFT:
+			return this.getSquareAt(coordinate).addLeftWall(
+					new Wall(new Random().nextInt(5) * this.hashCode(),
+							direction));
 		case Coordinate.RIGHT:
-			return this.getSquareAt(coordinate).addRightWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
-		default: 
-			return false; 
+			return this.getSquareAt(coordinate).addRightWall(
+					new Wall(new Random().nextInt(5) * this.hashCode(),
+							direction));
+		default:
+			return false;
 		}
 	}
-	
-	public void removeWall(Coordinate coordinate, int direction){
-		if(!verifyCoordinate(coordinate)) throw new IllegalValueException("Bad coordinates"); 
-		switch(direction){
-		case Coordinate.UP: 
-			this.getSquareAt(coordinate).removeUpWall(); 
-			break; 
-		case Coordinate.DOWN: 
-			this.getSquareAt(coordinate).removeDownWall(); 
-			break; 
-		case Coordinate.LEFT: 
-			this.getSquareAt(coordinate).removeLeftWall(); 
-			break; 
-		case Coordinate.RIGHT: 
-			this.getSquareAt(coordinate).removeRightWall(); 
+
+	public void removeWall(Coordinate coordinate, int direction) {
+		if (!verifyCoordinate(coordinate))
+			throw new IllegalValueException("Bad coordinates");
+		switch (direction) {
+		case Coordinate.UP:
+			this.getSquareAt(coordinate).removeUpWall();
 			break;
-		default: 
-			throw new IllegalValueException("Illegal direction"); 
+		case Coordinate.DOWN:
+			this.getSquareAt(coordinate).removeDownWall();
+			break;
+		case Coordinate.LEFT:
+			this.getSquareAt(coordinate).removeLeftWall();
+			break;
+		case Coordinate.RIGHT:
+			this.getSquareAt(coordinate).removeRightWall();
+			break;
+		default:
+			throw new IllegalValueException("Illegal direction");
 		}
 	}
+
 	/**
 	 * Checks to see if there is an item on the location
 	 * 
@@ -549,15 +559,11 @@ public class World implements Serializable {
 				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() + 1);
-//			GridWorld.getInstance().gridButtons[currentEveLocation.getX()][currentEveLocation
-//					.getY() + 1] = GridWorld.getInstance().gridButtons[currentEveLocation
-//					.getX()][currentEveLocation.getY()];
-			
-			GridWorld.getInstance().getChildren().remove(SandboxScene.getInstance().Eve);
-			GridWorld.getInstance().add(SandboxScene.getInstance().Eve, currentEveLocation.getX(), currentEveLocation
-					.getY() + 1);
-//			GridWorld.getInstance().gridButtons[currentEveLocation.getX()][currentEveLocation
-//					.getY()].setText("   ");
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+					.getY() + 1] = GridWorld.gridButtons[currentEveLocation
+					.getX()][currentEveLocation.getY()];
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+					.getY()].setText("   ");
 			break;
 		case Coordinate.DOWN:
 			if (this.getSquareAt(currentEveLocation).hasDownWall())
