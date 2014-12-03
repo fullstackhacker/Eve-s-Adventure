@@ -455,15 +455,17 @@ public final class ButtonHandlers {
 	 */
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("EVE_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getYCoordinate()][GridWorld.getXCoordinate()].getText();
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 		
 		for(int y=0; y < GridWorld.gridButtons.length; y++){
 			for(int x=0; x < GridWorld.gridButtons[y].length; x++){
 				if (GridWorld.gridButtons[y][x].getText().equals("Eve!")){
 					//frontend move
+					GridWorld.gridButtons[y][x].setText("   ");
 					
 					//backend move
-					Creature eve = GridWorld.getInstance().getWorld().removeCreature(new Coordinate(x,y)); 
+					System.out.println("X: " + x  + "Y: " + y); 
+					Creature eve = GridWorld.getInstance().getWorld().removeCreature(new Coordinate(y,x)); 
 					eve.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
 					GridWorld.getInstance().getWorld().addCreature(eve);
 				}

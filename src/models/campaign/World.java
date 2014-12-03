@@ -304,6 +304,7 @@ public class World implements Serializable {
 				this.world[y][x] = new Square();
 			}
 		}
+		findEve();
 	}
 
 	/**
@@ -430,6 +431,8 @@ public class World implements Serializable {
 	 */
 	public Creature removeCreature(Coordinate coordinate) {
 		verifyCoordinate(coordinate);
+		if(this.getSquareAt(coordinate).currentCreature().getName() == "Eve")
+			this.eve = null;
 		return this.world[coordinate.getY()][coordinate.getX()]
 				.removeCreature();
 	}
