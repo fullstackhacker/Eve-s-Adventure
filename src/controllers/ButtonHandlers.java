@@ -461,6 +461,7 @@ public final class ButtonHandlers {
 			for(int x=0; x < GridWorld.gridButtons[y].length; x++){
 				if (GridWorld.gridButtons[y][x].getText().equals("Eve!")){
 					//frontend move
+					GridWorld.gridButtons[y][x].setText(" ");
 					
 					//backend move
 					Creature eve = GridWorld.getInstance().getWorld().removeCreature(new Coordinate(x,y)); 
