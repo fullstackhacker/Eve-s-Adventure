@@ -1,20 +1,20 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
+import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.World;
+import models.gridobjects.items.Tree;
 import views.MainApp;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
@@ -392,10 +392,17 @@ public final class ButtonHandlers {
 			EvePop();
 			
 		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo")){
-			popup("Tree");
+			popup("Tree");;
+		
 		}
-        else
+        else{
 			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Tree");
+			Tree tree = new Tree(4);
+			
+			tree.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+			GridWorld.getInstance().getWorld().addItem(tree); 
+			GridWorld.getInstance().getWorld().printWorld();
+        }	
 	}
 	
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e){
