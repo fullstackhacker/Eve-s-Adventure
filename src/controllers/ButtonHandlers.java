@@ -1,19 +1,20 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
+import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.World;
+import models.gridobjects.items.Tree;
 import views.MainApp;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
@@ -26,6 +27,7 @@ import views.tabs.GameTabs;
 /**
  * 
  * @author Anthony Wong
+ * @author Megan Murray
  *
  */
 public final class ButtonHandlers {
@@ -300,34 +302,122 @@ public final class ButtonHandlers {
 	
 	/**
 	 * Popup for if a grid space is not empty
+	 * Asks to replace object or just cancel
+	 * 
+	 * @newObject the object the user is trying to put into the square
 	 */
+	public static void popup(String newObject){
+	final Stage dialog = new Stage();
+    dialog.initModality(Modality.APPLICATION_MODAL);
+    VBox dialogVbox = new VBox(20);
+    dialogVbox.getChildren().add(new Text("There is already an object in this space. \nReplace " + 
+    										GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText()+ 
+    										" with " + newObject + "?"));
+    Scene dialogScene = new Scene(dialogVbox, 300, 200);
+    final Button REPLACE = new Button("Replace");
+    REPLACE.setMaxWidth(100);
+    final Button CANCEL = new Button("Cancel");
+    REPLACE.setMaxWidth(100);
+    dialogVbox.getChildren().addAll(REPLACE, CANCEL);
+    dialog.setScene(dialogScene);
+    dialog.show();
+    
+    CANCEL.setOnAction(
+    		new EventHandler<ActionEvent>(){
+    			public void handle(ActionEvent e){
+    				dialog.close();
+    			}
+    	}
+	);
+    REPLACE.setOnAction(
+    		new EventHandler<ActionEvent>(){
+    			public void handle(ActionEvent e){
+    				dialog.close();
+    				GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText(newObject);
+    			}
+    	}
+	);
+}
+	
+	
+	
+	
+	/**
+	 * Popup for if a grid space is not empty
+	 * Asks to replace object or just cancel
+	 * 
+	 * @newObject the object the user is trying to put into the square
+	 */
+	public static void EvePop(){
+	final Stage dialog = new Stage();
+    dialog.initModality(Modality.APPLICATION_MODAL);
+    VBox dialogVbox = new VBox(20);
+    dialogVbox.getChildren().add(new Text("Eve is on this space. \nYou can't put an Object here."));
+    Scene dialogScene = new Scene(dialogVbox, 300, 200);
+    final Button OKAY = new Button("Okay");
+    dialogVbox.getChildren().add(OKAY);
+    dialog.setScene(dialogScene);
+    dialog.show();
+    
+    OKAY.setOnAction(
+    		new EventHandler<ActionEvent>(){
+    			public void handle(ActionEvent e){
+    				dialog.close();
+    			}
+    	}
+	);
+}
+	
 	    
 	/**
 	 * ItemsTab.java
 	 */
-	
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("SHRUB_BUTTON_HANDLER");
-	}
-	public static final void TREE_BUTTON_HANDLER(ActionEvent e){
-		System.out.println(GridWorld.GetXCoordinate() + "," + GridWorld.GetYCoordinate());
-		if (GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText() == "Tree"){
-			final Stage dialog = new Stage();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text("There is already an object in this space. Replace old object with tree?"));
-            Scene dialogScene = new Scene(dialogVbox, 300, 200);
-            dialog.setScene(dialogScene);
-            dialog.show();
+		String oldObject = GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText();
+		if (oldObject.equals("Eve!"))
+			EvePop();
+			
+		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo")){
+			popup("Shrub");
 		}
         else
-			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Tree");
+			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Shrub");
+	}
+		
+	
+	public static final void TREE_BUTTON_HANDLER(ActionEvent e){
+		String oldObject = GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText();
+		if (oldObject.equals("Eve!"))
+			EvePop();
+			
+		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo")){
+			popup("Tree");;
+		
 		}
+        else{
+			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Tree");
+			Tree tree = new Tree(4);
+			
+			tree.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+			if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
+			GridWorld.getInstance().getWorld().addItem(tree); 
+			GridWorld.getInstance().getWorld().printWorld();
+        }	
+	}
 	
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("BAMBOO_BUTTON_HANDLER");
-	}
-		
+		String oldObject = GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText();
+		if (oldObject.equals("Eve!"))
+			EvePop();
+			
+		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo")){
+			popup("Bamboo");
+		}
+        else
+			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Bamboo");
+		}	
 		
 		
 		

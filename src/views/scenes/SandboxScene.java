@@ -123,6 +123,7 @@ public final class SandboxScene extends Scene {
 
 			// BACKEND-FRONTEND Integration
 			world = new World("SandboxWorld", 10, 5);
+			GridWorld.getInstance().setWorld(world);
 			world.addCreature(new Creature("Eve", new Coordinate(2, 2)));
 			// world.printWorld();
 			// Coordinate coordEve = new Coordinate(1,1);

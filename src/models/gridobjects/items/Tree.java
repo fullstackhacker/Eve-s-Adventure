@@ -24,6 +24,10 @@ public class Tree extends Item implements Serializable {
 	 */
 	private static final long serialVersionUID = 9L;
 
+	public Tree(int iD){
+		super(iD);
+	}
+	
 	public Tree(int iD, Bamboo bamboo) {
 		super(iD);
 		this.bamboo = bamboo;
