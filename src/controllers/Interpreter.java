@@ -2,12 +2,18 @@ package controllers;
 
 import java.util.ArrayList;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 import views.grid.GridWorld;
 import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.Level;
+import models.campaign.Tips;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 
@@ -107,10 +113,21 @@ public class Interpreter {
 
 	public void start() {
 		this.world.findEve();
-		instructions();
+		player.play();
 	}
 
+	Timeline player = new Timeline(new KeyFrame(Duration.seconds(2),
+			new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					instructions();
+				}
+			}));
+
+	//, new KeyFrame(Duration.seconds(2))
+	
 	public void instructions() {
+		player.stop();
 		System.out.println("Instructions: "
 				+ this.karelCode.get(this.activeCodeBlock));
 		instruction();
@@ -127,7 +144,7 @@ public class Interpreter {
 			return;
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP))
 			return;
-		instructions();
+		player.play();
 	}
 
 	public void instruction() {
@@ -289,9 +306,10 @@ public class Interpreter {
 			return;
 		case KarelCode.TURNRIGHT:
 			this.world.getEve().turnLeft();
-			/*GridWorld.gridButtons[this.world.getEve().getX()][this.world
-					.getEve().getY()].getTransforms().add(new Rotate(90, 0, 0));
-			;*/
+			GridWorld.gridButtons[this.world.getEve().getX()][this.world
+					.getEve().getY()].getTransforms().add(
+					new Rotate(90, 28, 32.5));
+			;
 			return;
 		case KarelCode.SLEEP:
 			this.world.getEve().setAwake(false);
