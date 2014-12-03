@@ -9,6 +9,7 @@ import models.campaign.World;
 import views.MainApp;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
+import views.scenes.LoadSessionScene;
 import views.scenes.MainMenuScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
