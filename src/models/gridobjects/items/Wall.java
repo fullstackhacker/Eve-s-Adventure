@@ -3,6 +3,7 @@ package models.gridobjects.items;
 import java.io.Serializable;
 
 import exceptions.IllegalValueException;
+import models.Coordinate;
 
 /**
  * The Wall object extends Item and acts as a pure obstruction in the grid
@@ -26,99 +27,18 @@ public class Wall extends Item implements Serializable {
 	 * Stores the side of the grid box that the wall exists on ("north",
 	 * "south", "east", "west").
 	 */
-	private String side;
+	private int side;
 
-	public Wall(int iD, String side) {
+	public Wall(int iD, int side) {
 		super(iD);
-		/*
-		 * north = null; south = null; east = null; west = null;
-		 */
-		if(side.equals("north") || side.equals("east") || side.equals("south") || side.equals("west")){
+		if(side < Coordinate.UP || side > Coordinate.RIGHT) throw new IllegalValueException("Must be Coordinate.(UP|DOWN|LEFT|RIGHT");
 		this.side = side;
-		}else{
-			throw new IllegalValueException("Side must be have one of the following values: 'north', 'east', 'south', 'west'");
-		}
-
 	}
 	
-	public String getSide(){
+	public int getSide(){
 		return side;
 	}
-
-	/*
-	 * Locates the coordinate of the eastern most section of a wall within a
-	 * sequence of Wall objects.
-	 * 
-	 * @return coordinate The farthest east wall section.
-	 */
-	/*
-	 * public Wall end_east() {
-	 * 
-	 * return null; }
-	 */
-
-	/*
-	 * Locates the coordinate of the northern most section of a wall within a
-	 * sequence of Wall objects.
-	 * 
-	 * @return coordinate The farthest north wall section.
-	 */
-	/*
-	 * public Wall end_north() {
-	 * 
-	 * return null; }
-	 */
-
-	/*
-	 * Locates the coordinate of the western most section of a wall within a
-	 * sequence of Wall objects.
-	 * 
-	 * @return coordinate The farthest west wall section.
-	 */
-	/*
-	 * public Wall end_west() {
-	 * 
-	 * return null; }
-	 */
-
-	/*
-	 * Locates the coordinate of the southern most section of a wall within a
-	 * sequence of Wall objects.
-	 * 
-	 * @return coordinate The farthest south wall section.
-	 */
-	/*
-	 * public Wall end_south() {
-	 * 
-	 * return null; }
-	 */
-
-	/*
-	 * Returns the next Wall segment in a specified direction. If none exists
-	 * then it returns null;
-	 * 
-	 * @param direction
-	 *            The direction that the method should search in ("north",
-	 *            "south", "east", "west").
-	 * @return nextWall The next Wall object in the specified direction.
-	 */
-	/*
-	 * public Wall getNextWall(String direction) { return null;
-	 * 
-	 * }
-	 */
-
-	/*
-	 * Checks to see if the Wall is near a Tree object.
-	 * 
-	 * @return true If the Wall is near a Tree.
-	 */
-	/*
-	 * public boolean nearTree() {
-	 * 
-	 * return false; }
-	 */
-
+	
 	/**
 	 * Determines what type the object is and returns the first letter of that
 	 * types name.

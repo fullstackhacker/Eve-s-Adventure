@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import views.grid.GridWorld;
 import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.campaign.KarelCode;
@@ -35,6 +36,7 @@ public class Interpreter {
 	public Interpreter(ArrayList<String> karelCode, World world){ 
 		 this.karelCode = karelCode; 
 		 this.world = world; 
+		 GridWorld.getInstance().setWorld(this.world);
 	}
 	/**
 	 * Moves onto the next code block WITHOUT executing it
@@ -42,6 +44,9 @@ public class Interpreter {
 	public boolean next(){
 		this.activeCodeBlock++;
 		return this.activeCodeBlock < this.karelCode.size(); 
+	}
+	public boolean validPosition(){
+		return this.activeCodeBlock < this.karelCode.size();
 	}
 	/**
 	 * Moves to the previous code block WITHOUT executing it
@@ -87,13 +92,14 @@ public class Interpreter {
 	}
 	
 	public void start(){ 
+		this.world.findEve();
 		instructions();
 	}
 	
 	public void instructions(){ 
 		System.out.println("Instructions: " + this.karelCode.get(this.activeCodeBlock)); 
 		instruction();
-		//if(!this.next()) return;
+		if(!validPosition()) return;
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.CLOSESTATEMENT)) return; 
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF)) return;
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSE)) return;
@@ -257,13 +263,13 @@ public class Interpreter {
 		case KarelCode.BAGISEMPTY: 
 			return !this.world.getEve().hasBamboo();
 		case KarelCode.FACINGNORTH: 
-			return this.world.getEve().getDirection() == Creature.UP;
+			return this.world.getEve().getDirection() == Coordinate.UP;
 		case KarelCode.FACINGSOUTH:
-			return this.world.getEve().getDirection() == Creature.DOWN; 
+			return this.world.getEve().getDirection() == Coordinate.DOWN; 
 		case KarelCode.FACINGEAST: 
-			return this.world.getEve().getDirection() == Creature.RIGHT;
+			return this.world.getEve().getDirection() == Coordinate.RIGHT;
 		case KarelCode.FACINGWEST:
-			return this.world.getEve().getDirection() == Creature.LEFT;
+			return this.world.getEve().getDirection() == Coordinate.LEFT;
 		default: 
 			throw new IllegalValueException("Ill formed Karel Code " + this.karelCode.get(this.activeCodeBlock));
 		}
@@ -286,21 +292,6 @@ public class Interpreter {
 		else System.out.println("unable to add eve");
 		
 		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.WHILESTATEMENT);
-		level.addKarelCode(KarelCode.FRONTISCLEAR);
-		//level.addKarelCode(KarelCode.CLOSESTATEMENT);
-		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.ENDWHILE);
-		level.addKarelCode(KarelCode.TURNLEFT); 
-		level.addKarelCode(KarelCode.TURNLEFT); 
-		level.addKarelCode(KarelCode.TURNLEFT); 
-		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.PUTBAMBOO);
-		level.addKarelCode(KarelCode.IFSTATEMENT);
-		level.addKarelCode(KarelCode.FRONTISCLEAR);
-		//level.addKarelCode(KarelCode.CLOSESTATEMENT);
-		level.addKarelCode(KarelCode.MOVE);
-		level.addKarelCode(KarelCode.ENDIF);
 		Interpreter interpreter = new Interpreter(level.getKarelCode(), world);
 		
 		if(world.getEve() == null) return;
@@ -308,34 +299,6 @@ public class Interpreter {
 		world.printWorld(); 
 		interpreter.executeOne();
 		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		world.printWorld(); 
-		interpreter.executeOne();
-		System.out.println("Active Code Block: " + interpreter.activeCodeBlock +  "total size: " + level.getKarelCode().size());
-		
-		
+		world.printWorld();
 	}
 }

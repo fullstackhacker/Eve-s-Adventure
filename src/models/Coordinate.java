@@ -15,6 +15,22 @@ public class Coordinate {
 	 * Represents the y-coordinate in a Cartesian product representation of the world
 	 */
 	private int y;
+	/**
+	 * The directional value of Right.
+	 */
+	public static final int RIGHT = 3;
+	/**
+	 * The directional value of Down.
+	 */
+	public static final int DOWN = 2;
+	/**
+	 * The directional value of Left.
+	 */
+	public static final int LEFT = 1;
+	/**
+	 * The directional value of Up.
+	 */
+	public static final int UP = 0;
 	
 	/**
 	 * Constructor method. Creates a representation of the x and y coordinates

@@ -475,6 +475,7 @@ public final class KarelTable extends GridPane {
 				this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 				break;
 			default:
+				break;
 				/* Do Nothing */
 		}
 	}
@@ -485,9 +486,6 @@ public final class KarelTable extends GridPane {
 		for(String code : this.karelCode){
 			karelCodeArrayList.add(code);
 		}
-		
-		/* Remove Add Code Here */
-		karelCodeArrayList.remove(0);
 		
 		return karelCodeArrayList;
 	}
