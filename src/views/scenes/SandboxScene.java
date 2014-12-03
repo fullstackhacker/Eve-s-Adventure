@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -26,23 +27,29 @@ import javafx.scene.layout.RowConstraints;
 public final class SandboxScene extends Scene {
 
 	private static World world;
-	
+
 	private static GridWorld gridWorld;
 	
+	public static ToggleButton Eve = new ToggleButton("Eve!");
+
 	private static final class SandboxPane extends GridPane {
 
 		private static SandboxPane instanceOfMainMenuPane = null;
-		
-		private ImageView imageBack = new ImageView(new Image("./Images/ArrowLeft.png"));
-		private ImageView imageRight = new ImageView(new Image("./Images/ArrowRight.png"));
-		private ImageView imagePlay = new ImageView(new Image("./Images/PlayButton.png"));
-		private ImageView imageReset = new ImageView(new Image("./Images/ResetButton.png"));
-		
+
+		private ImageView imageBack = new ImageView(new Image(
+				"./Images/ArrowLeft.png"));
+		private ImageView imageRight = new ImageView(new Image(
+				"./Images/ArrowRight.png"));
+		private ImageView imagePlay = new ImageView(new Image(
+				"./Images/PlayButton.png"));
+		private ImageView imageReset = new ImageView(new Image(
+				"./Images/ResetButton.png"));
+
 		private Button BACK, FORWARD, PLAY, RESET;
 
 		private SandboxPane() {
 			this.getStylesheets().add("./sandbox_style.css");
-			
+
 			buttonSetup();
 
 			GridPane.setFillWidth(BACK, true);
@@ -61,7 +68,7 @@ public final class SandboxScene extends Scene {
 			KarelTable karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			gridWorld = GridWorld.getInstance();
-			
+
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
 
@@ -76,7 +83,7 @@ public final class SandboxScene extends Scene {
 			this.add(rows, 2, 3, 1, 2);
 			this.add(gridWorld, 3, 3, 4, 2);
 			this.add(protips, 0, 4, 2, 1);
-			
+
 			GridPane.setHalignment(rows, HPos.RIGHT);
 
 			ColumnConstraints column1 = new ColumnConstraints();
@@ -106,50 +113,49 @@ public final class SandboxScene extends Scene {
 			row4.setPercentHeight(78);
 			RowConstraints row5 = new RowConstraints();
 			row5.setPercentHeight(10);
-			/*RowConstraints row6 = new RowConstraints();
-			row6.setPercentHeight(20.5);
-			RowConstraints row7 = new RowConstraints();
-			row7.setPercentHeight(20.5);
-			RowConstraints row8 = new RowConstraints();
-			row8.setPercentHeight(10);*/
+			/*
+			 * RowConstraints row6 = new RowConstraints();
+			 * row6.setPercentHeight(20.5); RowConstraints row7 = new
+			 * RowConstraints(); row7.setPercentHeight(20.5); RowConstraints
+			 * row8 = new RowConstraints(); row8.setPercentHeight(10);
+			 */
 			this.getRowConstraints().addAll(row1, row2, row3, row4, row5);
-			
-			//BACKEND-FRONTEND Integration
+
+			// BACKEND-FRONTEND Integration
 			world = new World("SandboxWorld", 10, 5);
-			GridWorld.getInstance().setWorld(world);
-			world.addCreature(new Creature("Eve", new Coordinate(0,0)));
-//			world.printWorld();
-//			Coordinate coordEve = new Coordinate(1,1);
-//			Creature CreatureEve = new Creature("Eve", coordEve);
-//			world.addCreature(CreatureEve);
-//			world.printWorld();
-//			
-//			Label Eve = new Label("Eve!");
-//			GridPane.setHalignment(Eve, HPos.CENTER);
-//			gridWorld.add(Eve, 1, 1);
-//			Eve.setVisible(true);
-//			
-//			//world.moveEveEast();
-//			world.moveEve();
-//			gridWorld.getChildren().remove(Eve);
-//			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
-//			world.printWorld();
-//			
-//			//world.moveEveSouth();
-//			world.moveEve();
-//			gridWorld.getChildren().remove(Eve);
-//			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
-//			world.printWorld();
+			world.addCreature(new Creature("Eve", new Coordinate(2, 2)));
+			// world.printWorld();
+			// Coordinate coordEve = new Coordinate(1,1);
+			// Creature CreatureEve = new Creature("Eve", coordEve);
+			// world.addCreature(CreatureEve);
+			// world.printWorld();
+			//
+			// Label Eve = new Label("Eve!");
+			//GridPane.setHalignment(Eve, HPos.CENTER);
+			GridWorld.gridButtons[2][2].setText("Eve!");
+			Eve.setVisible(true);
 			
-			//this.setPadding(new Insets(0, 5, 5, 5));
 			
-			//this.setGridLinesVisible(true);
+			//
+			// //world.moveEveEast();
+			// world.moveEve();
+			// gridWorld.getChildren().remove(Eve);
+			// gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
+			// world.printWorld();
+			//
+			// //world.moveEveSouth();
+			// world.moveEve();
+			// gridWorld.getChildren().remove(Eve);
+			// gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
+			// world.printWorld();
+
+			// this.setPadding(new Insets(0, 5, 5, 5));
+
+			// this.setGridLinesVisible(true);
 
 		}
-		
-		
-		
-		private void buttonSetup(){
+
+		private void buttonSetup() {
 			BACK = new Button();
 			FORWARD = new Button();
 			PLAY = new Button();
@@ -158,7 +164,7 @@ public final class SandboxScene extends Scene {
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
 			RESET.setGraphic(imageReset);
-			
+
 			BACK.setOnAction(ButtonHandlers::BACK_BUTTON_HANDLER);
 			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);
 			PLAY.setOnAction(ButtonHandlers::PLAY_BUTTON_HANDLER);
@@ -172,24 +178,24 @@ public final class SandboxScene extends Scene {
 	}
 
 	private static SandboxScene instanceOfSandboxScene = null;
-	
+
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
-	
-	public static void setWorld(World world1){
+
+	public static void setWorld(World world1) {
 		world = world1;
 	}
-	
-	public static void setGridWorld(GridWorld gridworld1){
+
+	public static void setGridWorld(GridWorld gridworld1) {
 		gridWorld = gridworld1;
 	}
-	
-	public static World getWorld(){
+
+	public static World getWorld() {
 		return world;
 	}
-	
-	public static GridWorld getGridWorld(){
+
+	public static GridWorld getGridWorld() {
 		return gridWorld;
 	}
 
