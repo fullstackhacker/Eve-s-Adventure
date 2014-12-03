@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.World;
+import models.gridobjects.creatures.Creature;
 import models.gridobjects.items.Bamboo;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
@@ -313,7 +314,7 @@ public final class ButtonHandlers {
     dialog.initModality(Modality.APPLICATION_MODAL);
     VBox dialogVbox = new VBox(20);
     dialogVbox.getChildren().add(new Text("There is already an object in this space. \nReplace " + 
-    										GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText()+ 
+    										GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText()+ 
     										" with " + newObject + "?"));
     Scene dialogScene = new Scene(dialogVbox, 300, 200);
     final Button REPLACE = new Button("Replace");
@@ -335,25 +336,25 @@ public final class ButtonHandlers {
     		new EventHandler<ActionEvent>(){
     			public void handle(ActionEvent e){
     				dialog.close();
-    				GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText(newObject);
+    				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText(newObject);
     				switch(newObject){
     				case "Tree":
     					Tree tree = new Tree(4);
-    					tree.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+    					tree.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
     					if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
     					GridWorld.getInstance().getWorld().addItem(tree); 
     					GridWorld.getInstance().getWorld().printWorld();
     					break;
     				case "Shrub":
     					Shrub shrub = new Shrub(4, false);
-    					shrub.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+    					shrub.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
     					if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
     					GridWorld.getInstance().getWorld().addItem(shrub); 
     					GridWorld.getInstance().getWorld().printWorld();
     					break; 
     				case "Bamboo":
     					Bamboo bamboo = new Bamboo(4);
-    					bamboo.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+    					bamboo.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
     					if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
     					GridWorld.getInstance().getWorld().addItem(bamboo); 
     					GridWorld.getInstance().getWorld().printWorld();
@@ -367,14 +368,13 @@ public final class ButtonHandlers {
 }
 	/**
 	 * Popup if they try to put something where Eve is
-	 * 
 	 * @newObject the object the user is trying to put into the square
 	 */
 	public static void EvePop(){
 	final Stage dialog = new Stage();
     dialog.initModality(Modality.APPLICATION_MODAL);
     VBox dialogVbox = new VBox(20);
-    dialogVbox.getChildren().add(new Text("Eve is on this space. \nYou can't put an Object here."));
+    dialogVbox.getChildren().add(new Text("This space is already full. \nYou can't put an Object here."));
     Scene dialogScene = new Scene(dialogVbox, 300, 200);
     final Button OKAY = new Button("Okay");
     dialogVbox.getChildren().add(OKAY);
@@ -395,7 +395,7 @@ public final class ButtonHandlers {
 	 */
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("SHRUB_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText();
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 		if (oldObject.equals("Eve!"))
 			EvePop();
 			
@@ -403,9 +403,9 @@ public final class ButtonHandlers {
 			popup("Shrub");
 		}
         else
-			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Shrub");
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Shrub");
 			Shrub shrub = new Shrub(4, false);
-			shrub.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+			shrub.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
 			if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
 			GridWorld.getInstance().getWorld().addItem(shrub); 
 			GridWorld.getInstance().getWorld().printWorld();
@@ -413,18 +413,18 @@ public final class ButtonHandlers {
 		
 	
 	public static final void TREE_BUTTON_HANDLER(ActionEvent e){
-		String oldObject = GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText();
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 		if (oldObject.equals("Eve!"))
 			EvePop();
 			
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo")){
+		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Friend")){
 			popup("Tree");
 		
 		}
         else{
-			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Tree");
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Tree");
 			Tree tree = new Tree(4);
-			tree.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+			tree.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
 			if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
 			GridWorld.getInstance().getWorld().addItem(tree); 
 			GridWorld.getInstance().getWorld().printWorld();
@@ -433,21 +433,78 @@ public final class ButtonHandlers {
 	
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("BAMBOO_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText();
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 		if (oldObject.equals("Eve!"))
 			EvePop();
 			
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo")){
+		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Friend")){
 			popup("Bamboo");
 		}
-        else
-			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Bamboo");
+        else{
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Bamboo");
 			Bamboo bamboo = new Bamboo(4);
-			bamboo.setCoordinates(new Coordinate(GridWorld.GetXCoordinate(), GridWorld.GetYCoordinate()));
+			bamboo.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
 			if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
 			GridWorld.getInstance().getWorld().addItem(bamboo); 
 			GridWorld.getInstance().getWorld().printWorld();
-		}	
+        }
+	}	
+	
+	/**
+	 * CreaturesTab.java
+	 */
+	public static final void EVE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("EVE_BUTTON_HANDLER");
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
+		
+		for(int y=0; y < GridWorld.gridButtons.length; y++){
+			for(int x=0; x < GridWorld.gridButtons[y].length; x++){
+				if (GridWorld.gridButtons[x][y].getText().equals("Eve!")){
+					//frontend move
+					
+					//backend move
+					Creature eve = GridWorld.getInstance().getWorld().removeCreature(new Coordinate(x,y)); 
+					eve.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
+					GridWorld.getInstance().getWorld().addCreature(eve);
+				}
+			}
+		}
+		
+		if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Friend")){
+			EvePop();
+		}
+		
+        else{
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Eve!");
+			Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate());
+			Creature Eve = new Creature("Eve!", cords);
+			Eve.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
+			if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
+			GridWorld.getInstance().getWorld().addCreature(Eve); 
+			GridWorld.getInstance().getWorld().printWorld();
+        }
+	}
+	
+	
+	public static final void FRIENDS_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("FRIENDS_BUTTON_HANDLER");
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
+			
+		if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Eve!")){
+			EvePop();
+		}
+        else
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Friend");
+			Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate());
+			Creature Friend = new Creature("Friend", cords);
+			Friend.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
+			if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
+			GridWorld.getInstance().getWorld().addCreature(Friend); 
+			GridWorld.getInstance().getWorld().printWorld();
+	}
+	
+	
+	
 		
 		
 		

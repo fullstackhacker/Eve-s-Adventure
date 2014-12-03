@@ -86,8 +86,8 @@ public final class GridWorld extends GridPane {
 		        		GameTabs.getInstance().enableTab(GameTabs.CREATURES_TAB_VALUE);
 		        		GameTabs.getInstance().enableTab(GameTabs.ITEMS_TAB_VALUE);
 		        		GameTabs.getInstance().switchTab(GameTabs.CREATURES_TAB_VALUE);
-		        		GetXCoordinate();
-		        		GetYCoordinate();
+		        		getXCoordinate();
+		        		getYCoordinate();
 		            }
 		         }
 		});
@@ -129,11 +129,11 @@ public final class GridWorld extends GridPane {
 	}
 	
 	
-	
-	public static int GetXCoordinate(){
-		for(int x = 0; x < 5; x++){
-			for(int y = 0; y < 10; y++){
-				if (GridWorld.gridButtons[x][y].isSelected()){
+
+	public static int getXCoordinate(){
+		for(int y = 0; y < gridButtons.length; y++){
+			for(int x = 0; x < gridButtons[y].length; x++){
+				if (GridWorld.gridButtons[y][x].isSelected()){
 					System.out.println(x);
 					return x;
 				}
@@ -143,15 +143,16 @@ public final class GridWorld extends GridPane {
 		return 0;
 	}
 	
-	public static int GetYCoordinate(){
-		for(int x = 0; x < 5; x++){
-			for(int y = 0; y < 10; y++){
-				if (GridWorld.gridButtons[x][y].isSelected()){
+	public static int getYCoordinate(){
+		for(int y = 0; y < gridButtons.length; y++){
+			for(int x = 0; x < gridButtons[y].length; x++){
+				if (GridWorld.gridButtons[y][x].isSelected()){
 					System.out.println(y);
 					return y;
 				}
 			}
     	}
+
 		System.out.println("no Y coordinate");
 		return 0;
 	}
