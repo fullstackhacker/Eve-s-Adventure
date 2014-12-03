@@ -107,6 +107,7 @@ public final class GridWorld extends GridPane {
 		//this.getChildren().addAll(GridWorld.gridButtons);
 
 		this.setPadding(new Insets(5, 5, 5, 5));
+		
 	}
 	
 	public void setWorld(World world){

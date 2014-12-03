@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import views.grid.GridWorld;
 import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.campaign.KarelCode;
@@ -39,6 +40,7 @@ public class Interpreter {
 	public Interpreter(ArrayList<String> karelCode, World world){ 
 		 this.karelCode = karelCode; 
 		 this.world = world; 
+		 GridWorld.getInstance().setWorld(this.world);
 	}
 	/**
 	 * Moves onto the next code block WITHOUT executing it
