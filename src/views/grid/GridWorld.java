@@ -1,6 +1,5 @@
 package views.grid;
 
-import models.Coordinate;
 import models.campaign.World;
 import views.tabs.GameTabs;
 import controllers.ButtonHandlers;
@@ -99,7 +98,7 @@ public final class GridWorld extends GridPane {
 		
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < 10; j++){
-				gridButtons[i][j] = new ToggleButton("test");
+				gridButtons[i][j] = new ToggleButton("   ");
 				GridPane.setHalignment(gridButtons[i][j], HPos.CENTER);
 				GridPane.setHgrow(gridButtons[i][j], Priority.ALWAYS);
 				GridPane.setVgrow(gridButtons[i][j], Priority.ALWAYS);
