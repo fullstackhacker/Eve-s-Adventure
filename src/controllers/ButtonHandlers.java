@@ -287,25 +287,27 @@ public final class ButtonHandlers {
 		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 	}
-
-	public static final void GridWorld_BUTTON_HANDLER(ActionEvent e) {
+	
+	public static final void GridWorld_BUTTON_HANDLER(ActionEvent e){
 	}
-
-	public static final void BACK_BUTTON_HANDLER(ActionEvent e) {
+	
+	public static final void BACK_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("BACK_BUTTON_HANDLER CALLED");
 	}
-
-	public static final void FORWARD_BUTTON_HANDLER(ActionEvent e) {
+	
+	public static final void FORWARD_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("FORWARD_BUTTON_HANDLER CALLED");
 	}
-
-	public static final void PLAY_BUTTON_HANDLER(ActionEvent e) {
+	
+	public static final void PLAY_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("PLAY_BUTTON_HANDLER CALLED");
-		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
-		World world = SandboxScene.getWorld();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode(); 
+		World world = SandboxScene.getWorld(); 
 		System.out.println(KarelTable.getInstance().getKarelCode());
 		Interpreter interpreter = new Interpreter(karelCode, world);
-		interpreter.start(); // starts the code
+		world.printWorld();
+		interpreter.start(); //starts the code
+		world.printWorld();
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {

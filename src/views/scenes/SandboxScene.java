@@ -116,28 +116,29 @@ public final class SandboxScene extends Scene {
 			
 			//BACKEND-FRONTEND Integration
 			world = new World("SandboxWorld", 10, 5);
-			world.printWorld();
-			Coordinate coordEve = new Coordinate(1,1);
-			Creature CreatureEve = new Creature("Eve", coordEve);
-			world.addCreature(CreatureEve);
-			world.printWorld();
-			
-			Label Eve = new Label("Eve!");
-			GridPane.setHalignment(Eve, HPos.CENTER);
-			gridWorld.add(Eve, 1, 1);
-			Eve.setVisible(true);
-			
-			//world.moveEveEast();
-			world.moveEve();
-			gridWorld.getChildren().remove(Eve);
-			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
-			world.printWorld();
-			
-			//world.moveEveSouth();
-			world.moveEve();
-			gridWorld.getChildren().remove(Eve);
-			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
-			world.printWorld();
+			world.addCreature(new Creature("Eve", new Coordinate(0,0)));
+//			world.printWorld();
+//			Coordinate coordEve = new Coordinate(1,1);
+//			Creature CreatureEve = new Creature("Eve", coordEve);
+//			world.addCreature(CreatureEve);
+//			world.printWorld();
+//			
+//			Label Eve = new Label("Eve!");
+//			GridPane.setHalignment(Eve, HPos.CENTER);
+//			gridWorld.add(Eve, 1, 1);
+//			Eve.setVisible(true);
+//			
+//			//world.moveEveEast();
+//			world.moveEve();
+//			gridWorld.getChildren().remove(Eve);
+//			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
+//			world.printWorld();
+//			
+//			//world.moveEveSouth();
+//			world.moveEve();
+//			gridWorld.getChildren().remove(Eve);
+//			gridWorld.add(Eve, CreatureEve.getX(), CreatureEve.getY());
+//			world.printWorld();
 			
 			//this.setPadding(new Insets(0, 5, 5, 5));
 			
