@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import views.grid.GridWorld;
+import views.karel.KarelTable;
 import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.campaign.KarelCode;
@@ -120,6 +121,7 @@ public class Interpreter {
 			new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
+					KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 					instructions();
 				}
 			}));

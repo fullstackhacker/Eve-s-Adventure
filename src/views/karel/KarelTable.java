@@ -564,6 +564,12 @@ public final class KarelTable extends GridPane {
 				/* Do Nothing */
 		}
 	}
+	
+	public void setSelectedIndex(int index){
+		if(index >= 0 || index < karelCode.size()){
+			this.listView.getSelectionModel().clearAndSelect(index);
+		}
+	}
 
 	public ArrayList<String> getKarelCode(){
 		ArrayList<String> karelCodeArrayList = new ArrayList<String>();
