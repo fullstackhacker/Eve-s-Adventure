@@ -9,7 +9,7 @@ import java.util.Iterator;
  * Can only have one per level
  */
 public class Tips {
-	public static final String CREATURESTAB = "You can select the \"Creture\" tab after selecting a cell within the grid world to add a creature.";
+	public static final String CREATURESTAB = "You can select the \"Creature\" tab after selecting a cell within the grid world to add a creature.";
 	public static final String ITEMSTAB = "You can select the \"Items\" tab after selecting a cell within the grid world to add an item.";
 	public static final String SAVING = "If you go to File->Save, at the top of the screen you can make you're scenario playable in Adventure Mode!";
 	public static Iterator<String> getPossibleTips() {
