@@ -710,6 +710,10 @@ public final class ButtonHandlers {
 		world.printWorld();
 		interpreter.start(); // starts the code
 		world.printWorld();
+//		do{
+//			interpreter.executeOne();
+//			world.printWorld();
+//		} while(interpreter.next());
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {

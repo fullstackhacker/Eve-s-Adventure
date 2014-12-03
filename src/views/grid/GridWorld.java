@@ -167,8 +167,6 @@ public final class GridWorld extends GridPane {
 	public World getWorld() {
 		return world;
 	}
-	
-	
 
 	public static int getXCoordinate(){
 		for(int y = 0; y < gridButtons.length; y++){
