@@ -138,8 +138,8 @@ public final class GridWorld extends GridPane {
 		for(int y = 0; y < gridButtons.length; y++){
 			for(int x = 0; x < gridButtons[y].length; x++){
 				if (GridWorld.gridButtons[y][x].isSelected()){
-					System.out.println(x);
-					return x;
+					System.out.println("X: " + y);
+					return y;
 				}
 			}
     	}
@@ -151,8 +151,8 @@ public final class GridWorld extends GridPane {
 		for(int y = 0; y < gridButtons.length; y++){
 			for(int x = 0; x < gridButtons[y].length; x++){
 				if (GridWorld.gridButtons[y][x].isSelected()){
-					System.out.println(y);
-					return y;
+					System.out.println("Y: " +  x);
+					return x;
 				}
 			}
     	}

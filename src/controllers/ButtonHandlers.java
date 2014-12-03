@@ -455,11 +455,11 @@ public final class ButtonHandlers {
 	 */
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("EVE_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
+		String oldObject = GridWorld.gridButtons[GridWorld.getYCoordinate()][GridWorld.getXCoordinate()].getText();
 		
 		for(int y=0; y < GridWorld.gridButtons.length; y++){
 			for(int x=0; x < GridWorld.gridButtons[y].length; x++){
-				if (GridWorld.gridButtons[x][y].getText().equals("Eve!")){
+				if (GridWorld.gridButtons[y][x].getText().equals("Eve!")){
 					//frontend move
 					
 					//backend move
