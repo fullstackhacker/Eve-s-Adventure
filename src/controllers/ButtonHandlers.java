@@ -563,7 +563,7 @@ public final class ButtonHandlers {
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 			
 		if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Eve!")){
-			EvePop();
+			popup("Friend");
 		}
         else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Friend");
