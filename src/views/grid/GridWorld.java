@@ -1,5 +1,6 @@
 package views.grid;
 
+import models.campaign.World;
 import views.tabs.GameTabs;
 import controllers.ButtonHandlers;
 import javafx.beans.value.ChangeListener;
@@ -24,6 +25,8 @@ public final class GridWorld extends GridPane {
 	private static GridWorld instant = null;
 	
 	public static ToggleButton[][] gridButtons = new ToggleButton[5][10];
+	
+	private World world;
 
 	private GridWorld() {
 		this.getStylesheets().add("./sandbox_style.css");
@@ -104,7 +107,14 @@ public final class GridWorld extends GridPane {
 		//this.getChildren().addAll(GridWorld.gridButtons);
 
 		this.setPadding(new Insets(5, 5, 5, 5));
-
+	}
+	
+	public void setWorld(World world){
+		this.world = world;
+	}
+	
+	public World getWorld(){
+		return world;
 	}
 
 	public static GridWorld getInstance() {
