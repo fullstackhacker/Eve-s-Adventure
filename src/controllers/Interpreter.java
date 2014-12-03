@@ -92,6 +92,7 @@ public class Interpreter {
 	}
 	
 	public void start(){ 
+		this.world.findEve();
 		instructions();
 	}
 	

@@ -269,6 +269,12 @@ public class World implements Serializable {
 	 * Name of the world
 	 */
 	private String name;
+	
+	/**
+	 * Eve
+	 */
+	private Creature eve; 
+	
 	/**
 	 * Serializable ID for saving
 	 */
@@ -393,6 +399,7 @@ public class World implements Serializable {
 	 * @return true iff added the creature to the square
 	 */
 	public boolean addCreature(Creature creature) {
+		if(eve == null && creature.getName().equals("Eve")) this.eve = creature; 
 		if (creature == null)
 			throw new IllegalValueException();
 		return this.world[creature.getY()][creature.getX()]
@@ -947,15 +954,16 @@ public class World implements Serializable {
 	 * @return the Eve Creature Object
 	 */
 	public Creature getEve() {
-		for (int y = 0; y < this.getHeight(); y++) {
-			for (int x = 0; x < this.getWidth(); x++) {
-				if (this.world[y][x].hasCreature()
-						&& this.world[y][x].currentCreature().getName()
-								.equals("Eve"))
-					return this.world[y][x].currentCreature();
+		return this.eve;
+	}
+	
+	public void findEve(){
+		for(int y=0; y<this.world.length; y++){
+			for(int x=9; x<this.world[y].length; x++){
+				if(this.world[y][x].hasCreature() && this.world[y][x].currentCreature().getName().equals("Eve"))
+					this.eve = this.world[y][x].currentCreature();
 			}
 		}
-		return null;
 	}
 
 	private Square getSquareAt(Coordinate coordinate) {

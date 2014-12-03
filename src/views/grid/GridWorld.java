@@ -1,5 +1,6 @@
 package views.grid;
 
+import models.Coordinate;
 import models.campaign.World;
 import views.tabs.GameTabs;
 import controllers.ButtonHandlers;
@@ -86,6 +87,8 @@ public final class GridWorld extends GridPane {
 		        		GameTabs.getInstance().enableTab(GameTabs.CREATURES_TAB_VALUE);
 		        		GameTabs.getInstance().enableTab(GameTabs.ITEMS_TAB_VALUE);
 		        		GameTabs.getInstance().switchTab(GameTabs.CREATURES_TAB_VALUE);
+		        		GetXCoordinate();
+		        		GetYCoordinate();
 		            }
 		         }
 		});
@@ -119,6 +122,36 @@ public final class GridWorld extends GridPane {
 	public World getWorld(){
 		return world;
 	}
+	
+	
+	
+	public static int GetXCoordinate(){
+		for(int x = 0; x < 5; x++){
+			for(int y = 0; y < 10; y++){
+				if (GridWorld.gridButtons[x][y].isSelected()){
+					System.out.println(x);
+					return x;
+				}
+			}
+    	}
+		System.out.println("no X coordinate");
+		return 0;
+	}
+	
+	public static int GetYCoordinate(){
+		for(int x = 0; x < 5; x++){
+			for(int y = 0; y < 10; y++){
+				if (GridWorld.gridButtons[x][y].isSelected()){
+					System.out.println(y);
+					return y;
+				}
+			}
+    	}
+		System.out.println("no Y coordinate");
+		return 0;
+	}
+	
+	
 
 	public static GridWorld getInstance() {
 		return (instant == null) ? new GridWorld() : instant;

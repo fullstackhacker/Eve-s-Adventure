@@ -3,10 +3,19 @@ package controllers;
 import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 import models.campaign.KarelCode;
 import models.campaign.World;
 import views.MainApp;
+import views.grid.GridWorld;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
 import views.scenes.LoadSessionScene;
@@ -287,6 +296,41 @@ public final class ButtonHandlers {
 		GameTabs.getInstance().enableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		GameTabs.getInstance().switchTab(GameTabs.OPERATIONS_TAB_VALUE);
 	}
+	
+	
+	/**
+	 * Popup for if a grid space is not empty
+	 */
+	    
+	/**
+	 * ItemsTab.java
+	 */
+	
+	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("SHRUB_BUTTON_HANDLER");
+	}
+	public static final void TREE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println(GridWorld.GetXCoordinate() + "," + GridWorld.GetYCoordinate());
+		if (GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].getText() == "Tree"){
+			final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text("There is already an object in this space. Replace old object with tree?"));
+            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            dialog.setScene(dialogScene);
+            dialog.show();
+		}
+        else
+			GridWorld.gridButtons[GridWorld.GetXCoordinate()][GridWorld.GetYCoordinate()].setText("Tree");
+		}
+	
+	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("BAMBOO_BUTTON_HANDLER");
+	}
+		
+		
+		
+		
 	
 	public static final void GridWorld_BUTTON_HANDLER(ActionEvent e){
 	}
