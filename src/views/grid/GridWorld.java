@@ -19,6 +19,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.transform.Rotate;
 
 public final class GridWorld extends GridPane {
 
@@ -113,6 +114,8 @@ public final class GridWorld extends GridPane {
 		}
 		
 		GridWorld.gridButtons[2][2].setText("Eve!");
+		//GridWorld.gridButtons[2][2].getTransforms().add(new Rotate(180, 0, 0));
+		//GridWorld.gridButtons[2][2].getTransforms()
 		
 		//gridButtons[2][2].setText("Eve!");
 		
