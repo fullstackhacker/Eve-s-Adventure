@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import javafx.geometry.HPos;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import views.grid.GridWorld;
 import views.scenes.SandboxScene;
 import models.Coordinate;
@@ -553,15 +557,28 @@ public class World implements Serializable {
 		Coordinate currentEveLocation = this.getEve().getCoordinates();
 		Coordinate newEveLocation = null;
 
+		
+		for(int i = 0; i < 5; i++){
+			for(int j = 0; j < 10; j++){
+				System.out.println(GridWorld.gridButtons[i][j].getText());
+			}
+		}
+		
+		GridWorld.gridButtons[1][1].setText("Eve!");
+		
+		
 		switch (this.getEve().getDirection()) {
 		case Coordinate.UP:
 			if (this.getSquareAt(currentEveLocation).hasUpWall())
 				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() + 1);
+			System.out.println("HEEEERRREEE: " + GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+					.getY()].getText());
 			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-					.getY() + 1] = GridWorld.gridButtons[currentEveLocation
-					.getX()][currentEveLocation.getY()];
+					.getY() + 1]
+					.setText(GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].getText());
 			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
 					.getY()].setText("   ");
 			break;
@@ -570,18 +587,40 @@ public class World implements Serializable {
 				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() - 1);
+			System.out.println("HEEEERRREEE: " + GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+			                                                                  					.getY()].getText());
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+					.getY() - 1]
+					.setText(GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].getText());
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+					.getY()].setText("   ");
 			break;
 		case Coordinate.LEFT:
 			if (this.getSquareAt(currentEveLocation).hasLeftWall())
 				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX() - 1,
 					currentEveLocation.getY());
+			System.out.println("HEEEERRREEE: " + GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+			                                                                  					.getY()].getText());
+			GridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
+					.getY()].setText(GridWorld.gridButtons[currentEveLocation
+					.getX()][currentEveLocation.getY()].getText());
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+					.getY()].setText("   ");
 			break;
 		case Coordinate.RIGHT:
 			if (this.getSquareAt(currentEveLocation).hasRightWall())
 				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX() + 1,
 					currentEveLocation.getY());
+			System.out.println("HEEEERRREEE: " + GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+			                                                                  					.getY()].getText());
+			GridWorld.gridButtons[currentEveLocation.getX() + 1][currentEveLocation
+					.getY()].setText(GridWorld.gridButtons[currentEveLocation
+					.getX()][currentEveLocation.getY()].getText());
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+					.getY()].setText("   ");
 			break;
 		default:
 			throw new IllegalValueException("Eve facing illegal direction");

@@ -92,17 +92,20 @@ public final class GridWorld extends GridPane {
 		
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < 10; j++){
-				GridWorld.gridButtons[i][j] = new ToggleButton("   ");
-				GridPane.setHalignment(GridWorld.gridButtons[i][j], HPos.CENTER);
-				GridPane.setHgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
-				GridPane.setVgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
-				GridWorld.gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-				GridWorld.gridButtons[i][j].setId("WorldButton");
-				GridWorld.gridButtons[i][j].setToggleGroup(group);
+				gridButtons[i][j] = new ToggleButton("test");
+				GridPane.setHalignment(gridButtons[i][j], HPos.CENTER);
+				GridPane.setHgrow(gridButtons[i][j], Priority.ALWAYS);
+				GridPane.setVgrow(gridButtons[i][j], Priority.ALWAYS);
+				gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				gridButtons[i][j].setId("WorldButton");
+				gridButtons[i][j].setToggleGroup(group);
 				
-				this.add(GridWorld.gridButtons[i][j], i, j);
+				this.add(gridButtons[i][j], i, j);
+				
 			}
 		}
+		
+		//gridButtons[2][2].setText("Eve!");
 		
 		//this.getChildren().addAll(GridWorld.gridButtons);
 
