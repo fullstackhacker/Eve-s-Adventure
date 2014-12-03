@@ -132,6 +132,7 @@ public final class SandboxScene extends Scene {
 			//
 			// Label Eve = new Label("Eve!");
 			//GridPane.setHalignment(Eve, HPos.CENTER);
+			System.out.println("Sandbox Scene things");
 			GridWorld.gridButtons[2][2].setText("Eve!");
 			Eve.setVisible(true);
 			

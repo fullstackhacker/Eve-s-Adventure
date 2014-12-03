@@ -25,7 +25,7 @@ public final class GridWorld extends GridPane {
 
 	private static GridWorld instant = null;
 	
-	public static ToggleButton[][] gridButtons = new ToggleButton[5][10];
+	public static ToggleButton[][] gridButtons = null;
 	
 	private World world;
 
@@ -93,6 +93,10 @@ public final class GridWorld extends GridPane {
 		         }
 		});
 		
+		gridButtons = new ToggleButton[5][10];
+		
+		System.out.println("OVERWERITINEG BUTTONGS");
+		
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < 10; j++){
 				gridButtons[i][j] = new ToggleButton("test");
@@ -154,7 +158,10 @@ public final class GridWorld extends GridPane {
 	
 
 	public static GridWorld getInstance() {
-		return (instant == null) ? new GridWorld() : instant;
+		if(instant == null){
+			instant = new GridWorld();
+		}
+		return instant;
 	}
 
 }
