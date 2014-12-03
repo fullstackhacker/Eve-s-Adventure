@@ -152,6 +152,7 @@ public class Interpreter {
 				+ this.karelCode.get(this.activeCodeBlock));
 		instruction();
 		if (!validPosition()){
+			timer.cancel();
 			return;
 		}
 		if (this.karelCode.get(this.activeCodeBlock).equals(
