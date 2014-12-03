@@ -137,7 +137,7 @@ public class Interpreter {
 		case KarelCode.MOVE:
 		case KarelCode.WAKEUP: 
 		case KarelCode.SLEEP: 
-		case KarelCode.TURNLEFT: 
+		case KarelCode.TURNRIGHT: 
 		case KarelCode.PICKBAMBOO: 
 		case KarelCode.PUTBAMBOO:
 			operation(); 
@@ -235,7 +235,7 @@ public class Interpreter {
 		case KarelCode.MOVE:
 			this.world.moveEve();
 			return;
-		case KarelCode.TURNLEFT:
+		case KarelCode.TURNRIGHT:
 			this.world.getEve().turnLeft();
 			return;
 		case KarelCode.SLEEP:

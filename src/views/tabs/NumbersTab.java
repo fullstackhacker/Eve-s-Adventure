@@ -14,7 +14,7 @@ final class NumbersTab extends VBox{
 		this.setPadding(new Insets(0, 20, 10, 20));
 		this.setAlignment(Pos.CENTER);
 		
-		for(int i = 1; i < 11; i++){
+		for(int i = 0; i < 10; i++){
 			final Button BUTTON = new Button(Integer.toString(i));
 			BUTTON.setOnAction(ButtonHandlers::NUMBERS_BUTTON_HANDLER);
 			this.getChildren().add(BUTTON);

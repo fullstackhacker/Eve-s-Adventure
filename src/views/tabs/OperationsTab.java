@@ -19,14 +19,14 @@ final class OperationsTab extends VBox{
 		final Button MOVE_BUTTON = new Button("MOVE");
 		final Button SLEEP_BUTTON = new Button("SLEEP");
 		final Button WAKE_UP_BUTTON = new Button("WAKE UP");
-		final Button TURN_LEFT_BUTTON = new Button("TURN RIGHT");
+		final Button TURN_RIGHT_BUTTON = new Button("TURN RIGHT");
 		final Button PICK_UP_BAMBOO_BUTTON = new Button("PICK UP BAMBOO");
 		final Button PUT_BAMBOO_BUTTON = new Button("PUT BAMBOO");
 		
 		MOVE_BUTTON.setOnAction(ButtonHandlers::MOVE_BUTTON_HANDLER);
 		SLEEP_BUTTON.setOnAction(ButtonHandlers::SLEEP_BUTTON_HANDLER);
 		WAKE_UP_BUTTON.setOnAction(ButtonHandlers::WAKE_UP_BUTTON_HANDLER);
-		TURN_LEFT_BUTTON.setOnAction(ButtonHandlers::TURN_LEFT_BUTTON_HANDLER);
+		TURN_RIGHT_BUTTON.setOnAction(ButtonHandlers::TURN_RIGHT_BUTTON_HANDLER);
 		PICK_UP_BAMBOO_BUTTON.setOnAction(ButtonHandlers::PICK_UP_BAMBOO_BUTTON_HANDLER);
 		PUT_BAMBOO_BUTTON.setOnAction(ButtonHandlers::PUT_BAMBOO_BUTTON_HANDLER);
 		
@@ -34,11 +34,11 @@ final class OperationsTab extends VBox{
 		MOVE_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		SLEEP_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		WAKE_UP_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
-		TURN_LEFT_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
+		TURN_RIGHT_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		PICK_UP_BAMBOO_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		PUT_BAMBOO_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		
-		this.getChildren().addAll(MOVE_BUTTON, SLEEP_BUTTON, WAKE_UP_BUTTON, TURN_LEFT_BUTTON, PICK_UP_BAMBOO_BUTTON, PUT_BAMBOO_BUTTON);
+		this.getChildren().addAll(MOVE_BUTTON, SLEEP_BUTTON, WAKE_UP_BUTTON, TURN_RIGHT_BUTTON, PICK_UP_BAMBOO_BUTTON, PUT_BAMBOO_BUTTON);
 	}
 	
 	protected static OperationsTab getInstance(){

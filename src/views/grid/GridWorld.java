@@ -83,6 +83,7 @@ public final class GridWorld extends GridPane {
 		            	GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		        		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		        		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		        		GameTabs.getInstance().disableTab(GameTabs.NUMBERS_TAB_VALUE);
 		        		GameTabs.getInstance().enableTab(GameTabs.CREATURES_TAB_VALUE);
 		        		GameTabs.getInstance().enableTab(GameTabs.ITEMS_TAB_VALUE);
 		        		GameTabs.getInstance().switchTab(GameTabs.CREATURES_TAB_VALUE);

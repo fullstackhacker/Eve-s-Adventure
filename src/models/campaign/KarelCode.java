@@ -49,7 +49,7 @@ public class KarelCode {
 	/**
 	 * Karel turn left function
 	 */
-	public static final String TURNLEFT = "turnleft();\n";
+	public static final String TURNRIGHT = "turnright();\n";
 	/**
 	 * Karel pick up bamboo function
 	 */
@@ -111,7 +111,7 @@ public class KarelCode {
 		possibleKarelCode.add(KarelCode.MOVE);
 		possibleKarelCode.add(KarelCode.SLEEP);
 		possibleKarelCode.add(KarelCode.WAKEUP);
-		possibleKarelCode.add(KarelCode.TURNLEFT);
+		possibleKarelCode.add(KarelCode.TURNRIGHT);
 		possibleKarelCode.add(KarelCode.PICKBAMBOO);
 		possibleKarelCode.add(KarelCode.PUTBAMBOO);
 		possibleKarelCode.add(KarelCode.FRONTISCLEAR);
@@ -145,7 +145,7 @@ public class KarelCode {
 		possibleKarelCode.add(KarelCode.MOVE);
 		possibleKarelCode.add(KarelCode.SLEEP);
 		possibleKarelCode.add(KarelCode.WAKEUP);
-		possibleKarelCode.add(KarelCode.TURNLEFT);
+		possibleKarelCode.add(KarelCode.TURNRIGHT);
 		possibleKarelCode.add(KarelCode.PICKBAMBOO);
 		possibleKarelCode.add(KarelCode.PUTBAMBOO);
 		return possibleKarelCode.iterator();
