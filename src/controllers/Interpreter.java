@@ -27,6 +27,10 @@ public class Interpreter {
 	 */
 	private World world; 
 	/**
+	 * NEIL ADDED THIS. TEMPORARY.
+	 */
+	boolean programFinished = false;
+	/**
 	 * Constructor for the parser
 	 * 
 	 * @param karelCode  the Karel code to parse and execute
@@ -93,6 +97,7 @@ public class Interpreter {
 	public void instructions(){ 
 		System.out.println("Instructions: " + this.karelCode.get(this.activeCodeBlock)); 
 		instruction();
+		if(programFinished) return; //NEIL ADDED THIS
 		//if(!this.next()) return;
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.CLOSESTATEMENT)) return; 
 		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF)) return;
@@ -135,7 +140,7 @@ public class Interpreter {
 		case KarelCode.PICKBAMBOO: 
 		case KarelCode.PUTBAMBOO:
 			operation(); 
-			this.next();
+			if(!this.next()) programFinished = true; //NEIL ADDED THIS
 			break;
 		default: 
 			throw new IllegalValueException("Illegal Karel Code Segment: " + this.karelCode.get(this.activeCodeBlock));

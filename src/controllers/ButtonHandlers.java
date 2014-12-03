@@ -304,7 +304,9 @@ public final class ButtonHandlers {
 		World world = SandboxScene.getWorld(); 
 		System.out.println(KarelTable.getInstance().getKarelCode());
 		Interpreter interpreter = new Interpreter(karelCode, world);
+		world.printWorld();
 		interpreter.start(); //starts the code
+		world.printWorld();
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e){
