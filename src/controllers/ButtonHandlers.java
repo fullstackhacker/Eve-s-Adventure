@@ -324,7 +324,6 @@ public final class ButtonHandlers {
     dialog.setScene(dialogScene);
     dialog.show();
     
-    
     CANCEL.setOnAction(
     		new EventHandler<ActionEvent>(){
     			public void handle(ActionEvent e){
@@ -368,7 +367,7 @@ public final class ButtonHandlers {
 }
 	/**
 	 * Popup if they try to put something where Eve is
-	 * Doesn't work yet
+	 * 
 	 * @newObject the object the user is trying to put into the square
 	 */
 	public static void EvePop(){
@@ -381,7 +380,6 @@ public final class ButtonHandlers {
     dialogVbox.getChildren().add(OKAY);
     dialog.setScene(dialogScene);
     dialog.show();
-    
     OKAY.setOnAction(
     		new EventHandler<ActionEvent>(){
     			public void handle(ActionEvent e){
