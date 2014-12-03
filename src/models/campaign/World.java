@@ -575,8 +575,14 @@ public class World implements Serializable {
 		case Coordinate.UP:
 			if (this.getSquareAt(currentEveLocation).hasUpWall())
 				return;
+			
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() + 1);
+			
+			if (!verifyCoordinate(newEveLocation))
+				return;
+			if (this.getSquareAt(newEveLocation).hasCreature())
+				return;
 			System.out
 					.println("HEEEERRREEE: "
 							+ GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -592,8 +598,13 @@ public class World implements Serializable {
 		case Coordinate.DOWN:
 			if (this.getSquareAt(currentEveLocation).hasDownWall())
 				return;
+			
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() - 1);
+			if (!verifyCoordinate(newEveLocation))
+				return;
+			if (this.getSquareAt(newEveLocation).hasCreature())
+				return;
 			System.out
 					.println("HEEEERRREEE: "
 							+ GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -611,6 +622,10 @@ public class World implements Serializable {
 				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX() - 1,
 					currentEveLocation.getY());
+			if (!verifyCoordinate(newEveLocation))
+				return;
+			if (this.getSquareAt(newEveLocation).hasCreature())
+				return;
 			System.out
 					.println("HEEEERRREEE: "
 							+ GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -627,6 +642,10 @@ public class World implements Serializable {
 				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX() + 1,
 					currentEveLocation.getY());
+			if (!verifyCoordinate(newEveLocation))
+				return;
+			if (this.getSquareAt(newEveLocation).hasCreature())
+				return;
 			System.out
 					.println("HEEEERRREEE: "
 							+ GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -642,10 +661,7 @@ public class World implements Serializable {
 			throw new IllegalValueException("Eve facing illegal direction");
 		}
 
-		if (!verifyCoordinate(newEveLocation))
-			return;
-		if (this.getSquareAt(newEveLocation).hasCreature())
-			return;
+		
 		System.out.println("eve current: " + currentEveLocation);
 		System.out.println("new local: " + newEveLocation);
 		this.getSquareAt(newEveLocation).addCreature(
