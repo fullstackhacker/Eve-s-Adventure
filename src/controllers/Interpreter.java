@@ -171,6 +171,7 @@ public class Interpreter {
 		case KarelCode.LOOPSTATEMENT:
 			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
 			int times = positiveNumbers(); 
+			System.out.println("int times: " + times);
 			int currentInstruction = this.activeCodeBlock;
 			for(int counter = 0; counter < times; counter++){
 				this.activeCodeBlock = currentInstruction; 
@@ -279,8 +280,11 @@ public class Interpreter {
 		String number = "";
 		do{ 
 			number += this.karelCode.get(this.activeCodeBlock);
-			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
-		}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.CLOSESTATEMENT)); 
+			System.out.println("number: " + number);
+			if(!this.next()){
+				throw new IllegalValueException("Ill formed Karel Code"); 
+			}
+		}while(this.karelCode.get(this.activeCodeBlock).matches(".*\\d.*")); 
 		return Integer.parseInt(number); 
 	}
 	
