@@ -142,6 +142,29 @@ public class World implements Serializable {
 			this.creature = null; 
 			return temp; 
 		}
+		private boolean addUpWall(Wall wall){
+			if(this.hasUpWall()) return false;
+			this.upWall = wall;
+			return true; 
+		}
+		
+		private boolean addDownWall(Wall wall){
+			if(this.hasDownWall()) return false; 
+			this.downWall = wall; 
+			return true; 
+		}
+		
+		private boolean addLeftWall(Wall wall){
+			if(this.hasLeftWall()) return false; 
+			this.leftWall = wall; 
+			return true;
+		}
+		
+		private boolean addRightWall(Wall wall){
+			if(this.hasRightWall()) return false; 
+			this.rightWall = wall; 
+			return true; 
+		}
 		/**
 		 * Check if the square has an item
 		 * 
@@ -322,6 +345,20 @@ public class World implements Serializable {
 		return this.world[coordinate.getY()][coordinate.getX()].removeCreature();
 	}
 	/**
+	 * Add a wall to a square
+	 * The direction should be from Coordinate (UP, DOWN, LEFT, RIGHT)
+	 */
+	public boolean addWall(Coordinate coordinate, int direction){
+		switch(direction){
+		case Coordinate.UP: 
+			return this.getSquareAt(coordinate).addUpWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction));
+		case Coordinate.DOWN: 
+			return this.getSquareAt(coordinate).addDownWall(new Wall(new Random().nextInt(5) * this.hashCode(), direction)); 
+		default: 
+			return false; 
+		}
+	}
+	/**
 	 * Checks to see if there is an item on the location
 	 * 
 	 * @param x  the x coordinate of the location
@@ -391,19 +428,19 @@ public class World implements Serializable {
 		Coordinate newEveLocation = null; 
 		
 		switch(this.getEve().getDirection()){
-		case Creature.UP:
+		case Coordinate.UP:
 			if(this.getSquareAt(currentEveLocation).hasUpWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(), currentEveLocation.getY()+1);
 			break;
-		case Creature.DOWN:
+		case Coordinate.DOWN:
 			if(this.getSquareAt(currentEveLocation).hasDownWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(), currentEveLocation.getY()-1);
 			break;
-		case Creature.LEFT: 
+		case Coordinate.LEFT: 
 			if(this.getSquareAt(currentEveLocation).hasLeftWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX()-1, currentEveLocation.getY());
 			break;
-		case Creature.RIGHT: 
+		case Coordinate.RIGHT: 
 			if(this.getSquareAt(currentEveLocation).hasRightWall()) return;
 			newEveLocation = new Coordinate(currentEveLocation.getX()+1, currentEveLocation.getY()); 
 			break;
@@ -448,17 +485,17 @@ public class World implements Serializable {
 	public void takeBambooFromShrub(){
 		Coordinate shrubCoordinate = null; 
 		switch(this.getEve().getDirection()){
-		case Creature.UP: 
+		case Coordinate.UP: 
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()+1);
 			break;
-		case Creature.DOWN: 
+		case Coordinate.DOWN: 
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()-1);
 			verifyCoordinate(shrubCoordinate);
 			break;
-		case Creature.LEFT: 
+		case Coordinate.LEFT: 
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()-1, this.getEve().getCoordinates().getY());
 			break;
-		case Creature.RIGHT:
+		case Coordinate.RIGHT:
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()+1, this.getEve().getCoordinates().getY());
 			break;
 		default: 
@@ -483,17 +520,17 @@ public class World implements Serializable {
 	public void putBambooInShrub(){
 		Coordinate shrubCoordinate = null; 
 		switch(this.getEve().getDirection()){
-		case Creature.UP: 
+		case Coordinate.UP: 
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()+1);
 			break;
-		case Creature.DOWN: 
+		case Coordinate.DOWN: 
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX(), this.getEve().getCoordinates().getY()-1);
 			verifyCoordinate(shrubCoordinate);
 			break;
-		case Creature.LEFT: 
+		case Coordinate.LEFT: 
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()-1, this.getEve().getCoordinates().getY());
 			break;
-		case Creature.RIGHT:
+		case Coordinate.RIGHT:
 			shrubCoordinate = new Coordinate(this.getEve().getCoordinates().getX()+1, this.getEve().getCoordinates().getY());
 			break;
 		default: 
@@ -521,19 +558,19 @@ public class World implements Serializable {
 		Coordinate eveLocation = this.getEve().getCoordinates();
 		Coordinate front = null; 
 		switch(this.getEve().getDirection()){
-		case Creature.UP: 
+		case Coordinate.UP: 
 			if(this.getSquareAt(eveLocation).hasUpWall()) return false; 
 			front = new Coordinate(eveLocation.getX(), eveLocation.getY()+1); 
 			break; 
-		case Creature.DOWN: 
+		case Coordinate.DOWN: 
 			if(this.getSquareAt(eveLocation).hasDownWall()) return false; 
 			front = new Coordinate(eveLocation.getX(), eveLocation.getY()-1);
 			break; 
-		case Creature.LEFT: 
+		case Coordinate.LEFT: 
 			if(this.getSquareAt(eveLocation).hasLeftWall()) return false; 
 			front = new Coordinate(eveLocation.getX()-1, eveLocation.getY()); 
 			break;
-		case Creature.RIGHT: 
+		case Coordinate.RIGHT: 
 			if(this.getSquareAt(eveLocation).hasRightWall()) return false; 
 			front = new Coordinate(eveLocation.getX()+1, eveLocation.getY()); 
 			break;

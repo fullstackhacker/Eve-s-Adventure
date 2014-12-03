@@ -1,18 +1,17 @@
 package controllers;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-import models.campaign.KarelCode;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import models.campaign.KarelCode;
+import models.campaign.World;
 import views.MainApp;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
-import views.scenes.LoadSessionScene;
 import views.scenes.MainMenuScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
-import views.tabs.InstructionsTab;
 /**
  * 
  * @author Anthony Wong
@@ -300,7 +299,11 @@ public final class ButtonHandlers {
 	
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("PLAY_BUTTON_HANDLER CALLED");
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode(); 
+		World world = SandboxScene.getWorld(); 
 		System.out.println(KarelTable.getInstance().getKarelCode());
+		Interpreter interpreter = new Interpreter(karelCode, world);
+		interpreter.start(); //starts the code
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e){

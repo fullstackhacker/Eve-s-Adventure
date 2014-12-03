@@ -7,26 +7,6 @@ import exceptions.IllegalValueException;
 public class Creature extends GridObject {
 
 	/**
-	 * The directional value of Up.
-	 */
-	public static final int UP = 0;
-	
-	/**
-	 * The directional value of Left.
-	 */
-	public static final int LEFT = 1;
-	
-	/**
-	 * The directional value of Down.
-	 */
-	public static final int DOWN = 2;
-	
-	/**
-	 * The directional value of Right.
-	 */
-	public static final int RIGHT = 3;
-	
-	/**
 	 * The number of bamboos the creature is currently holding.
 	 */
 	private int numberOfBamboo;
@@ -54,24 +34,24 @@ public class Creature extends GridObject {
 		super.setName(name);
 		super.setCoordinates(coordinate);
 		this.isAwake =  true; 
-		this.direction = Creature.UP;
+		this.direction = Coordinate.UP;
 		this.numberOfBamboo = 0;		
 	}
 	
 	public boolean facingNorth(){ 
-		return this.direction == Creature.UP; 
+		return this.direction == Coordinate.UP; 
 	}
 	
 	public boolean facingSouth(){ 
-		return this.direction == Creature.DOWN; 
+		return this.direction == Coordinate.DOWN; 
 	}
 	
 	public boolean facingEast(){ 
-		return this.direction == Creature.RIGHT; 
+		return this.direction == Coordinate.RIGHT; 
 	}
 	
 	public boolean facingWest(){
-		return this.direction == Creature.LEFT;
+		return this.direction == Coordinate.LEFT;
 	}
 	
 	public void turnLeft(){ 
@@ -84,16 +64,16 @@ public class Creature extends GridObject {
 	 */
 	public void move(){ 
 		switch(this.direction){
-		case Creature.UP: 
+		case Coordinate.UP: 
 			this.getCoordinates().moveNorth();
 			break; 
-		case Creature.DOWN: 
+		case Coordinate.DOWN: 
 			this.getCoordinates().moveSouth(); 
 			break; 
-		case Creature.RIGHT: 
+		case Coordinate.RIGHT: 
 			this.getCoordinates().moveEast(); 
 			break; 
-		case Creature.LEFT: 
+		case Coordinate.LEFT: 
 			this.getCoordinates().moveWest(); 
 			break; 
 		default: 

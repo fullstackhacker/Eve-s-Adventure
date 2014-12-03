@@ -257,13 +257,13 @@ public class Interpreter {
 		case KarelCode.BAGISEMPTY: 
 			return !this.world.getEve().hasBamboo();
 		case KarelCode.FACINGNORTH: 
-			return this.world.getEve().getDirection() == Creature.UP;
+			return this.world.getEve().getDirection() == Coordinate.UP;
 		case KarelCode.FACINGSOUTH:
-			return this.world.getEve().getDirection() == Creature.DOWN; 
+			return this.world.getEve().getDirection() == Coordinate.DOWN; 
 		case KarelCode.FACINGEAST: 
-			return this.world.getEve().getDirection() == Creature.RIGHT;
+			return this.world.getEve().getDirection() == Coordinate.RIGHT;
 		case KarelCode.FACINGWEST:
-			return this.world.getEve().getDirection() == Creature.LEFT;
+			return this.world.getEve().getDirection() == Coordinate.LEFT;
 		default: 
 			throw new IllegalValueException("Ill formed Karel Code " + this.karelCode.get(this.activeCodeBlock));
 		}
