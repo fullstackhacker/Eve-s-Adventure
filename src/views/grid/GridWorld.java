@@ -1,6 +1,5 @@
 package views.grid;
 
-import models.Coordinate;
 import models.campaign.World;
 import views.tabs.GameTabs;
 import controllers.ButtonHandlers;
@@ -25,7 +24,7 @@ public final class GridWorld extends GridPane {
 
 	private static GridWorld instant = null;
 	
-	public static ToggleButton[][] gridButtons = new ToggleButton[5][10];
+	public static ToggleButton[][] gridButtons = null;
 	
 	private World world;
 
@@ -93,19 +92,29 @@ public final class GridWorld extends GridPane {
 		         }
 		});
 		
+		gridButtons = new ToggleButton[5][10];
+		
+		System.out.println("OVERWERITINEG BUTTONGS");
+		
 		for(int i = 0; i < 5; i++){
 			for(int j = 0; j < 10; j++){
-				GridWorld.gridButtons[i][j] = new ToggleButton("   ");
-				GridPane.setHalignment(GridWorld.gridButtons[i][j], HPos.CENTER);
-				GridPane.setHgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
-				GridPane.setVgrow(GridWorld.gridButtons[i][j], Priority.ALWAYS);
-				GridWorld.gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-				GridWorld.gridButtons[i][j].setId("WorldButton");
-				GridWorld.gridButtons[i][j].setToggleGroup(group);
+				gridButtons[i][j] = new ToggleButton("   ");
+				GridPane.setHalignment(gridButtons[i][j], HPos.CENTER);
+				GridPane.setHgrow(gridButtons[i][j], Priority.ALWAYS);
+				GridPane.setVgrow(gridButtons[i][j], Priority.ALWAYS);
+				gridButtons[i][j].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+				gridButtons[i][j].setId("WorldButton");
+				gridButtons[i][j].setToggleGroup(group);
 				
-				this.add(GridWorld.gridButtons[i][j], i, j);
+				this.add(gridButtons[i][j], i, j);
+				
 			}
 		}
+		
+		GridWorld.gridButtons[2][2].setText("Eve!");
+		
+		//gridButtons[2][2].setText("Eve!");
+		
 		//this.getChildren().addAll(GridWorld.gridButtons);
 
 		this.setPadding(new Insets(5, 5, 5, 5));
@@ -150,7 +159,6 @@ public final class GridWorld extends GridPane {
 	
 
 	public static GridWorld getInstance() {
-		return (instant == null) ? new GridWorld() : instant;
+		return (instant == null) ? instant = new GridWorld() : instant;
 	}
-
 }

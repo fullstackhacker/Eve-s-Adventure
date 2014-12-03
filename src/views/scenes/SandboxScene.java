@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -29,7 +30,7 @@ public final class SandboxScene extends Scene {
 
 	private static GridWorld gridWorld;
 	
-	public static Label Eve = new Label("Eve!");
+	public static ToggleButton Eve = new ToggleButton("Eve!");
 
 	private static final class SandboxPane extends GridPane {
 
@@ -130,9 +131,12 @@ public final class SandboxScene extends Scene {
 			// world.printWorld();
 			//
 			// Label Eve = new Label("Eve!");
-			GridPane.setHalignment(Eve, HPos.CENTER);
-			gridWorld.add(Eve, 2, 2);
+			//GridPane.setHalignment(Eve, HPos.CENTER);
+			System.out.println("Sandbox Scene things");
+			GridWorld.gridButtons[2][2].setText("Eve!");
 			Eve.setVisible(true);
+			
+			
 			//
 			// //world.moveEveEast();
 			// world.moveEve();

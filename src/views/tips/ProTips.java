@@ -92,6 +92,6 @@ public final class ProTips extends GridPane {
 	}
 
 	public static ProTips getInstance() {
-		return (instant == null) ? new ProTips() : instant;
+		return (instant == null) ? instant = new ProTips() : instant;
 	}
 }

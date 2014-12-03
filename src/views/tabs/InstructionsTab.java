@@ -64,6 +64,6 @@ public final class InstructionsTab extends VBox{
 	}
 	
 	public static InstructionsTab getInstance(){
-		return (instant == null) ? new InstructionsTab() : instant;
+		return (instant == null) ? instant = new InstructionsTab() : instant;
 	}
 }
