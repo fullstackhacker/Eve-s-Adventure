@@ -19,6 +19,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.transform.Rotate;
 
 public final class GridWorld extends GridPane {
 
@@ -83,6 +84,7 @@ public final class GridWorld extends GridPane {
 		            	GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
 		        		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		        		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
+		        		GameTabs.getInstance().disableTab(GameTabs.NUMBERS_TAB_VALUE);
 		        		GameTabs.getInstance().enableTab(GameTabs.CREATURES_TAB_VALUE);
 		        		GameTabs.getInstance().enableTab(GameTabs.ITEMS_TAB_VALUE);
 		        		GameTabs.getInstance().switchTab(GameTabs.CREATURES_TAB_VALUE);
@@ -112,6 +114,8 @@ public final class GridWorld extends GridPane {
 		}
 		
 		GridWorld.gridButtons[2][2].setText("Eve!");
+		//GridWorld.gridButtons[2][2].getTransforms().add(new Rotate(180, 0, 0));
+		//GridWorld.gridButtons[2][2].getTransforms()
 		
 		//gridButtons[2][2].setText("Eve!");
 		

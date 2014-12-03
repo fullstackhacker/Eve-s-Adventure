@@ -149,6 +149,16 @@ public final class KarelTable extends GridPane {
 		                		case KarelCode.FACINGEAST:
 		                		case KarelCode.FACINGWEST:
 		                		case KarelCode.ELSESTATEMENT:
+		                		case KarelCode.ZERO:
+		                		case KarelCode.ONE:
+		                		case KarelCode.TWO:
+		                		case KarelCode.THREE:
+		                		case KarelCode.FOUR:
+		                		case KarelCode.FIVE:
+		                		case KarelCode.SIX:
+		                		case KarelCode.SEVEN:
+		                		case KarelCode.EIGHT:
+		                		case KarelCode.NINE:
 		                			return;
 	                    	}
 	                        if (dragFromIndex.get() >= 0 && dragFromIndex.get() != cell.getIndex()) {
@@ -167,6 +177,7 @@ public final class KarelTable extends GridPane {
                     			return;
                     		}
                     		switch(cell.getText()){
+                    		//TODO FIX this shit
 		                    	case "ADD CODE HERE":
 		                		case KarelCode.FRONTISCLEAR:
 		                		case KarelCode.NEXTTOAFRIEND:
@@ -174,6 +185,16 @@ public final class KarelTable extends GridPane {
 		                		case KarelCode.FACINGSOUTH:
 		                		case KarelCode.FACINGEAST:
 		                		case KarelCode.FACINGWEST:
+		                		case KarelCode.ZERO:
+		                		case KarelCode.ONE:
+		                		case KarelCode.TWO:
+		                		case KarelCode.THREE:
+		                		case KarelCode.FOUR:
+		                		case KarelCode.FIVE:
+		                		case KarelCode.SIX:
+		                		case KarelCode.SEVEN:
+		                		case KarelCode.EIGHT:
+		                		case KarelCode.NINE:
 		                			return;
 	                    	}
 	                        if (dragFromIndex.get() >= 0 && dragFromIndex.get() != cell.getIndex()) {
@@ -299,6 +320,7 @@ public final class KarelTable extends GridPane {
 
 			@Override
 			public void handle(ActionEvent event) {
+				System.out.println("REPLACE_BUTTON CALLED");
 				String code = listView.getSelectionModel().getSelectedItem();
 				
 				if(code == null){
@@ -355,8 +377,10 @@ public final class KarelTable extends GridPane {
 
 			@Override
 			public void handle(ActionEvent event) {
+				System.out.println("DELETE_BUTTON CALLED");
 				String item = listView.getSelectionModel().getSelectedItem();
 				if(item != null){
+					System.out.println("item: " + item);
 					switch(item){
 						case KarelCode.ENDIF:
 						case KarelCode.ENDELSE:
@@ -364,7 +388,7 @@ public final class KarelTable extends GridPane {
 						case KarelCode.ENDLOOP:
 							/* Fine the beginning of the block */
 							System.out.println(true);
-							for(int i = listView.getSelectionModel().getSelectedIndex(); i > 0; i--){
+							for(int i = listView.getSelectionModel().getSelectedIndex(); i >= 0; i--){
 								String code = karelCode.get(i);
 								System.out.println("For Loop: " + code);
 								if(code.equals(KarelCode.IFSTATEMENT) || 
@@ -383,6 +407,7 @@ public final class KarelTable extends GridPane {
 							/* Delete the whole code block */
 							System.out.println("Called");
 							int line = listView.getSelectionModel().getSelectedIndex();
+							System.out.println("line: " + line);
 							for(; line < karelCode.size();){
 								String code = listView.getSelectionModel().getSelectedItem();
 								if(code.equals(KarelCode.ENDIF) || code.equals(KarelCode.ENDELSE) || code.equals(KarelCode.ENDWHILE) || code.equals(KarelCode.ENDLOOP)){
@@ -413,6 +438,10 @@ public final class KarelTable extends GridPane {
 					public void changed(
 							ObservableValue<? extends String> observable,
 							String oldValue, String newValue) {
+						
+						GameTabs.getInstance().disableTab(GameTabs.CREATURES_TAB_VALUE);
+						GameTabs.getInstance().disableTab(GameTabs.ITEMS_TAB_VALUE);
+						GameTabs.getInstance().disableTab(GameTabs.NUMBERS_TAB_VALUE);
 						
 						if(newValue == null){
 							return;

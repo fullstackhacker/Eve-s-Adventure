@@ -259,14 +259,14 @@ public final class ButtonHandlers {
 		}
 		KarelTable.getInstance().addCode(KarelCode.WAKEUP);
 	}
-
-	public static final void TURN_LEFT_BUTTON_HANDLER(ActionEvent e) {
-		System.out.println("TURN_LEFT_BUTTON_HANDLER");
+	
+	public static final void TURN_RIGHT_BUTTON_HANDLER(ActionEvent e) {
+		System.out.println("TURN_RIGHT_BUTTON_HANDLER");
 		if (KarelTable.getInstance().isREPLACE_BUTTON_ON()) {
-			KarelTable.getInstance().replaceCode(KarelCode.TURNLEFT);
+			KarelTable.getInstance().replaceCode(KarelCode.TURNRIGHT);
 			return;
 		}
-		KarelTable.getInstance().addCode(KarelCode.TURNLEFT);
+		KarelTable.getInstance().addCode(KarelCode.TURNRIGHT);
 	}
 
 	public static final void PICK_UP_BAMBOO_BUTTON_HANDLER(ActionEvent e) {
