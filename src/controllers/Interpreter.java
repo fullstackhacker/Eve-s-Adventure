@@ -129,7 +129,7 @@ public class Interpreter {
 	//, new KeyFrame(Duration.seconds(2))
 	
 	public void instructions() {
-		player.stop();
+		player.pause();
 		System.out.println("Instructions: "
 				+ this.karelCode.get(this.activeCodeBlock));
 		instruction();
@@ -147,6 +147,7 @@ public class Interpreter {
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP))
 			return;
 		player.play();
+		
 	}
 
 	public void instruction() {
