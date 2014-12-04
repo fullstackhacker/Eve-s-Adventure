@@ -1,9 +1,12 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.transform.Rotate;
@@ -35,6 +38,8 @@ public class Interpreter {
 	 * The world that the code should be executed in
 	 */
 	private World world;
+	
+	private Timer timer;
 
 	/**
 	 * Constructor for the parser
@@ -114,9 +119,22 @@ public class Interpreter {
 
 	public void start() {
 		this.world.findEve();
-		player.play();
+//		player.play();
+		timer = new Timer();
+		timer.schedule(new TimerTask(){
+			@Override
+			public void run() {
+				Platform.runLater(new Runnable(){
+					@Override
+					public void run() {
+						KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
+						instructions();
+					}
+				});
+			}
+		}, 0, 2000);
 	}
-
+/*
 	Timeline player = new Timeline(new KeyFrame(Duration.seconds(2),
 			new EventHandler<ActionEvent>() {
 				@Override
@@ -124,17 +142,19 @@ public class Interpreter {
 					KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 					instructions();
 				}
-			}));
+			}));*/
 
 	//, new KeyFrame(Duration.seconds(2))
 	
 	public void instructions() {
-		player.pause();
+	//	player.stop();
 		System.out.println("Instructions: "
 				+ this.karelCode.get(this.activeCodeBlock));
 		instruction();
-		if (!validPosition())
+		if (!validPosition()){
+			timer.cancel();
 			return;
+		}
 		if (this.karelCode.get(this.activeCodeBlock).equals(
 				KarelCode.CLOSESTATEMENT))
 			return;
@@ -146,8 +166,7 @@ public class Interpreter {
 			return;
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP))
 			return;
-		player.play();
-		
+	//	player.play();
 	}
 
 	public void instruction() {

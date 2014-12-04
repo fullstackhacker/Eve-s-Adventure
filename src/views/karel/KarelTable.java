@@ -106,7 +106,7 @@ public final class KarelTable extends GridPane {
 		                						karelCode.get(i).equals(KarelCode.ENDWHILE) ||
 		                						karelCode.get(i).equals(KarelCode.ENDLOOP)){
 		                					System.out.println(listView.getSelectionModel().getSelectedIndices());
-		                					if(i + 1 > karelCode.size() && 
+		                					if(i + 1 < karelCode.size() && 
 		                							karelCode.get(i + 1).equals(KarelCode.ELSESTATEMENT)){
 		                						for(int z = i + 1; z < karelCode.size(); z++){
 		                							listView.getSelectionModel().select(z);

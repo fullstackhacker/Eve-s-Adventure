@@ -16,6 +16,7 @@ import models.campaign.KarelCode;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import models.gridobjects.items.Bamboo;
+import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import views.MainApp;
@@ -310,11 +311,12 @@ public final class ButtonHandlers {
 	 * @newObject the object the user is trying to put into the square
 	 */
 	public static void popup(String newObject){
+	String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 	final Stage dialog = new Stage();
     dialog.initModality(Modality.APPLICATION_MODAL);
     VBox dialogVbox = new VBox(20);
     dialogVbox.getChildren().add(new Text("There is already an object in this space. \nReplace " + 
-    										GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText()+ 
+    										oldObject + 
     										" with " + newObject + "?"));
     Scene dialogScene = new Scene(dialogVbox, 300, 200);
     final Button REPLACE = new Button("Replace");
@@ -336,6 +338,12 @@ public final class ButtonHandlers {
     		new EventHandler<ActionEvent>(){
     			public void handle(ActionEvent e){
     				dialog.close();
+    				if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo"))
+    					RMITEM_BUTTON_HANDLER(null);
+    					
+    				if (oldObject.equals("Friend"))
+    					RMCREATURE_BUTTON_HANDLER(null);
+    				
     				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText(newObject);
     				switch(newObject){
     				case "Tree":
@@ -357,6 +365,13 @@ public final class ButtonHandlers {
     					bamboo.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
     					if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
     					GridWorld.getInstance().getWorld().addItem(bamboo); 
+    					GridWorld.getInstance().getWorld().printWorld();
+    				case "Friend":
+    					Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate());
+    					Creature Friend = new Creature("Friend", cords);
+    					Friend.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
+    					if(GridWorld.getInstance().getWorld() == null) System.out.println("Uninitalized world");
+    					GridWorld.getInstance().getWorld().addCreature(Friend); 
     					GridWorld.getInstance().getWorld().printWorld();
     				default: 
     					break; 
@@ -389,17 +404,62 @@ public final class ButtonHandlers {
 	);
 }
 	
+	
+	
+	
+	/**
+	 * Popup if they try delete the wrong thing
+	 * @newObject the object the user is trying to put into the square
+	 */
+	public static void DeletePop(){
+	String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
+	final Stage dialog = new Stage();
+    dialog.initModality(Modality.APPLICATION_MODAL);
+    VBox dialogVbox = new VBox(20);
+    dialogVbox.getChildren().add(new Text("This space is a(n) "+ oldObject +". \nUse the Remove"+oldObject+" button."));
+    Scene dialogScene = new Scene(dialogVbox, 300, 200);
+    final Button OKAY = new Button("Okay");
+    dialogVbox.getChildren().add(OKAY);
+    dialog.setScene(dialogScene);
+    dialog.show();
+    OKAY.setOnAction(
+    		new EventHandler<ActionEvent>(){
+    			public void handle(ActionEvent e){
+    				dialog.close();
+    			}
+    	}
+	);
+}
 	    
 	/**
 	 * ItemsTab.java
 	 */
+	public static final void RMITEM_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("RMITEM_BUTTON_HANDLER");
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
+		switch(oldObject){
+		case "Tree":
+			GridWorld.getInstance().getWorld().removeItem(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("");
+			break;
+		case "Shrub":
+			GridWorld.getInstance().getWorld().removeItem(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("");
+			break; 
+		case "Bamboo":
+			GridWorld.getInstance().getWorld().removeItem(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("");			
+		default: 
+			break;
+		}
+	}
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("SHRUB_BUTTON_HANDLER");
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 		if (oldObject.equals("Eve!"))
 			EvePop();
 			
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo")){
+		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Friend")){
 			popup("Shrub");
 		}
         else
@@ -453,6 +513,15 @@ public final class ButtonHandlers {
 	/**
 	 * CreaturesTab.java
 	 */
+	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e){
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
+			if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Friend")){
+				
+			}
+		System.out.println("RMCREATURE_BUTTON_HANDLER");
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("");
+		GridWorld.getInstance().getWorld().removeCreature(new Coordinate(GridWorld.getXCoordinate(),GridWorld.getYCoordinate()));
+	}
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("EVE_BUTTON_HANDLER");
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
@@ -467,6 +536,7 @@ public final class ButtonHandlers {
 					System.out.println("X: " + x  + "Y: " + y); 
 					Creature eve = GridWorld.getInstance().getWorld().removeCreature(new Coordinate(y,x)); 
 					eve.setCoordinates(new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()));
+					eve.setDirection(Coordinate.DOWN);
 					GridWorld.getInstance().getWorld().addCreature(eve);
 				}
 			}
@@ -493,7 +563,7 @@ public final class ButtonHandlers {
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
 			
 		if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Eve!")){
-			EvePop();
+			popup("Friend");
 		}
         else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Friend");
