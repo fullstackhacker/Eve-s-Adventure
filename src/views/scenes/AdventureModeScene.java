@@ -5,7 +5,7 @@ import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import controllers.ButtonHandlers;
 import views.MainApp;
-import views.TopMenu;
+import views.ATopMenu;
 import views.grid.Cols;
 import views.grid.AGridWorld;
 import views.grid.Rows;
@@ -62,7 +62,7 @@ public final class AdventureModeScene extends Scene {
 			GridPane.setFillWidth(RESET, true);
 			GridPane.setHalignment(RESET, HPos.CENTER);
 
-			TopMenu topMenu = TopMenu.getInstance();
+			ATopMenu topMenu = ATopMenu.getInstance();
 			AGameTabs gametabs = AGameTabs.getInstance();
 			gametabs.setId("gametabs");
 			ProTips protips = ProTips.getInstance();

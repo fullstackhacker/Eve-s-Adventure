@@ -34,6 +34,9 @@ public class World implements Serializable {
 	 * Eve, one her friends, a stick of bamboo, a wall, or a shrub
 	 *
 	 */
+	
+	private static boolean findObj = false;
+	
 	private class Square implements Serializable {
 		/**
 		 * Serial ID
@@ -1027,6 +1030,18 @@ public class World implements Serializable {
 	 */
 	public void printWorld() {
 		System.out.print(this);
+	}
+	
+	public void setObjective(boolean obj){
+		findObj = obj;
+	}
+	
+	public String getObjective(){
+		if (findObj){
+			return "find";
+		} else {
+			return "collect";
+		}
 	}
 
 	@Override

@@ -19,8 +19,12 @@ public final class TopMenu extends MenuBar {
 		quit.setOnAction(ButtonHandlers::QUIT_MENU_HANDLER);
 		MenuItem save = new MenuItem("Save");
 		save.setOnAction(ButtonHandlers::SAVE_MENU_HANDLER);
-		MenuItem addObj = new MenuItem("Add Objective");
-		addObj.setOnAction(ButtonHandlers::ADDOB_MENU_HANDLER);
+		Menu addObj = new Menu("Add Objective");
+		MenuItem collect = new MenuItem("Collect all Bamboo");
+		collect.setOnAction(ButtonHandlers::COLLECT_MENU_HANDLER);
+		MenuItem find = new MenuItem("Find Friend");
+		find.setOnAction(ButtonHandlers::FIND_MENU_HANDLER);
+		addObj.getItems().addAll(collect, find);
 
 		menu1.getItems().addAll(save, quit);
 		menu2.getItems().addAll(addObj);

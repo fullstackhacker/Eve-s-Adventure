@@ -684,8 +684,16 @@ public final class ButtonHandlers {
 		MainApp.changeScenes(MainMenuScene.getInstance());
 	}
 
-	public static final void ADDOB_MENU_HANDLER(ActionEvent e) {
-		System.out.println("Added an objective!");
+	public static final void COLLECT_MENU_HANDLER(ActionEvent e) {
+		System.out.println("Added an objective (Collect)!");
+		World world = AdventureModeScene.getWorld();
+		world.setObjective(false);
+	}
+	
+	public static final void FIND_MENU_HANDLER(ActionEvent e) {
+		System.out.println("Added an objective (Find)!");
+		World world = AdventureModeScene.getWorld();
+		world.setObjective(true);
 	}
 
 	public static final void SAVE_MENU_HANDLER(ActionEvent e) {
