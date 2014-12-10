@@ -40,7 +40,7 @@ public final class MainMenuScene extends Scene {
 		private Button SANDBOX_MODE_BUTTON, ADVENTURE_MODE_BUTTON;
 		
 		private ImageView LOGO = new ImageView(new Image("./Images/Eve.png"));
-		
+		//private ImageView LOGO;
 		private Label TITLE_LABEL;
 		
 		/**
@@ -61,6 +61,11 @@ public final class MainMenuScene extends Scene {
 		}
 		
 		private void setupObjects(){
+//			ClassLoader cldr = this.getClass().getClassLoader();
+//			java.net.URL imageURL   = cldr.getResource("./Images/Eve.png");
+//			Image logo = new Image(getClass().getResourceAsStream("./Images/Eve.png"));
+//			LOGO = new ImageView();
+//			LOGO.setImage(logo);
 			TITLE_LABEL = new Label("EVE'S ADVENTURE");
 			SANDBOX_MODE_BUTTON = new Button("SANDBOX MODE");
 			ADVENTURE_MODE_BUTTON = new Button("ADVENTURE MODE");

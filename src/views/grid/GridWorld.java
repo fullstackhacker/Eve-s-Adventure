@@ -150,7 +150,7 @@ public final class GridWorld extends GridPane {
 			}
 		}
 
-		gridButtons[2][2].setText("Eve!");
+		//gridButtons[2][2].setText("Eve!");
 		gridButtons[2][2].getTransforms().add(new Rotate(180, 28, 32.5));
 
 		// gridButtons[2][2].setText("Eve!");
