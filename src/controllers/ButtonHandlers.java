@@ -1,12 +1,14 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -27,6 +29,7 @@ import views.scenes.LoadSessionScene;
 import views.scenes.MainMenuScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
+import views.tabs.InstructionsTab;
 
 /**
  * 
@@ -70,10 +73,18 @@ public final class ButtonHandlers {
 	 * InstuctionsTab.java
 	 */
 	public static final void IF_BUTTON_HANDLER(ActionEvent e) {
-		KarelTable.getInstance().addInstructionsCode(KarelCode.IFSTATEMENT);
 		if (KarelTable.getInstance().isREPLACE_BUTTON_ON()) {
-			KarelTable.getInstance().replaceCode(KarelCode.IFSTATEMENT);
-			return;
+			int line = KarelTable.getInstance().getLineSelectedLine();
+			int start = line;
+			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+			for( ; line < karelCode.size() ;line++){
+				if(karelCode.get(line).equals(KarelCode.ENDWHILE)){
+					KarelTable.getInstance().replaceInstructions(start, line, KarelCode.IFSTATEMENT);
+					break;
+				}
+			}
+		}else{
+			KarelTable.getInstance().addInstructionsCode(KarelCode.IFSTATEMENT);
 		}
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
@@ -87,8 +98,8 @@ public final class ButtonHandlers {
 	public static final void ELSE_BUTTON_HANDLER(ActionEvent e) {
 		KarelTable.getInstance().addInstructionsCode(KarelCode.ELSESTATEMENT);
 		if (KarelTable.getInstance().isREPLACE_BUTTON_ON()) {
+			InstructionsTab.LOOP_BUTTON.setDisable(false);
 			// TODO
-			KarelTable.getInstance().replaceCode(KarelCode.ELSESTATEMENT);
 			return;
 		}
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -101,10 +112,18 @@ public final class ButtonHandlers {
 	}
 
 	public static final void WHILE_BUTTON_HANDLER(ActionEvent e) {
-		KarelTable.getInstance().addInstructionsCode(KarelCode.WHILESTATEMENT);
 		if (KarelTable.getInstance().isREPLACE_BUTTON_ON()) {
-			KarelTable.getInstance().replaceCode(KarelCode.WHILESTATEMENT);
-			return;
+			int line = KarelTable.getInstance().getLineSelectedLine();
+			int start = line;
+			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+			for( ; line < karelCode.size() ;line++){
+				if(karelCode.get(line).equals(KarelCode.ENDIF)){
+					KarelTable.getInstance().replaceInstructions(start, line, KarelCode.WHILESTATEMENT);
+					break;
+				}
+			}
+		}else{
+			KarelTable.getInstance().addInstructionsCode(KarelCode.WHILESTATEMENT);
 		}
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
