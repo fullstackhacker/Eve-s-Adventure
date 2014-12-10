@@ -11,7 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import views.grid.GridWorld;
+import views.grid.AGridWorld;
 import views.karel.KarelTable;
 import exceptions.IllegalValueException;
 import models.Coordinate;
@@ -52,7 +52,7 @@ public class Interpreter {
 	public Interpreter(ArrayList<String> karelCode, World world) {
 		this.karelCode = karelCode;
 		this.world = world;
-		GridWorld.getInstance().setWorld(this.world);
+		AGridWorld.getInstance().setWorld(this.world);
 	}
 
 	/**
@@ -311,7 +311,7 @@ public class Interpreter {
 			return;
 		case KarelCode.TURNRIGHT:
 			this.world.getEve().turnLeft();
-			GridWorld.gridButtons[this.world.getEve().getX()][this.world
+			AGridWorld.gridButtons[this.world.getEve().getX()][this.world
 					.getEve().getY()].getTransforms().add(
 					new Rotate(90, 28, 32.5));
 			;

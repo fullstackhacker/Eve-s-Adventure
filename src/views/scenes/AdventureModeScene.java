@@ -5,12 +5,12 @@ import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import controllers.ButtonHandlers;
 import views.MainApp;
-import views.TopMenu;
+import views.ATopMenu;
 import views.grid.Cols;
-import views.grid.GridWorld;
-import views.grid.GridWorld;
+import views.grid.AGridWorld;
 import views.grid.Rows;
 import views.karel.KarelTable;
+import views.tabs.AGameTabs;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
@@ -25,17 +25,17 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-public final class SandboxScene extends Scene {
+public final class AdventureModeScene extends Scene {
 
 	private static World world;
 
-	private static GridWorld gridWorld;
+	private static AGridWorld gridWorld;
 	
 	public static ToggleButton Eve = new ToggleButton("Eve!");
 
-	private static final class SandboxPane extends GridPane {
+	private static final class AdventureModePane extends GridPane {
 
-		private static SandboxPane instanceOfMainMenuPane = null;
+		private static AdventureModePane instanceOfMainMenuPane = null;
 
 		private ImageView imageBack = new ImageView(new Image(
 				"./Images/ArrowLeft.png"));
@@ -48,7 +48,7 @@ public final class SandboxScene extends Scene {
 
 		private Button BACK, FORWARD, PLAY, RESET;
 
-		private SandboxPane() {
+		private AdventureModePane() {
 			this.getStylesheets().add("./sandbox_style.css");
 
 			buttonSetup();
@@ -62,13 +62,13 @@ public final class SandboxScene extends Scene {
 			GridPane.setFillWidth(RESET, true);
 			GridPane.setHalignment(RESET, HPos.CENTER);
 
-			TopMenu topMenu = TopMenu.getInstance();
-			GameTabs gametabs = GameTabs.getInstance();
+			ATopMenu topMenu = ATopMenu.getInstance();
+			AGameTabs gametabs = AGameTabs.getInstance();
 			gametabs.setId("gametabs");
 			ProTips protips = ProTips.getInstance();
 			KarelTable karelTable = KarelTable.getInstance();
 			protips.setId("protips");
-			gridWorld = GridWorld.getInstance();
+			gridWorld = AGridWorld.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -124,7 +124,7 @@ public final class SandboxScene extends Scene {
 
 			// BACKEND-FRONTEND Integration
 			world = new World("SandboxWorld", 10, 5);
-			GridWorld.getInstance().setWorld(world);
+			AGridWorld.getInstance().setWorld(world);
 			world.addCreature(new Creature("Eve", new Coordinate(2, 2)));
 			// world.printWorld();
 			// Coordinate coordEve = new Coordinate(1,1);
@@ -135,7 +135,7 @@ public final class SandboxScene extends Scene {
 			// Label Eve = new Label("Eve!");
 			//GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
-			GridWorld.gridButtons[2][2].setText("Eve!");
+			AGridWorld.gridButtons[2][2].setText("Eve!");
 			Eve.setVisible(true);
 			
 			
@@ -174,15 +174,15 @@ public final class SandboxScene extends Scene {
 			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
 		}
 
-		private static SandboxPane getInstance() {
-			return (instanceOfMainMenuPane == null) ? instanceOfMainMenuPane = new SandboxPane()
+		private static AdventureModePane getInstance() {
+			return (instanceOfMainMenuPane == null) ? instanceOfMainMenuPane = new AdventureModePane()
 					: instanceOfMainMenuPane;
 		}
 	}
 
-	private static SandboxScene instanceOfSandboxScene = null;
+	private static AdventureModeScene instanceOfSandboxScene = null;
 
-	private SandboxScene(Parent arg0, double arg1, double arg2) {
+	private AdventureModeScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
 
@@ -190,7 +190,7 @@ public final class SandboxScene extends Scene {
 		world = world1;
 	}
 
-	public static void setGridWorld(GridWorld gridworld1) {
+	public static void setGridWorld(AGridWorld gridworld1) {
 		gridWorld = gridworld1;
 	}
 
@@ -198,13 +198,13 @@ public final class SandboxScene extends Scene {
 		return world;
 	}
 
-	public static GridWorld getGridWorld() {
+	public static AGridWorld getGridWorld() {
 		return gridWorld;
 	}
 
-	public static SandboxScene getInstance() {
-		return (SandboxScene.instanceOfSandboxScene == null) ? instanceOfSandboxScene = new SandboxScene(
-				SandboxPane.getInstance(), MainApp.WINDOW_WIDTH,
+	public static AdventureModeScene getInstance() {
+		return (AdventureModeScene.instanceOfSandboxScene == null) ? instanceOfSandboxScene = new AdventureModeScene(
+				AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH,
 				MainApp.WINDOW_HEIGHT) : instanceOfSandboxScene;
 	}
 }
