@@ -18,6 +18,9 @@ public class Level implements Serializable {
 	/**
 	 * Name of the level
 	 */
+	
+	private static boolean findObj = false;
+	
 	private String name; 
 	/**
 	 * The world for the level
@@ -199,6 +202,19 @@ public class Level implements Serializable {
 			this.objectives.remove(position);
 		}
 	}
+	
+	public void setObjective(boolean obj){
+		findObj = obj;
+	}
+	
+	public String getObjective(){
+		if (findObj){
+			return "find";
+		} else {
+			return "collect";
+		}
+	}
+	
 	/**
 	 * Overwrites the description. 
 	 * 

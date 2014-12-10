@@ -35,7 +35,7 @@ public class World implements Serializable {
 	 *
 	 */
 	
-	private static boolean findObj = false;
+	
 	
 	private class Square implements Serializable {
 		/**
@@ -1032,17 +1032,6 @@ public class World implements Serializable {
 		System.out.print(this);
 	}
 	
-	public void setObjective(boolean obj){
-		findObj = obj;
-	}
-	
-	public String getObjective(){
-		if (findObj){
-			return "find";
-		} else {
-			return "collect";
-		}
-	}
 
 	@Override
 	/**
