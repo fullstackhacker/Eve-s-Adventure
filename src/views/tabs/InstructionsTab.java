@@ -20,6 +20,8 @@ public final class InstructionsTab extends VBox{
 	
 	public static final Button END_LOOP_BUTTON = new Button("END LOOP");
 	
+	public static final Button LOOP_BUTTON = new Button("LOOP");
+	
 	private InstructionsTab(){
 		this.setSpacing(10);
 		this.setPadding(new Insets(0, 20, 10, 20));
@@ -29,7 +31,6 @@ public final class InstructionsTab extends VBox{
 		final Button IF_BUTTON = new Button("IF");
 		final Button WHILE_BUTTON = new Button("WHILE");
 		final Button TASK_BUTTON = new Button("TASK");
-		final Button LOOP_BUTTON = new Button("LOOP");
 		
 		IF_BUTTON.setOnAction(ButtonHandlers::IF_BUTTON_HANDLER);
 		ELSE_BUTTON.setOnAction(ButtonHandlers::ELSE_BUTTON_HANDLER);

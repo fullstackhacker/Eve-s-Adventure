@@ -348,6 +348,7 @@ public final class KarelTable extends GridPane {
 						GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
 						GameTabs.getInstance().enableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 						GameTabs.getInstance().switchTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
+						InstructionsTab.LOOP_BUTTON.setDisable(true);
 						break;
 					/* Conditionals */
 					case KarelCode.FRONTISCLEAR:
@@ -527,6 +528,45 @@ public final class KarelTable extends GridPane {
 		this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 		this.karelCode.remove(this.listView.getSelectionModel().getSelectedIndex() - 1);
 	}
+	
+	/**
+	 * 
+	 * @param start 
+	 * @param end
+	 * @param instruc Current Instructions
+	 */
+	public void replaceInstructions(int start, int end, String instruc){
+		System.out.println("replaceInstructions CALLED");
+		System.out.println("start = " + start);
+		System.out.println("end = " + end);
+		this.REPLACE_BUTTON_ON = false;
+		InstructionsTab.ELSE_BUTTON.setDisable(false);
+		this.karelCode.remove(end);
+		this.karelCode.remove(start);
+		
+		String beginning = "";
+		String ending = "";
+		
+		switch(instruc){
+			case KarelCode.IFSTATEMENT:
+				/* While Loop */
+				/* IF Statement */
+				beginning = KarelCode.IFSTATEMENT;
+				ending = KarelCode.ENDIF;
+				break;
+			case KarelCode.WHILESTATEMENT:
+				beginning = KarelCode.WHILESTATEMENT;
+				ending = KarelCode.ENDWHILE;
+				break;
+		}
+		
+		this.karelCode.add(start, beginning);
+		this.karelCode.add(end, ending);
+		System.out.println(this.karelCode);
+		this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
+	}
+	
+	
 
 	/**
 	 * Adding a piece a code to the Karel Table
@@ -579,6 +619,10 @@ public final class KarelTable extends GridPane {
 		}
 		
 		return karelCodeArrayList;
+	}
+	
+	public int getLineSelectedLine(){
+		return this.listView.getSelectionModel().getSelectedIndex();
 	}
 	
 	public static KarelTable getInstance() {
