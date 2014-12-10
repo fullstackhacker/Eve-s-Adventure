@@ -11,17 +11,21 @@ public final class TopMenu extends MenuBar {
 
 	private TopMenu() {
 		final Menu menu1 = new Menu("File");
-		//final Menu menu2 = new Menu("Options");
-		//final Menu menu3 = new Menu("Help");
+		final Menu menu2 = new Menu("Options");
+		// final Menu menu2 = new Menu("Options");
+		// final Menu menu3 = new Menu("Help");
 
 		MenuItem quit = new MenuItem("Quit");
 		quit.setOnAction(ButtonHandlers::QUIT_MENU_HANDLER);
 		MenuItem save = new MenuItem("Save");
 		save.setOnAction(ButtonHandlers::SAVE_MENU_HANDLER);
-		
-		menu1.getItems().addAll(save, quit);
+		MenuItem addObj = new MenuItem("Add Objective");
+		addObj.setOnAction(ButtonHandlers::ADDOB_MENU_HANDLER);
 
-		this.getMenus().addAll(menu1);
+		menu1.getItems().addAll(save, quit);
+		menu2.getItems().addAll(addObj);
+
+		this.getMenus().addAll(menu1, menu2);
 	}
 
 	public static TopMenu getInstance() {
