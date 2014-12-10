@@ -20,6 +20,7 @@ import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import views.MainApp;
+import views.TopMenu;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
 import views.scenes.LoadMenuScene;
@@ -684,17 +685,21 @@ public final class ButtonHandlers {
 		MainApp.changeScenes(MainMenuScene.getInstance());
 	}
 
-	/*public static final void COLLECT_MENU_HANDLER(ActionEvent e) {
+	public static final void COLLECT_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Collect)!");
-		World world = AdventureModeScene.getWorld();
-		Level.setObjective(false);
+		//World world = AdventureModeScene.getWorld();
+		//Level.setObjective(false);
+		SandboxScene.getInstance().topMenu.collect.setDisable(true);
+		SandboxScene.getInstance().topMenu.find.setDisable(false);
 	}
 	
 	public static final void FIND_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Find)!");
-		World world = AdventureModeScene.getWorld();
-		Level.setObjective(true);
-	}*/
+		//World world = AdventureModeScene.getWorld();
+		//Level.setObjective(true);
+		SandboxScene.getInstance().topMenu.collect.setDisable(false);
+		SandboxScene.getInstance().topMenu.find.setDisable(true);
+	}
 
 	public static final void SAVE_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Saved!");

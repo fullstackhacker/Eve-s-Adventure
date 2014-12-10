@@ -8,7 +8,9 @@ import javafx.scene.control.MenuItem;
 public final class TopMenu extends MenuBar {
 
 	private static TopMenu instant = null;
-
+	public MenuItem collect = null;
+	public MenuItem find = null;
+	
 	private TopMenu() {
 		final Menu menu1 = new Menu("File");
 		final Menu menu2 = new Menu("Options");
@@ -20,10 +22,10 @@ public final class TopMenu extends MenuBar {
 		MenuItem save = new MenuItem("Save");
 		save.setOnAction(ButtonHandlers::SAVE_MENU_HANDLER);
 		Menu addObj = new Menu("Add Objective");
-		MenuItem collect = new MenuItem("Collect all Bamboo");
-		//collect.setOnAction(ButtonHandlers::COLLECT_MENU_HANDLER);
-		MenuItem find = new MenuItem("Find Friend");
-		//find.setOnAction(ButtonHandlers::FIND_MENU_HANDLER);
+		collect = new MenuItem("Collect all Bamboo");
+		collect.setOnAction(ButtonHandlers::COLLECT_MENU_HANDLER);
+		find = new MenuItem("Find Friend");
+		find.setOnAction(ButtonHandlers::FIND_MENU_HANDLER);
 		addObj.getItems().addAll(collect, find);
 
 		menu1.getItems().addAll(save, quit);

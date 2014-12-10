@@ -32,6 +32,8 @@ public final class SandboxScene extends Scene {
 	private static GridWorld gridWorld;
 	
 	public static ToggleButton Eve = new ToggleButton("Eve!");
+	
+	public static TopMenu topMenu = null;
 
 	private static final class SandboxPane extends GridPane {
 
@@ -62,7 +64,7 @@ public final class SandboxScene extends Scene {
 			GridPane.setFillWidth(RESET, true);
 			GridPane.setHalignment(RESET, HPos.CENTER);
 
-			TopMenu topMenu = TopMenu.getInstance();
+			topMenu = TopMenu.getInstance();
 			GameTabs gametabs = GameTabs.getInstance();
 			gametabs.setId("gametabs");
 			ProTips protips = ProTips.getInstance();
