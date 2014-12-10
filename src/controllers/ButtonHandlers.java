@@ -595,6 +595,10 @@ public final class ButtonHandlers {
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e){
 		System.out.println("PLAY_BUTTON_HANDLER CALLED");
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode(); 
+		if(karelCode.isEmpty()){
+			System.out.println("karelCode is empty!");
+			return;
+		}
 		World world = SandboxScene.getWorld(); 
 		System.out.println(KarelTable.getInstance().getKarelCode());
 		Interpreter interpreter = new Interpreter(karelCode, world);
