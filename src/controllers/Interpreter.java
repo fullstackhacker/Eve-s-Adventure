@@ -117,6 +117,13 @@ public class Interpreter {
 				GridWorld.gridButtons[row][col].setGraphic(gridButtons[row][col].getGraphic());
 			}
 		}
+		
+		if(timer != null){
+			timer.cancel();
+		}
+		
+		KarelTable.getInstance().setSelectedIndex(0);
+		
 	}
 
 	/**

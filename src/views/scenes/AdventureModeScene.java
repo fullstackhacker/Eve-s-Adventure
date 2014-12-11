@@ -40,6 +40,15 @@ public final class AdventureModeScene extends Scene {
 	
 	public static ToggleButton Eve = new ToggleButton("Eve!");
 
+	public static Button PLAY;
+	
+	public static ImageView imagePlay = new ImageView(new Image(
+			"./Images/PlayButton.png"));
+	
+	//TODO Change this link
+	public static ImageView imagePause = new ImageView(new Image(
+			"./Images/ResetButton.png"));
+	
 	public static final class AdventureModePane extends GridPane {
 
 		public static AdventureModePane instanceOfMainMenuPane = new AdventureModePane();
@@ -48,12 +57,10 @@ public final class AdventureModeScene extends Scene {
 				"./Images/ArrowLeft.png"));
 		private ImageView imageRight = new ImageView(new Image(
 				"./Images/ArrowRight.png"));
-		private ImageView imagePlay = new ImageView(new Image(
-				"./Images/PlayButton.png"));
 		private ImageView imageReset = new ImageView(new Image(
 				"./Images/ResetButton.png"));
 
-		private Button BACK, FORWARD, PLAY, RESET;
+		private Button BACK, FORWARD, RESET;
 
 		private AdventureModePane() {
 			this.getStylesheets().add("./sandbox_style.css");
