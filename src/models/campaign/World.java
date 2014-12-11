@@ -552,6 +552,22 @@ public class World implements Serializable {
 		return this.world[coordinate.getY()][coordinate.getX()].hasCreature();
 	}
 
+	public boolean hasUpWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasUpWall();
+	}
+	public boolean hasDownWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasDownWall();
+	}
+	public boolean hasLeftWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasLeftWall();
+	}
+	public boolean hasRightWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasRightWall();
+	}
 	/**
 	 * Gets the area of the world
 	 * 
@@ -1205,39 +1221,16 @@ public class World implements Serializable {
 	}
 
 	public void overwrite(World world){
-		for(int row = 0; row < this.getHeight(); row++){
-			for(int col = 0; col < this.getWidth(); col++){
-				Coordinate currentPosition = new Coordinate(col, row);
+		this.name = world.name; 
+		this.eve = world.eve.copy();
+		this.bambooObjective = world.bambooObjective;
+		
+		//copy the world
+		for(int row = 0; row < this.world.length; row++){
+			for(int col = 0; col < this.world[row].length; col++){
+				//Coordinate 
 				
-				//overwrite the creatures
-				if(world.getSquareAt(currentPosition).hasCreature() && !this.getSquareAt(currentPosition).hasCreature()) 
-					this.getSquareAt(currentPosition).addCreature(world.getSquareAt(currentPosition).currentCreature()); 
-				else if(world.getSquareAt(currentPosition).hasCreature() && this.getSquareAt(currentPosition).hasCreature())
-					this.getSquareAt(currentPosition).replaceCreature(world.getSquareAt(currentPosition).currentCreature());
-				else
-					this.getSquareAt(currentPosition).removeCreature(); 
-				
-				//overwrite the items
-				if(world.getSquareAt(currentPosition).hasItem() && !this.getSquareAt(currentPosition).hasItem())
-					this.getSquareAt(currentPosition).addItem(world.getSquareAt(currentPosition).currentItem()); 
-				else if(world.getSquareAt(currentPosition).hasItem() && this.getSquareAt(currentPosition).hasItem())
-					this.getSquareAt(currentPosition).replaceItem(world.getSquareAt(currentPosition).currentItem());
-				else
-					this.getSquareAt(currentPosition).removeItem();
-					
-				//overwrite the walls
-				this.getSquareAt(currentPosition).removeUpWall(); 
-				this.getSquareAt(currentPosition).removeDownWall(); 
-				this.getSquareAt(currentPosition).removeRightWall(); 
-				this.getSquareAt(currentPosition).removeLeftWall(); 
-				if(world.getSquareAt(currentPosition).hasUpWall())
-					this.getSquareAt(currentPosition).addUpWall(world.getSquareAt(currentPosition).upWall.copy());
-				if(world.getSquareAt(currentPosition).hasDownWall())
-					this.getSquareAt(currentPosition).addDownWall(world.getSquareAt(currentPosition).downWall.copy());
-				if(world.getSquareAt(currentPosition).hasLeftWall())
-					this.getSquareAt(currentPosition).addLeftWall(world.getSquareAt(currentPosition).leftWall.copy()); 
-				if(world.getSquareAt(currentPosition).hasRightWall())
-					this.getSquareAt(currentPosition).addRightWall(world.getSquareAt(currentPosition).rightWall.copy()); 
+				//replace the creatures
 			}
 		}
 	}
