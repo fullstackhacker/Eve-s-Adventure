@@ -15,14 +15,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class LoadSessionScene extends Scene {
+public class NewCampaignScene extends Scene {
 
-	private static final class LoadSessionPane extends BorderPane{
+	private static final class NewCampaignPane extends BorderPane{
 		
 		/**
 		 * 
 		 */
-		private static LoadSessionPane instanceOfLoadSessionPane = null;
+		private static NewCampaignPane instanceOfNewCampaignPane = null;
 		
 		private Button LOAD_SESSION_BUTTON, CANCEL_BUTTON;
 		
@@ -30,17 +30,17 @@ public class LoadSessionScene extends Scene {
 		private ListView<String> sessionsListView;
 		
 		private static final String DATADIR = "data" + File.separator; 
-		private static final String WORLDDIR = LoadSessionPane.DATADIR + "worlds" + File.separator; 
-		private static final String LEVELDIR = LoadSessionPane.DATADIR + "levels" + File.separator; 
-		private static final String CAMPAIGNDIR = LoadSessionPane.DATADIR + "campaigns" + File.separator; 
+		private static final String WORLDDIR = NewCampaignPane.DATADIR + "worlds" + File.separator; 
+		private static final String LEVELDIR = NewCampaignPane.DATADIR + "levels" + File.separator; 
+		private static final String CAMPAIGNDIR = NewCampaignPane.DATADIR + "campaigns" + File.separator; 
 		private static final String WORLDEXT = ".world"; 
 		private static final String NAMEFILENAME = "name.dat"; 
 		
 		/**
 		 * 
 		 */
-		private LoadSessionPane(){
-			this.getStylesheets().add(LoadSessionScene.class.getResource("/loadsession_style.css").toExternalForm());
+		private NewCampaignPane(){
+			this.getStylesheets().add("./loadsession_style.css");
 			setupObjects();
 			this.setCenter(addVBox());
 			
@@ -66,7 +66,7 @@ public class LoadSessionScene extends Scene {
 		}
 		
 		private void addSessions(){
-			File worldsDir = new File(LoadSessionPane.WORLDDIR); 
+			File worldsDir = new File(NewCampaignPane.WORLDDIR); 
 			if(!worldsDir.exists()) return;
 			
 			File[] listOfFiles = worldsDir.listFiles();
@@ -94,22 +94,22 @@ public class LoadSessionScene extends Scene {
 		
 		
 		
-		private static LoadSessionPane getInstance(){
-			return (instanceOfLoadSessionPane == null) ?instanceOfLoadSessionPane = new LoadSessionPane() : instanceOfLoadSessionPane;
+		private static NewCampaignPane getInstance(){
+			return (instanceOfNewCampaignPane == null) ?instanceOfNewCampaignPane = new NewCampaignPane() : instanceOfNewCampaignPane;
 		
 		}
 	}
 	
-	private static LoadSessionScene instanceOfLoadSessionScene = null;
+	private static NewCampaignScene instanceOfNewCampaignScene = null;
 	
-	private LoadSessionScene(Parent arg0, double arg1, double arg2){
+	private NewCampaignScene(Parent arg0, double arg1, double arg2){
 		super(arg0, arg1, arg2);
 	}
 	
-	public static LoadSessionScene getInstance(){
-		return (LoadSessionScene.instanceOfLoadSessionScene == null) ? instanceOfLoadSessionScene = 
-			new LoadSessionScene(LoadSessionPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
-			instanceOfLoadSessionScene;
+	public static NewCampaignScene getInstance(){
+		return (NewCampaignScene.instanceOfNewCampaignScene == null) ? instanceOfNewCampaignScene = 
+			new NewCampaignScene(NewCampaignPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
+				instanceOfNewCampaignScene;
 	}
 	
 }

@@ -1,25 +1,9 @@
 package views.scenes;
 
-import models.Coordinate;
-import models.campaign.World;
-import models.gridobjects.creatures.Creature;
-import controllers.ButtonHandlers;
-import controllers.Interpreter;
-import views.MainApp;
-import views.ATopMenu;
-import views.grid.Cols;
-import views.grid.GridWorld;
-import views.grid.Rows;
-import views.karel.KarelTable;
-import views.tabs.GameTabs;
-import views.tips.Objective;
-import views.tips.ProTips;
 import javafx.geometry.HPos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -27,6 +11,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import models.Coordinate;
+import models.campaign.World;
+import models.gridobjects.creatures.Creature;
+import views.ATopMenu;
+import views.MainApp;
+import views.grid.Cols;
+import views.grid.GridWorld;
+import views.grid.Rows;
+import views.karel.KarelTable;
+import views.tabs.GameTabs;
+import views.tips.Objective;
+import views.tips.ProTips;
+import controllers.ButtonHandlers;
+import controllers.Interpreter;
 
 public final class AdventureModeScene extends Scene {
 

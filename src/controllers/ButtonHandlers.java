@@ -1,6 +1,5 @@
 package controllers;
 
-import java.awt.List;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -10,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -34,9 +32,12 @@ import views.Running;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
 import views.scenes.AdventureModeScene;
+import views.scenes.LoadCampaignScene;
 import views.scenes.LoadMenuScene;
+import views.scenes.LoadMenuSceneA;
 import views.scenes.LoadSessionScene;
 import views.scenes.MainMenuScene;
+import views.scenes.NewCampaignScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
 import views.tabs.InstructionsTab;
@@ -46,6 +47,9 @@ import views.tips.ProTips;
  * 
  * @author Anthony Wong
  * @author Megan Murray
+ * @author Neil Patel
+ * @author Carmine Iannaccone
+ * @author Mushaheed Kapadia
  *
  */
 public final class ButtonHandlers {
@@ -64,7 +68,7 @@ public final class ButtonHandlers {
 
 	public static final void ADVENTURE_MODE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("ADVENTURE_MODE_BUTTON_HANDLER CALLED");
-		MainApp.changeScenes(LoadMenuScene.getInstance());
+		MainApp.changeScenes(LoadMenuSceneA.getInstance());
 		sandbox = false;
 	}
 
@@ -130,6 +134,16 @@ public final class ButtonHandlers {
 			GameTabs.getInstance().getTabs()
 					.remove(GameTabs.getInstance().ITEMS_TAB);
 		}
+	}
+
+	public static final void LOAD_CAMPAIGN_BUTTON_HANDLER(ActionEvent e) {
+		System.out.println("LOAD_CAMPAIGN_BUTTON_HANDLER CALLED");
+		MainApp.changeScenes(LoadCampaignScene.getInstance());
+	}
+
+	public static final void NEW_CAMPAIGN_BUTTON_HANDLER(ActionEvent e) {
+		System.out.println("NEW_CAMPAIGN_BUTTON_HANDLER CALLED");
+		MainApp.changeScenes(NewCampaignScene.getInstance());
 	}
 
 	public static final void CANCEL_BUTTON_HANDLER(ActionEvent e) {

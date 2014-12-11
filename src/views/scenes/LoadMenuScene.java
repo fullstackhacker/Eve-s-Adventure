@@ -1,7 +1,5 @@
 package views.scenes;
 
-import views.MainApp;
-import controllers.ButtonHandlers;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,12 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import views.MainApp;
+import controllers.ButtonHandlers;
 
 /**
  * 
  * @author Anthony Wong
  * 
- *         The MainMenuScene will be use for the MainApp.java. This class
+ *         The LoadMenuScene will be use for the MainApp.java. This class
  *         extends Scene. It is using design pattern Singleton.
  */
 public final class LoadMenuScene extends Scene {
@@ -22,7 +22,7 @@ public final class LoadMenuScene extends Scene {
 	/**
 	 * @author Anthony Wong
 	 * 
-	 *         The MainMenuPane will be use for the MainMenuScene.java. This
+	 *         The LoadMenuPane will be use for the MainMenuScene.java. This
 	 *         class extends Pane and it is the design patter singleton.
 	 */
 	private static final class LoadMenuPane extends BorderPane {
@@ -99,10 +99,10 @@ public final class LoadMenuScene extends Scene {
 	private static LoadMenuScene instanceOfMainMenuScene = null;
 
 	/**
-	 * MainMenuScene' Constructor
+	 * LoadMenuScene' Constructor
 	 * 
 	 * @param arg0
-	 *            MainMenuPane
+	 *            LoadMenuPane
 	 * @param arg1
 	 *            width
 	 * @param arg2
