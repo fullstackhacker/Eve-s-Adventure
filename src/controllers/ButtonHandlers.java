@@ -6,9 +6,13 @@ import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -70,6 +74,12 @@ public final class ButtonHandlers {
 				SandboxScene.SandboxPane.getInstance().add(GameTabs.getInstance(), 0, 1, 1, 3);
 				SandboxScene.SandboxPane.getInstance().add(KarelTable.getInstance(), 1, 1, 1, 3);
 				SandboxScene.SandboxPane.getInstance().add(ProTips.getInstance(), 0, 4, 2, 1);
+				SandboxScene.SandboxPane.getInstance().add(SandboxScene.gridWorld, 3, 3, 4, 2);
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 10; j++) {
+						GridWorld.gridButtons[i][j].setDisable(false);
+					}
+				}
 			}catch(Exception e1){
 				System.out.println("LOL");
 			}
@@ -83,6 +93,12 @@ public final class ButtonHandlers {
 				AdventureModeScene.AdventureModePane.getInstance().add(GameTabs.getInstance(), 0, 1, 1, 3);
 				AdventureModeScene.AdventureModePane.getInstance().add(KarelTable.getInstance(), 1, 1, 1, 3);
 				AdventureModeScene.AdventureModePane.getInstance().add(ProTips.getInstance(), 0, 4, 2, 1);
+				AdventureModeScene.AdventureModePane.getInstance().add(AdventureModeScene.gridWorld, 3, 3, 4, 2);
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 10; j++) {
+						GridWorld.gridButtons[i][j].setDisable(true);
+					}
+				}
 			}catch(Exception e2){
 				System.out.println("");
 			}

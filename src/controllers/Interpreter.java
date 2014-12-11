@@ -6,15 +6,15 @@ import java.util.TimerTask;
 
 import javafx.application.Platform;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.transform.Rotate;
 import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.Level;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
-import views.grid.AGridWorld;
+import views.grid.GridWorld;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
+import views.scenes.SandboxScene;
 import exceptions.IllegalValueException;
 
 /**
@@ -38,9 +38,9 @@ public class Interpreter {
 	 * The original state of the world
 	 */
 	private World startWorld;
-	
-	private ToggleButton[][] gridButtons; 
-	
+
+	private ToggleButton[][] gridButtons;
+
 	private Timer timer;
 	
 	private int currentLoopCounter; 
@@ -56,7 +56,7 @@ public class Interpreter {
 	public Interpreter(ArrayList<String> karelCode, World world) {
 		this.karelCode = karelCode;
 		this.world = world;
-		AGridWorld.getInstance().setWorld(this.world);
+		GridWorld.getInstance().setWorld(this.world);
 		this.startWorld = world.copyWorld();
 		this.currentLoopCounter = 0; 
 	}
@@ -105,10 +105,11 @@ public class Interpreter {
 	public void reset() {
 		this.activeCodeBlock = 0;
 		this.world.overwrite(startWorld);
-		for(int row = 0; row < gridButtons.length; row++){
-			for(int col = 0; col < gridButtons[row].length; col++){
-				//going to be swapped with the images
-				GridWorld.gridButtons[row][col].setText(gridButtons[row][col].getText());
+		for (int row = 0; row < gridButtons.length; row++) {
+			for (int col = 0; col < gridButtons[row].length; col++) {
+				// going to be swapped with the images
+				GridWorld.gridButtons[row][col].setText(gridButtons[row][col]
+						.getText());
 			}
 		}
 	}
@@ -129,50 +130,51 @@ public class Interpreter {
 	public void changeKarelCode(ArrayList<String> karelCode) {
 		this.karelCode = karelCode;
 	}
-	
-	public World getWorld(){ 
-		return this.world; 
+
+	public World getWorld() {
+		return this.world;
 	}
-	
-	public World getStartWorld(){
-		return this.startWorld; 
+
+	public World getStartWorld() {
+		return this.startWorld;
 	}
 
 	public void start() {
 		this.world.findEve();
-//		player.play();
+		// player.play();
 		timer = new Timer();
-		timer.schedule(new TimerTask(){
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				Platform.runLater(new Runnable(){
+				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
+						KarelTable.getInstance().setSelectedIndex(
+								activeCodeBlock);
 						instructions();
 					}
 				});
 			}
 		}, 0, 2000);
 	}
-/*
-	Timeline player = new Timeline(new KeyFrame(Duration.seconds(2),
-			new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
-					instructions();
-				}
-			}));*/
 
-	//, new KeyFrame(Duration.seconds(2))
-	
+	/*
+	 * Timeline player = new Timeline(new KeyFrame(Duration.seconds(2), new
+	 * EventHandler<ActionEvent>() {
+	 * 
+	 * @Override public void handle(ActionEvent event) {
+	 * KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
+	 * instructions(); } }));
+	 */
+
+	// , new KeyFrame(Duration.seconds(2))
+
 	public void instructions() {
-	//	player.stop();
+		// player.stop();
 		System.out.println("Instructions: "
 				+ this.karelCode.get(this.activeCodeBlock));
 		instruction();
-		if (!validPosition()){
+		if (!validPosition()) {
 			timer.cancel();
 			return;
 		}
@@ -187,7 +189,7 @@ public class Interpreter {
 			return;
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP))
 			return;
-	//	player.play();
+		// player.play();
 	}
 
 	public void instruction() {
@@ -315,7 +317,9 @@ public class Interpreter {
 				throw new IllegalValueException("Ill formed Karel Code");
 			instructions();
 		}
-		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result) {
+		if (this.karelCode.get(this.activeCodeBlock).equals(
+				KarelCode.ELSESTATEMENT)
+				&& result) {
 			do {
 				this.next();
 			} while (!this.karelCode.get(this.activeCodeBlock).equals(
@@ -326,7 +330,8 @@ public class Interpreter {
 
 	public void operation() {
 		if (!this.world.getEve().isAwake()) {
-			if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.WAKEUP)) {
+			if (this.karelCode.get(this.activeCodeBlock).equals(
+					KarelCode.WAKEUP)) {
 				this.world.getEve().setAwake(true);
 			} else {
 				return;
@@ -339,10 +344,23 @@ public class Interpreter {
 			return;
 		case KarelCode.TURNRIGHT:
 			this.world.getEve().turnLeft();
-			AGridWorld.gridButtons[this.world.getEve().getX()][this.world
-					.getEve().getY()].getTransforms().add(
-					new Rotate(90, 28, 32.5));
-			;
+			if (this.world.getEve().getDirection() == Coordinate.UP) {
+				GridWorld.gridButtons[this.world.getEve().getX()][this.world
+						.getEve().getY()].setGraphic(SandboxScene.EveDown);
+			} else if (this.world.getEve().getDirection() == Coordinate.LEFT) {
+				GridWorld.gridButtons[this.world.getEve().getX()][this.world
+						.getEve().getY()].setGraphic(SandboxScene.EveLeft);
+			} else if (this.world.getEve().getDirection() == Coordinate.RIGHT) {
+				GridWorld.gridButtons[this.world.getEve().getX()][this.world
+						.getEve().getY()].setGraphic(SandboxScene.EveRight);
+			} else {
+				GridWorld.gridButtons[this.world.getEve().getX()][this.world
+						.getEve().getY()].setGraphic(SandboxScene.EveUp);
+			}
+			/*
+			 * GridWorld.gridButtons[this.world.getEve().getX()][this.world
+			 * .getEve().getY()].getTransforms().add( new Rotate(90, 28, 32.5));
+			 */
 			return;
 		case KarelCode.SLEEP:
 			this.world.getEve().setAwake(false);
@@ -396,17 +414,16 @@ public class Interpreter {
 		return Integer.parseInt(number);
 	}
 
-	
 	/* Reverser Instruction */
-	public void reverseInstruction(){
-		switch(this.karelCode.get(this.activeCodeBlock)){
+	public void reverseInstruction() {
+		switch (this.karelCode.get(this.activeCodeBlock)) {
 		case KarelCode.MOVE:
-		case KarelCode.TURNRIGHT: 
-		case KarelCode.SLEEP: 
-		case KarelCode.WAKEUP: 
+		case KarelCode.TURNRIGHT:
+		case KarelCode.SLEEP:
+		case KarelCode.WAKEUP:
 		case KarelCode.PUTBAMBOO:
-		case KarelCode.PICKBAMBOO: 
-			//reverseOperation(); 
+		case KarelCode.PICKBAMBOO:
+			// reverseOperation();
 			return;
 		case KarelCode.ENDIF:
 		case KarelCode.ENDELSE: 
@@ -420,8 +437,8 @@ public class Interpreter {
 			throw new IllegalValueException("Illegal Set of Karel Code: " + this.karelCode.get(this.activeCodeBlock)); 
 		}
 	}
-	
-	public static void main(String[] args) {
+
+	/*public static void main(String[] args) {
 		World world = new World("test_world", 5, 5);
 		Level level = new Level(world, "testing the parser");
 
@@ -437,10 +454,10 @@ public class Interpreter {
 			return;
 
 		world.printWorld();
-		interpreter.start(); 
+		interpreter.start();
 		System.out.println("Active Code Block: " + interpreter.activeCodeBlock
 				+ "total size: " + level.getKarelCode().size());
 		world.printWorld();
-		
-	}
+
+	}*/
 }
