@@ -818,6 +818,29 @@ public class World implements Serializable {
 				+ this.getEve().getDirection());
 
 	}
+	
+	public boolean eveNearFriend(){
+		Coordinate eveLocation = this.eve.getCoordinates();
+		Coordinate possibleFriendLocation = null; 
+		
+		switch(this.eve.getDirection()){
+		case Coordinate.UP:
+			
+			break; 
+		case Coordinate.DOWN:
+			
+			break; 
+		case Coordinate.RIGHT: 
+			
+			break; 
+		case Coordinate.LEFT: 
+			
+			break;
+		default: 
+			return false; 
+		}
+		return false; 
+	}
 
 	/**
 	 * Put bamboo on current square
