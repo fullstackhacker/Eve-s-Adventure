@@ -1,5 +1,6 @@
 package views.grid;
 
+import models.Coordinate;
 import models.campaign.World;
 import views.tabs.GameTabs;
 import controllers.ButtonHandlers;
@@ -29,7 +30,7 @@ public final class GridWorld extends GridPane {
 
 	private World world;
 
-	private GridWorld() {
+	public GridWorld() {
 		this.getStylesheets().add(GridWorld.class.getResource("/sandbox_style.css").toExternalForm());
 
 		this.setGridLinesVisible(true);
@@ -144,7 +145,11 @@ public final class GridWorld extends GridPane {
 						.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 				gridButtons[i][j].setId("WorldButton");
 				gridButtons[i][j].setToggleGroup(group);
-
+				if(getWorld() != null){
+					if(getWorld().itemAt(new Coordinate(i, j)) != null){
+						gridButtons[i][j].setGraphic()
+					} else if(getWorld().creatureAt(new Coordinate(i, j)) != null)
+				}
 				this.add(gridButtons[i][j], i, j);
 
 			}

@@ -226,6 +226,9 @@ public final class ButtonHandlers {
 					AdventureModeScene.gridWorld, 3, 3, 4, 2);
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					AdventureModeScene.objective, 0, 4, 1, 1);
+			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
+			AdventureModeScene.getInstance().gridWorld = new GridWorld();
+			//AdventureModeScene.getInstance().gridWorld.world = 
 		} catch (Exception e2) {
 			System.out.println("AdventureMode.add() Exception Caught");
 			//e2.printStackTrace();
