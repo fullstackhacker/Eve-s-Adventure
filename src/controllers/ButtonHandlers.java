@@ -1185,6 +1185,7 @@ public final class ButtonHandlers {
 
 	}
 
+	//Friend on Eve - ask
 	public static final void FRIENDS_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("FRIENDS_BUTTON_HANDLER");
 		// String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
