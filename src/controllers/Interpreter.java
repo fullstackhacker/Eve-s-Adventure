@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,6 +12,7 @@ import models.campaign.KarelCode;
 import models.campaign.Level;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
+import views.Running;
 import views.grid.GridWorld;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
@@ -285,9 +287,11 @@ public class Interpreter {
 							.getInstance().getWorld().getEve()
 							.getNumberOfBamboo()) {
 				this.activeCodeBlock = this.karelCode.size();
+				Running.getInstance().setText("YOU WIN!!!!");
 			} else if (Level.getObjective().equals("find")
 					&& GridWorld.getInstance().getWorld().eveNearFriend()) {
 				this.activeCodeBlock = this.karelCode.size();
+				Running.getInstance().setText("YOU WIN!!!!");
 			}
 			this.next();
 			break;
