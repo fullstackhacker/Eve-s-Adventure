@@ -1175,7 +1175,7 @@ public class World implements Serializable {
 
 	public void findEve() {
 		for (int y = 0; y < this.world.length; y++) {
-			for (int x = 9; x < this.world[y].length; x++) {
+			for (int x = 0; x < this.world[y].length; x++) {
 				if (this.world[y][x].hasCreature()
 						&& this.world[y][x].currentCreature().getName()
 								.equals("Eve"))
@@ -1213,6 +1213,7 @@ public class World implements Serializable {
 				if(this.getSquareAt(currentPosition).hasLeftWall()) world.getSquareAt(currentPosition).addLeftWall(this.getSquareAt(currentPosition).currentLeftWall().copy());
 			}
 		}
+		world.findEve();
 		return world;
 	}
 	
@@ -1222,15 +1223,41 @@ public class World implements Serializable {
 
 	public void overwrite(World world){
 		this.name = world.name; 
-		this.eve = world.eve.copy();
+		System.out.println("World.eve.cooridnates: " + world.eve.getCoordinates());
+		this.getEve().setCoordinates(world.eve.getCoordinates());
 		this.bambooObjective = world.bambooObjective;
 		
 		//copy the world
 		for(int row = 0; row < this.world.length; row++){
 			for(int col = 0; col < this.world[row].length; col++){
-				//Coordinate 
+				Coordinate currentLocation = new Coordinate(col, row); 
+				
+				this.getSquareAt(currentLocation).removeCreature();
+				this.getSquareAt(currentLocation).removeItem();
 				
 				//replace the creatures
+				if(world.getSquareAt(currentLocation).hasCreature() && !this.getSquareAt(currentLocation).addCreature(world.getSquareAt(currentLocation).currentCreature().copy())){
+					this.getSquareAt(currentLocation).replaceCreature(world.getSquareAt(currentLocation).currentCreature().copy()); 
+				}
+				
+				//replace the items
+				if(world.getSquareAt(currentLocation).hasItem() && !this.getSquareAt(currentLocation).addItem(world.getSquareAt(currentLocation).currentItem().copy())){
+					this.getSquareAt(currentLocation).replaceItem(world.getSquareAt(currentLocation).currentItem().copy());
+				}
+				
+				//replace the walls
+				this.getSquareAt(currentLocation).removeUpWall(); 
+				this.getSquareAt(currentLocation).removeDownWall(); 
+				this.getSquareAt(currentLocation).removeLeftWall(); 
+				this.getSquareAt(currentLocation).removeRightWall(); 
+				if(world.getSquareAt(currentLocation).hasUpWall())
+					this.getSquareAt(currentLocation).addUpWall(world.getSquareAt(currentLocation).upWall.copy());
+				if(world.getSquareAt(currentLocation).hasDownWall())
+					this.getSquareAt(currentLocation).addDownWall(world.getSquareAt(currentLocation).downWall.copy());
+				if(world.getSquareAt(currentLocation).hasRightWall())
+					this.getSquareAt(currentLocation).addRightWall(world.getSquareAt(currentLocation).rightWall.copy());
+				if(world.getSquareAt(currentLocation).hasLeftWall())
+					this.getSquareAt(currentLocation).addLeftWall(world.getSquareAt(currentLocation).leftWall.copy());
 			}
 		}
 	}
