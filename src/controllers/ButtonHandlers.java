@@ -21,6 +21,7 @@ import models.gridobjects.items.Bamboo;
 import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
+import models.gridobjects.items.Wall;
 import views.MainApp;
 import views.TopMenu;
 import views.grid.GridWorld;
@@ -415,8 +416,8 @@ public final class ButtonHandlers {
 				}
 			}
 		});
-
 	}
+	
 
 	/**
 	 * Popup if they try to put something where Eve is
@@ -517,18 +518,28 @@ public final class ButtonHandlers {
 	
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLT_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("upWall");
+		
 	}
 	
 	public static final void WALLB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLB_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.DOWN);
 	}
 
 	public static final void WALLL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLL_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
 	}
 	
 	public static final void WALLR_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLR_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
 	}
 	
 	
