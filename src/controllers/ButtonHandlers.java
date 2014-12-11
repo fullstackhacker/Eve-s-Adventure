@@ -626,7 +626,7 @@ public final class ButtonHandlers {
 
 		} else {
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("Tree");
+					.getYCoordinate()].setGraphic(SandboxScene.getTreeI());
 
 			Tree tree = new Tree(4);
 			tree.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
@@ -751,7 +751,7 @@ public final class ButtonHandlers {
 			popup("Friend");
 		} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("Friend");
+					.getYCoordinate()].setGraphic(SandboxScene.getFriendI());
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
 		Creature Friend = new Creature("Friend", cords);

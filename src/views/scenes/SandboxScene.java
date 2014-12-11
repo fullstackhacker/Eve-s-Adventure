@@ -49,8 +49,8 @@ public final class SandboxScene extends Scene {
 	private static ImageView EveLeft = new ImageView(new Image("./Images/eve_left.png"));
 	private static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
 	private static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
-	public static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
-	public static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
+	private static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
+	private static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
 
 	public static final class SandboxPane extends GridPane {
 		
@@ -244,6 +244,15 @@ public final class SandboxScene extends Scene {
 	public static ImageView getBambooI(){
 		return new ImageView(new Image("./Images/bamboo.png")); 
 	}
+	
+	public static ImageView getFriendI(){
+		return new ImageView(new Image("./Images/friend.png")); 
+	}
+	
+	public static ImageView getTreeI(){
+		return new ImageView(new Image("./Images/tree.png"));
+	}
+	
 	
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
