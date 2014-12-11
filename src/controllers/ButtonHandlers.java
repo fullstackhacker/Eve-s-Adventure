@@ -564,6 +564,9 @@ public final class ButtonHandlers {
 
 	public static final void RMWALL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RMWALL_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("WorldButton");
 	}
 
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
@@ -578,18 +581,21 @@ public final class ButtonHandlers {
 		System.out.println("WALLB_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.DOWN);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("downWall");
 	}
 
 	public static final void WALLL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLL_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("leftWall");
 	}
 
 	public static final void WALLR_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLR_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("rightWall");
 	}
 
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
