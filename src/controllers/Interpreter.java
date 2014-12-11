@@ -14,6 +14,7 @@ import models.gridobjects.creatures.Creature;
 import views.grid.GridWorld;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
+import views.scenes.AdventureModeScene;
 import views.scenes.SandboxScene;
 import exceptions.IllegalValueException;
 
@@ -178,6 +179,7 @@ public class Interpreter {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
+						System.out.println("activeCodeBlock: " + activeCodeBlock);
 						KarelTable.getInstance().setSelectedIndex(
 								activeCodeBlock);
 						instructions();
@@ -206,6 +208,11 @@ public class Interpreter {
 		instruction();
 		if (!validPosition()) {
 			timer.cancel();
+			if(ButtonHandlers.isSandboxMode()){
+				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
+			}else{
+				AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePlay);
+			}
 			return;
 		}
 		if (this.karelCode.get(this.activeCodeBlock).equals(
