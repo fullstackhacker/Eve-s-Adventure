@@ -10,6 +10,8 @@ public final class TopMenu extends MenuBar {
 	private static TopMenu instant = null;
 	public MenuItem collect = null;
 	public MenuItem find = null;
+	public MenuItem saveA = null;
+	public MenuItem saveS = null;
 	
 	private TopMenu() {
 		final Menu menu1 = new Menu("File");
@@ -20,14 +22,18 @@ public final class TopMenu extends MenuBar {
 		MenuItem quit = new MenuItem("Quit");
 		quit.setOnAction(ButtonHandlers::QUIT_MENU_HANDLER);
 
-		MenuItem save = new MenuItem("Save");
-		save.setOnAction(ButtonHandlers::SAVE_MENU_HANDLER);
+		Menu save = new Menu("Save");
+		saveA = new MenuItem("Save As Level");
+		saveA.setOnAction(ButtonHandlers::SAVEA_MENU_HANDLER);
+		saveS = new MenuItem("Save For Editing");
+		saveS.setOnAction(ButtonHandlers::SAVES_MENU_HANDLER);
 		Menu addObj = new Menu("Add Objective");
 		collect = new MenuItem("Collect all Bamboo");
 		collect.setOnAction(ButtonHandlers::COLLECT_MENU_HANDLER);
 		find = new MenuItem("Find Friend");
 		find.setOnAction(ButtonHandlers::FIND_MENU_HANDLER);
 		addObj.getItems().addAll(collect, find);
+		save.getItems().addAll(saveS, saveA);
 
 		menu1.getItems().addAll(save, quit);
 		menu2.getItems().addAll(addObj);

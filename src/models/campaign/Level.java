@@ -32,6 +32,10 @@ public class Level implements Serializable {
 	 */
 	private String description; 
 	/**
+	 * 
+	 */
+	private boolean findObj;
+	/**
 	 * Constructor
 	 * 
 	 * @param world  the world for the level to exist in 

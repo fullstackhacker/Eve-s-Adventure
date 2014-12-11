@@ -44,6 +44,10 @@
 	-fx-border-color: #222;
 }
 
+#upWall:selected, #rightWall:selected, #downWall:selected, #leftWall{
+	-fx-background-color: #aaa;
+}
+
 #WorldButton{
 	-fx-background-color: white;
 	-fx-border-radius: 0;

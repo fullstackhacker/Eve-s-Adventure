@@ -312,8 +312,8 @@ public final class SandboxScene extends Scene {
 
 		if (listOfFiles != null) {
 			for (int i = 0; i < listOfFiles.length; i++) {
-				if (!listOfFiles[i].isDirectory()
-						&& listOfFiles[i].getName().contains("SandboxWorld")) {
+				if (listOfFiles[i].isDirectory()
+						&& !listOfFiles[i].getName().contains("SandboxWorld")) {
 					Campaigns.add(listOfFiles[i].getName());
 					campaigns.add(new Campaign(listOfFiles[i].getName(),
 							"Default description."));
