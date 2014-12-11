@@ -224,6 +224,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FRONTISCLEAR);
 			return;
 		}
+		
+		if(ButtonHandlers.isSandboxMode()){
+			SandboxScene.PLAY.setDisable(false);
+		}else{
+			AdventureModeScene.PLAY.setDisable(false);
+		}
+		
+		int line = KarelTable.getInstance().getLineSelectedLine();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+		String nextLine = karelCode.get(line + 1);
+		
+		switch(nextLine){
+			case KarelCode.FRONTISCLEAR:
+			case KarelCode.NEXTTOAFRIEND:
+			case KarelCode.FACINGNORTH:
+			case KarelCode.FACINGSOUTH:
+			case KarelCode.FACINGEAST:
+			case KarelCode.FACINGWEST:
+				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FRONTISCLEAR);
+				return;
+			default:
+				break;
+		}
+		
+		
 		KarelTable.getInstance().addCode(KarelCode.FRONTISCLEAR);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -238,6 +263,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.NEXTTOAFRIEND);
 			return;
 		}
+		
+		if(ButtonHandlers.isSandboxMode()){
+			SandboxScene.PLAY.setDisable(false);
+		}else{
+			AdventureModeScene.PLAY.setDisable(false);
+		}
+		
+		
+		int line = KarelTable.getInstance().getLineSelectedLine();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+		String nextLine = karelCode.get(line + 1);
+		
+		switch(nextLine){
+			case KarelCode.FRONTISCLEAR:
+			case KarelCode.NEXTTOAFRIEND:
+			case KarelCode.FACINGNORTH:
+			case KarelCode.FACINGSOUTH:
+			case KarelCode.FACINGEAST:
+			case KarelCode.FACINGWEST:
+				KarelTable.getInstance().replaceCode(line + 1, KarelCode.NEXTTOAFRIEND);
+				return;
+			default:
+				break;
+		}
+		
 		KarelTable.getInstance().addCode(KarelCode.NEXTTOAFRIEND);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -252,6 +302,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGNORTH);
 			return;
 		}
+		
+		if(ButtonHandlers.isSandboxMode()){
+			SandboxScene.PLAY.setDisable(false);
+		}else{
+			AdventureModeScene.PLAY.setDisable(false);
+		}
+		
+		
+		int line = KarelTable.getInstance().getLineSelectedLine();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+		String nextLine = karelCode.get(line + 1);
+		
+		switch(nextLine){
+			case KarelCode.FRONTISCLEAR:
+			case KarelCode.NEXTTOAFRIEND:
+			case KarelCode.FACINGNORTH:
+			case KarelCode.FACINGSOUTH:
+			case KarelCode.FACINGEAST:
+			case KarelCode.FACINGWEST:
+				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGNORTH);
+				return;
+			default:
+				break;
+		}
+		
 		KarelTable.getInstance().addCode(KarelCode.FACINGNORTH);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -266,6 +341,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGSOUTH);
 			return;
 		}
+		
+		if(ButtonHandlers.isSandboxMode()){
+			SandboxScene.PLAY.setDisable(false);
+		}else{
+			AdventureModeScene.PLAY.setDisable(false);
+		}
+		
+		
+		int line = KarelTable.getInstance().getLineSelectedLine();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+		String nextLine = karelCode.get(line + 1);
+		
+		switch(nextLine){
+			case KarelCode.FRONTISCLEAR:
+			case KarelCode.NEXTTOAFRIEND:
+			case KarelCode.FACINGNORTH:
+			case KarelCode.FACINGSOUTH:
+			case KarelCode.FACINGEAST:
+			case KarelCode.FACINGWEST:
+				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGSOUTH);
+				return;
+			default:
+				break;
+		}
+		
 		KarelTable.getInstance().addCode(KarelCode.FACINGSOUTH);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -280,6 +380,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGEAST);
 			return;
 		}
+		
+		if(ButtonHandlers.isSandboxMode()){
+			SandboxScene.PLAY.setDisable(false);
+		}else{
+			AdventureModeScene.PLAY.setDisable(false);
+		}
+		
+		
+		int line = KarelTable.getInstance().getLineSelectedLine();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+		String nextLine = karelCode.get(line + 1);
+		
+		switch(nextLine){
+			case KarelCode.FRONTISCLEAR:
+			case KarelCode.NEXTTOAFRIEND:
+			case KarelCode.FACINGNORTH:
+			case KarelCode.FACINGSOUTH:
+			case KarelCode.FACINGEAST:
+			case KarelCode.FACINGWEST:
+				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGEAST);
+				return;
+			default:
+				break;
+		}
+		
 		KarelTable.getInstance().addCode(KarelCode.FACINGEAST);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -294,6 +419,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGWEST);
 			return;
 		}
+		
+		if(ButtonHandlers.isSandboxMode()){
+			SandboxScene.PLAY.setDisable(false);
+		}else{
+			AdventureModeScene.PLAY.setDisable(false);
+		}
+		
+		
+		int line = KarelTable.getInstance().getLineSelectedLine();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+		String nextLine = karelCode.get(line + 1);
+		
+		switch(nextLine){
+			case KarelCode.FRONTISCLEAR:
+			case KarelCode.NEXTTOAFRIEND:
+			case KarelCode.FACINGNORTH:
+			case KarelCode.FACINGSOUTH:
+			case KarelCode.FACINGEAST:
+			case KarelCode.FACINGWEST:
+				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGWEST);
+				return;
+			default:
+				break;
+		}
+		
 		KarelTable.getInstance().addCode(KarelCode.FACINGWEST);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -308,6 +458,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.BAGISEMPTY);
 			return;
 		}
+		
+		if(ButtonHandlers.isSandboxMode()){
+			SandboxScene.PLAY.setDisable(false);
+		}else{
+			AdventureModeScene.PLAY.setDisable(false);
+		}
+		
+		
+		int line = KarelTable.getInstance().getLineSelectedLine();
+		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+		String nextLine = karelCode.get(line + 1);
+		
+		switch(nextLine){
+			case KarelCode.FRONTISCLEAR:
+			case KarelCode.NEXTTOAFRIEND:
+			case KarelCode.FACINGNORTH:
+			case KarelCode.FACINGSOUTH:
+			case KarelCode.FACINGEAST:
+			case KarelCode.FACINGWEST:
+				KarelTable.getInstance().replaceCode(line + 1, KarelCode.BAGISEMPTY);
+				return;
+			default:
+				break;
+		}
+		
 		KarelTable.getInstance().addCode(KarelCode.BAGISEMPTY);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);

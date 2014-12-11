@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.sun.javafx.sg.prism.NGShape.Mode;
 
+import controllers.ButtonHandlers;
 import models.campaign.KarelCode;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -32,6 +33,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.util.Callback;
+import views.scenes.AdventureModeScene;
+import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
 import views.tabs.InstructionsTab;
 
@@ -399,6 +402,11 @@ public final class KarelTable extends GridPane {
 									code.equals(KarelCode.ELSESTATEMENT) || 
 									code.equals(KarelCode.WHILESTATEMENT) || 
 									code.equals(KarelCode.LOOPSTATEMENT)){
+									if(ButtonHandlers.isSandboxMode()){
+										SandboxScene.PLAY.setDisable(false);
+									}else{
+										AdventureModeScene.PLAY.setDisable(false);
+									}
 									listView.getSelectionModel().clearAndSelect(i);
 									System.out.println("i == " + i);
 									break;
@@ -420,9 +428,24 @@ public final class KarelTable extends GridPane {
 								karelCode.remove(line);
 								listView.getSelectionModel().clearAndSelect(line);
 							}
+							if(ButtonHandlers.isSandboxMode()){
+								SandboxScene.PLAY.setDisable(false);
+							}else{
+								AdventureModeScene.PLAY.setDisable(false);
+							}
 							/* Remove last line of code */
 							karelCode.remove(line);
 							return;
+						case KarelCode.FRONTISCLEAR:
+						case KarelCode.FACINGNORTH:
+						case KarelCode.FACINGSOUTH:
+						case KarelCode.FACINGEAST:
+						case KarelCode.FACINGWEST:
+							if(ButtonHandlers.isSandboxMode()){
+								SandboxScene.PLAY.setDisable(true);
+							}else{
+								AdventureModeScene.PLAY.setDisable(true);
+							}
 					default:
 							karelCode.remove(listView.getSelectionModel().getSelectedIndex());
 							break;
@@ -530,6 +553,15 @@ public final class KarelTable extends GridPane {
 		this.karelCode.add(this.listView.getSelectionModel().getSelectedIndex() + 1, code);
 		this.listView.getSelectionModel().clearAndSelect(this.listView.getSelectionModel().getSelectedIndex() + 1);
 		this.karelCode.remove(this.listView.getSelectionModel().getSelectedIndex() - 1);
+	}
+	
+	public void replaceCode(int line, String code){
+		this.REPLACE_BUTTON_ON = false;
+	
+		this.karelCode.add(line, code);
+		this.listView.getSelectionModel().clearAndSelect(line);
+		this.karelCode.remove(line + 1);
+	
 	}
 	
 	/**
