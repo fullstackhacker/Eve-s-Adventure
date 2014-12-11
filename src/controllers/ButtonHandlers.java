@@ -678,16 +678,12 @@ public final class ButtonHandlers {
 	 * CreaturesTab.java
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
-		
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
-		
 		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
 			return;
 		}
-		
 		//remove from backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
-		
 		//remove from frontend
 		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
 	}
