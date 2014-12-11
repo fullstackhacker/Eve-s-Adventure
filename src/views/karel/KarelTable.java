@@ -37,6 +37,9 @@ import views.tabs.InstructionsTab;
 
 public final class KarelTable extends GridPane {
 
+	public static Button REPLACE_BUTTON = new Button("REPLACE");
+	public static Button DELETE_BUTTON = new Button("DELETE");
+	
 	private static final KarelTable instant = new KarelTable();
 
 	private ObservableList<String> karelCode;
@@ -45,14 +48,15 @@ public final class KarelTable extends GridPane {
 	
 	private boolean REPLACE_BUTTON_ON = false;
 	
+	
 	private int line;
 	
 	private KarelTable() {
 		this.karelCode = FXCollections.observableArrayList();
 		this.listView = new ListView<String>(karelCode);
 		
-		Button REPLACE_BUTTON = new Button("REPLACE");
-		Button DELETE_BUTTON = new Button("DELETE");
+		//REPLACE_BUTTON = new Button("REPLACE");
+		//DELETE_BUTTON = new Button("DELETE");
 		
 		this.add(listView, 0, 0, 2, 1);
 		this.add(REPLACE_BUTTON, 0, 1);

@@ -19,6 +19,7 @@ import models.gridobjects.items.Bamboo;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import views.MainApp;
+import views.Running;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
 import views.scenes.AdventureModeScene;
@@ -40,10 +41,10 @@ public final class ButtonHandlers {
 
 	private static boolean sandbox = false;
 
-	public static boolean isSandboxMode(){
+	public static boolean isSandboxMode() {
 		return sandbox;
 	}
-	
+
 	public static final void SANDBOX_MODE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("SANDBOX_MODE_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadMenuScene.getInstance());
@@ -79,7 +80,7 @@ public final class ButtonHandlers {
 				}
 				SandboxScene.SandboxPane.getInstance().add(
 						SandboxScene.gridWorld, 3, 3, 4, 2);
-				
+
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -109,7 +110,7 @@ public final class ButtonHandlers {
 						AdventureModeScene.gridWorld, 3, 3, 4, 2);
 				AdventureModeScene.AdventureModePane.getInstance().add(
 						AdventureModeScene.objective, 1, 4, 1, 1);
-				
+
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -473,7 +474,6 @@ public final class ButtonHandlers {
 			}
 		});
 	}
-	
 
 	/**
 	 * Popup if they try to put something where Eve is
@@ -573,38 +573,48 @@ public final class ButtonHandlers {
 
 	public static final void RMWALL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RMWALL_BUTTON_HANDLER");
-		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("WorldButton");
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+				.getYCoordinate()].setId("WorldButton");
 	}
 
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLT_BUTTON_HANDLER");
-		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("upWall");
-		
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+				.getYCoordinate()].setId("upWall");
+
 	}
 
 	public static final void WALLB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLB_BUTTON_HANDLER");
-		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.DOWN);
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("downWall");
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+				.getYCoordinate()].setId("downWall");
 	}
 
 	public static final void WALLL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLL_BUTTON_HANDLER");
-		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("leftWall");
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+				.getYCoordinate()].setId("leftWall");
 	}
 
 	public static final void WALLR_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLR_BUTTON_HANDLER");
-		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("rightWall");
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+				.getYCoordinate()].setId("rightWall");
 	}
 
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
@@ -682,14 +692,16 @@ public final class ButtonHandlers {
 	 * CreaturesTab.java
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
-		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
-		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
+		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition)) {
 			return;
 		}
-		//remove from backend
+		// remove from backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
-		//remove from frontend
-		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
+		// remove from frontend
+		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()]
+				.setGraphic(null);
 	}
 
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e) {
@@ -722,15 +734,18 @@ public final class ButtonHandlers {
 		} else {
 			if (GridWorld.getInstance().getWorld().getEve().getDirection() == Coordinate.UP) {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.getEveDownI());
+						.getYCoordinate()].setGraphic(SandboxScene
+						.getEveDownI());
 			} else if (GridWorld.getInstance().getWorld().getEve()
 					.getDirection() == Coordinate.LEFT) {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.getEveLeftI());
+						.getYCoordinate()].setGraphic(SandboxScene
+						.getEveLeftI());
 			} else if (GridWorld.getInstance().getWorld().getEve()
 					.getDirection() == Coordinate.RIGHT) {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.getEveRightI());
+						.getYCoordinate()].setGraphic(SandboxScene
+						.getEveRightI());
 			} else {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 						.getYCoordinate()].setGraphic(SandboxScene.getEveUpI());
@@ -776,52 +791,83 @@ public final class ButtonHandlers {
 
 	public static final void BACK_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("BACK_BUTTON_HANDLER CALLED");
-		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
-			if(AdventureModeScene.getInterpreter() != null){
-				//AdventureModeScene.getInterpreter().reverseInstruction();
+		if ((!sandbox)
+				&& (AdventureModeScene.PLAY != null)
+				&& (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)) {
+			if (AdventureModeScene.getInterpreter() != null) {
+				// AdventureModeScene.getInterpreter().reverseInstruction();
 			}
-		}else if((sandbox) && (SandboxScene.PLAY != null) && (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)){
-			if(SandboxScene.getInterpreter() != null){
-				//SandboxScene.getInterpreter().reverseInstruction();
+		} else if ((sandbox) && (SandboxScene.PLAY != null)
+				&& (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)) {
+			if (SandboxScene.getInterpreter() != null) {
+				// SandboxScene.getInterpreter().reverseInstruction();
 			}
 		}
 	}
 
 	public static final void FORWARD_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("FORWARD_BUTTON_HANDLER CALLED");
-		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
-			if(AdventureModeScene.getInterpreter() != null){
+		if (!sandbox) {
+			AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					Running.getInstance(), 0, 1, 1, 3);
+		} else if (sandbox) {
+			SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
+			SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),
+					0, 1, 1, 3);
+		}
+		KarelTable.getInstance().DELETE_BUTTON.setDisable(true);
+		KarelTable.getInstance().REPLACE_BUTTON.setDisable(true);
+		if ((!sandbox)
+				&& (AdventureModeScene.PLAY != null)
+				&& (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)) {
+			if (AdventureModeScene.getInterpreter() != null) {
 				AdventureModeScene.getInterpreter().executeOne();
 			}
-		}else if((sandbox) && (SandboxScene.PLAY != null) && (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)){
-			if(SandboxScene.getInterpreter() != null){
+		} else if ((sandbox) && (SandboxScene.PLAY != null)
+				&& (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)) {
+			if (SandboxScene.getInterpreter() != null) {
 				SandboxScene.getInterpreter().executeOne();
 			}
 		}
 	}
 
 	private static boolean isPause = false;
-	
+
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e) {
+		if (!sandbox) {
+			AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					Running.getInstance(), 0, 1, 1, 3);
+		} else if (sandbox) {
+			SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
+			SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),
+					0, 1, 1, 3);
+		}
+		KarelTable.getInstance().DELETE_BUTTON.setDisable(true);
+		KarelTable.getInstance().REPLACE_BUTTON.setDisable(true);
+
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		if (karelCode.isEmpty()) {
 			System.out.println("karelCode is empty!");
 			return;
 		}
-		
+
 		System.out.println("PLAY_BUTTON_HANDLER CALLED");
 		World world = null;
 		if (!sandbox) {
-			if(AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePause){
-				//TODO have a pause() in Interpreter
+			if (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePause) {
+				// TODO have a pause() in Interpreter
 				AdventureModeScene.PLAY.setGraphic(null);
-				AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePlay);
-				AdventureModeScene.getInterpreter().pause();;
+				AdventureModeScene.PLAY
+						.setGraphic(AdventureModeScene.imagePlay);
+				AdventureModeScene.getInterpreter().pause();
+				;
 				isPause = true;
 				return;
 			}
-			
-			if(isPause){
+
+			if (isPause) {
 				AdventureModeScene.getInterpreter().start();
 				isPause = false;
 				return;
@@ -829,26 +875,27 @@ public final class ButtonHandlers {
 			world = AdventureModeScene.getWorld();
 			AdventureModeScene.PLAY.setGraphic(null);
 			AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePause);
-			AdventureModeScene.setInterpreter(new Interpreter(karelCode, world));
+			AdventureModeScene
+					.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());
 			world.printWorld();
 			AdventureModeScene.getInterpreter().start(); // starts the code
-		}else{
-			if(SandboxScene.PLAY.getGraphic() == SandboxScene.imagePause){
-				//TODO have a pause() in Interpreter
+		} else {
+			if (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePause) {
+				// TODO have a pause() in Interpreter
 				SandboxScene.PLAY.setGraphic(null);
 				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
 				SandboxScene.getInterpreter().pause();
 				isPause = true;
 				return;
 			}
-			
-			if(isPause){
+
+			if (isPause) {
 				SandboxScene.getInterpreter().start();
 				isPause = false;
 				return;
 			}
-			
+
 			world = SandboxScene.getWorld();
 			SandboxScene.PLAY.setGraphic(null);
 			SandboxScene.PLAY.setGraphic(SandboxScene.imagePause);
@@ -857,7 +904,7 @@ public final class ButtonHandlers {
 			world.printWorld();
 			SandboxScene.getInterpreter().start(); // starts the code
 		}
-		
+
 		world.printWorld();
 		// do{
 		// interpreter.executeOne();
@@ -865,13 +912,25 @@ public final class ButtonHandlers {
 		// } while(interpreter.next());
 	}
 
+	// TODO
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RESET_BUTTON_HANDLER CALLED");
-		if(!sandbox){
-			if(AdventureModeScene.getInterpreter() != null){
+		if (!sandbox) {
+			AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(Running.getInstance());
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					AdventureModeScene.gametabs, 0, 1, 1, 3);
+		} else if (sandbox) {
+			SandboxScene.SandboxPane.getInstance().getChildren().remove(Running.getInstance());
+			SandboxScene.SandboxPane.getInstance().add(SandboxScene.gametabs,
+					0, 1, 1, 3);
+		}
+		KarelTable.getInstance().DELETE_BUTTON.setDisable(false);
+		KarelTable.getInstance().REPLACE_BUTTON.setDisable(false);
+		if (!sandbox) {
+			if (AdventureModeScene.getInterpreter() != null) {
 				AdventureModeScene.getInterpreter().reset();
 			}
-		}else{
+		} else {
 			SandboxScene.getInterpreter().reset();
 		}
 	}

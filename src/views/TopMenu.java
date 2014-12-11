@@ -40,6 +40,6 @@ public final class TopMenu extends MenuBar {
 	}
 
 	public static TopMenu getInstance() {
-		return (instant == null) ? new TopMenu() : instant;
+		return (instant == null) ? instant = new TopMenu() : instant;
 	}
 }
