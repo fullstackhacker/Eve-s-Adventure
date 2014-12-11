@@ -1,18 +1,11 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -22,18 +15,15 @@ import models.campaign.KarelCode;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import models.gridobjects.items.Bamboo;
-import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import views.MainApp;
-import views.TopMenu;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
-import views.scenes.AdventureModeScene.AdventureModePane;
+import views.scenes.AdventureModeScene;
 import views.scenes.LoadMenuScene;
 import views.scenes.LoadSessionScene;
 import views.scenes.MainMenuScene;
-import views.scenes.AdventureModeScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
 import views.tabs.InstructionsTab;
@@ -473,8 +463,8 @@ public final class ButtonHandlers {
 				}
 			}
 		});
-
 	}
+	
 
 	/**
 	 * Popup if they try to put something where Eve is
@@ -578,18 +568,28 @@ public final class ButtonHandlers {
 
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLT_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("upWall");
+		
 	}
 
 	public static final void WALLB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLB_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.DOWN);
 	}
 
 	public static final void WALLL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLL_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
 	}
 
 	public static final void WALLR_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLR_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
 	}
 
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
@@ -796,6 +796,7 @@ public final class ButtonHandlers {
 			world.printWorld();
 			SandboxScene.getInterpreter().start(); // starts the code
 		}
+		
 		world.printWorld();
 		// do{
 		// interpreter.executeOne();

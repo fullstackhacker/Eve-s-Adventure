@@ -54,7 +54,7 @@ final class ItemsTab extends VBox{
 		VBox space = new VBox(10);
 		VBox space2 = new VBox(10);
 		VBox space3 = new VBox(10);
-		this.getChildren().addAll(space, space2, space3, WALLB_BUTTON, WALLL_BUTTON, WALLR_BUTTON, RMWALL_BUTTON);
+		this.getChildren().addAll(space, space2, space3, WALLT_BUTTON, WALLB_BUTTON, WALLL_BUTTON, WALLR_BUTTON, RMWALL_BUTTON);
 	}
 	
 	protected static ItemsTab getInstance(){

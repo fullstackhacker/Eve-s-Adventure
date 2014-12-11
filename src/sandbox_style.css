@@ -16,6 +16,10 @@
 	-fx-border-right: 5px solid #DDDDDD;
 }
 
+#upWall{
+	-fx-border-width: 300, 0, 0, 0;
+}
+
 #WorldButton{
 	-fx-background-color: white;
 	-fx-border-radius: 0;
