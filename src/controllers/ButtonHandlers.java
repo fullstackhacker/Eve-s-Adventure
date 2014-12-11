@@ -185,9 +185,30 @@ public final class ButtonHandlers {
 	
 	
 	public static final void NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e){
-		System.out.println("NEW_CAMPAIGN_BUTTON_HANDLER CALLED");
-		AdventureModeScene.AdventureModePane.getInstance();
-		AdventureModeScene.getInstance();
+		System.out.println("NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLE");
+		
+		String campaignName = NewCampaignScene.getInstance().getSelectedCampaign();
+		
+		System.out.println("campaignName = " + campaignName);
+		Campaign campaign = Load.loadCampaign(campaignName); 
+		
+		if(campaign == null){
+			System.out.println("campaign == null");
+			return;
+		}
+		
+		if(campaign.getLevels() != null && !campaign.getLevels().isEmpty()){
+			System.out.println(campaign.getLevels().size());
+			if(campaign.getLevels().get(0) == null){
+				System.out.println("ERROR: getWorld == null");
+				return;
+			}
+			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
+			GridWorld.getInstance().setWorld(campaign.getLevels().get(0).getWorld());
+		}else{
+			System.out.println("ERROR: campaign.getLevel == null");
+		}
+		
 		MainApp.changeScenes(AdventureModeScene.getInstance());
 		try {
 			AdventureModeScene.AdventureModePane.getInstance().add(
@@ -271,6 +292,11 @@ public final class ButtonHandlers {
 	public static final void CANCEL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("CANCEL_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadMenuScene.getInstance());
+	}
+	
+	public static final void CANCEL_BUTTON_HANDLERA(ActionEvent e){
+		System.out.println("CANCEL_BUTTON_HANDLERA CALLED");
+		MainApp.changeScenes(LoadMenuSceneA.getInstance());
 	}
 
 	public static final void BACK_HOMESCREEN_BUTTON_HANDLER(ActionEvent e) {
@@ -1005,9 +1031,10 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 			
-			if (oldObject.getName().equals("Tree")) {
+			if (oldObject instanceof Tree)
 			popup("Shrub", "Tree");
-		} else
+		} 
+		else{
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getShrubI());
 		Shrub shrub = new Shrub(4, false);
@@ -1015,10 +1042,12 @@ public final class ButtonHandlers {
 				GridWorld.getYCoordinate()));
 		if (GridWorld.getInstance().getWorld() == null)
 			System.out.println("Uninitalized world");
+		
 		GridWorld.getInstance().getWorld().addItem(shrub);
 		GridWorld.getInstance().getWorld().printWorld();
 	}
 }
+
 	//Tree on Eve - go
 	//Tree on Friend - go
 	//Tree on Shrub - ask to replace
@@ -1030,9 +1059,9 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-			if (oldObject.getName().equals("Shrub"))
-			popup("Tree", "Shrub");
-			else if (oldObject.equals("Bamboo"))
+			if (oldObject instanceof Shrub)
+				popup("Tree", "Shrub");
+			else if (oldObject instanceof Bamboo)
 				popup("Tree", "Bamboo");
 		} 
 			else {
@@ -1063,7 +1092,7 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-			if (oldObject.getName().equals("Tree"))
+			if (oldObject instanceof Tree)
 				popup("Bamboo", "Tree");
 		} 
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
@@ -1118,7 +1147,7 @@ public final class ButtonHandlers {
 		}// check if there is an Item in the new space already
 		else if (GridWorld.getInstance().getWorld().hasItem(currentPosition)) {
 			Item item = GridWorld.getInstance().getWorld().itemAt(currentPosition);
-			if (item.getName() == "Shrub"){
+			if (item instanceof Shrub){
 				popup("Eve", "shrub");
 			}
 		}
