@@ -7,10 +7,9 @@ import controllers.ButtonHandlers;
 import views.MainApp;
 import views.ATopMenu;
 import views.grid.Cols;
-import views.grid.AGridWorld;
+import views.grid.GridWorld;
 import views.grid.Rows;
 import views.karel.KarelTable;
-import views.tabs.AGameTabs;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
@@ -29,13 +28,17 @@ public final class AdventureModeScene extends Scene {
 
 	private static World world;
 
-	private static AGridWorld gridWorld;
+	private static GridWorld gridWorld;
+	
+	 public static GameTabs gametabs = null;
+	 public static ProTips protips = null;
+	 public static KarelTable karelTable = null;
 	
 	public static ToggleButton Eve = new ToggleButton("Eve!");
 
-	private static final class AdventureModePane extends GridPane {
+	public static final class AdventureModePane extends GridPane {
 
-		private static AdventureModePane instanceOfMainMenuPane = null;
+		public static AdventureModePane instanceOfMainMenuPane = null;
 
 		private ImageView imageBack = new ImageView(new Image(
 				"./Images/ArrowLeft.png"));
@@ -63,12 +66,12 @@ public final class AdventureModeScene extends Scene {
 			GridPane.setHalignment(RESET, HPos.CENTER);
 
 			ATopMenu topMenu = ATopMenu.getInstance();
-			AGameTabs gametabs = AGameTabs.getInstance();
+			gametabs = GameTabs.getInstance();
 			gametabs.setId("gametabs");
-			ProTips protips = ProTips.getInstance();
-			KarelTable karelTable = KarelTable.getInstance();
+			protips = ProTips.getInstance();
+			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
-			gridWorld = AGridWorld.getInstance();
+			gridWorld = GridWorld.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -124,7 +127,7 @@ public final class AdventureModeScene extends Scene {
 
 			// BACKEND-FRONTEND Integration
 			world = new World("SandboxWorld", 10, 5);
-			AGridWorld.getInstance().setWorld(world);
+			GridWorld.getInstance().setWorld(world);
 			world.addCreature(new Creature("Eve", new Coordinate(2, 2)));
 			// world.printWorld();
 			// Coordinate coordEve = new Coordinate(1,1);
@@ -135,7 +138,7 @@ public final class AdventureModeScene extends Scene {
 			// Label Eve = new Label("Eve!");
 			//GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
-			AGridWorld.gridButtons[2][2].setText("Eve!");
+			GridWorld.gridButtons[2][2].setText("Eve!");
 			Eve.setVisible(true);
 			
 			
@@ -174,7 +177,7 @@ public final class AdventureModeScene extends Scene {
 			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
 		}
 
-		private static AdventureModePane getInstance() {
+		public static AdventureModePane getInstance() {
 			return (instanceOfMainMenuPane == null) ? instanceOfMainMenuPane = new AdventureModePane()
 					: instanceOfMainMenuPane;
 		}
@@ -190,7 +193,7 @@ public final class AdventureModeScene extends Scene {
 		world = world1;
 	}
 
-	public static void setGridWorld(AGridWorld gridworld1) {
+	public static void setGridWorld(GridWorld gridworld1) {
 		gridWorld = gridworld1;
 	}
 
@@ -198,7 +201,7 @@ public final class AdventureModeScene extends Scene {
 		return world;
 	}
 
-	public static AGridWorld getGridWorld() {
+	public static GridWorld getGridWorld() {
 		return gridWorld;
 	}
 
