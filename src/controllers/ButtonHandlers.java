@@ -1163,10 +1163,13 @@ public final class ButtonHandlers {
 				popup("Eve","Friend");
 			}
 		}// check if there is an Item in the new space already
-		else if (GridWorld.getInstance().getWorld().hasItem(currentPosition)) {
+		else if (GridWorld.getInstance().getWorld().hasItem(currentPosition) && !(GridWorld.getInstance().getWorld().itemAt(currentPosition) instanceof Bamboo)) {
 			Item item = GridWorld.getInstance().getWorld().itemAt(currentPosition);
-			if (item.getName() == "Shrub"){
-				popup("Eve", "shrub");
+			if (item instanceof Tree){
+				popup("Eve", "Tree");
+			}
+			if(item instanceof Shrub){
+				popup("Eve", "Shrub");
 			}
 		}
 		//That space was empty, make the change
@@ -1182,6 +1185,19 @@ public final class ButtonHandlers {
 			GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()]
 					.setGraphic(null);
 		}
+		
+		if(GridWorld.getInstance().getWorld().hasItem(eveLocation)){
+			if(GridWorld.getInstance().getWorld().itemAt(eveLocation) instanceof Bamboo){
+				GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()].setGraphic(SandboxScene.getBambooI());
+			}
+			if(GridWorld.getInstance().getWorld().itemAt(eveLocation) instanceof Shrub){
+				GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()].setGraphic(SandboxScene.getShrubI());
+			}
+			if(GridWorld.getInstance().getWorld().itemAt(eveLocation) instanceof Tree){
+				GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()].setGraphic(SandboxScene.getTreeI());
+			}
+		}
+		
 
 	}
 

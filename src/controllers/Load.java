@@ -125,24 +125,7 @@ public class Load {
 			ois.close();
 			fis.close();
 		} catch (Exception e) {
-			return null;
-		}
-
-		/* load the objectives */
-		String objectivesPath = levelPath + Load.OBJECTIVEFILENAME;
-		ArrayList<String> objectives = null;
-
-		File objectiveFile = new File(objectivesPath);
-		if (!objectiveFile.exists())
-			return null; // objective file doesn't exist
-
-		try {
-			fis = new FileInputStream(objectiveFile);
-			ois = new ObjectInputStream(fis);
-			objectives = (ArrayList<String>) ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 
@@ -161,6 +144,7 @@ public class Load {
 			ois.close();
 			fis.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 
@@ -179,24 +163,7 @@ public class Load {
 			ois.close();
 			fis.close();
 		} catch (Exception e) {
-			return null;
-		}
-
-		/* load the bambooo objective */
-		String bambooObjectivePath = levelPath + Load.BAMBOOBJECTIVEFILENAME;
-		Integer bambooObjective = null;
-
-		File bambooObjectiveFile = new File(bambooObjectivePath);
-		if (!bambooObjectiveFile.exists())
-			return null;
-
-		try {
-			fis = new FileInputStream(new File(bambooObjectivePath));
-			ois = new ObjectInputStream(fis);
-			bambooObjective = (Integer) ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 
@@ -274,6 +241,7 @@ public class Load {
 			ois.close();
 			fis.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 
@@ -292,13 +260,13 @@ public class Load {
 			ois.close();
 			fis.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 
 		/* create the campaign */
 		Campaign campaign = new Campaign(name, levels, description,
 				currentLevel);
-
 		/* return the campaign */
 		return campaign;
 	}

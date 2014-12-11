@@ -644,139 +644,21 @@ public class World implements Serializable {
 		Coordinate currentEveLocation = this.getEve().getCoordinates();
 		Coordinate newEveLocation = null;
 
-		StackTraceElement[] stackTraceElements = Thread.currentThread()
-				.getStackTrace();
-		String method = stackTraceElements[2].getMethodName();
-
-		if (method.equals("reverseOperation")) {
-			switch (this.getEve().getDirection()) {
-			case Coordinate.DOWN:
-				if (this.getSquareAt(currentEveLocation).hasUpWall())
-					return;
-
-				newEveLocation = new Coordinate(currentEveLocation.getX(),
-						currentEveLocation.getY() + 1);
-
-				if (!verifyCoordinate(newEveLocation))
-					return;
-				if (this.getSquareAt(newEveLocation).hasCreature())
-					return;
-				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY() + 1]
-						.setGraphic(GridWorld.gridButtons[currentEveLocation
-								.getX()][currentEveLocation.getY()]
-								.getGraphic());
-				if (!this.getSquareAt(currentEveLocation).hasItem())
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(null);
-				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(SandboxScene.getBambooI());
-				GridWorld.getInstance().setVisible(true);
-				break;
-			case Coordinate.UP:
-				if (this.getSquareAt(currentEveLocation).hasDownWall())
-					return;
-
-				newEveLocation = new Coordinate(currentEveLocation.getX(),
-						currentEveLocation.getY() - 1);
-				if (!verifyCoordinate(newEveLocation))
-					return;
-				if (this.getSquareAt(newEveLocation).hasCreature())
-					return;
-				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY() - 1]
-						.setGraphic(GridWorld.gridButtons[currentEveLocation
-								.getX()][currentEveLocation.getY()]
-								.getGraphic());
-				if (!this.getSquareAt(currentEveLocation).hasItem())
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(null);
-				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(SandboxScene.getBambooI());
-				GridWorld.getInstance().setVisible(true);
-				break;
-			case Coordinate.RIGHT:
-				if (this.getSquareAt(currentEveLocation).hasLeftWall())
-					return;
-				newEveLocation = new Coordinate(currentEveLocation.getX() - 1,
-						currentEveLocation.getY());
-				if (!verifyCoordinate(newEveLocation))
-					return;
-				if (this.getSquareAt(newEveLocation).hasCreature())
-					return;
-				GridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
-						.getY()]
-						.setGraphic(GridWorld.gridButtons[currentEveLocation
-								.getX()][currentEveLocation.getY()]
-								.getGraphic());
-				if (!this.getSquareAt(currentEveLocation).hasItem())
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(null);
-				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(SandboxScene.getBambooI());
-				GridWorld.getInstance().setVisible(true);
-				break;
-			case Coordinate.LEFT:
-				if (this.getSquareAt(currentEveLocation).hasRightWall())
-					return;
-				newEveLocation = new Coordinate(currentEveLocation.getX() + 1,
-						currentEveLocation.getY());
-				if (!verifyCoordinate(newEveLocation))
-					return;
-				if (this.getSquareAt(newEveLocation).hasCreature())
-					return;
-				GridWorld.gridButtons[currentEveLocation.getX() + 1][currentEveLocation
-						.getY()]
-						.setGraphic(GridWorld.gridButtons[currentEveLocation
-								.getX()][currentEveLocation.getY()]
-								.getGraphic());
-				if (!this.getSquareAt(currentEveLocation).hasItem())
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(null);
-				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].setGraphic(SandboxScene.getBambooI());
-				GridWorld.getInstance().setVisible(true);
-				break;
-			default:
-				throw new IllegalValueException("Eve facing illegal direction");
-			}
-
-			System.out.println("eve current: " + currentEveLocation);
-			System.out.println("new local: " + newEveLocation);
-			this.getSquareAt(newEveLocation).addCreature(
-					this.getSquareAt(currentEveLocation).removeCreature());
-			this.getEve().move();
-
-			System.out.println("MOVE: CURRENT LOCATION: "
-					+ this.getEve().getCoordinates());
-			System.out.println("MOVE: END DIRECTION: "
-					+ this.getEve().getDirection());
-
-			return;
-		}
-
 		switch (this.getEve().getDirection()) {
 		case Coordinate.UP:
-			if (this.getSquareAt(currentEveLocation).hasDownWall())
-				return;
-
-			if (this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() + 1)).hasUpWall())
-				return;
-			if ((this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() + 1)).currentItem() instanceof Tree))
-				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() + 1);
 
 			if (!verifyCoordinate(newEveLocation))
 				return;
+			if (this.getSquareAt(currentEveLocation).hasDownWall())
+				return;
+
+			if (this.getSquareAt(newEveLocation).hasUpWall())
+				return;
+			if ((this.getSquareAt(newEveLocation).currentItem() instanceof Tree))
+				return;
+			
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
 			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -795,22 +677,19 @@ public class World implements Serializable {
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.DOWN:
-			if (this.getSquareAt(currentEveLocation).hasUpWall())
-				return;
-
-			if (this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() - 1)).hasDownWall())
-				return;
-			if ((this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() - 1)).currentItem() instanceof Tree))
-				return;
-			
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() - 1);
 			if (!verifyCoordinate(newEveLocation))
 				return;
+			if (this.getSquareAt(currentEveLocation).hasUpWall())
+				return;
+
+			if (this.getSquareAt(newEveLocation).hasDownWall())
+				return;
+			if ((this.getSquareAt(newEveLocation).currentItem() instanceof Tree))
+				return;
+			
+			
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
 			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -829,22 +708,20 @@ public class World implements Serializable {
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.LEFT:
-			if (this.getSquareAt(currentEveLocation).hasLeftWall())
-				return;
-
-			if (this.getSquareAt(
-					new Coordinate(currentEveLocation.getX() - 1,
-							currentEveLocation.getY())).hasRightWall())
-				return;
-			if ((this.getSquareAt(
-					new Coordinate(currentEveLocation.getX() - 1,
-							currentEveLocation.getY())).currentItem() instanceof Tree))
-				return;
-			
 			newEveLocation = new Coordinate(currentEveLocation.getX() - 1,
 					currentEveLocation.getY());
 			if (!verifyCoordinate(newEveLocation))
 				return;
+			if (this.getSquareAt(currentEveLocation).hasLeftWall())
+				return;
+			
+			if (this.getSquareAt(newEveLocation).hasRightWall())
+				return;
+			
+			if ((this.getSquareAt(newEveLocation).currentItem() instanceof Tree))
+				return;
+			
+			
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
 			GridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
@@ -905,6 +782,8 @@ public class World implements Serializable {
 		this.getSquareAt(newEveLocation).addCreature(
 				this.getSquareAt(currentEveLocation).removeCreature());
 		this.getEve().move();
+		
+
 
 		System.out.println("MOVE: CURRENT LOCATION: "
 				+ this.getEve().getCoordinates());

@@ -273,7 +273,7 @@ public class Interpreter {
 			
 			return;
 		}
-		instructions();
+		//instructions();
 		// player.play();
 	}
 
