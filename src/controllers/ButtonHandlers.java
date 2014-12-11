@@ -248,19 +248,25 @@ public final class ButtonHandlers {
 		System.out.println("campaignName = " + campaignName);
 		Campaign campaign = Load.loadCampaign(campaignName); 
 		
+		int level = campaign.getCurrentLevel();
+		
+		if((level < 0) || (level >= campaign.getLevels().size())){
+			level = 0;
+		}
+		
 		if(campaign.getLevels() != null && !campaign.getLevels().isEmpty()){
 			System.out.println(campaign.getLevels().size());
-			if(campaign.getLevels().get(0) == null){
+			if(campaign.getLevels().get(level) == null){
 				System.out.println("ERROR: getWorld == null");
 				return;
 			}
 			
-			if(campaign.getLevels().get(0).getKarelCode() != null){
-				System.out.println(campaign.getLevels().get(0).getKarelCode());
-				KarelTable.getInstance().setKarelCode(campaign.getLevels().get(0).getKarelCode());
+			if(campaign.getLevels().get(level).getKarelCode() != null){
+				System.out.println(campaign.getLevels().get(level).getKarelCode());
+				KarelTable.getInstance().setKarelCode(campaign.getLevels().get(level).getKarelCode());
 			}
-			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
-			GridWorld.getInstance().setWorld(campaign.getLevels().get(0).getWorld());
+			AdventureModeScene.setWorld(campaign.getLevels().get(level).getWorld());
+			GridWorld.getInstance().setWorld(campaign.getLevels().get(level).getWorld());
 		}else{
 			System.out.println("ERROR: campaign.getLevel == null");
 		}
