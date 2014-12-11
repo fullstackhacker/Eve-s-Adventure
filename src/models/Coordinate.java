@@ -1,12 +1,18 @@
 package models;
 
+import java.io.Serializable;
+
 import exceptions.IllegalValueException;
 
 /**
  * Coordinate class to represent coordinates in the world
  *
  */
-public class Coordinate {
+public class Coordinate implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 16L;
 	/**
 	 * Represents the x-coordinate in a Cartesian product representation of the world
 	 */
