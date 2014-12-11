@@ -63,6 +63,11 @@ public class Interpreter {
 		this.currentLoopCounter = 0; 
 		this.currentWhileResult = false; 
 		this.gridButtons = new ToggleButton[5][10];
+		for(int row = 0; row < this.gridButtons.length; row++){
+			for(int col = 0; col < this.gridButtons.length; col++){
+				this.gridButtons[row][col].setGraphic(GridWorld.gridButtons[row][col].getGraphic()); 
+			}
+		}
 	}
 
 	/**
