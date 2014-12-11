@@ -64,29 +64,7 @@ public class Creature extends GridObject {
 	 */
 	public void move(){
 		System.out.println("move CALLED");
-		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-		String method = stackTraceElements[2].getMethodName();
-		System.out.println(method);
-		if(method.equals("reverseOperation")){
-			System.out.println(true);
-			switch(this.direction){
-			case Coordinate.DOWN: 
-				this.getCoordinates().moveNorth();
-				break; 
-			case Coordinate.UP: 
-				this.getCoordinates().moveSouth(); 
-				break; 
-			case Coordinate.LEFT: 
-				this.getCoordinates().moveEast(); 
-				break; 
-			case Coordinate.RIGHT: 
-				this.getCoordinates().moveWest(); 
-				break; 
-			default: 
-				throw new IllegalValueException("Invalid Direction");
-			}	
-			return;
-		}
+		System.out.println(true);
 		
 		switch(this.direction){
 		case Coordinate.UP: 
