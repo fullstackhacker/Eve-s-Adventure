@@ -1,10 +1,7 @@
 package views.scenes;
 
-import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
-
-import com.sun.org.apache.regexp.internal.RE;
 
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
@@ -18,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import models.Coordinate;
 import models.campaign.Campaign;
+import models.campaign.Level;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import views.MainApp;
@@ -30,7 +28,6 @@ import views.tabs.GameTabs;
 import views.tips.ProTips;
 import controllers.ButtonHandlers;
 import controllers.Interpreter;
-import controllers.Save;
 
 public final class SandboxScene extends Scene {
 
@@ -41,8 +38,6 @@ public final class SandboxScene extends Scene {
 	public static GameTabs gametabs = null;
 	public static ProTips protips = null;
 	public static KarelTable karelTable = null;
-
-	public static ArrayList<Campaign> campaigns = new ArrayList<Campaign>();
 
 	private static Interpreter interpreter;
 
@@ -78,7 +73,6 @@ public final class SandboxScene extends Scene {
 			this.getStylesheets().add(SandboxScene.class.getResource("/sandbox_style.css").toExternalForm());
 
 			buttonSetup();
-			loadUpCampaigns();
 
 			GridPane.setFillWidth(PAUSE, true);
 			GridPane.setHalignment(PAUSE, HPos.CENTER);
@@ -302,24 +296,4 @@ public final class SandboxScene extends Scene {
 		SandboxScene.interpreter = interpreter;
 	}
 
-	public static void loadUpCampaigns() {
-		File campaignsDir = new File("data" + File.separator + "campaigns"
-				+ File.separator);
-		if (!campaignsDir.isDirectory())
-			return;
-		File[] listOfFiles = campaignsDir.listFiles();
-		ArrayList<String> Campaigns = new ArrayList<String>();
-
-		if (listOfFiles != null) {
-			for (int i = 0; i < listOfFiles.length; i++) {
-				if (listOfFiles[i].isDirectory()
-						&& !listOfFiles[i].getName().contains("SandboxWorld")) {
-					Campaigns.add(listOfFiles[i].getName());
-					campaigns.add(new Campaign(listOfFiles[i].getName(),
-							"Default description."));
-				}
-			}
-		}
-
-	}
 }

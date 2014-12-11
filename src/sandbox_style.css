@@ -44,7 +44,7 @@
 	-fx-border-color: #222;
 }
 
-#upWall:selected, #rightWall:selected, #downWall:selected, #leftWall{
+#upWall:selected, #rightWall:selected, #downWall:selected, #leftWall:selected{
 	-fx-background-color: #aaa;
 }
 

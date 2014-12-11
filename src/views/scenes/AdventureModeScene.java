@@ -100,7 +100,7 @@ public final class AdventureModeScene extends Scene {
 			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			gridWorld = GridWorld.getInstance();
-			//objective = Objective.getInstance();
+			objective = Objective.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -225,7 +225,7 @@ public final class AdventureModeScene extends Scene {
 		super(arg0, arg1, arg2);
 	}
 
-	public void setWorld(World world1) {
+	public static void setWorld(World world1) {
 		world = world1;
 	}
 

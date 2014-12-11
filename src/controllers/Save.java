@@ -74,11 +74,11 @@ public class Save {
 
 		/* create the path and the output stream objects */
 		String levelPath = campaignPath == null ? Save.LEVELDIR
-				+ level.getName() + File.separator : campaignPath
-				+ level.getName() + File.separator;
+				+ level.getWorld().getName() + File.separator : campaignPath
+				+ level.getWorld().getName() + File.separator;
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
-
+		System.out.println(levelPath);
 		/* create the directory for the level */
 		File levelDir = new File(levelPath);
 		levelDir.mkdirs();
@@ -89,11 +89,14 @@ public class Save {
 		try {
 			fos = new FileOutputStream(new File(worldPath));
 			oos = new ObjectOutputStream(fos);
+			System.out.println("OK WE MADE IT THIS FAR");
 			oos.writeObject(level.getWorld());
 			oos.close();
 			fos.close();
 		} catch (Exception e) {
 			// unable to save the world
+			System.out.println("ERROR SERIALIZING THE WORLD");
+			e.printStackTrace();
 			return false;
 		}
 
@@ -108,6 +111,7 @@ public class Save {
 			fos.close();
 		} catch (Exception e) {
 			// unable to save karel code
+			e.printStackTrace();
 			return false;
 		}
 
@@ -122,6 +126,7 @@ public class Save {
 			fos.close();
 		} catch (Exception e) {
 			// unable to save the description
+			e.printStackTrace();
 			return false;
 		}
 
@@ -149,11 +154,15 @@ public class Save {
 		/* create the directory for the campaign */
 		File campaignDir = new File(campaignPath);
 		campaignDir.mkdir();
+		
+		if(campaign.getLevels().isEmpty()) System.out.println("No levels...");
 
 		/* save the levels */
 		for (Level level : campaign.getLevels()) {
-			if (!saveLevel(level, campaignPath + "levels" + File.separator))
-				return false; // error saving one of the levels
+			if(level != null){
+				if (!saveLevel(level, campaignPath + "levels" + File.separator))
+					return false; // error saving one of the levels
+			}
 		}
 
 		/* save the name */
