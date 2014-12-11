@@ -1053,8 +1053,8 @@ public final class ButtonHandlers {
 		}
 	}
 
-//Bamboo on Eve - ?
-//Bamboo on Friend - ?
+//Bamboo on Eve - fine
+//Bamboo on Friend - fine
 //Bamboo on Tree - ask to replace
 //Bamboo on Shrub - increment value of bamboo in that shrub, let user know this happened
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e) {
@@ -1062,20 +1062,35 @@ public final class ButtonHandlers {
 		System.out.println("BAMBOO_BUTTON_HANDLER");
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		//if there is a creature, would change graphic to something where you see both of them
+		if(GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
+			Bamboo bamboo = new Bamboo(4);
+			bamboo.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
+					GridWorld.getYCoordinate()));
+			GridWorld.getInstance().getWorld().addItem(bamboo);
+			return;
+		}
+		
 		//if there is item
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
 			if (oldObject instanceof Tree)
 				popup("Bamboo", "Tree");
+			if (oldObject instanceof Shrub)
+				popup("Bamboo", "Shrub");
+			
+			return;
+			
 		} 
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getBambooI());
 			Bamboo bamboo = new Bamboo(4);
 			bamboo.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
 					GridWorld.getYCoordinate()));
+			
 			if (GridWorld.getInstance().getWorld() == null)
 				System.out.println("Uninitalized world");
+			
 			GridWorld.getInstance().getWorld().addItem(bamboo);
 			GridWorld.getInstance().getWorld().printWorld();
 		}
@@ -1087,7 +1102,7 @@ public final class ButtonHandlers {
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
-		if (GridWorld.getInstance().getWorld().hasCreature(currentPosition))
+		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
 			return;
 		//backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
