@@ -348,16 +348,16 @@ public class Interpreter {
 			this.world.getEve().turnLeft();
 			if (this.world.getEve().getDirection() == Coordinate.UP) {
 				GridWorld.gridButtons[this.world.getEve().getX()][this.world
-						.getEve().getY()].setGraphic(SandboxScene.EveDown);
+						.getEve().getY()].setGraphic(SandboxScene.getEveDownI());
 			} else if (this.world.getEve().getDirection() == Coordinate.LEFT) {
 				GridWorld.gridButtons[this.world.getEve().getX()][this.world
-						.getEve().getY()].setGraphic(SandboxScene.EveLeft);
+						.getEve().getY()].setGraphic(SandboxScene.getEveLeftI());
 			} else if (this.world.getEve().getDirection() == Coordinate.RIGHT) {
 				GridWorld.gridButtons[this.world.getEve().getX()][this.world
-						.getEve().getY()].setGraphic(SandboxScene.EveRight);
+						.getEve().getY()].setGraphic(SandboxScene.getEveRightI());
 			} else {
 				GridWorld.gridButtons[this.world.getEve().getX()][this.world
-						.getEve().getY()].setGraphic(SandboxScene.EveUp);
+						.getEve().getY()].setGraphic(SandboxScene.getEveUpI());
 			}
 			/*
 			 * GridWorld.gridButtons[this.world.getEve().getX()][this.world

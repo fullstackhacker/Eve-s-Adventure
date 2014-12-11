@@ -605,7 +605,7 @@ public class World implements Serializable {
 						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
 				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setGraphic(SandboxScene.Bamboo);
+						.getY()].setGraphic(SandboxScene.getBambooI());
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.DOWN:
@@ -627,7 +627,7 @@ public class World implements Serializable {
 						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
 				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setGraphic(SandboxScene.Bamboo);
+						.getY()].setGraphic(SandboxScene.getBambooI());
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.LEFT:
@@ -647,7 +647,7 @@ public class World implements Serializable {
 						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
 				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setGraphic(SandboxScene.Bamboo);
+						.getY()].setGraphic(SandboxScene.getBambooI());
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.RIGHT:
@@ -667,7 +667,7 @@ public class World implements Serializable {
 						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
 				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setGraphic(SandboxScene.Bamboo);
+						.getY()].setGraphic(SandboxScene.getBambooI());
 			GridWorld.getInstance().setVisible(true);
 			break;
 		default:
