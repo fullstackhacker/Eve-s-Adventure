@@ -65,30 +65,54 @@ public final class GameTabs extends TabPane {
 
 	public void switchTab(int tab) {
 		//TODO Clean UP
-				if(tab == NUMBERS_TAB_VALUE){
-					for(int i = 0; i < this.getTabs().size(); i++){
-						if(this.getTabs().get(i).getText().equals("NUMBERS")){
-							this.getSelectionModel().select(i);
-							return;						
-						}
-					}
-				}
-				this.getSelectionModel().select(tab);
+		for(int i = 0; i < this.getTabs().size(); i++){
+			if(this.getTabs().get(i).getText().equals("NUMBERS") && tab == NUMBERS_TAB_VALUE){
+				this.getSelectionModel().select(i);
+				return;						
+			}else if(this.getTabs().get(i).getText().equals("INSTRUCTIONS") && tab == INSTRUCTIONS_TAB_VALUE){
+				this.getSelectionModel().select(i);
+				return;
+			}else if(this.getTabs().get(i).getText().equals("CONDITIONS") && tab == CONDITIONS_TAB_VALUE){
+				this.getSelectionModel().select(i);
+				return;
+			}else if(this.getTabs().get(i).getText().equals("ITEMS") && tab == ITEMS_TAB_VALUE){
+				this.getSelectionModel().select(i);
+				return;
+			}else if(this.getTabs().get(i).getText().equals("OPERATIONS") && tab == OPERATIONS_TAB_VALUE){
+				this.getSelectionModel().select(i);
+				return;
+			}else if(this.getTabs().get(i).getText().equals("CREATURES") && tab == CREATURES_TAB_VALUE){
+				this.getSelectionModel().select(i);
+				return;
+			}
+		}
+		this.getSelectionModel().select(tab);
 	}
 
 	public void enableTab(int tab) {
 		System.out.println("enableTab");
 		try{
-			//TODO Clean UP
-			if(tab == NUMBERS_TAB_VALUE){
-				for(int i = 0; i < this.getTabs().size(); i++){
-					if(this.getTabs().get(i).getText().equals("NUMBERS")){
-						this.getTabs().get(i).setDisable(false);
-						return;						
-					}
+			for(int i = 0; i < this.getTabs().size(); i++){
+				if(this.getTabs().get(i).getText().equals("NUMBERS") && tab == NUMBERS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(false);
+					return;						
+				}else if(this.getTabs().get(i).getText().equals("INSTRUCTIONS") && tab == INSTRUCTIONS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(false);
+					return;	
+				}else if(this.getTabs().get(i).getText().equals("CONDITIONS") && tab == CONDITIONS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(false);
+					return;	
+				}else if(this.getTabs().get(i).getText().equals("ITEMS") && tab == ITEMS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(false);
+					return;	
+				}else if(this.getTabs().get(i).getText().equals("OPERATIONS") && tab == OPERATIONS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(false);
+					return;	
+				}else if(this.getTabs().get(i).getText().equals("CREATURES") && tab == CREATURES_TAB_VALUE){
+					this.getTabs().get(i).setDisable(false);
+					return;	
 				}
 			}
-			this.getTabs().get(tab).setDisable(false);
 		}catch(Exception e){
 			/* Do Nothing */
 			System.out.println("tab == " + tab);
@@ -98,16 +122,27 @@ public final class GameTabs extends TabPane {
 	public void disableTab(int tab) {
 		System.out.println("disableTab");
 		try{
-			//TODO Clean UP
-			if(tab == NUMBERS_TAB_VALUE){
-				for(int i = 0; i < this.getTabs().size(); i++){
-					if(this.getTabs().get(i).getText().equals("NUMBERS")){
-						this.getTabs().get(i).setDisable(true);
-						return;						
-					}
+			for(int i = 0; i < this.getTabs().size(); i++){
+				if(this.getTabs().get(i).getText().equals("NUMBERS") && tab == NUMBERS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(true);
+					return;
+				}else if(this.getTabs().get(i).getText().equals("INSTRUCTIONS") && tab == INSTRUCTIONS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(true);
+					return;
+				}else if(this.getTabs().get(i).getText().equals("CONDITIONS") && tab == CONDITIONS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(true);
+					return;
+				}else if(this.getTabs().get(i).getText().equals("ITEMS") && tab == ITEMS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(true);
+					return;
+				}else if(this.getTabs().get(i).getText().equals("OPERATIONS") && tab == OPERATIONS_TAB_VALUE){
+					this.getTabs().get(i).setDisable(true);
+					return;
+				}else if(this.getTabs().get(i).getText().equals("CREATURES") && tab == CREATURES_TAB_VALUE){
+					this.getTabs().get(i).setDisable(true);
+					return;
 				}
 			}
-			this.getTabs().get(tab).setDisable(true);
 		}catch(Exception e){
 			/* Do Nothing */
 			System.out.println("tab == " + tab);
