@@ -136,7 +136,7 @@ public final class GridWorld extends GridPane {
 
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 10; j++) {
-				gridButtons[i][j] = new ToggleButton("   ");
+				gridButtons[i][j] = new ToggleButton();
 				GridPane.setHalignment(gridButtons[i][j], HPos.CENTER);
 				GridPane.setHgrow(gridButtons[i][j], Priority.ALWAYS);
 				GridPane.setVgrow(gridButtons[i][j], Priority.ALWAYS);
@@ -150,8 +150,7 @@ public final class GridWorld extends GridPane {
 			}
 		}
 
-		gridButtons[2][2].setText("Eve!");
-		gridButtons[2][2].getTransforms().add(new Rotate(180, 28, 32.5));
+		//gridButtons[2][2].setText("Eve!");
 
 		// gridButtons[2][2].setText("Eve!");
 
@@ -167,8 +166,6 @@ public final class GridWorld extends GridPane {
 	public World getWorld() {
 		return world;
 	}
-	
-	
 
 	public static int getXCoordinate(){
 		for(int y = 0; y < gridButtons.length; y++){

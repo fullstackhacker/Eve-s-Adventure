@@ -4,5 +4,5 @@ data/*
 ./.DS_Store
 .classpath
 /bin/
-*.png
 .DS_Store
+UML_*.png

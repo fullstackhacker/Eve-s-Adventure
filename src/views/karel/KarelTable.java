@@ -81,6 +81,9 @@ public final class KarelTable extends GridPane {
                     public void handle(MouseEvent event) {
                     	listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
                         if (! cell.isEmpty()) {
+                        	if(cell.getText().matches(".*\\d.*")){
+                        		return;
+                        	}
                         	switch(cell.getText()){
                         		case "ADD CODE HERE":
 		                		case KarelCode.ELSESTATEMENT:

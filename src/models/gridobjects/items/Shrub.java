@@ -63,5 +63,9 @@ public class Shrub extends Item implements Serializable{
 
 	}
 	
+	public Item copy(){
+		return new Shrub(this.getId(), this.bamboo); 
+	}
+	
 
 }
