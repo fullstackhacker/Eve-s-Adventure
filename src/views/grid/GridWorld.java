@@ -1,26 +1,23 @@
 package views.grid;
 
-import models.Coordinate;
-import models.campaign.World;
-import views.tabs.GameTabs;
-import controllers.ButtonHandlers;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.transform.Rotate;
+import models.Coordinate;
+import models.campaign.World;
+import models.gridobjects.items.Bamboo;
+import models.gridobjects.items.Shrub;
+import models.gridobjects.items.Tree;
+import views.scenes.SandboxScene;
+import views.tabs.GameTabs;
 
 public final class GridWorld extends GridPane {
 
@@ -145,11 +142,7 @@ public final class GridWorld extends GridPane {
 						.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 				gridButtons[i][j].setId("WorldButton");
 				gridButtons[i][j].setToggleGroup(group);
-				if(getWorld() != null){
-					if(getWorld().itemAt(new Coordinate(i, j)) != null){
-						gridButtons[i][j].setGraphic()
-					} else if(getWorld().creatureAt(new Coordinate(i, j)) != null)
-				}
+
 				this.add(gridButtons[i][j], i, j);
 
 			}
@@ -166,6 +159,41 @@ public final class GridWorld extends GridPane {
 
 	public void setWorld(World world) {
 		this.world = world;
+		for(int i = 0; i < 5; i++){
+			for(int j = 0; j < 10; j++){
+				if(this.world != null){
+					if(this.world.itemAt(new Coordinate(i, j)) != null){
+						if(this.world.itemAt(new Coordinate(i, j)) instanceof Bamboo){
+							gridButtons[i][j].setGraphic(SandboxScene.getBambooI());
+						}
+						if(this.world.itemAt(new Coordinate(i, j)) instanceof Shrub){
+							gridButtons[i][j].setGraphic(SandboxScene.getShrubI());
+						}					
+						if(this.world.itemAt(new Coordinate(i, j)) instanceof Tree){
+							gridButtons[i][j].setGraphic(SandboxScene.getTreeI());
+						}						
+					} 
+					else if(getWorld().creatureAt(new Coordinate(i, j)) != null){
+						if(this.world.creatureAt(new Coordinate(i, j)).isEve()){
+							switch(this.world.creatureAt(new Coordinate(i, j)).getDirection()){
+							case Coordinate.UP:
+								gridButtons[i][j].setGraphic(SandboxScene.getEveDownI());
+								break;
+							case Coordinate.DOWN:
+								gridButtons[i][j].setGraphic(SandboxScene.getEveUpI());
+								break;
+							case Coordinate.RIGHT:
+								gridButtons[i][j].setGraphic(SandboxScene.getEveRightI());
+								break;
+							case Coordinate.LEFT:
+								gridButtons[i][j].setGraphic(SandboxScene.getEveLeftI());
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public World getWorld() {
