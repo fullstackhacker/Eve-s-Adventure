@@ -165,7 +165,8 @@ public final class ButtonHandlers {
 						SandboxScene.gridWorld, 3, 3, 4, 2);
 
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				System.out.println("Sandbox.add() Exception Caught");
+				//e1.printStackTrace();
 			}
 			GameTabs.getInstance().getTabs()
 					.remove(GameTabs.getInstance().CREATURES_TAB);
@@ -193,9 +194,9 @@ public final class ButtonHandlers {
 						AdventureModeScene.gridWorld, 3, 3, 4, 2);
 				AdventureModeScene.AdventureModePane.getInstance().add(
 						AdventureModeScene.objective, 1, 4, 1, 1);
-
 			} catch (Exception e2) {
-				e2.printStackTrace();
+				System.out.println("AdventureMode.add() Exception Caught");
+				//e2.printStackTrace();
 			}
 			GameTabs.getInstance().getTabs()
 					.remove(GameTabs.getInstance().CREATURES_TAB);
