@@ -73,8 +73,10 @@ public final class ButtonHandlers {
 			}catch(Exception e1){
 				System.out.println("LOL");
 			}
-			//GameTabs.getInstance().getTabs().add(GameTabs.getInstance().CREATURES_TAB);
-			//GameTabs.getInstance().getTabs().add(GameTabs.getInstance().ITEMS_TAB);
+			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().ITEMS_TAB);
+			GameTabs.getInstance().getTabs().add(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs().add(GameTabs.getInstance().ITEMS_TAB);
 		} else {
 			MainApp.changeScenes(AdventureModeScene.getInstance());
 			try{
@@ -84,8 +86,8 @@ public final class ButtonHandlers {
 			}catch(Exception e2){
 				System.out.println("");
 			}
-			//GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().CREATURES_TAB);
-			//GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().ITEMS_TAB);
+			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().ITEMS_TAB);
 		}
 	}
 
