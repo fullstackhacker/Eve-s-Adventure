@@ -279,6 +279,8 @@ public class Interpreter {
 
 		switch (this.karelCode.get(this.activeCodeBlock)) {
 		// end statements
+		case KarelCode.ELSESTATEMENT: 
+			return;
 		case KarelCode.ENDIF:
 		case KarelCode.ENDWHILE:
 		case KarelCode.ENDELSE:
@@ -296,7 +298,6 @@ public class Interpreter {
 			break;
 		// conditionals
 		case KarelCode.IFSTATEMENT:
-		case KarelCode.ELSESTATEMENT:
 			conditional();
 			this.next();
 			break;
@@ -395,37 +396,30 @@ public class Interpreter {
 		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		boolean result = variable();
 		System.out.println("result = " + result);
-		if (!result) {
-			if (!this.next()){
-				throw new IllegalValueException("Ill formed Karel Code");
-			}
+		if(!this.next()) throw new IllegalValueException("ill formed karel code");
+		if (result) {
 			instructions();
 		} else {
-			System.out.println("TRUE");
+			System.out.println("FALSE");
 			do {
-				System.out.println("this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
-				instruction();
+				if(!this.next()) throw new IllegalValueException("ill formed karel code");
 			} while (!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF));
 		}
+		if(!validPosition()) return;
 		System.out.println("1this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
-		if (!this.next()){
-			return;
-		}
 		System.out.println("2this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
-		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT)&& !result) {
+		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && !result) {
 			if (!this.next()){
 				throw new IllegalValueException("Ill formed Karel Code");
 			}
 			System.out.println("instruction() CALLED-----------------");
 			instructions();
 		}
-		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result) {
-			System.out.println("do while-----------------");
-			do {
-				instructions();
-			} while (!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSE));
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result){
+			do{
+				if(!this.next()) throw new IllegalValueException("mal formed karel code");
+			}while(this.karelCode.get(activeCodeBlock).equals(KarelCode.ENDELSE));
 		}
-
 	}
 
 	public void operation() {
@@ -492,14 +486,13 @@ public class Interpreter {
 		switch (this.karelCode.get(this.activeCodeBlock)) {
 		case KarelCode.FRONTISCLEAR:
 			System.out.println("frontIsClear" +this.world.frontIsClear());
-			this.next();
 			return this.world.frontIsClear();
 		case KarelCode.BAGISEMPTY:
 			return !this.world.getEve().hasBamboo();
 		case KarelCode.FACINGNORTH:
-			return this.world.getEve().getDirection() == Coordinate.UP;
-		case KarelCode.FACINGSOUTH:
 			return this.world.getEve().getDirection() == Coordinate.DOWN;
+		case KarelCode.FACINGSOUTH:
+			return this.world.getEve().getDirection() == Coordinate.UP;
 		case KarelCode.FACINGEAST:
 			return this.world.getEve().getDirection() == Coordinate.RIGHT;
 		case KarelCode.FACINGWEST:
