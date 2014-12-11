@@ -244,6 +244,7 @@ public class Interpreter {
 				+ this.karelCode.get(this.activeCodeBlock) + "active: "
 				+ this.activeCodeBlock);
 		instruction();
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		if (!validPosition()) {
 			timer.cancel();
 			if (ButtonHandlers.isSandboxMode()) {
@@ -382,6 +383,7 @@ public class Interpreter {
 
 	public void conditional() { // if statement
 		System.out.println("condtional CALLED");
+		System.out.println("this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
 		if (!this.karelCode.get(this.activeCodeBlock).equals(
 				KarelCode.IFSTATEMENT)){
 			System.out.println("1. if");
@@ -390,49 +392,44 @@ public class Interpreter {
 		if (!this.next()){
 			throw new IllegalValueException("Ill formed code");
 		}
-		/*if (!this.karelCode.get(this.activeCodeBlock).equals(
-				KarelCode.CLOSESTATEMENT)){
-			System.out.println("this.activeCodeBlock =" + this.karelCode.get(this.activeCodeBlock));
-			System.out.println("3. if");
-			return;
-		}*/
-		if (!this.next()){
-			throw new IllegalValueException("Ill formed code");
-		}
-		
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		boolean result = variable();
 		System.out.println("result = " + result);
-		if (result) {
-			if (!this.next())
+		if (!result) {
+			if (!this.next()){
 				throw new IllegalValueException("Ill formed Karel Code");
+			}
 			instructions();
 		} else {
 			System.out.println("TRUE");
 			do {
-				this.next();
-			} while (!this.karelCode.get(this.activeCodeBlock).equals(
-					KarelCode.ENDIF));
-			System.out.println("Conditional (variable false): "
-					+ this.karelCode.get(this.activeCodeBlock));
+				System.out.println("this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
+				instruction();
+			} while (!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF));
 		}
+		System.out.println("1this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
 		if (!this.next()){
 			return;
 		}
+		System.out.println("2this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT)&& !result) {
-			if (!this.next())
+			if (!this.next()){
 				throw new IllegalValueException("Ill formed Karel Code");
+			}
+			System.out.println("instruction() CALLED-----------------");
 			instructions();
 		}
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result) {
+			System.out.println("do while-----------------");
 			do {
-				this.next();
-			} while (!this.karelCode.get(this.activeCodeBlock).equals(
-					KarelCode.ENDIF));
+				instructions();
+			} while (!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSE));
 		}
 
 	}
 
 	public void operation() {
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		if (!this.world.getEve().isAwake()) {
 			if (this.karelCode.get(this.activeCodeBlock).equals(
 					KarelCode.WAKEUP)) {
@@ -495,6 +492,7 @@ public class Interpreter {
 		switch (this.karelCode.get(this.activeCodeBlock)) {
 		case KarelCode.FRONTISCLEAR:
 			System.out.println("frontIsClear" +this.world.frontIsClear());
+			this.next();
 			return this.world.frontIsClear();
 		case KarelCode.BAGISEMPTY:
 			return !this.world.getEve().hasBamboo();
