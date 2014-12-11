@@ -41,7 +41,7 @@ final class ConditionalsTab extends VBox {
 		FACING_WEST_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		BAG_IS_EMPTY_BUTTON.setMaxWidth(GameTabs.GAMETABS_MAX_WIDTH);
 		
-		this.getChildren().addAll(FRONT_IS_CLEAR_BUTTON, NEXT_TO_A_FRIEND_BUTTON, FACING_NORTH_BUTTON, FACING_SOUTH_BUTTON, FACING_EAST_BUTTON);
+		this.getChildren().addAll(FRONT_IS_CLEAR_BUTTON, FACING_NORTH_BUTTON, FACING_SOUTH_BUTTON, FACING_EAST_BUTTON);
 	}
 	
 	protected static ConditionalsTab getInstance(){

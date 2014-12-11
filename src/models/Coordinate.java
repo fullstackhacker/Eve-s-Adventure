@@ -111,5 +111,9 @@ public class Coordinate {
 	public String toString(){
 		return "X: " + this.x + " Y: " + this.y; 
 	}
+	
+	public Coordinate copy(){
+		return new Coordinate(this.x, this.y);
+	}
 }
 

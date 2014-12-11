@@ -62,7 +62,10 @@ public class Creature extends GridObject {
 	/**
 	 *  Move the creature in the direction he or she is facing 
 	 */
-	public void move(){ 
+	public void move(){
+		System.out.println("move CALLED");
+		System.out.println(true);
+		
 		switch(this.direction){
 		case Coordinate.UP: 
 			this.getCoordinates().moveNorth();
@@ -184,7 +187,7 @@ public class Creature extends GridObject {
 	}
 	
 	public Creature copy(){
-		Creature creature = new Creature(this.getName(), this.getCoordinates()); 
+		Creature creature = new Creature(this.getName(), this.getCoordinates().copy()); 
 		creature.numberOfBamboo = this.numberOfBamboo; 
 		creature.direction = this.direction; 
 		creature.isAwake = this.isAwake; 

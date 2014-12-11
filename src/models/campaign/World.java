@@ -552,6 +552,22 @@ public class World implements Serializable {
 		return this.world[coordinate.getY()][coordinate.getX()].hasCreature();
 	}
 
+	public boolean hasUpWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasUpWall();
+	}
+	public boolean hasDownWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasDownWall();
+	}
+	public boolean hasLeftWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasLeftWall();
+	}
+	public boolean hasRightWall(Coordinate coordinate){
+		if(!verifyCoordinate(coordinate)) return false;
+		return this.getSquareAt(coordinate).hasRightWall();
+	}
 	/**
 	 * Gets the area of the world
 	 * 
@@ -607,6 +623,115 @@ public class World implements Serializable {
 		Coordinate currentEveLocation = this.getEve().getCoordinates();
 		Coordinate newEveLocation = null;
 
+		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+		String method = stackTraceElements[2].getMethodName();
+
+		if(method.equals("reverseOperation")){
+			switch (this.getEve().getDirection()) {
+			case Coordinate.DOWN:
+				if (this.getSquareAt(currentEveLocation).hasUpWall())
+					return;
+
+				newEveLocation = new Coordinate(currentEveLocation.getX(),
+						currentEveLocation.getY() + 1);
+
+				if (!verifyCoordinate(newEveLocation))
+					return;
+				if (this.getSquareAt(newEveLocation).hasCreature())
+					return;
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY() + 1]
+						.setGraphic(GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+								.getY()].getGraphic());
+				if (!this.getSquareAt(currentEveLocation).hasItem())
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(null);
+				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(SandboxScene.getBambooI());
+				GridWorld.getInstance().setVisible(true);
+				break;
+			case Coordinate.UP:
+				if (this.getSquareAt(currentEveLocation).hasDownWall())
+					return;
+
+				newEveLocation = new Coordinate(currentEveLocation.getX(),
+						currentEveLocation.getY() - 1);
+				if (!verifyCoordinate(newEveLocation))
+					return;
+				if (this.getSquareAt(newEveLocation).hasCreature())
+					return;
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY() - 1]
+						.setGraphic(GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+								.getY()].getGraphic());
+				if (!this.getSquareAt(currentEveLocation).hasItem())
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(null);
+				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(SandboxScene.getBambooI());
+				GridWorld.getInstance().setVisible(true);
+				break;
+			case Coordinate.RIGHT:
+				if (this.getSquareAt(currentEveLocation).hasLeftWall())
+					return;
+				newEveLocation = new Coordinate(currentEveLocation.getX() - 1,
+						currentEveLocation.getY());
+				if (!verifyCoordinate(newEveLocation))
+					return;
+				if (this.getSquareAt(newEveLocation).hasCreature())
+					return;
+				GridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
+						.getY()].setGraphic(GridWorld.gridButtons[currentEveLocation
+						.getX()][currentEveLocation.getY()].getGraphic());
+				if (!this.getSquareAt(currentEveLocation).hasItem())
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(null);
+				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(SandboxScene.getBambooI());
+				GridWorld.getInstance().setVisible(true);
+				break;
+			case Coordinate.LEFT:
+				if (this.getSquareAt(currentEveLocation).hasRightWall())
+					return;
+				newEveLocation = new Coordinate(currentEveLocation.getX() + 1,
+						currentEveLocation.getY());
+				if (!verifyCoordinate(newEveLocation))
+					return;
+				if (this.getSquareAt(newEveLocation).hasCreature())
+					return;
+				GridWorld.gridButtons[currentEveLocation.getX() + 1][currentEveLocation
+						.getY()].setGraphic(GridWorld.gridButtons[currentEveLocation
+						.getX()][currentEveLocation.getY()].getGraphic());
+				if (!this.getSquareAt(currentEveLocation).hasItem())
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(null);
+				if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
+					GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].setGraphic(SandboxScene.getBambooI());
+				GridWorld.getInstance().setVisible(true);
+				break;
+			default:
+				throw new IllegalValueException("Eve facing illegal direction");
+			}
+			
+			System.out.println("eve current: " + currentEveLocation);
+			System.out.println("new local: " + newEveLocation);
+			this.getSquareAt(newEveLocation).addCreature(
+					this.getSquareAt(currentEveLocation).removeCreature());
+			this.getEve().move();
+
+			System.out.println("MOVE: CURRENT LOCATION: "
+					+ this.getEve().getCoordinates());
+			System.out.println("MOVE: END DIRECTION: "
+					+ this.getEve().getDirection());
+			
+			return;
+		}
+		
+		
 		switch (this.getEve().getDirection()) {
 		case Coordinate.UP:
 			if (this.getSquareAt(currentEveLocation).hasUpWall())
@@ -708,6 +833,37 @@ public class World implements Serializable {
 		System.out.println("MOVE: END DIRECTION: "
 				+ this.getEve().getDirection());
 
+	}
+	
+	public boolean eveNearFriend(){
+		Coordinate eveLocation = this.eve.getCoordinates();
+		Coordinate possibleFriendLocation = null; 
+		
+		switch(this.eve.getDirection()){
+		case Coordinate.UP:
+			if(this.getSquareAt(eveLocation).hasUpWall()) return false;
+			possibleFriendLocation = new Coordinate(eveLocation.getX(), eveLocation.getY() + 1);
+			break; 
+		case Coordinate.DOWN:
+			if(this.getSquareAt(eveLocation).hasDownWall()) return false; 
+			possibleFriendLocation = new Coordinate(eveLocation.getX(), eveLocation.getY() - 1);
+			break; 
+		case Coordinate.RIGHT: 
+			if(this.getSquareAt(eveLocation).hasRightWall()) return false; 
+			possibleFriendLocation = new Coordinate(eveLocation.getX() + 1, eveLocation.getY());
+			break; 
+		case Coordinate.LEFT: 
+			if(this.getSquareAt(eveLocation).hasLeftWall()) return false;
+			possibleFriendLocation = new Coordinate(eveLocation.getX() - 1, eveLocation.getY());
+			break;
+		default: 
+			throw new IllegalValueException("Eve is facing in an invalid direction");
+		}
+		
+		if(!verifyCoordinate(possibleFriendLocation)) return false; 
+		
+		if(this.getSquareAt(possibleFriendLocation).hasCreature()) return true;
+		return false; 
 	}
 
 	/**
@@ -1019,7 +1175,7 @@ public class World implements Serializable {
 
 	public void findEve() {
 		for (int y = 0; y < this.world.length; y++) {
-			for (int x = 9; x < this.world[y].length; x++) {
+			for (int x = 0; x < this.world[y].length; x++) {
 				if (this.world[y][x].hasCreature()
 						&& this.world[y][x].currentCreature().getName()
 								.equals("Eve"))
@@ -1057,6 +1213,7 @@ public class World implements Serializable {
 				if(this.getSquareAt(currentPosition).hasLeftWall()) world.getSquareAt(currentPosition).addLeftWall(this.getSquareAt(currentPosition).currentLeftWall().copy());
 			}
 		}
+		world.findEve();
 		return world;
 	}
 	
@@ -1065,39 +1222,42 @@ public class World implements Serializable {
 	}
 
 	public void overwrite(World world){
-		for(int row = 0; row < this.getHeight(); row++){
-			for(int col = 0; col < this.getWidth(); col++){
-				Coordinate currentPosition = new Coordinate(col, row);
+		this.name = world.name; 
+		System.out.println("World.eve.cooridnates: " + world.eve.getCoordinates());
+		this.getEve().setCoordinates(world.eve.getCoordinates());
+		this.bambooObjective = world.bambooObjective;
+		
+		//copy the world
+		for(int row = 0; row < this.world.length; row++){
+			for(int col = 0; col < this.world[row].length; col++){
+				Coordinate currentLocation = new Coordinate(col, row); 
 				
-				//overwrite the creatures
-				if(world.getSquareAt(currentPosition).hasCreature() && !this.getSquareAt(currentPosition).hasCreature()) 
-					this.getSquareAt(currentPosition).addCreature(world.getSquareAt(currentPosition).currentCreature()); 
-				else if(world.getSquareAt(currentPosition).hasCreature() && this.getSquareAt(currentPosition).hasCreature())
-					this.getSquareAt(currentPosition).replaceCreature(world.getSquareAt(currentPosition).currentCreature());
-				else
-					this.getSquareAt(currentPosition).removeCreature(); 
+				this.getSquareAt(currentLocation).removeCreature();
+				this.getSquareAt(currentLocation).removeItem();
 				
-				//overwrite the items
-				if(world.getSquareAt(currentPosition).hasItem() && !this.getSquareAt(currentPosition).hasItem())
-					this.getSquareAt(currentPosition).addItem(world.getSquareAt(currentPosition).currentItem()); 
-				else if(world.getSquareAt(currentPosition).hasItem() && this.getSquareAt(currentPosition).hasItem())
-					this.getSquareAt(currentPosition).replaceItem(world.getSquareAt(currentPosition).currentItem());
-				else
-					this.getSquareAt(currentPosition).removeItem();
-					
-				//overwrite the walls
-				this.getSquareAt(currentPosition).removeUpWall(); 
-				this.getSquareAt(currentPosition).removeDownWall(); 
-				this.getSquareAt(currentPosition).removeRightWall(); 
-				this.getSquareAt(currentPosition).removeLeftWall(); 
-				if(world.getSquareAt(currentPosition).hasUpWall())
-					this.getSquareAt(currentPosition).addUpWall(world.getSquareAt(currentPosition).upWall.copy());
-				if(world.getSquareAt(currentPosition).hasDownWall())
-					this.getSquareAt(currentPosition).addDownWall(world.getSquareAt(currentPosition).downWall.copy());
-				if(world.getSquareAt(currentPosition).hasLeftWall())
-					this.getSquareAt(currentPosition).addLeftWall(world.getSquareAt(currentPosition).leftWall.copy()); 
-				if(world.getSquareAt(currentPosition).hasRightWall())
-					this.getSquareAt(currentPosition).addRightWall(world.getSquareAt(currentPosition).rightWall.copy()); 
+				//replace the creatures
+				if(world.getSquareAt(currentLocation).hasCreature() && !this.getSquareAt(currentLocation).addCreature(world.getSquareAt(currentLocation).currentCreature().copy())){
+					this.getSquareAt(currentLocation).replaceCreature(world.getSquareAt(currentLocation).currentCreature().copy()); 
+				}
+				
+				//replace the items
+				if(world.getSquareAt(currentLocation).hasItem() && !this.getSquareAt(currentLocation).addItem(world.getSquareAt(currentLocation).currentItem().copy())){
+					this.getSquareAt(currentLocation).replaceItem(world.getSquareAt(currentLocation).currentItem().copy());
+				}
+				
+				//replace the walls
+				this.getSquareAt(currentLocation).removeUpWall(); 
+				this.getSquareAt(currentLocation).removeDownWall(); 
+				this.getSquareAt(currentLocation).removeLeftWall(); 
+				this.getSquareAt(currentLocation).removeRightWall(); 
+				if(world.getSquareAt(currentLocation).hasUpWall())
+					this.getSquareAt(currentLocation).addUpWall(world.getSquareAt(currentLocation).upWall.copy());
+				if(world.getSquareAt(currentLocation).hasDownWall())
+					this.getSquareAt(currentLocation).addDownWall(world.getSquareAt(currentLocation).downWall.copy());
+				if(world.getSquareAt(currentLocation).hasRightWall())
+					this.getSquareAt(currentLocation).addRightWall(world.getSquareAt(currentLocation).rightWall.copy());
+				if(world.getSquareAt(currentLocation).hasLeftWall())
+					this.getSquareAt(currentLocation).addLeftWall(world.getSquareAt(currentLocation).leftWall.copy());
 			}
 		}
 	}
