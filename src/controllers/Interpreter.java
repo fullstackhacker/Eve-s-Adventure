@@ -44,6 +44,8 @@ public class Interpreter {
 	private Timer timer;
 	
 	private int currentLoopCounter; 
+	
+	private boolean currentWhileResult;
 
 	/**
 	 * Constructor for the parser
@@ -59,6 +61,7 @@ public class Interpreter {
 		GridWorld.getInstance().setWorld(this.world);
 		this.startWorld = world.copyWorld();
 		this.currentLoopCounter = 0; 
+		this.currentWhileResult = false; 
 		this.gridButtons = new ToggleButton[5][10];
 	}
 
@@ -174,7 +177,7 @@ public class Interpreter {
 	public void instructions() {
 		// player.stop();
 		System.out.println("Instructions: "
-				+ this.karelCode.get(this.activeCodeBlock));
+				+ this.karelCode.get(this.activeCodeBlock) + "active: " + this.activeCodeBlock);
 		instruction();
 		if (!validPosition()) {
 			timer.cancel();
@@ -187,10 +190,14 @@ public class Interpreter {
 			return;
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDELSE))
 			return;
-		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDWHILE))
+		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDWHILE)){
+			//if(this.currentWhileResult) this.repetition();
 			return;
-		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP))
+		}
+		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP)){
+			
 			return;
+		}
 		// player.play();
 	}
 
@@ -213,7 +220,7 @@ public class Interpreter {
 		case KarelCode.LOOPSTATEMENT:
 		case KarelCode.WHILESTATEMENT:
 			repetition();
-			this.next();
+			//this.next();
 			break;
 		// conditionals
 		case KarelCode.IFSTATEMENT:
@@ -242,18 +249,18 @@ public class Interpreter {
 
 		switch (this.karelCode.get(this.activeCodeBlock)) {
 		case KarelCode.WHILESTATEMENT:
+			int variableCode = this.activeCodeBlock;
 			if (!this.next())
 				throw new IllegalValueException("Ill formed Karel Code");
-			int variableCode = this.activeCodeBlock;
-			boolean result = variable();
-			if (result) {
+			this.currentWhileResult = variable();
+			if (this.currentWhileResult) {
 				if (!this.next())
 					return;
 				instructions();
 				this.activeCodeBlock = variableCode;
-				result = variable();
+				System.out.println("supposed to reset the result: " + this.karelCode.get(this.activeCodeBlock));
 			}
-			if (!result) {
+			if (!this.currentWhileResult) {
 				do {
 					if (!this.next())
 						throw new IllegalValueException("Ill formed Karel Code");
@@ -280,8 +287,7 @@ public class Interpreter {
 			}
 			break;
 		default:
-			throw new IllegalValueException("Ill formed Karel Code"
-					+ this.karelCode.get(this.activeCodeBlock));
+			throw new IllegalValueException("Ill formed Karel Code: " + this.karelCode.get(this.activeCodeBlock));
 		}
 
 	}
