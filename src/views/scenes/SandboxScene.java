@@ -1,10 +1,11 @@
 package views.scenes;
 
+import java.util.ArrayList;
+
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -17,24 +18,12 @@ import views.MainApp;
 import views.TopMenu;
 import views.grid.Cols;
 import views.grid.GridWorld;
-import views.grid.GridWorld;
 import views.grid.Rows;
 import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
-import javafx.geometry.HPos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import controllers.ButtonHandlers;
+import controllers.Interpreter;
 
 public final class SandboxScene extends Scene {
 
@@ -46,8 +35,12 @@ public final class SandboxScene extends Scene {
 	public static ProTips protips = null;
 	public static KarelTable karelTable = null;
 
-	public static ToggleButton Eve = new ToggleButton("Eve!");
+	//public static ToggleButton Eve = new ToggleButton("Eve!");
 
+	private static Interpreter interpreter;
+	
+	//public static ToggleButton Eve = new ToggleButton("Eve!");
+	
 	public static TopMenu topMenu = null;
 	
 	public static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
@@ -56,6 +49,8 @@ public final class SandboxScene extends Scene {
 	public static ImageView EveLeft = new ImageView(new Image("./Images/eve_left.png"));
 	public static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
 	public static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
+	public static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
+	public static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
 
 	public static final class SandboxPane extends GridPane {
 		
@@ -161,12 +156,15 @@ public final class SandboxScene extends Scene {
 			// Label Eve = new Label("Eve!");
 			// GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
-			//GridWorld.gridButtons[2][2].setText("Eve!");
-			Eve.setVisible(true);
+
+			GridWorld.gridButtons[2][2].setText("Eve!");
+			//Eve.setVisible(true);
 
 			//GridWorld.gridButtons[2][2].setText("Eve!");
 			GridWorld.gridButtons[2][2].setText("");
 			GridWorld.gridButtons[2][2].setGraphic(EveDown);
+			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+			interpreter = new Interpreter(karelCode, getWorld());
 			//imageEve.setId("Eve!");
 			//GridWorld.gridButtons[2][2].setGraphic(imageEve);
 			//Eve.setVisible(true);
@@ -223,6 +221,30 @@ public final class SandboxScene extends Scene {
 		return 
 	}*/
 	
+	public static ImageView getEveUpI(){
+		return new ImageView(new Image("./Images/eve_up.png")); 
+	}
+	
+	public static ImageView getEveDownI(){
+		return new ImageView(new Image("./Images/eve_down2.png")); 
+	}
+	
+	public static ImageView getEveLeftI(){
+		return new ImageView(new Image("./Images/eve_left.png")); 
+	}
+	
+	public static ImageView getEveRightI(){
+		return new ImageView(new Image("./Images/eve_right.png")); 
+	} 
+	
+	public static ImageView getShrubI(){
+		return new ImageView(new Image("./Images/bush.png"));
+	}
+	
+	public static ImageView getBambooI(){
+		return new ImageView(new Image("./Images/bamboo.png")); 
+	}
+	
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
@@ -245,5 +267,13 @@ public final class SandboxScene extends Scene {
 
 	public static SandboxScene getInstance() {
 		return instanceOfSandboxScene;
+	}
+
+	public static Interpreter getInterpreter() {
+		return interpreter;
+	}
+
+	public static void setInterpreter(Interpreter interpreter) {
+		SandboxScene.interpreter = interpreter;
 	}
 }

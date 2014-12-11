@@ -62,6 +62,7 @@ public class Interpreter {
 		this.startWorld = world.copyWorld();
 		this.currentLoopCounter = 0; 
 		this.currentWhileResult = false; 
+		this.gridButtons = new ToggleButton[5][10];
 	}
 
 	/**
@@ -108,11 +109,12 @@ public class Interpreter {
 	public void reset() {
 		this.activeCodeBlock = 0;
 		this.world.overwrite(startWorld);
-		for (int row = 0; row < gridButtons.length; row++) {
-			for (int col = 0; col < gridButtons[row].length; col++) {
-				// going to be swapped with the images
-				GridWorld.gridButtons[row][col].setText(gridButtons[row][col]
-						.getText());
+
+		for(int row = 0; row < gridButtons.length; row++){
+			for(int col = 0; col < gridButtons[row].length; col++){
+				//going to be swapped with the images
+				if(GridWorld.gridButtons[row][col] != null && gridButtons[row][col] != null)
+				GridWorld.gridButtons[row][col].setGraphic(gridButtons[row][col].getGraphic());
 			}
 		}
 	}
