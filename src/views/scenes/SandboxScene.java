@@ -43,14 +43,15 @@ public final class SandboxScene extends Scene {
 	
 	public static TopMenu topMenu = null;
 	
-	public static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
-	public static ImageView EveRight = new ImageView(new Image("./Images/eve_right.png"));
-	public static ImageView EveDown = new ImageView(new Image("./Images/eve_down2.png"));
-	public static ImageView EveLeft = new ImageView(new Image("./Images/eve_left.png"));
-	public static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
-	public static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
-	public static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
-	public static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
+
+	private static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
+	private static ImageView EveRight = new ImageView(new Image("./Images/eve_right.png"));
+	private static ImageView EveDown = new ImageView(new Image("./Images/eve_down2.png"));
+	private static ImageView EveLeft = new ImageView(new Image("./Images/eve_left.png"));
+	private static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
+	private static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
+	private static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
+	private static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
 
 	public static Button PLAY;
 	
@@ -251,6 +252,15 @@ public final class SandboxScene extends Scene {
 	public static ImageView getBambooI(){
 		return new ImageView(new Image("./Images/bamboo.png")); 
 	}
+	
+	public static ImageView getFriendI(){
+		return new ImageView(new Image("./Images/friend.png")); 
+	}
+	
+	public static ImageView getTreeI(){
+		return new ImageView(new Image("./Images/tree.png"));
+	}
+	
 	
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);

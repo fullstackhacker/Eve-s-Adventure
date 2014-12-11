@@ -564,6 +564,9 @@ public final class ButtonHandlers {
 
 	public static final void RMWALL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RMWALL_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("WorldButton");
 	}
 
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
@@ -578,18 +581,21 @@ public final class ButtonHandlers {
 		System.out.println("WALLB_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.DOWN);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("downWall");
 	}
 
 	public static final void WALLL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLL_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("leftWall");
 	}
 
 	public static final void WALLR_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLR_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("rightWall");
 	}
 
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
@@ -626,7 +632,7 @@ public final class ButtonHandlers {
 
 		} else {
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("Tree");
+					.getYCoordinate()].setGraphic(SandboxScene.getTreeI());
 
 			Tree tree = new Tree(4);
 			tree.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
@@ -667,21 +673,18 @@ public final class ButtonHandlers {
 	 * CreaturesTab.java
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-
+		
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
+		
+		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
+			return;
 		}
-		System.out.println("RMCREATURE_BUTTON_HANDLER");
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].setGraphic(null);
-		GridWorld
-				.getInstance()
-				.getWorld()
-				.removeCreature(
-						new Coordinate(GridWorld.getXCoordinate(), GridWorld
-								.getYCoordinate()));
+		
+		//remove from backend
+		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
+		
+		//remove from frontend
+		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
 	}
 
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e) {
@@ -751,7 +754,7 @@ public final class ButtonHandlers {
 			popup("Friend");
 		} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("Friend");
+					.getYCoordinate()].setGraphic(SandboxScene.getFriendI());
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
 		Creature Friend = new Creature("Friend", cords);
