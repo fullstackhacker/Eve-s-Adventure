@@ -197,8 +197,7 @@ public class Load {
 		}
 
 		/* create the level */
-		Level level = new Level(world, description, objectives, karelCode,
-				bambooObjective.intValue());
+		Level level = new Level(world, description, karelCode);
 
 		/* return the level */
 		return level;

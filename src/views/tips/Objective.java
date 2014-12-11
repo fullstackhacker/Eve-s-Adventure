@@ -1,20 +1,14 @@
 package views.tips;
 
 import java.util.Iterator;
-import java.util.Timer;
 
-import models.campaign.Level;
-import models.campaign.Tips;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.util.Duration;
+import models.campaign.Tips;
+import views.grid.GridWorld;
 
 public final class Objective extends GridPane {
 
@@ -26,7 +20,7 @@ public final class Objective extends GridPane {
 	private Objective() {
 		final Label header = new Label("Objective! - ");
 		final Label obj = new Label();
-		if(Level.getObjective().equals("find")){
+		if(!GridWorld.getInstance().getWorld().getFindObj()){
 			obj.setText("Find and collect all the bamboo androids!");
 		} else {
 			obj.setText("Find Eve's friend and save her from certain death!");

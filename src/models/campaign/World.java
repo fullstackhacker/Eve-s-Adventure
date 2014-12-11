@@ -297,6 +297,8 @@ public class World implements Serializable {
 	 * Grid of Squares
 	 */
 	private Square[][] world;
+
+	private boolean findObj; //true means find a friend mission
 	/**
 	 * Constructor for the world
 	 * 
@@ -361,6 +363,14 @@ public class World implements Serializable {
 			return;
 		}
 		this.bambooObjective--;
+	}
+	
+	public boolean getFindObj(){
+		return this.findObj; 
+	}
+	
+	public void setFindObj(boolean findObj){
+		this.findObj = findObj;
 	}
 	
 	

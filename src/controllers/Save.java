@@ -125,34 +125,6 @@ public class Save {
 			return false;
 		}
 
-		/* save the objectives */
-		String objectivePath = levelPath + File.separator
-				+ Save.OBJECTIVEFILENAME;
-		try {
-			fos = new FileOutputStream(new File(objectivePath));
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(level.getObjectives());
-			oos.close();
-			fos.close();
-		} catch (Exception e) {
-			// unable to save the objectives
-			return false;
-		}
-
-		/* save the bamboo objectives */
-		String bambooObjectivesPath = levelPath + File.separator
-				+ Save.BAMBOOBJECTIVEFILENAME;
-		try {
-			fos = new FileOutputStream(new File(bambooObjectivesPath));
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject(new Integer(level.getBambooObjective()));
-			oos.close();
-			fos.close();
-		} catch (Exception e) {
-			// unable to save the bamboo objectives
-			return false;
-		}
-
 		return true; // saved the level
 	}
 

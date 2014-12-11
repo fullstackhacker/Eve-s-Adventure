@@ -308,13 +308,13 @@ public class Interpreter {
 		case KarelCode.PUTBAMBOO:
 			operation();
 			// add an objective check
-			if (Level.getObjective().equals("collect")
+			if (!this.world.getFindObj()
 					&& this.world.getBambooObjective() == GridWorld
 							.getInstance().getWorld().getEve()
 							.getNumberOfBamboo()) {
 				this.activeCodeBlock = this.karelCode.size();
 				Running.getInstance().setText("YOU WIN!!!!");
-			} else if (Level.getObjective().equals("find")
+			} else if (this.world.getFindObj()
 					&& GridWorld.getInstance().getWorld().eveNearFriend()) {
 				this.activeCodeBlock = this.karelCode.size();
 				Running.getInstance().setText("YOU WIN!!!!");

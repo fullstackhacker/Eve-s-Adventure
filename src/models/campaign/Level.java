@@ -18,9 +18,6 @@ public class Level implements Serializable {
 	/**
 	 * Name of the level
 	 */
-	
-	private static boolean findObj = false;
-	
 	private String name; 
 	/**
 	 * The world for the level
@@ -30,17 +27,6 @@ public class Level implements Serializable {
 	 * The set of Karel Code in the level 
 	 */
 	private ArrayList<String> karelCode;
-	/**
-	 * The set of Objects in the level 
-	 */
-	private ArrayList<String> objectives; 
-	/**
-	 * Designates how many bamboo must be picked up 
-	 * Only has a value if the bamboo objective is enabled
-	 * 
-	 * 1 designates the bamboo objective is not enabled	 *  
-	 */
-	private int bambooObjective; 
 	/**
 	 * Description about the level 
 	 */
@@ -52,12 +38,10 @@ public class Level implements Serializable {
 	 * @param description  the description for the level
 	 */
 	public Level(World world, String description){ 
-		bambooObjective = -1;
 		this.name = world.getName(); 
 		this.world = world;
 		this.description = description;
-		this.karelCode = new ArrayList<String>(); 
-		this.objectives = new ArrayList<String>(); 
+		this.karelCode = new ArrayList<String>();
 	}
 	/**
 	 * Constructor - create a level by giving all the parts
@@ -67,12 +51,10 @@ public class Level implements Serializable {
 	 * @param objectives
 	 * @param karelCode
 	 */
-	public Level(World world, String description, ArrayList<String> objectives, ArrayList<String> karelCode, int bambooObjective){
+	public Level(World world, String description, ArrayList<String> karelCode){
 		this.world = world;
 		this.description = description;
-		this.objectives = objectives;
 		this.karelCode = karelCode;
-		this.bambooObjective = bambooObjective;
 	}
 	/**
 	 * Gets the name of the level
@@ -100,14 +82,6 @@ public class Level implements Serializable {
 		return this.world;
 	}
 	/**
-	 * Gets the objectives in the level 
-	 * 
-	 * @return  the objectives in the world
-	 */
-	public ArrayList<String> getObjectives(){
-		return this.objectives;
-	}
-	/**
 	 * Gets the Karel Code in the level
 	 * 
 	 * @return  the karel code in the world
@@ -122,13 +96,6 @@ public class Level implements Serializable {
 	 */
 	public String getDescription(){
 		return this.description; 
-	}
-	/**
-	 * Gets the bamboo bojective
-	 * @return the bamboo objective
-	 */
-	public int getBambooObjective(){ 
-		return this.bambooObjective; 
 	}
 	/**
 	 * Change the world in the level
@@ -185,37 +152,6 @@ public class Level implements Serializable {
 		}
 	}
 	/**
-	 * Adds the objective to the ArrayList
-	 * 
-	 * @param objective  the new objective to add
-	 */
-	public void addObjective(String objective){
-		this.objectives.add(objective);
-	}
-	/**
-	 * Removes an objective from the objective list
-	 * 
-	 * @param position  the position of the objective in the list
-	 */
-	public void removeObjective(int position){
-		if(this.objectives.size() > position && position >= 0){
-			this.objectives.remove(position);
-		}
-	}
-	
-	public static void setObjective(boolean obj){
-		findObj = obj;
-	}
-	
-	public static String getObjective(){
-		if (findObj){
-			return "find";
-		} else {
-			return "collect";
-		}
-	}
-	
-	/**
 	 * Overwrites the description. 
 	 * 
 	 * @param description  the new description for the level 
@@ -230,11 +166,5 @@ public class Level implements Serializable {
 	public Iterator<String> listKarelCode(){
 		return this.karelCode.iterator();
 	}
-	
-	/**
-	 * @return Iterator of the objectives.
-	 */
-	public Iterator<String> listObjectives() {
-		return this.objectives.iterator();
-	}
+
 }

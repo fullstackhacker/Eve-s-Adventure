@@ -1164,7 +1164,7 @@ public final class ButtonHandlers {
 	public static final void COLLECT_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Collect)!");
 		// World world = AdventureModeScene.getWorld();
-		Level.setObjective(false);
+		GridWorld.getInstance().getWorld().setFindObj(false);
 		SandboxScene.getInstance().topMenu.collect.setDisable(true);
 		SandboxScene.getInstance().topMenu.find.setDisable(false);
 	}
@@ -1172,7 +1172,7 @@ public final class ButtonHandlers {
 	public static final void FIND_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Find)!");
 		// World world = AdventureModeScene.getWorld();
-		Level.setObjective(true);
+		GridWorld.getInstance().getWorld().setFindObj(true);
 		SandboxScene.getInstance().topMenu.collect.setDisable(false);
 		SandboxScene.getInstance().topMenu.find.setDisable(true);
 	}
