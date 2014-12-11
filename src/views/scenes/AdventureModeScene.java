@@ -59,7 +59,30 @@ public final class AdventureModeScene extends Scene {
 		private AdventureModePane() {
 			this.getStylesheets().add(AdventureModeScene.class.getResource("/sandbox_style.css").toExternalForm());
 
-			buttonSetup();
+			//buttonSetup();
+			
+			PLAY = new Button();
+			PAUSE = new Button();
+			FORWARD = new Button();
+			RESET = new Button();
+			
+			PAUSE.setGraphic(imagePause);
+			FORWARD.setGraphic(imageRight);
+			PLAY.setGraphic(imagePlay);
+			RESET.setGraphic(imageReset);
+			
+			PAUSE.setTooltip(new Tooltip("PAUSE"));
+			FORWARD.setTooltip(new Tooltip("FORWARD"));
+			RESET.setTooltip(new Tooltip("RESET"));
+			PLAY.setTooltip(new Tooltip("PLAY"));
+			
+			PAUSE.setDisable(true);
+			FORWARD.setDisable(true);
+
+			PAUSE.setOnAction(ButtonHandlers::PAUSE_BUTTON_HANDLER);
+			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);
+			PLAY.setOnAction(ButtonHandlers::PLAY_BUTTON_HANDLER);
+			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
 
 			GridPane.setFillWidth(PAUSE, true);
 			GridPane.setHalignment(PAUSE, HPos.CENTER);
@@ -169,9 +192,7 @@ public final class AdventureModeScene extends Scene {
 
 		private void buttonSetup() {
 			PAUSE = new Button();
-			FORWARD = new Button();
-			PLAY = new Button();
-			RESET = new Button();
+			
 			PAUSE.setGraphic(imagePause);
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);

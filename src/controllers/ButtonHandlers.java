@@ -25,6 +25,7 @@ import models.campaign.Level;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import models.gridobjects.items.Bamboo;
+import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import views.MainApp;
@@ -84,65 +85,36 @@ public final class ButtonHandlers {
 		System.out.println("WORLD TO LOAD: " + levelName); 
 		
 		Level level = Load.loadLevel(levelName, null);
-		
-		if(sandbox){
-			SandboxScene.getInstance().setWorld(level.getWorld());
-			//SandboxScene.karelTable.setKarelCode(level.getKarelCode());
-			MainApp.changeScenes(SandboxScene.getInstance()); 
-			try {
-				SandboxScene.SandboxPane.getInstance().add(
-						GameTabs.getInstance(), 0, 1, 1, 3);
-				SandboxScene.SandboxPane.getInstance().add(
-						KarelTable.getInstance(), 1, 1, 1, 3);
-				SandboxScene.SandboxPane.getInstance().add(
-						ProTips.getInstance(), 0, 4, 2, 1);
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 10; j++) {
-						GridWorld.gridButtons[i][j].setDisable(false);
-					}
+	
+		SandboxScene.getInstance().setWorld(level.getWorld());
+		//SandboxScene.karelTable.setKarelCode(level.getKarelCode());
+		MainApp.changeScenes(SandboxScene.getInstance()); 
+		try {
+			SandboxScene.SandboxPane.getInstance().add(
+					GameTabs.getInstance(), 0, 1, 1, 3);
+			SandboxScene.SandboxPane.getInstance().add(
+					KarelTable.getInstance(), 1, 1, 1, 3);
+			SandboxScene.SandboxPane.getInstance().add(
+					ProTips.getInstance(), 0, 4, 2, 1);
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 10; j++) {
+					GridWorld.gridButtons[i][j].setDisable(false);
 				}
-				SandboxScene.SandboxPane.getInstance().add(
-						SandboxScene.gridWorld, 3, 3, 4, 2);
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
 			}
-			GameTabs.getInstance().getTabs()
-					.remove(GameTabs.getInstance().CREATURES_TAB);
-			GameTabs.getInstance().getTabs()
-					.remove(GameTabs.getInstance().ITEMS_TAB);
-			GameTabs.getInstance().getTabs()
-					.add(GameTabs.getInstance().CREATURES_TAB);
-			GameTabs.getInstance().getTabs()
-					.add(GameTabs.getInstance().ITEMS_TAB);
-		} else {
-			AdventureModeScene.getInstance().setWorld(level.getWorld());
-			MainApp.changeScenes(AdventureModeScene.getInstance());
-			try {
-				AdventureModeScene.AdventureModePane.getInstance().add(
-						GameTabs.getInstance(), 0, 1, 1, 3);
-				AdventureModeScene.AdventureModePane.getInstance().add(
-						KarelTable.getInstance(), 1, 1, 1, 3);
-				AdventureModeScene.AdventureModePane.getInstance().add(
-						ProTips.getInstance(), 0, 4, 1, 1);
-				for (int i = 0; i < 5; i++) {
-					for (int j = 0; j < 10; j++) {
-						GridWorld.gridButtons[i][j].setDisable(true);
-					}
-				}
-				AdventureModeScene.AdventureModePane.getInstance().add(
-						AdventureModeScene.gridWorld, 3, 3, 4, 2);
-				AdventureModeScene.AdventureModePane.getInstance().add(
-						AdventureModeScene.objective, 1, 4, 1, 1);
+			SandboxScene.SandboxPane.getInstance().add(
+					SandboxScene.gridWorld, 3, 3, 4, 2);
 
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-			GameTabs.getInstance().getTabs()
-					.remove(GameTabs.getInstance().CREATURES_TAB);
-			GameTabs.getInstance().getTabs()
-					.remove(GameTabs.getInstance().ITEMS_TAB);
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
+		GameTabs.getInstance().getTabs()
+				.remove(GameTabs.getInstance().CREATURES_TAB);
+		GameTabs.getInstance().getTabs()
+				.remove(GameTabs.getInstance().ITEMS_TAB);
+		GameTabs.getInstance().getTabs()
+				.add(GameTabs.getInstance().CREATURES_TAB);
+		GameTabs.getInstance().getTabs()
+				.add(GameTabs.getInstance().ITEMS_TAB);
 	}
 
 	public static final void NEW_SESSION_BUTTON_HANDLER(ActionEvent e) {
@@ -208,6 +180,14 @@ public final class ButtonHandlers {
 	public static final void LOAD_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("LOAD_CAMPAIGN_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadCampaignScene.getInstance());
+	}
+	
+	
+	public static final void NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("NEW_CAMPAIGN_BUTTON_HANDLER CALLED");
+		AdventureModeScene.AdventureModePane.getInstance();
+		AdventureModeScene.getInstance();
+		MainApp.changeScenes(AdventureModeScene.getInstance());
 		try {
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					GameTabs.getInstance(), 0, 1, 1, 3);
@@ -224,19 +204,14 @@ public final class ButtonHandlers {
 					AdventureModeScene.gridWorld, 3, 3, 4, 2);
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					AdventureModeScene.objective, 1, 4, 1, 1);
-
 		} catch (Exception e2) {
-			e2.printStackTrace();
+			System.out.println("AdventureMode.add() Exception Caught");
+			//e2.printStackTrace();
 		}
 		GameTabs.getInstance().getTabs()
 				.remove(GameTabs.getInstance().CREATURES_TAB);
 		GameTabs.getInstance().getTabs()
 				.remove(GameTabs.getInstance().ITEMS_TAB);
-	}
-	
-	
-	public static final void NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e){
-		System.out.println("NEW_CAMPAIGN_BUTTON_HANDLER CALLED");
 	}
 	
 	//load campaign 
@@ -245,12 +220,34 @@ public final class ButtonHandlers {
 		
 		String campaignName = LoadCampaignScene.getInstance().getSelectedCampaign();
 		
+		System.out.println("campaignName = " + campaignName);
 		Campaign campaign = Load.loadCampaign(campaignName); 
 		
-		//AdventureModeScene.getInstance(); 
-		//AdventureModeScene.getInstance().setWorld(campaign.getLevels().get(campaign.getCurrentLevel()).getWorld());
 		MainApp.changeScenes(AdventureModeScene.getInstance());
-		
+		try {
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					GameTabs.getInstance(), 0, 1, 1, 3);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					KarelTable.getInstance(), 1, 1, 1, 3);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					ProTips.getInstance(), 0, 4, 1, 1);
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 10; j++) {
+					GridWorld.gridButtons[i][j].setDisable(true);
+				}
+			}
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					AdventureModeScene.gridWorld, 3, 3, 4, 2);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					AdventureModeScene.objective, 1, 4, 1, 1);
+		} catch (Exception e2) {
+			System.out.println("AdventureMode.add() Exception Caught");
+			//e2.printStackTrace();
+		}
+		GameTabs.getInstance().getTabs()
+				.remove(GameTabs.getInstance().CREATURES_TAB);
+		GameTabs.getInstance().getTabs()
+				.remove(GameTabs.getInstance().ITEMS_TAB);
 	}
 
 	public static final void NEW_CAMPAIGN_BUTTON_HANDLER(ActionEvent e) {
@@ -702,14 +699,15 @@ public final class ButtonHandlers {
 	}
 
 	/**
-	 * Popup for if a grid space is not empty Asks to replace object or just
-	 * cancel
+	 * Popup for if bad collision on placement occurs
+	 * Bad collision = Eve & Friend, Bamboo & Tree, Shrub & Tree
+	 * Asks to replace object or just cancel
 	 * 
 	 * @newObject the object the user is trying to put into the square
 	 */
-	public static void popup(String newObject) {
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
+	public static void popup(String newObject, String oldObject) {
+		
+		
 		final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		VBox dialogVbox = new VBox(20);
@@ -734,15 +732,16 @@ public final class ButtonHandlers {
 		REPLACE.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				dialog.close();
-				if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-						|| oldObject.equals("Bamboo"))
+				//Bad collision = Eve & Friend, Bamboo & Tree, Shrub & Tree
+				//remove oldObject
+				if ( (oldObject.equals("Tree") || oldObject.equals("Shrub")
+						|| oldObject.equals("Bamboo")) )
 					RMITEM_BUTTON_HANDLER(null);
-
-				if (oldObject.equals("Friend"))
+				else if (oldObject.equals("Friend"))
 					RMCREATURE_BUTTON_HANDLER(null);
 
-				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setText(newObject);
+				//add newObject
+				Coordinate cords = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 				switch (newObject) {
 				case "Tree":
 					Tree tree = new Tree(4);
@@ -751,7 +750,10 @@ public final class ButtonHandlers {
 					if (GridWorld.getInstance().getWorld() == null)
 						System.out.println("Uninitalized world");
 					GridWorld.getInstance().getWorld().addItem(tree);
-					GridWorld.getInstance().getWorld().printWorld();
+					
+					//front end
+					GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+					                              					.getYCoordinate()].setGraphic(SandboxScene.getTreeI());
 					break;
 				case "Shrub":
 					Shrub shrub = new Shrub(4, false);
@@ -759,8 +761,12 @@ public final class ButtonHandlers {
 							.getXCoordinate(), GridWorld.getYCoordinate()));
 					if (GridWorld.getInstance().getWorld() == null)
 						System.out.println("Uninitalized world");
+					
 					GridWorld.getInstance().getWorld().addItem(shrub);
 					GridWorld.getInstance().getWorld().printWorld();
+					//front
+					GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+					                              					.getYCoordinate()].setGraphic(SandboxScene.getShrubI());
 					break;
 				case "Bamboo":
 					Bamboo bamboo = new Bamboo(4);
@@ -768,11 +774,13 @@ public final class ButtonHandlers {
 							.getXCoordinate(), GridWorld.getYCoordinate()));
 					if (GridWorld.getInstance().getWorld() == null)
 						System.out.println("Uninitalized world");
+					
 					GridWorld.getInstance().getWorld().addItem(bamboo);
 					GridWorld.getInstance().getWorld().printWorld();
+					//front
+					GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+					                              					.getYCoordinate()].setGraphic(SandboxScene.getBambooI());
 				case "Friend":
-					Coordinate cords = new Coordinate(GridWorld
-							.getXCoordinate(), GridWorld.getYCoordinate());
 					Creature Friend = new Creature("Friend", cords);
 					Friend.setCoordinates(new Coordinate(GridWorld
 							.getXCoordinate(), GridWorld.getYCoordinate()));
@@ -780,6 +788,23 @@ public final class ButtonHandlers {
 						System.out.println("Uninitalized world");
 					GridWorld.getInstance().getWorld().addCreature(Friend);
 					GridWorld.getInstance().getWorld().printWorld();
+					GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+					                              					.getYCoordinate()].setGraphic(SandboxScene.getFriendI());
+				case "Eve":
+					Creature eve = GridWorld.getInstance().getWorld().getEve();
+					GridWorld.getInstance().getWorld().findEve();
+					Coordinate eveLocation = eve.getCoordinates();
+					eve.setCoordinates(cords);
+					GridWorld.getInstance().getWorld().addCreature(eve);
+					
+					
+					// front end
+					GridWorld.gridButtons[cords.getX()][cords
+							.getY()].setGraphic(GridWorld.gridButtons[eveLocation
+							.getX()][eveLocation.getY()].getGraphic());
+					GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()]
+							.setGraphic(null);
+					GridWorld.getInstance().getWorld().removeCreature(eveLocation);
 				default:
 					break;
 				}
@@ -955,14 +980,22 @@ public final class ButtonHandlers {
 				.getYCoordinate()].setId("rightWall");
 	}
 
+	//shrub on shrub: nothing
+	//shrub on Eve: can co-exist, add shrub
+	//shrub on Friend: can co-exist, add shrub
+	//shrub on bamboo: add shrub that contains bamboo
+	//shrub on tree: cannot co-exist, ask to replace
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("SHRUB_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Eve!"))
-			EvePop();
-
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub")
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		//if there is a creature
+		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
+			continue; //would change graphic to something where you see both of them
+		//if Item is here
+		if (!GridWorld.getInstance().getWorld().hasItem(currentPosition)){
+			Item oldItem = GridWorld.getInstance().getWorld()
+					.ItemAt(currentPosition);
+			if (oldObject.equals("Tree") || oldObject.equals("Shrub")
 				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
 			popup("Shrub");
 		} else
@@ -976,7 +1009,7 @@ public final class ButtonHandlers {
 		GridWorld.getInstance().getWorld().addItem(shrub);
 		GridWorld.getInstance().getWorld().printWorld();
 	}
-
+}
 	public static final void TREE_BUTTON_HANDLER(ActionEvent e) {
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].getText();
@@ -1034,6 +1067,7 @@ public final class ButtonHandlers {
 				GridWorld.getYCoordinate());
 		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
 			return;
+		//backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
 		// remove from frontend
 		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()]
@@ -1053,20 +1087,24 @@ public final class ButtonHandlers {
 		// she is in the world somewhere, find her
 		Creature eve = GridWorld.getInstance().getWorld().getEve();
 		Coordinate eveLocation = eve.getCoordinates();
-
-		System.out.println("Location " + eveLocation);
-		System.out.println("current " + currentPosition);
-
-		// check if there is something in the new space already
+		// check if there is creature in the new space already
 		if (GridWorld.getInstance().getWorld().hasCreature(currentPosition)) {
 			Creature creature = GridWorld.getInstance().getWorld()
 					.creatureAt(currentPosition);
 			if (creature.isEve()) {
 				return;
 			} else { // friend is there
-				return;
+				popup("Eve","Friend");
 			}
-		} else {
+		}// check if there is an Item in the new space already
+		else if (GridWorld.getInstance().getWorld().hasItem(currentPosition)) {
+			Item item = GridWorld.getInstance().getWorld().itemAt(currentPosition);
+			if (item.getName() == "Shrub"){
+				popup("Eve", "shrub");
+			}
+		}
+		//That space was empty, make the change
+		else {
 			eve.setCoordinates(currentPosition);
 			GridWorld.getInstance().getWorld().addCreature(eve);
 			GridWorld.getInstance().getWorld().removeCreature(eveLocation);
@@ -1083,13 +1121,13 @@ public final class ButtonHandlers {
 
 	public static final void FRIENDS_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("FRIENDS_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
+		// String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+		//		.getYCoordinate()].getText();
 
-		if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Eve!")) {
-			popup("Friend");
-		} else
+		//if (oldObject.equals("Tree") || oldObject.equals("Shrub")
+			///	|| oldObject.equals("Bamboo") || oldObject.equals("Eve!")) {
+			//popup("Friend");
+		//} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getFriendI());
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
