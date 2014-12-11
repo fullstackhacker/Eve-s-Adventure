@@ -32,6 +32,7 @@ import views.scenes.AdventureModeScene;
 import views.scenes.SandboxScene;
 import views.tabs.GameTabs;
 import views.tabs.InstructionsTab;
+import views.tips.ProTips;
 
 /**
  * 
@@ -64,8 +65,18 @@ public final class ButtonHandlers {
 		System.out.println("NEW_SESSION_BUTTON_HANDLER CALLED");
 		if (sandbox) {
 			MainApp.changeScenes(SandboxScene.getInstance());
+			SandboxScene.SandboxPane.getInstance().add(GameTabs.getInstance(), 0, 1, 1, 3);
+			SandboxScene.SandboxPane.getInstance().add(KarelTable.getInstance(), 1, 1, 1, 3);
+			SandboxScene.SandboxPane.getInstance().add(ProTips.getInstance(), 0, 4, 2, 1);
+			//GameTabs.getInstance().getTabs().add(GameTabs.getInstance().CREATURES_TAB);
+			//GameTabs.getInstance().getTabs().add(GameTabs.getInstance().ITEMS_TAB);
 		} else {
 			MainApp.changeScenes(AdventureModeScene.getInstance());
+			AdventureModeScene.AdventureModePane.getInstance().add(GameTabs.getInstance(), 0, 1, 1, 3);
+			AdventureModeScene.AdventureModePane.getInstance().add(KarelTable.getInstance(), 1, 1, 1, 3);
+			AdventureModeScene.AdventureModePane.getInstance().add(ProTips.getInstance(), 0, 4, 2, 1);
+			//GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().CREATURES_TAB);
+			//GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().ITEMS_TAB);
 		}
 	}
 
@@ -714,7 +725,13 @@ public final class ButtonHandlers {
 			System.out.println("karelCode is empty!");
 			return;
 		}
-		World world = AdventureModeScene.getWorld();
+		World world = null;
+		if(!sandbox){
+			world = AdventureModeScene.getWorld();
+		}else{
+			world = SandboxScene.getWorld();
+		}
+		
 		System.out.println(KarelTable.getInstance().getKarelCode());
 		Interpreter interpreter = new Interpreter(karelCode, world);
 		world.printWorld();

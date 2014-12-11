@@ -22,6 +22,18 @@ import views.grid.Rows;
 import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
+import javafx.geometry.HPos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import controllers.ButtonHandlers;
 
 public final class SandboxScene extends Scene {
@@ -29,10 +41,16 @@ public final class SandboxScene extends Scene {
 	private static World world;
 
 	private static GridWorld gridWorld;
-	
-	//public static ToggleButton Eve = new ToggleButton("Eve!");
-	
+
+	public static GameTabs gametabs = null;
+	public static ProTips protips = null;
+	public static KarelTable karelTable = null;
+
+	public static ToggleButton Eve = new ToggleButton("Eve!");
+
 	public static TopMenu topMenu = null;
+
+	public static final class SandboxPane extends GridPane {
 	
 	public static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
 	public static ImageView EveRight = new ImageView(new Image("./Images/eve_right.png"));
@@ -41,7 +59,6 @@ public final class SandboxScene extends Scene {
 	public static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
 	public static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
 	
-	private static final class SandboxPane extends GridPane {
 
 		private static SandboxPane instanceOfMainMenuPane = null;
 
@@ -73,10 +90,10 @@ public final class SandboxScene extends Scene {
 			GridPane.setHalignment(RESET, HPos.CENTER);
 
 			topMenu = TopMenu.getInstance();
-			GameTabs gametabs = GameTabs.getInstance();
+			gametabs = GameTabs.getInstance();
 			gametabs.setId("gametabs");
-			ProTips protips = ProTips.getInstance();
-			KarelTable karelTable = KarelTable.getInstance();
+			protips = ProTips.getInstance();
+			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			gridWorld = GridWorld.getInstance();
 
@@ -94,7 +111,6 @@ public final class SandboxScene extends Scene {
 			this.add(rows, 2, 3, 1, 2);
 			this.add(gridWorld, 3, 3, 4, 2);
 			this.add(protips, 0, 4, 2, 1);
-
 			GridPane.setHalignment(rows, HPos.RIGHT);
 
 			ColumnConstraints column1 = new ColumnConstraints();
@@ -143,8 +159,11 @@ public final class SandboxScene extends Scene {
 			// world.printWorld();
 			//
 			// Label Eve = new Label("Eve!");
-			//GridPane.setHalignment(Eve, HPos.CENTER);
+			// GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
+			GridWorld.gridButtons[2][2].setText("Eve!");
+			Eve.setVisible(true);
+
 			//GridWorld.gridButtons[2][2].setText("Eve!");
 			GridWorld.gridButtons[2][2].setText("");
 			GridWorld.gridButtons[2][2].setGraphic(Bush);
@@ -188,14 +207,23 @@ public final class SandboxScene extends Scene {
 			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
 		}
 
-		private static SandboxPane getInstance() {
+		public static SandboxPane getInstance() {
 			return (instanceOfMainMenuPane == null) ? instanceOfMainMenuPane = new SandboxPane()
 					: instanceOfMainMenuPane;
 		}
+		
+		/*@SuppressWarnings("unused")
+		public static void addToScene(Node child, int i, int j, int k, int l){
+			
+		}*/
 	}
 
 	private static SandboxScene instanceOfSandboxScene = null;
 
+	/*public static SandboxPane getSandbox(){
+		return 
+	}*/
+	
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
