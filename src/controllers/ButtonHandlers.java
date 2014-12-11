@@ -785,14 +785,17 @@ public final class ButtonHandlers {
 		World world = null;
 		if (!sandbox) {
 			world = AdventureModeScene.getWorld();
-		} else {
+			AdventureModeScene.setInterpreter(new Interpreter(karelCode, world));
+			System.out.println(KarelTable.getInstance().getKarelCode());
+			world.printWorld();
+			AdventureModeScene.getInterpreter().start(); // starts the code
+		}else{
 			world = SandboxScene.getWorld();
+			SandboxScene.setInterpreter(new Interpreter(karelCode, world));
+			System.out.println(KarelTable.getInstance().getKarelCode());
+			world.printWorld();
+			SandboxScene.getInterpreter().start(); // starts the code
 		}
-
-		System.out.println(KarelTable.getInstance().getKarelCode());
-		Interpreter interpreter = new Interpreter(karelCode, world);
-		world.printWorld();
-		interpreter.start(); // starts the code
 		world.printWorld();
 		// do{
 		// interpreter.executeOne();
@@ -801,6 +804,11 @@ public final class ButtonHandlers {
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {
+		if(!sandbox){
+			AdventureModeScene.getInterpreter().reset();
+		}else{
+			SandboxScene.getInterpreter().reset();
+		}
 		System.out.println("RESET_BUTTON_HANDLER CALLED");
 	}
 

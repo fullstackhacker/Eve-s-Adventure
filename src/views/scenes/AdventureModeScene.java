@@ -4,6 +4,7 @@ import models.Coordinate;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import controllers.ButtonHandlers;
+import controllers.Interpreter;
 import views.MainApp;
 import views.ATopMenu;
 import views.grid.Cols;
@@ -34,6 +35,8 @@ public final class AdventureModeScene extends Scene {
 	 public static GameTabs gametabs = null;
 	 public static ProTips protips = null;
 	 public static KarelTable karelTable = null;
+	
+	private static Interpreter interpreter;
 	
 	public static ToggleButton Eve = new ToggleButton("Eve!");
 
@@ -183,7 +186,7 @@ public final class AdventureModeScene extends Scene {
 		}
 	}
 
-	private static AdventureModeScene instanceOfSandboxScene = new AdventureModeScene(AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT);
+	private static AdventureModeScene instanceOfAdventureModeScene = new AdventureModeScene(AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT);
 	
 	private AdventureModeScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
@@ -206,6 +209,15 @@ public final class AdventureModeScene extends Scene {
 	}
 
 	public static AdventureModeScene getInstance() {
-		return instanceOfSandboxScene;
+		return (AdventureModeScene.instanceOfAdventureModeScene == null) ? instanceOfAdventureModeScene = new AdventureModeScene(
+				AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH,
+				MainApp.WINDOW_HEIGHT) : instanceOfAdventureModeScene;
+	}
+	public static Interpreter getInterpreter() {
+		return interpreter;
+	}
+
+	public static void setInterpreter(Interpreter interpreter) {
+		AdventureModeScene.interpreter = interpreter;
 	}
 }

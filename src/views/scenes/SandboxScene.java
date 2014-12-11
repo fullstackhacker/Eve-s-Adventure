@@ -1,5 +1,7 @@
 package views.scenes;
 
+import java.util.ArrayList;
+
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,6 +37,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import controllers.ButtonHandlers;
+import controllers.Interpreter;
 
 public final class SandboxScene extends Scene {
 
@@ -46,8 +49,12 @@ public final class SandboxScene extends Scene {
 	public static ProTips protips = null;
 	public static KarelTable karelTable = null;
 
-	public static ToggleButton Eve = new ToggleButton("Eve!");
+	//public static ToggleButton Eve = new ToggleButton("Eve!");
 
+	private static Interpreter interpreter;
+	
+	//public static ToggleButton Eve = new ToggleButton("Eve!");
+	
 	public static TopMenu topMenu = null;
 	
 	public static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
@@ -161,12 +168,15 @@ public final class SandboxScene extends Scene {
 			// Label Eve = new Label("Eve!");
 			// GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
-			//GridWorld.gridButtons[2][2].setText("Eve!");
-			Eve.setVisible(true);
+
+			GridWorld.gridButtons[2][2].setText("Eve!");
+			//Eve.setVisible(true);
 
 			//GridWorld.gridButtons[2][2].setText("Eve!");
 			GridWorld.gridButtons[2][2].setText("");
 			GridWorld.gridButtons[2][2].setGraphic(EveDown);
+			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+			interpreter = new Interpreter(karelCode, getWorld());
 			//imageEve.setId("Eve!");
 			//GridWorld.gridButtons[2][2].setGraphic(imageEve);
 			//Eve.setVisible(true);
@@ -245,5 +255,13 @@ public final class SandboxScene extends Scene {
 
 	public static SandboxScene getInstance() {
 		return instanceOfSandboxScene;
+	}
+
+	public static Interpreter getInterpreter() {
+		return interpreter;
+	}
+
+	public static void setInterpreter(Interpreter interpreter) {
+		SandboxScene.interpreter = interpreter;
 	}
 }
