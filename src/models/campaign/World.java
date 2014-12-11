@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.Stack;
 
 import models.Coordinate;
 import models.gridobjects.GridObject;
@@ -534,7 +533,7 @@ public class World implements Serializable {
 	 * @return true iff the specified location has an item
 	 */
 	public boolean hasItem(Coordinate coordinate) {
-		verifyCoordinate(coordinate);
+		if(!verifyCoordinate(coordinate)) throw new IllegalValueException("Illegal Coordinates");
 		return this.world[coordinate.getY()][coordinate.getX()].hasItem();
 	}
 
@@ -548,7 +547,7 @@ public class World implements Serializable {
 	 * @return true iff the specified location has a creature
 	 */
 	public boolean hasCreature(Coordinate coordinate) {
-		verifyCoordinate(coordinate);
+		if(!verifyCoordinate(coordinate)) return false;;
 		return this.world[coordinate.getY()][coordinate.getX()].hasCreature();
 	}
 

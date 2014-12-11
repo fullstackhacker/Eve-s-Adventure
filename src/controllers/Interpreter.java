@@ -5,13 +5,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
-import javafx.scene.control.ToggleButton;
 import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.Level;
 import models.campaign.World;
-import models.gridobjects.creatures.Creature;
-import views.grid.GridWorld;
+import models.gridobjects.items.Bamboo;
+import models.gridobjects.items.Shrub;
+import models.gridobjects.items.Tree;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
 import views.scenes.AdventureModeScene;
@@ -40,7 +40,7 @@ public class Interpreter {
 	 */
 	private World startWorld;
 
-	private ToggleButton[][] gridButtons;
+	//private ToggleButton[][] gridButtons;
 
 	private Timer timer;
 
@@ -62,16 +62,7 @@ public class Interpreter {
 		GridWorld.getInstance().setWorld(this.world);
 		this.startWorld = world.copyWorld();
 		this.currentLoopCounter = 0;
-		this.currentWhileResult = false;
-		this.gridButtons = new ToggleButton[5][10];
-		for (int row = 0; row < this.gridButtons.length; row++) {
-			for (int col = 0; col < this.gridButtons.length; col++) {
-				this.gridButtons[row][col] = new ToggleButton();
-				this.gridButtons[row][col]
-						.setGraphic(GridWorld.gridButtons[row][col]
-								.getGraphic());
-			}
-		}
+		this.currentWhileResult = false; 
 	}
 
 	/**
@@ -127,19 +118,54 @@ public class Interpreter {
 		
 		System.out.println("----- RESET WORLD -----");
 		this.world.printWorld();
-
-		for (int row = 0; row < this.gridButtons.length; row++) {
-			for (int col = 0; col < this.gridButtons[row].length; col++) {
-				// going to be swapped with the images
-				try{
-					GridWorld.gridButtons[row][col].setGraphic(this.gridButtons[row][col].getGraphic());
+		
+		//based on world, reset the grid
+		for(int row = 0; row < this.world.getHeight(); row++){
+			for(int col = 0; col < this.world.getWidth(); col++){
+				//current position 
+				Coordinate currentPosition = new Coordinate(col, row); 
+			
+				//clear the current graphic
+				GridWorld.gridButtons[col][row].setGraphic(null);
+				
+				//set graphic to creature
+				if(this.world.hasCreature(currentPosition) && this.world.creatureAt(currentPosition).isEve()){
+					switch(this.world.getEve().getDirection()){
+					case Coordinate.UP: 
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveDownI());
+						break;
+					case Coordinate.DOWN: 
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveUpI());
+						break;
+					case Coordinate.LEFT:
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveRightI());
+						break;
+					case Coordinate.RIGHT: 
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveLeftI()); 
+						break;
+					default: 
+						throw new IllegalValueException("Eve is facing an illegal direction");
+					}
 				}
-				catch(NullPointerException e){
-					GridWorld.gridButtons[row][col].setGraphic(null);
+				else if(this.world.hasCreature(currentPosition)){
+					GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getFriendI());
 				}
+				else if(this.world.hasItem(currentPosition)){
+					if(this.world.itemAt(currentPosition) instanceof Bamboo){
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getBambooI());
+					}
+					else if(this.world.itemAt(currentPosition) instanceof Shrub){
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getShrubI()); 
+					}
+					else if(this.world.itemAt(currentPosition) instanceof Tree){
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getTreeI());
+					}
+				}
+				//
+				
 			}
 		}
-
+		
 		if (timer != null) {
 			timer.cancel();
 		}
