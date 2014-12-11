@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.transform.Rotate;
-import javafx.util.Duration;
-import views.grid.AGridWorld;
-import views.karel.KarelTable;
-import exceptions.IllegalValueException;
 import models.Coordinate;
 import models.campaign.KarelCode;
 import models.campaign.Level;
-import models.campaign.Tips;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
+import views.grid.AGridWorld;
+import views.grid.GridWorld;
+import views.karel.KarelTable;
+import exceptions.IllegalValueException;
 
 /**
  * An object to go through and execute the Karel code
@@ -38,6 +34,12 @@ public class Interpreter {
 	 * The world that the code should be executed in
 	 */
 	private World world;
+	/**
+	 * The original state of the world
+	 */
+	private World startWorld;
+	
+	private ToggleButton[][] gridButtons; 
 	
 	private Timer timer;
 
@@ -53,6 +55,7 @@ public class Interpreter {
 		this.karelCode = karelCode;
 		this.world = world;
 		AGridWorld.getInstance().setWorld(this.world);
+		this.startWorld = world.copyWorld();
 	}
 
 	/**
@@ -98,6 +101,13 @@ public class Interpreter {
 	 */
 	public void reset() {
 		this.activeCodeBlock = 0;
+		this.world.overwrite(startWorld);
+		for(int row = 0; row < gridButtons.length; row++){
+			for(int col = 0; col < gridButtons[row].length; col++){
+				//going to be swapped with the images
+				GridWorld.gridButtons[row][col].setText(gridButtons[row][col].getText());
+			}
+		}
 	}
 
 	/**
@@ -115,6 +125,14 @@ public class Interpreter {
 	 */
 	public void changeKarelCode(ArrayList<String> karelCode) {
 		this.karelCode = karelCode;
+	}
+	
+	public World getWorld(){ 
+		return this.world; 
+	}
+	
+	public World getStartWorld(){
+		return this.startWorld; 
 	}
 
 	public void start() {
@@ -368,6 +386,24 @@ public class Interpreter {
 		return Integer.parseInt(number);
 	}
 
+	
+	/* Reverser Instruction */
+	public void reverseInstruction(){
+		switch(this.karelCode.get(this.activeCodeBlock)){
+		case KarelCode.MOVE:
+		case KarelCode.TURNRIGHT: 
+		case KarelCode.SLEEP: 
+		case KarelCode.WAKEUP: 
+		case KarelCode.PUTBAMBOO:
+		case KarelCode.PICKBAMBOO: 
+			//reverseOperation(); 
+			return;
+		case KarelCode.ENDIF:
+		case KarelCode.ENDELSE: 
+			//reverseConditional();
+		}
+	}
+	
 	public static void main(String[] args) {
 		World world = new World("test_world", 5, 5);
 		Level level = new Level(world, "testing the parser");
@@ -384,9 +420,10 @@ public class Interpreter {
 			return;
 
 		world.printWorld();
-		interpreter.executeOne();
+		interpreter.start(); 
 		System.out.println("Active Code Block: " + interpreter.activeCodeBlock
 				+ "total size: " + level.getKarelCode().size());
 		world.printWorld();
+		
 	}
 }
