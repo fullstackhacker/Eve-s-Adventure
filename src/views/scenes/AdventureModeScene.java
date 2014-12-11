@@ -99,7 +99,9 @@ public final class AdventureModeScene extends Scene {
 			protips = ProTips.getInstance();
 			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
-			gridWorld = GridWorld.getInstance();
+			if(gridWorld == null){
+				gridWorld = GridWorld.getInstance();
+			}
 			objective = Objective.getInstance();
 
 			Rows rows = Rows.getInstance();
@@ -155,21 +157,22 @@ public final class AdventureModeScene extends Scene {
 			this.getRowConstraints().addAll(row1, row2, row3, row4, row5);
 
 			// BACKEND-FRONTEND Integration
-			world = new World("SandboxWorld", 10, 5);
-			GridWorld.getInstance().setWorld(world);
-			world.addCreature(new Creature("Eve", new Coordinate(2, 2)));
-			// world.printWorld();
-			// Coordinate coordEve = new Coordinate(1,1);
-			// Creature CreatureEve = new Creature("Eve", coordEve);
-			// world.addCreature(CreatureEve);
-			// world.printWorld();
-			//
-			// Label Eve = new Label("Eve!");
-			//GridPane.setHalignment(Eve, HPos.CENTER);
-			System.out.println("AdventureMode Scene things");
-			//GridWorld.gridButtons[2][2].setText("Eve!");
-			Eve.setVisible(true);
-			
+			if(world != null){
+				world = new World("SandboxWorld", 10, 5);
+				GridWorld.getInstance().setWorld(world);
+				world.addCreature(new Creature("Eve", new Coordinate(2, 2)));
+				// world.printWorld();
+				// Coordinate coordEve = new Coordinate(1,1);
+				// Creature CreatureEve = new Creature("Eve", coordEve);
+				// world.addCreature(CreatureEve);
+				// world.printWorld();
+				//
+				// Label Eve = new Label("Eve!");
+				//GridPane.setHalignment(Eve, HPos.CENTER);
+				System.out.println("AdventureMode Scene things");
+				//GridWorld.gridButtons[2][2].setText("Eve!");
+				Eve.setVisible(true);
+			}
 			
 			//
 			// //world.moveEveEast();
@@ -227,6 +230,8 @@ public final class AdventureModeScene extends Scene {
 
 	public static void setWorld(World world1) {
 		world = world1;
+		gridWorld = GridWorld.getInstance();
+		gridWorld.setWorld(world1);
 	}
 
 	public void setGridWorld(GridWorld gridworld1) {
