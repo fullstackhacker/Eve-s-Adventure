@@ -989,7 +989,7 @@ public final class ButtonHandlers {
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		//if there is a creature, would change graphic to something where you see both of them
 		//if there is item
-		if (!GridWorld.getInstance().getWorld().hasItem(currentPosition)){
+		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 			
 			if (oldObject.getName().equals("Tree")) {
