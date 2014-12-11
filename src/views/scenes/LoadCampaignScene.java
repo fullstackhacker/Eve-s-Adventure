@@ -48,7 +48,7 @@ public class LoadCampaignScene extends Scene {
 
 			LOAD_SESSION_BUTTON
 					.setOnAction(ButtonHandlers::LOAD_ADVENTURE_SESSION_BUTTON_HANDLER);
-			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLER);
+			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLERA);
 		}
 
 		private void setupObjects() {
