@@ -6,7 +6,6 @@ import models.gridobjects.creatures.Creature;
 import controllers.ButtonHandlers;
 import views.MainApp;
 import views.ATopMenu;
-import views.grid.AGridWorld;
 import views.grid.Cols;
 import views.grid.GridWorld;
 import views.grid.Rows;
@@ -30,7 +29,7 @@ public final class AdventureModeScene extends Scene {
 
 	private static World world;
 
-	private static AGridWorld gridWorld;
+	public static GridWorld gridWorld;
 	
 	 public static GameTabs gametabs = null;
 	 public static ProTips protips = null;
@@ -73,7 +72,7 @@ public final class AdventureModeScene extends Scene {
 			protips = ProTips.getInstance();
 			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
-			gridWorld = AGridWorld.getInstance();
+			gridWorld = GridWorld.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -140,7 +139,7 @@ public final class AdventureModeScene extends Scene {
 			// Label Eve = new Label("Eve!");
 			//GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
-			GridWorld.gridButtons[2][2].setText("Eve!");
+			//GridWorld.gridButtons[2][2].setText("Eve!");
 			Eve.setVisible(true);
 			
 			
@@ -194,7 +193,7 @@ public final class AdventureModeScene extends Scene {
 		world = world1;
 	}
 
-	public static void setGridWorld(AGridWorld gridworld1) {
+	public static void setGridWorld(GridWorld gridworld1) {
 		gridWorld = gridworld1;
 	}
 
@@ -202,7 +201,7 @@ public final class AdventureModeScene extends Scene {
 		return world;
 	}
 
-	public static AGridWorld getGridWorld() {
+	public static GridWorld getGridWorld() {
 		return gridWorld;
 	}
 

@@ -40,7 +40,7 @@ public final class SandboxScene extends Scene {
 
 	private static World world;
 
-	private static GridWorld gridWorld;
+	public static GridWorld gridWorld;
 
 	public static GameTabs gametabs = null;
 	public static ProTips protips = null;
