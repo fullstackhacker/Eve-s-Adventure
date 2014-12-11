@@ -156,8 +156,8 @@ public final class ButtonHandlers {
 						GameTabs.getInstance(), 0, 1, 1, 3);
 				AdventureModeScene.AdventureModePane.getInstance().add(
 						KarelTable.getInstance(), 1, 1, 1, 3);
-				AdventureModeScene.AdventureModePane.getInstance().add(
-						ProTips.getInstance(), 0, 4, 1, 1);
+				/*AdventureModeScene.AdventureModePane.getInstance().add(
+						ProTips.getInstance(), 0, 4, 1, 1);*/
 				for (int i = 0; i < 5; i++) {
 					for (int j = 0; j < 10; j++) {
 						GridWorld.gridButtons[i][j].setDisable(true);
@@ -166,7 +166,7 @@ public final class ButtonHandlers {
 				AdventureModeScene.AdventureModePane.getInstance().add(
 						AdventureModeScene.gridWorld, 3, 3, 4, 2);
 				AdventureModeScene.AdventureModePane.getInstance().add(
-						AdventureModeScene.objective, 1, 4, 1, 1);
+						AdventureModeScene.objective, 0, 4, 1, 1);
 			} catch (Exception e2) {
 				System.out.println("AdventureMode.add() Exception Caught");
 				//e2.printStackTrace();
@@ -185,17 +185,38 @@ public final class ButtonHandlers {
 	
 	
 	public static final void NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e){
-		System.out.println("NEW_CAMPAIGN_BUTTON_HANDLER CALLED");
-		AdventureModeScene.AdventureModePane.getInstance();
-		AdventureModeScene.getInstance();
+		System.out.println("NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER");
+		
+		String campaignName = NewCampaignScene.getInstance().sessionsListView.getSelectionModel().getSelectedItem();
+		
+		System.out.println("campaignName = " + campaignName);
+		Campaign campaign = Load.loadCampaign(campaignName); 
+		
+		if(campaign == null){
+			System.out.println("campaign == null");
+			return;
+		}
+		
+		if(campaign.getLevels() != null && !campaign.getLevels().isEmpty()){
+			System.out.println(campaign.getLevels().size());
+			if(campaign.getLevels().get(0) == null){
+				System.out.println("ERROR: getWorld == null");
+				return;
+			}
+			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
+			GridWorld.getInstance().setWorld(campaign.getLevels().get(0).getWorld());
+		}else{
+			System.out.println("ERROR: campaign.getLevel == null");
+		}
+		
 		MainApp.changeScenes(AdventureModeScene.getInstance());
 		try {
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					GameTabs.getInstance(), 0, 1, 1, 3);
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					KarelTable.getInstance(), 1, 1, 1, 3);
-			AdventureModeScene.AdventureModePane.getInstance().add(
-					ProTips.getInstance(), 0, 4, 1, 1);
+			/*AdventureModeScene.AdventureModePane.getInstance().add(
+					ProTips.getInstance(), 0, 4, 1, 1);*/
 			for (int i = 0; i < 5; i++) {
 				for (int j = 0; j < 10; j++) {
 					GridWorld.gridButtons[i][j].setDisable(true);
@@ -204,7 +225,7 @@ public final class ButtonHandlers {
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					AdventureModeScene.gridWorld, 3, 3, 4, 2);
 			AdventureModeScene.AdventureModePane.getInstance().add(
-					AdventureModeScene.objective, 1, 4, 1, 1);
+					AdventureModeScene.objective, 0, 4, 1, 1);
 		} catch (Exception e2) {
 			System.out.println("AdventureMode.add() Exception Caught");
 			//e2.printStackTrace();
@@ -230,6 +251,11 @@ public final class ButtonHandlers {
 				System.out.println("ERROR: getWorld == null");
 				return;
 			}
+			
+			if(campaign.getLevels().get(0).getKarelCode() != null){
+				System.out.println(campaign.getLevels().get(0).getKarelCode());
+				KarelTable.getInstance().setKarelCode(campaign.getLevels().get(0).getKarelCode());
+			}
 			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
 			GridWorld.getInstance().setWorld(campaign.getLevels().get(0).getWorld());
 		}else{
@@ -242,8 +268,8 @@ public final class ButtonHandlers {
 					GameTabs.getInstance(), 0, 1, 1, 3);
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					KarelTable.getInstance(), 1, 1, 1, 3);
-			AdventureModeScene.AdventureModePane.getInstance().add(
-					ProTips.getInstance(), 0, 4, 1, 1);
+			/*AdventureModeScene.AdventureModePane.getInstance().add(
+					ProTips.getInstance(), 0, 4, 1, 1);*/
 			for (int i = 0; i < 5; i++) {
 				for (int j = 0; j < 10; j++) {
 					GridWorld.gridButtons[i][j].setDisable(true);
@@ -252,7 +278,7 @@ public final class ButtonHandlers {
 			AdventureModeScene.AdventureModePane.getInstance().add(
 					AdventureModeScene.gridWorld, 3, 3, 4, 2);
 			AdventureModeScene.AdventureModePane.getInstance().add(
-					AdventureModeScene.objective, 1, 4, 1, 1);
+					AdventureModeScene.objective, 0, 4, 1, 1);
 		} catch (Exception e2) {
 			System.out.println("AdventureMode.add() Exception Caught");
 			//e2.printStackTrace();
@@ -271,6 +297,11 @@ public final class ButtonHandlers {
 	public static final void CANCEL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("CANCEL_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadMenuScene.getInstance());
+	}
+	
+	public static final void CANCEL_BUTTON_HANDLERA(ActionEvent e){
+		System.out.println("CANCEL_BUTTON_HANDLERA CALLED");
+		MainApp.changeScenes(LoadMenuSceneA.getInstance());
 	}
 
 	public static final void BACK_HOMESCREEN_BUTTON_HANDLER(ActionEvent e) {
@@ -1005,10 +1036,9 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 			
-			if (oldObject instanceof Tree)
+			if (oldObject.getName().equals("Tree")) {
 			popup("Shrub", "Tree");
-		} 
-		else{
+		} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getShrubI());
 		Shrub shrub = new Shrub(4, false);
@@ -1016,12 +1046,10 @@ public final class ButtonHandlers {
 				GridWorld.getYCoordinate()));
 		if (GridWorld.getInstance().getWorld() == null)
 			System.out.println("Uninitalized world");
-		
 		GridWorld.getInstance().getWorld().addItem(shrub);
 		GridWorld.getInstance().getWorld().printWorld();
 	}
 }
-
 	//Tree on Eve - go
 	//Tree on Friend - go
 	//Tree on Shrub - ask to replace
@@ -1033,9 +1061,9 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-			if (oldObject instanceof Shrub)
-				popup("Tree", "Shrub");
-			else if (oldObject instanceof Bamboo)
+			if (oldObject.getName().equals("Shrub"))
+			popup("Tree", "Shrub");
+			else if (oldObject.equals("Bamboo"))
 				popup("Tree", "Bamboo");
 		} 
 			else {
@@ -1074,7 +1102,7 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-			if (oldObject instanceof Tree)
+			if (oldObject.getName().equals("Tree"))
 				popup("Bamboo", "Tree");
 			if (oldObject instanceof Shrub)
 				popup("Bamboo", "Shrub");
@@ -1136,7 +1164,7 @@ public final class ButtonHandlers {
 		}// check if there is an Item in the new space already
 		else if (GridWorld.getInstance().getWorld().hasItem(currentPosition)) {
 			Item item = GridWorld.getInstance().getWorld().itemAt(currentPosition);
-			if (item instanceof Shrub){
+			if (item.getName() == "Shrub"){
 				popup("Eve", "shrub");
 			}
 		}

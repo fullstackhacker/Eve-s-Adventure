@@ -17,6 +17,10 @@ import javafx.scene.layout.VBox;
 
 public class NewCampaignScene extends Scene {
 
+	public static ObservableList<String> sessions;
+	
+	public static ListView<String> sessionsListView;
+	
 	private static final class NewCampaignPane extends BorderPane{
 		
 		/**
@@ -25,9 +29,6 @@ public class NewCampaignScene extends Scene {
 		private static NewCampaignPane instanceOfNewCampaignPane = null;
 		
 		private Button LOAD_SESSION_BUTTON, CANCEL_BUTTON;
-		
-		private ObservableList<String> sessions;
-		private ListView<String> sessionsListView;
 		
 		private static final String DATADIR = "data" + File.separator; 
 		private static final String WORLDDIR = NewCampaignPane.DATADIR + "worlds" + File.separator; 
@@ -45,7 +46,7 @@ public class NewCampaignScene extends Scene {
 			this.setCenter(addVBox());
 			
 			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER);
-			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLER);
+			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLERA);
 		}
 		
 		private void setupObjects(){
@@ -100,8 +101,10 @@ public class NewCampaignScene extends Scene {
 		
 		
 		private static NewCampaignPane getInstance(){
-			return (instanceOfNewCampaignPane == null) ?instanceOfNewCampaignPane = new NewCampaignPane() : instanceOfNewCampaignPane;
-		
+			if(instanceOfNewCampaignPane == null){
+				instanceOfNewCampaignPane = new NewCampaignPane();	
+			}
+			return instanceOfNewCampaignPane;
 		}
 	}
 	
@@ -112,13 +115,14 @@ public class NewCampaignScene extends Scene {
 	}
 	
 	public String getSelectedCampaign(){
-		return instanceOfNewCampaignScene.getSelectedCampaign();
+		return NewCampaignScene.instanceOfNewCampaignScene.getSelectedCampaign();
 	}
 	
 	public static NewCampaignScene getInstance(){
-		return (NewCampaignScene.instanceOfNewCampaignScene == null) ? instanceOfNewCampaignScene = 
-			new NewCampaignScene(NewCampaignPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
-				instanceOfNewCampaignScene;
+		if(NewCampaignScene.instanceOfNewCampaignScene == null){
+			return instanceOfNewCampaignScene = new NewCampaignScene(NewCampaignPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT);
+		}
+		return instanceOfNewCampaignScene;
 	}
 	
 }

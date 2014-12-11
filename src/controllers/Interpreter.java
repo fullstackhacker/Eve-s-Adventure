@@ -256,6 +256,8 @@ public class Interpreter {
 			}
 			return;
 		}
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT))
+			return;
 		if (this.karelCode.get(this.activeCodeBlock).equals(
 				KarelCode.CLOSESTATEMENT))
 			return;
@@ -271,6 +273,7 @@ public class Interpreter {
 
 			return;
 		}
+		instructions();
 		// player.play();
 	}
 
@@ -345,8 +348,6 @@ public class Interpreter {
 					return;
 				instructions();
 				this.activeCodeBlock = variableCode;
-				System.out.println("supposed to reset the result: "
-						+ this.karelCode.get(this.activeCodeBlock));
 			}
 			if (!this.currentWhileResult) {
 				do {
@@ -409,8 +410,10 @@ public class Interpreter {
 		if(!validPosition()) return;
 		System.out.println("1this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
 		System.out.println("2this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
+		if(!this.next()) throw new IllegalValueException("illegal stuff");
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && !result) {
-			if (!this.next()){
+			System.out.println("ELSEING");
+			if (!this.next()){	
 				throw new IllegalValueException("Ill formed Karel Code");
 			}
 			System.out.println("instruction() CALLED-----------------");

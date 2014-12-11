@@ -44,7 +44,7 @@ public class LoadSessionScene extends Scene {
 			setupObjects();
 			this.setCenter(addVBox());
 			
-			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::LOAD_SANDBOX_SESSION_BUTTON_HANDLER);
+			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER);
 			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLER);
 		}
 		
