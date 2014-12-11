@@ -49,16 +49,15 @@ public final class AdventureModeScene extends Scene {
 	public static ImageView imagePlay = new ImageView(new Image(
 			"./Images/PlayButton.png"));
 	
-	//TODO Change this link
 	public static ImageView imagePause = new ImageView(new Image(
-			"./Images/ResetButton.png"));
+			"./Images/pause.png"));
 	
 	public static final class AdventureModePane extends GridPane {
 
 		public static AdventureModePane instanceOfMainMenuPane = new AdventureModePane();
 
-		private ImageView imageBack = new ImageView(new Image(
-				"./Images/ArrowLeft.png"));
+		//private ImageView imageBack = new ImageView(new Image(
+		//		"./Images/ArrowLeft.png"));
 		private ImageView imageRight = new ImageView(new Image(
 				"./Images/ArrowRight.png"));
 		private ImageView imageReset = new ImageView(new Image(
@@ -182,7 +181,7 @@ public final class AdventureModeScene extends Scene {
 			FORWARD = new Button();
 			PLAY = new Button();
 			RESET = new Button();
-			PAUSE.setGraphic(imageBack);
+			PAUSE.setGraphic(imagePause);
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
 			RESET.setGraphic(imageReset);
