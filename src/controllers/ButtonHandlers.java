@@ -71,40 +71,54 @@ public final class ButtonHandlers {
 		System.out.println("NEW_SESSION_BUTTON_HANDLER CALLED");
 		if (sandbox) {
 			MainApp.changeScenes(SandboxScene.getInstance());
-			try{
-				SandboxScene.SandboxPane.getInstance().add(GameTabs.getInstance(), 0, 1, 1, 3);
-				SandboxScene.SandboxPane.getInstance().add(KarelTable.getInstance(), 1, 1, 1, 3);
-				SandboxScene.SandboxPane.getInstance().add(ProTips.getInstance(), 0, 4, 2, 1);
-				SandboxScene.SandboxPane.getInstance().add(SandboxScene.gridWorld, 3, 3, 4, 2);
+			try {
+				SandboxScene.SandboxPane.getInstance().add(
+						GameTabs.getInstance(), 0, 1, 1, 3);
+				SandboxScene.SandboxPane.getInstance().add(
+						KarelTable.getInstance(), 1, 1, 1, 3);
+				SandboxScene.SandboxPane.getInstance().add(
+						ProTips.getInstance(), 0, 4, 2, 1);
+				SandboxScene.SandboxPane.getInstance().add(
+						SandboxScene.gridWorld, 3, 3, 4, 2);
 				for (int i = 0; i < 5; i++) {
 					for (int j = 0; j < 10; j++) {
 						GridWorld.gridButtons[i][j].setDisable(false);
 					}
 				}
-			}catch(Exception e1){
+			} catch (Exception e1) {
 				System.out.println("LOL");
 			}
-			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().CREATURES_TAB);
-			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().ITEMS_TAB);
-			GameTabs.getInstance().getTabs().add(GameTabs.getInstance().CREATURES_TAB);
-			GameTabs.getInstance().getTabs().add(GameTabs.getInstance().ITEMS_TAB);
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().ITEMS_TAB);
+			GameTabs.getInstance().getTabs()
+					.add(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs()
+					.add(GameTabs.getInstance().ITEMS_TAB);
 		} else {
 			MainApp.changeScenes(AdventureModeScene.getInstance());
-			try{
-				AdventureModeScene.AdventureModePane.getInstance().add(GameTabs.getInstance(), 0, 1, 1, 3);
-				AdventureModeScene.AdventureModePane.getInstance().add(KarelTable.getInstance(), 1, 1, 1, 3);
-				AdventureModeScene.AdventureModePane.getInstance().add(ProTips.getInstance(), 0, 4, 2, 1);
-				AdventureModeScene.AdventureModePane.getInstance().add(AdventureModeScene.gridWorld, 3, 3, 4, 2);
+			try {
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						GameTabs.getInstance(), 0, 1, 1, 3);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						KarelTable.getInstance(), 1, 1, 1, 3);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						ProTips.getInstance(), 0, 4, 2, 1);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						AdventureModeScene.gridWorld, 3, 3, 4, 2);
 				for (int i = 0; i < 5; i++) {
 					for (int j = 0; j < 10; j++) {
 						GridWorld.gridButtons[i][j].setDisable(true);
 					}
 				}
-			}catch(Exception e2){
+			} catch (Exception e2) {
 				System.out.println("");
 			}
-			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().CREATURES_TAB);
-			GameTabs.getInstance().getTabs().remove(GameTabs.getInstance().ITEMS_TAB);
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().ITEMS_TAB);
 		}
 	}
 
@@ -125,14 +139,16 @@ public final class ButtonHandlers {
 		if (KarelTable.getInstance().isREPLACE_BUTTON_ON()) {
 			int line = KarelTable.getInstance().getLineSelectedLine();
 			int start = line;
-			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
-			for( ; line < karelCode.size() ;line++){
-				if(karelCode.get(line).equals(KarelCode.ENDWHILE)){
-					KarelTable.getInstance().replaceInstructions(start, line, KarelCode.IFSTATEMENT);
+			ArrayList<String> karelCode = KarelTable.getInstance()
+					.getKarelCode();
+			for (; line < karelCode.size(); line++) {
+				if (karelCode.get(line).equals(KarelCode.ENDWHILE)) {
+					KarelTable.getInstance().replaceInstructions(start, line,
+							KarelCode.IFSTATEMENT);
 					break;
 				}
 			}
-		}else{
+		} else {
 			KarelTable.getInstance().addInstructionsCode(KarelCode.IFSTATEMENT);
 		}
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
@@ -164,15 +180,18 @@ public final class ButtonHandlers {
 		if (KarelTable.getInstance().isREPLACE_BUTTON_ON()) {
 			int line = KarelTable.getInstance().getLineSelectedLine();
 			int start = line;
-			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
-			for( ; line < karelCode.size() ;line++){
-				if(karelCode.get(line).equals(KarelCode.ENDIF)){
-					KarelTable.getInstance().replaceInstructions(start, line, KarelCode.WHILESTATEMENT);
+			ArrayList<String> karelCode = KarelTable.getInstance()
+					.getKarelCode();
+			for (; line < karelCode.size(); line++) {
+				if (karelCode.get(line).equals(KarelCode.ENDIF)) {
+					KarelTable.getInstance().replaceInstructions(start, line,
+							KarelCode.WHILESTATEMENT);
 					break;
 				}
 			}
-		}else{
-			KarelTable.getInstance().addInstructionsCode(KarelCode.WHILESTATEMENT);
+		} else {
+			KarelTable.getInstance().addInstructionsCode(
+					KarelCode.WHILESTATEMENT);
 		}
 		GameTabs.getInstance().disableTab(GameTabs.INSTRUCTIONS_TAB_VALUE);
 		GameTabs.getInstance().disableTab(GameTabs.OPERATIONS_TAB_VALUE);
@@ -458,7 +477,6 @@ public final class ButtonHandlers {
 	}
 	
 
-
 	/**
 	 * Popup if they try to put something where Eve is
 	 * 
@@ -485,7 +503,6 @@ public final class ButtonHandlers {
 			}
 		});
 	}
-
 
 	/**
 	 * Popup if they try delete the wrong thing
@@ -555,11 +572,11 @@ public final class ButtonHandlers {
 			break;
 		}
 	}
-	
+
 	public static final void RMWALL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RMWALL_BUTTON_HANDLER");
 	}
-	
+
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLT_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
@@ -567,7 +584,7 @@ public final class ButtonHandlers {
 		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("upWall");
 		
 	}
-	
+
 	public static final void WALLB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLB_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
@@ -579,14 +596,13 @@ public final class ButtonHandlers {
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
 	}
-	
+
 	public static final void WALLR_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLR_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
 	}
-	
-	
+
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("SHRUB_BUTTON_HANDLER");
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
@@ -599,7 +615,7 @@ public final class ButtonHandlers {
 			popup("Shrub");
 		} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("Shrub");
+					.getYCoordinate()].setGraphic(SandboxScene.Bush);
 		Shrub shrub = new Shrub(4, false);
 		shrub.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate()));
@@ -642,12 +658,12 @@ public final class ButtonHandlers {
 		if (oldObject.equals("Eve!"))
 			EvePop();
 
-
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Friend")){
+		else if (oldObject.equals("Tree") || oldObject.equals("Shrub")
+				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
 			popup("Bamboo");
-		}
-		else{
-			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setText("Bamboo");
+		} else {
+			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+					.getYCoordinate()].setGraphic(SandboxScene.Bamboo);
 			Bamboo bamboo = new Bamboo(4);
 			bamboo.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
 					GridWorld.getYCoordinate()));
@@ -661,14 +677,16 @@ public final class ButtonHandlers {
 	/**
 	 * CreaturesTab.java
 	 */
-	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e){
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].getText();
-		if (oldObject.equals("Tree") || oldObject.equals("Shrub") || oldObject.equals("Bamboo") || oldObject.equals("Friend")){
+	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
+		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+				.getYCoordinate()].getText();
+		if (oldObject.equals("Tree") || oldObject.equals("Shrub")
+				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
 
 		}
 		System.out.println("RMCREATURE_BUTTON_HANDLER");
 		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].setText("");
+				.getYCoordinate()].setGraphic(null);
 		GridWorld
 				.getInstance()
 				.getWorld()
@@ -686,7 +704,7 @@ public final class ButtonHandlers {
 			for (int x = 0; x < GridWorld.gridButtons[y].length; x++) {
 				if (GridWorld.gridButtons[y][x].getText().equals("Eve!")) {
 					// frontend move
-					GridWorld.gridButtons[y][x].setText("   ");
+					GridWorld.gridButtons[y][x].setGraphic(null);
 
 					// backend move
 					System.out.println("X: " + x + "Y: " + y);
@@ -704,11 +722,23 @@ public final class ButtonHandlers {
 		if (oldObject.equals("Tree") || oldObject.equals("Shrub")
 				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
 			EvePop();
-		}
+		} else {
+			if (GridWorld.getInstance().getWorld().getEve().getDirection() == Coordinate.UP) {
+				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+						.getYCoordinate()].setGraphic(SandboxScene.EveDown);
+			} else if (GridWorld.getInstance().getWorld().getEve()
+					.getDirection() == Coordinate.LEFT) {
+				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+						.getYCoordinate()].setGraphic(SandboxScene.EveLeft);
+			} else if (GridWorld.getInstance().getWorld().getEve()
+					.getDirection() == Coordinate.RIGHT) {
+				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+						.getYCoordinate()].setGraphic(SandboxScene.EveRight);
+			} else {
+				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
+						.getYCoordinate()].setGraphic(SandboxScene.EveUp);
+			}
 
-		else {
-			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("Eve!");
 			Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 					GridWorld.getYCoordinate());
 
@@ -764,7 +794,7 @@ public final class ButtonHandlers {
 			return;
 		}
 		World world = null;
-		if(!sandbox){
+		if (!sandbox) {
 			world = AdventureModeScene.getWorld();
 			AdventureModeScene.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());
@@ -777,12 +807,11 @@ public final class ButtonHandlers {
 			world.printWorld();
 			SandboxScene.getInterpreter().start(); // starts the code
 		}
-		
 		world.printWorld();
-//		do{
-//			interpreter.executeOne();
-//			world.printWorld();
-//		} while(interpreter.next());
+		// do{
+		// interpreter.executeOne();
+		// world.printWorld();
+		// } while(interpreter.next());
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {
@@ -805,23 +834,23 @@ public final class ButtonHandlers {
 
 	public static final void COLLECT_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Collect)!");
-		//World world = AdventureModeScene.getWorld();
-		//Level.setObjective(false);
+		// World world = AdventureModeScene.getWorld();
+		// Level.setObjective(false);
 		SandboxScene.getInstance().topMenu.collect.setDisable(true);
 		SandboxScene.getInstance().topMenu.find.setDisable(false);
 	}
-	
+
 	public static final void FIND_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Find)!");
-		//World world = AdventureModeScene.getWorld();
-		//Level.setObjective(true);
+		// World world = AdventureModeScene.getWorld();
+		// Level.setObjective(true);
 		SandboxScene.getInstance().topMenu.collect.setDisable(false);
 		SandboxScene.getInstance().topMenu.find.setDisable(true);
 	}
 
 	public static final void SAVE_MENU_HANDLER(ActionEvent e) {
 		String worldName = "";
-		
+
 		final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		VBox dialogVbox = new VBox(20);
@@ -835,14 +864,12 @@ public final class ButtonHandlers {
 		dialog.setScene(dialogScene);
 		dialog.show();
 
-		CANCEL.setOnAction(
-				new EventHandler<ActionEvent>(){
-					public void handle(ActionEvent e){
-						dialog.close();
-					}
-				}
-				);
-		
+		CANCEL.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				dialog.close();
+			}
+		});
+
 		Save.saveWorld(SandboxScene.getWorld());
 		System.out.println("Saved!");
 	}
