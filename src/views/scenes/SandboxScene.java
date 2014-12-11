@@ -1,9 +1,18 @@
 package views.scenes;
 
+import javafx.geometry.HPos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import models.Coordinate;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
-import controllers.ButtonHandlers;
 import views.MainApp;
 import views.TopMenu;
 import views.grid.Cols;
@@ -25,6 +34,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import controllers.ButtonHandlers;
 
 public final class SandboxScene extends Scene {
 
@@ -41,6 +51,14 @@ public final class SandboxScene extends Scene {
 	public static TopMenu topMenu = null;
 
 	public static final class SandboxPane extends GridPane {
+	
+	public static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
+	public static ImageView EveRight = new ImageView(new Image("./Images/eve_right.png"));
+	public static ImageView EveDown = new ImageView(new Image("./Images/eve_down2.png"));
+	public static ImageView EveLeft = new ImageView(new Image("./Images/eve_left.png"));
+	public static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
+	public static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
+	
 
 		private static SandboxPane instanceOfMainMenuPane = null;
 
@@ -52,6 +70,8 @@ public final class SandboxScene extends Scene {
 				"./Images/PlayButton.png"));
 		private ImageView imageReset = new ImageView(new Image(
 				"./Images/ResetButton.png"));
+		
+		//private ImageView imageEve = new ImageView(new Image("./Images/Eve.png"));
 
 		private Button BACK, FORWARD, PLAY, RESET;
 
@@ -144,6 +164,14 @@ public final class SandboxScene extends Scene {
 			GridWorld.gridButtons[2][2].setText("Eve!");
 			Eve.setVisible(true);
 
+			//GridWorld.gridButtons[2][2].setText("Eve!");
+			GridWorld.gridButtons[2][2].setText("");
+			GridWorld.gridButtons[2][2].setGraphic(Bush);
+			//imageEve.setId("Eve!");
+			//GridWorld.gridButtons[2][2].setGraphic(imageEve);
+			//Eve.setVisible(true);
+			
+			
 			//
 			// //world.moveEveEast();
 			// world.moveEve();
@@ -200,7 +228,7 @@ public final class SandboxScene extends Scene {
 		super(arg0, arg1, arg2);
 	}
 
-	public static void setWorld(World world1) {
+	public void setWorld(World world1) {
 		world = world1;
 	}
 

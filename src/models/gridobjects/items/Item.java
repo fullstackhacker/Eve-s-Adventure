@@ -39,5 +39,7 @@ public abstract class Item extends GridObject implements Serializable {
 		return "I";
 
 	}
+	
+	public abstract Item copy(); 
 
 }

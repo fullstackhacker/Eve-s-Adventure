@@ -131,5 +131,9 @@ public class Tree extends Item implements Serializable {
 		return "T";
 
 	}
+	
+	public Item copy(){
+		return new Tree(this.getId(), this.bamboo); 
+	}
 
 }

@@ -19,6 +19,7 @@ public final class TopMenu extends MenuBar {
 
 		MenuItem quit = new MenuItem("Quit");
 		quit.setOnAction(ButtonHandlers::QUIT_MENU_HANDLER);
+
 		MenuItem save = new MenuItem("Save");
 		save.setOnAction(ButtonHandlers::SAVE_MENU_HANDLER);
 		Menu addObj = new Menu("Add Objective");
@@ -30,6 +31,10 @@ public final class TopMenu extends MenuBar {
 
 		menu1.getItems().addAll(save, quit);
 		menu2.getItems().addAll(addObj);
+//		MenuItem saveworld = new MenuItem("Save world");
+//		saveworld.setOnAction(ButtonHandlers::SAVE_MENU_HANDLER);
+//		
+//		menu1.getItems().addAll(saveworld, quit);
 
 		this.getMenus().addAll(menu1, menu2);
 	}

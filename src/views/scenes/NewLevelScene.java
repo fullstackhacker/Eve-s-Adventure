@@ -2,9 +2,6 @@ package views.scenes;
 
 import java.io.File;
 
-import controllers.ButtonHandlers;
-import controllers.Save;
-import views.MainApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -14,15 +11,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import views.MainApp;
+import controllers.ButtonHandlers;
 
-public class LoadSessionScene extends Scene {
+public class NewLevelScene extends Scene {
 
-	private static final class LoadSessionPane extends BorderPane{
+	private static final class NewLevelSessionPane extends BorderPane{
 		
 		/**
 		 * The Instance of LoadSessionPane
 		 */
-		private static LoadSessionPane instanceOfLoadSessionPane = null;
+		private static NewLevelSessionPane instanceOfNewLevelSessionPane = null;
 		
 		private Button LOAD_SESSION_BUTTON, CANCEL_BUTTON;
 		
@@ -30,9 +29,9 @@ public class LoadSessionScene extends Scene {
 		private ListView<String> sessionsListView;
 		
 		private static final String DATADIR = "data" + File.separator; 
-		private static final String WORLDDIR = LoadSessionPane.DATADIR + "worlds" + File.separator; 
-		private static final String LEVELDIR = LoadSessionPane.DATADIR + "levels" + File.separator; 
-		private static final String CAMPAIGNDIR = LoadSessionPane.DATADIR + "campaigns" + File.separator; 
+		private static final String WORLDDIR = NewLevelSessionPane.DATADIR + "worlds" + File.separator; 
+		private static final String LEVELDIR = NewLevelSessionPane.DATADIR + "levels" + File.separator; 
+		private static final String CAMPAIGNDIR = NewLevelSessionPane.DATADIR + "campaigns" + File.separator; 
 		private static final String WORLDEXT = ".world"; 
 		private static final String NAMEFILENAME = "name.dat"; 
 		
@@ -42,7 +41,7 @@ public class LoadSessionScene extends Scene {
 		 * This will generate all the buttons,
 		 * textfields, and more. 
 		 */
-		private LoadSessionPane(){
+		private NewLevelSessionPane(){
 			this.getStylesheets().add("./loadsession_style.css");
 			setupObjects();
 			this.setCenter(addVBox());
@@ -69,7 +68,7 @@ public class LoadSessionScene extends Scene {
 		}
 		
 		private void addSessions(){
-			File worldsDir = new File(LoadSessionPane.WORLDDIR); 
+			File worldsDir = new File(NewLevelSessionPane.WORLDDIR); 
 			if(!worldsDir.exists()) return;
 			
 			File[] listOfFiles = worldsDir.listFiles();
@@ -97,22 +96,22 @@ public class LoadSessionScene extends Scene {
 		
 		
 		
-		private static LoadSessionPane getInstance(){
-			return (instanceOfLoadSessionPane == null) ?instanceOfLoadSessionPane = new LoadSessionPane() : instanceOfLoadSessionPane;
+		private static NewLevelSessionPane getInstance(){
+			return (instanceOfNewLevelSessionPane == null) ?instanceOfNewLevelSessionPane = new NewLevelSessionPane() : instanceOfNewLevelSessionPane;
 		
 		}
 	}
 	
-	private static LoadSessionScene instanceOfLoadSessionScene = null;
+	private static NewLevelScene instanceOfNewLevelSessionScene = null;
 	
-	private LoadSessionScene(Parent arg0, double arg1, double arg2){
+	private NewLevelScene(Parent arg0, double arg1, double arg2){
 		super(arg0, arg1, arg2);
 	}
 	
-	public static LoadSessionScene getInstance(){
-		return (LoadSessionScene.instanceOfLoadSessionScene == null) ? instanceOfLoadSessionScene = 
-			new LoadSessionScene(LoadSessionPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
-			instanceOfLoadSessionScene;
+	public static NewLevelScene getInstance(){
+		return (NewLevelScene.instanceOfNewLevelSessionScene == null) ? instanceOfNewLevelSessionScene = 
+			new NewLevelScene(NewLevelSessionPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
+				instanceOfNewLevelSessionScene;
 	}
 	
 }

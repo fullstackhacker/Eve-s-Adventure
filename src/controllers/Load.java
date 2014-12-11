@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import views.scenes.SandboxScene;
 import models.campaign.Campaign;
 import models.campaign.Level;
 import models.campaign.World;
@@ -51,6 +52,7 @@ public class Load {
 			fis = new FileInputStream(worldFile); 
 			ois = new ObjectInputStream(fis); 
 			world = (World) ois.readObject(); 
+			SandboxScene.getInstance().setWorld(world);
 			ois.close(); 
 			fis.close(); 
 		}
