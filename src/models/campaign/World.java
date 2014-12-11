@@ -791,17 +791,7 @@ public class World implements Serializable {
 				this.getSquareAt(currentEveLocation).removeCreature());
 		this.getEve().move();
 		
-		if(this.getSquareAt(currentEveLocation).hasItem()){
-			if(this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo){
-				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation.getY()].setGraphic(SandboxScene.getBambooI());
-			}
-			if(this.getSquareAt(currentEveLocation).currentItem() instanceof Shrub){
-				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation.getY()].setGraphic(SandboxScene.getShrubI());
-			}
-			if(this.getSquareAt(currentEveLocation).currentItem() instanceof Tree){
-				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation.getY()].setGraphic(SandboxScene.getTreeI());
-			}
-		}
+
 
 		System.out.println("MOVE: CURRENT LOCATION: "
 				+ this.getEve().getCoordinates());
