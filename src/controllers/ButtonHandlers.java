@@ -714,7 +714,13 @@ public final class ButtonHandlers {
 			System.out.println("karelCode is empty!");
 			return;
 		}
-		World world = AdventureModeScene.getWorld();
+		World world = null;
+		if(!sandbox){
+			world = AdventureModeScene.getWorld();
+		}else{
+			world = SandboxScene.getWorld();
+		}
+		
 		System.out.println(KarelTable.getInstance().getKarelCode());
 		Interpreter interpreter = new Interpreter(karelCode, world);
 		world.printWorld();
