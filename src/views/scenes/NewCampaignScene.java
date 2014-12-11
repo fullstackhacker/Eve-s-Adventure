@@ -40,11 +40,11 @@ public class NewCampaignScene extends Scene {
 		 * 
 		 */
 		private NewCampaignPane(){
-			this.getStylesheets().add("./loadsession_style.css");
+			this.getStylesheets().add("/loadsession_style.css");
 			setupObjects();
 			this.setCenter(addVBox());
 			
-			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::LOAD_SESSION_BUTTON_HANDLER);
+			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER);
 			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLER);
 		}
 		
@@ -66,20 +66,25 @@ public class NewCampaignScene extends Scene {
 		}
 		
 		private void addSessions(){
-			File worldsDir = new File(NewCampaignPane.WORLDDIR); 
-			if(!worldsDir.exists()) return;
+			File campaignDir = new File(NewCampaignPane.CAMPAIGNDIR); 
+			if(!campaignDir.exists()) return;
 			
-			File[] listOfFiles = worldsDir.listFiles();
+			File[] listOfFiles = campaignDir.listFiles();
 			for (int i = 0; i < listOfFiles.length; i++) {
-			      if (listOfFiles[i].isFile()) {
+			      if (listOfFiles[i].isDirectory()) {
 			        //System.out.println("File " + listOfFiles[i].getName());
 			    	  sessions.add(listOfFiles[i].getName());
-			      } else if (listOfFiles[i].isDirectory()) {
+			      } else if (listOfFiles[i].isFile()) {
 			        //Do nothing
 			      }
 			}
 			return;
 		}
+		
+		private String getSelectedCampaign(){
+			return sessionsListView.getSelectionModel().getSelectedItem(); 
+		}
+		
 		private VBox addVBox(){
 			VBox vbox = new VBox();
 			
@@ -104,6 +109,10 @@ public class NewCampaignScene extends Scene {
 	
 	private NewCampaignScene(Parent arg0, double arg1, double arg2){
 		super(arg0, arg1, arg2);
+	}
+	
+	public String getSelectedCampaign(){
+		return instanceOfNewCampaignScene.getSelectedCampaign();
 	}
 	
 	public static NewCampaignScene getInstance(){

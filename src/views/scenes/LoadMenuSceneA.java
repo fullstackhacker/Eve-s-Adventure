@@ -37,7 +37,7 @@ public final class LoadMenuSceneA extends Scene {
 			this.setBottom(addHBox());
 
 			LOAD_CAMPAIGN_BUTTON
-					.setOnAction(ButtonHandlers::LOAD_CAMPAIGN_BUTTON_HANDLER);
+					.setOnAction(ButtonHandlers::LOAD_CAMPAIGN_ADVENTURE_BUTTON_HANDLER);
 			NEW_CAMPAIGN_BUTTON
 					.setOnAction(ButtonHandlers::NEW_CAMPAIGN_BUTTON_HANDLER);
 			BACK_BUTTON
