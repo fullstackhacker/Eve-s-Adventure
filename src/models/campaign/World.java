@@ -638,7 +638,7 @@ public class World implements Serializable {
 				if (!verifyCoordinate(newEveLocation))
 					return;
 				if (this.getSquareAt(newEveLocation).hasCreature())
-					return;
+					return; 
 				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
 						.getY() + 1]
 						.setGraphic(GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -734,7 +734,10 @@ public class World implements Serializable {
 		
 		switch (this.getEve().getDirection()) {
 		case Coordinate.UP:
-			if (this.getSquareAt(currentEveLocation).hasUpWall())
+			if (this.getSquareAt(currentEveLocation).hasDownWall())
+				return;
+			
+			if (this.getSquareAt(new Coordinate(currentEveLocation.getX(), currentEveLocation.getY() + 1)).hasUpWall())
 				return;
 
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
@@ -757,7 +760,10 @@ public class World implements Serializable {
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.DOWN:
-			if (this.getSquareAt(currentEveLocation).hasDownWall())
+			if (this.getSquareAt(currentEveLocation).hasUpWall())
+				return;
+			
+			if (this.getSquareAt(new Coordinate(currentEveLocation.getX(), currentEveLocation.getY() - 1)).hasDownWall())
 				return;
 
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
@@ -781,6 +787,9 @@ public class World implements Serializable {
 		case Coordinate.LEFT:
 			if (this.getSquareAt(currentEveLocation).hasLeftWall())
 				return;
+			
+			if (this.getSquareAt(new Coordinate(currentEveLocation.getX() - 1, currentEveLocation.getY())).hasRightWall())
+				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX() - 1,
 					currentEveLocation.getY());
 			if (!verifyCoordinate(newEveLocation))
@@ -801,6 +810,10 @@ public class World implements Serializable {
 		case Coordinate.RIGHT:
 			if (this.getSquareAt(currentEveLocation).hasRightWall())
 				return;
+			
+			if (this.getSquareAt(new Coordinate(currentEveLocation.getX() + 1, currentEveLocation.getY())).hasLeftWall())
+				return;
+			
 			newEveLocation = new Coordinate(currentEveLocation.getX() + 1,
 					currentEveLocation.getY());
 			if (!verifyCoordinate(newEveLocation))

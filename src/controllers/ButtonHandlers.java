@@ -722,11 +722,15 @@ public final class ButtonHandlers {
 		System.out.println("RMWALL_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
-		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
+		GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.UP);
+		GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.DOWN);
+		GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.LEFT);
+		GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.RIGHT);
 		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].setId("WorldButton");
 	}
 
+	//TODO
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLT_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
@@ -833,7 +837,7 @@ public final class ButtonHandlers {
 			GridWorld.getInstance().getWorld().addItem(bamboo);
 			GridWorld.getInstance().getWorld().printWorld();
 		}
-	}
+	} 
 
 	/**
 	 * CreaturesTab.java
