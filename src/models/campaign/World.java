@@ -646,22 +646,19 @@ public class World implements Serializable {
 
 		switch (this.getEve().getDirection()) {
 		case Coordinate.UP:
-			if (this.getSquareAt(currentEveLocation).hasDownWall())
-				return;
-
-			if (this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() + 1)).hasUpWall())
-				return;
-			if ((this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() + 1)).currentItem() instanceof Tree))
-				return;
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() + 1);
 
 			if (!verifyCoordinate(newEveLocation))
 				return;
+			if (this.getSquareAt(currentEveLocation).hasDownWall())
+				return;
+
+			if (this.getSquareAt(newEveLocation).hasUpWall())
+				return;
+			if ((this.getSquareAt(newEveLocation).currentItem() instanceof Tree))
+				return;
+			
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
 			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -680,22 +677,19 @@ public class World implements Serializable {
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.DOWN:
-			if (this.getSquareAt(currentEveLocation).hasUpWall())
-				return;
-
-			if (this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() - 1)).hasDownWall())
-				return;
-			if ((this.getSquareAt(
-					new Coordinate(currentEveLocation.getX(),
-							currentEveLocation.getY() - 1)).currentItem() instanceof Tree))
-				return;
-			
 			newEveLocation = new Coordinate(currentEveLocation.getX(),
 					currentEveLocation.getY() - 1);
 			if (!verifyCoordinate(newEveLocation))
 				return;
+			if (this.getSquareAt(currentEveLocation).hasUpWall())
+				return;
+
+			if (this.getSquareAt(newEveLocation).hasDownWall())
+				return;
+			if ((this.getSquareAt(newEveLocation).currentItem() instanceof Tree))
+				return;
+			
+			
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
 			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
@@ -714,22 +708,20 @@ public class World implements Serializable {
 			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.LEFT:
-			if (this.getSquareAt(currentEveLocation).hasLeftWall())
-				return;
-
-			if (this.getSquareAt(
-					new Coordinate(currentEveLocation.getX() - 1,
-							currentEveLocation.getY())).hasRightWall())
-				return;
-			if ((this.getSquareAt(
-					new Coordinate(currentEveLocation.getX() - 1,
-							currentEveLocation.getY())).currentItem() instanceof Tree))
-				return;
-			
 			newEveLocation = new Coordinate(currentEveLocation.getX() - 1,
 					currentEveLocation.getY());
 			if (!verifyCoordinate(newEveLocation))
 				return;
+			if (this.getSquareAt(currentEveLocation).hasLeftWall())
+				return;
+			
+			if (this.getSquareAt(newEveLocation).hasRightWall())
+				return;
+			
+			if ((this.getSquareAt(newEveLocation).currentItem() instanceof Tree))
+				return;
+			
+			
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
 			GridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
