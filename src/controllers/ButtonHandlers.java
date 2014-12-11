@@ -904,8 +904,8 @@ public final class ButtonHandlers {
 	public static final void GridWorld_BUTTON_HANDLER(ActionEvent e) {
 	}
 
-	public static final void BACK_BUTTON_HANDLER(ActionEvent e) {
-		System.out.println("BACK_BUTTON_HANDLER CALLED");
+	public static final void PAUSE_BUTTON_HANDLER(ActionEvent e) {
+		System.out.println("PAUSE_BUTTON_HANDLER CALLED");
 		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
 			if(AdventureModeScene.getInterpreter() != null){
 				//AdventureModeScene.getInterpreter().reverseInstruction();
