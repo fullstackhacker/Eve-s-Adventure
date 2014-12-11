@@ -396,6 +396,7 @@ public class Interpreter {
 		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		boolean result = variable();
 		System.out.println("result = " + result);
+		if(!this.next()) throw new IllegalValueException("ill formed karel code");
 		if (result) {
 			instructions();
 		} else {
@@ -489,9 +490,9 @@ public class Interpreter {
 		case KarelCode.BAGISEMPTY:
 			return !this.world.getEve().hasBamboo();
 		case KarelCode.FACINGNORTH:
-			return this.world.getEve().getDirection() == Coordinate.UP;
-		case KarelCode.FACINGSOUTH:
 			return this.world.getEve().getDirection() == Coordinate.DOWN;
+		case KarelCode.FACINGSOUTH:
+			return this.world.getEve().getDirection() == Coordinate.UP;
 		case KarelCode.FACINGEAST:
 			return this.world.getEve().getDirection() == Coordinate.RIGHT;
 		case KarelCode.FACINGWEST:
