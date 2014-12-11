@@ -64,10 +64,12 @@ public class Interpreter {
 		this.currentLoopCounter = 0;
 		this.currentWhileResult = false;
 		this.gridButtons = new ToggleButton[5][10];
-		for(int row = 0; row < this.gridButtons.length; row++){
-			for(int col = 0; col < this.gridButtons.length; col++){
+		for (int row = 0; row < this.gridButtons.length; row++) {
+			for (int col = 0; col < this.gridButtons.length; col++) {
 				this.gridButtons[row][col] = new ToggleButton();
-				this.gridButtons[row][col].setGraphic(GridWorld.gridButtons[row][col].getGraphic()); 
+				this.gridButtons[row][col]
+						.setGraphic(GridWorld.gridButtons[row][col]
+								.getGraphic());
 			}
 		}
 	}
@@ -97,7 +99,7 @@ public class Interpreter {
 	 * Executes the current code block and then moves to the next one
 	 */
 	public void executeOne() {
-		//TODO Fix this
+		// TODO Fix this
 		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		this.instruction();
 	}
@@ -118,28 +120,35 @@ public class Interpreter {
 	 */
 	public void reset() {
 		this.activeCodeBlock = 0;
+		System.out.println("----- RESET WORLD -----");
+		this.world.printWorld();
 		this.world.overwrite(startWorld);
+		
+		System.out.println("----- RESET WORLD -----");
+		this.world.printWorld();
 
-		for (int row = 0; row < gridButtons.length; row++) {
-			for (int col = 0; col < gridButtons[row].length; col++) {
+		for (int row = 0; row < this.gridButtons.length; row++) {
+			for (int col = 0; col < this.gridButtons[row].length; col++) {
 				// going to be swapped with the images
-				if (GridWorld.gridButtons[row][col] != null
-						&& gridButtons[row][col] != null)
-					GridWorld.gridButtons[row][col]
-							.setGraphic(gridButtons[row][col].getGraphic());
+				try{
+					GridWorld.gridButtons[row][col].setGraphic(this.gridButtons[row][col].getGraphic());
+				}
+				catch(NullPointerException e){
+					GridWorld.gridButtons[row][col].setGraphic(null);
+				}
 			}
 		}
-		
-		if(timer != null){
+
+		if (timer != null) {
 			timer.cancel();
 		}
-		
+
 		KarelTable.getInstance().setSelectedIndex(0);
-		
+
 	}
-	
-	public void pause(){
-		if(timer != null){
+
+	public void pause() {
+		if (timer != null) {
 			timer.cancel();
 		}
 	}
@@ -179,7 +188,8 @@ public class Interpreter {
 				Platform.runLater(new Runnable() {
 					@Override
 					public void run() {
-						System.out.println("activeCodeBlock: " + activeCodeBlock);
+						System.out.println("activeCodeBlock: "
+								+ activeCodeBlock);
 						KarelTable.getInstance().setSelectedIndex(
 								activeCodeBlock);
 						instructions();
@@ -208,10 +218,11 @@ public class Interpreter {
 		instruction();
 		if (!validPosition()) {
 			timer.cancel();
-			if(ButtonHandlers.isSandboxMode()){
+			if (ButtonHandlers.isSandboxMode()) {
 				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
-			}else{
-				AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePlay);
+			} else {
+				AdventureModeScene.PLAY
+						.setGraphic(AdventureModeScene.imagePlay);
 			}
 			return;
 		}
@@ -269,11 +280,14 @@ public class Interpreter {
 			operation();
 			// add an objective check
 			if (Level.getObjective().equals("collect")
-					&& this.world.getBambooObjective() == GridWorld.getInstance().getWorld()
-							.getEve().getNumberOfBamboo()) {
+					&& this.world.getBambooObjective() == GridWorld
+							.getInstance().getWorld().getEve()
+							.getNumberOfBamboo()) {
 				this.activeCodeBlock = this.karelCode.size();
-			} /*else if (Level.getObjective().equals("find")
-					&& GridWorld.getInstance().getWorld().getEve().getCoordinates()*/
+			} else if (Level.getObjective().equals("find")
+					&& GridWorld.getInstance().getWorld().eveNearFriend()) {
+				this.activeCodeBlock = this.karelCode.size();
+			}
 			this.next();
 			break;
 		default:
@@ -491,14 +505,14 @@ public class Interpreter {
 					+ this.karelCode.get(this.activeCodeBlock));
 		}
 	}
-	
-	private void reverseOperation(){
-		switch(this.karelCode.get(this.activeCodeBlock)){
-			case KarelCode.MOVE:
-				this.world.moveEve();
-				break;
-			default:
-				break;
+
+	private void reverseOperation() {
+		switch (this.karelCode.get(this.activeCodeBlock)) {
+		case KarelCode.MOVE:
+			this.world.moveEve();
+			break;
+		default:
+			break;
 		}
 	}
 

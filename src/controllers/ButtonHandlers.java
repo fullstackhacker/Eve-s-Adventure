@@ -709,41 +709,13 @@ public final class ButtonHandlers {
 	 */
 	public static final void RMITEM_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RMITEM_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		switch (oldObject) {
-		case "Tree":
-			GridWorld
-					.getInstance()
-					.getWorld()
-					.removeItem(
-							new Coordinate(GridWorld.getXCoordinate(),
-									GridWorld.getYCoordinate()));
-			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("");
-			break;
-		case "Shrub":
-			GridWorld
-					.getInstance()
-					.getWorld()
-					.removeItem(
-							new Coordinate(GridWorld.getXCoordinate(),
-									GridWorld.getYCoordinate()));
-			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("");
-			break;
-		case "Bamboo":
-			GridWorld
-					.getInstance()
-					.getWorld()
-					.removeItem(
-							new Coordinate(GridWorld.getXCoordinate(),
-									GridWorld.getYCoordinate()));
-			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setText("");
-		default:
-			break;
-		}
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
+		if(!GridWorld.getInstance().getWorld().hasItem(currentPosition))
+			return;
+		//remove from backend
+		GridWorld.getInstance().getWorld().removeItem(currentPosition);
+		//remove from frontend
+		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
 	}
 
 	public static final void RMWALL_BUTTON_HANDLER(ActionEvent e) {
@@ -858,9 +830,8 @@ public final class ButtonHandlers {
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
-		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
+		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
 			return;
-		}
 		//remove from backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
 		//remove from frontend
@@ -869,59 +840,43 @@ public final class ButtonHandlers {
 
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("EVE_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-
-		for (int y = 0; y < GridWorld.gridButtons.length; y++) {
-			for (int x = 0; x < GridWorld.gridButtons[y].length; x++) {
-				if (GridWorld.gridButtons[y][x].getText().equals("Eve!")) {
-					// frontend move
-					GridWorld.gridButtons[y][x].setGraphic(null);
-
-					// backend move
-					System.out.println("X: " + x + "Y: " + y);
-					Creature eve = GridWorld.getInstance().getWorld()
-							.removeCreature(new Coordinate(y, x));
-					eve.setCoordinates(new Coordinate(GridWorld
-							.getXCoordinate(), GridWorld.getYCoordinate()));
-
-					eve.setDirection(Coordinate.DOWN);
-					GridWorld.getInstance().getWorld().addCreature(eve);
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		//eve not in world yet
+		if(GridWorld.getInstance().getWorld().getEve() == null){
+			Creature eve = new Creature("Eve", currentPosition);
+			GridWorld.getInstance().getWorld().addCreature(eve);
+			return;
+		}
+		//she is in the world somewhere, find her
+		Creature eve = GridWorld.getInstance().getWorld().getEve(); 
+		Coordinate eveLocation = eve.getCoordinates(); 
+		
+		System.out.println("Location " + eveLocation);
+		System.out.println("current " + currentPosition);
+	
+		
+		//check if there is something in the new space already
+		if(GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
+			Creature creature = GridWorld.getInstance().getWorld().creatureAt(currentPosition);
+				if(creature.isEve()){
+					return;
 				}
-			}
+				else{ //friend is there
+					return;
+				}
 		}
-
-		if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-			EvePop();
-		} else {
-			if (GridWorld.getInstance().getWorld().getEve().getDirection() == Coordinate.UP) {
-				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.getEveDownI());
-			} else if (GridWorld.getInstance().getWorld().getEve()
-					.getDirection() == Coordinate.LEFT) {
-				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.getEveLeftI());
-			} else if (GridWorld.getInstance().getWorld().getEve()
-					.getDirection() == Coordinate.RIGHT) {
-				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.getEveRightI());
-			} else {
-				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.getEveUpI());
-			}
-
-			Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
-					GridWorld.getYCoordinate());
-
-			Creature Eve = new Creature("Eve!", cords);
-			Eve.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
-					GridWorld.getYCoordinate()));
-			if (GridWorld.getInstance().getWorld() == null)
-				System.out.println("Uninitalized world");
-			GridWorld.getInstance().getWorld().addCreature(Eve);
-			GridWorld.getInstance().getWorld().printWorld();
+		else{
+			eve.setCoordinates(currentPosition);
+			GridWorld.getInstance().getWorld().addCreature(eve);
+			GridWorld.getInstance().getWorld().removeCreature(eveLocation);
+			GridWorld.getInstance().getWorld().findEve();
+			//front end
+			GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()]
+					.setGraphic(GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()].getGraphic());
+			GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()].setGraphic(null);
 		}
+		
+
 	}
 
 	public static final void FRIENDS_BUTTON_HANDLER(ActionEvent e) {
