@@ -760,9 +760,9 @@ public final class ButtonHandlers {
 		}
 		
 		System.out.println(KarelTable.getInstance().getKarelCode());
-		Interpreter interpreter = new Interpreter(karelCode, world);
+		AdventureModeScene.setInterpreter(new Interpreter(karelCode, world));
 		world.printWorld();
-		interpreter.start(); // starts the code
+		AdventureModeScene.getInterpreter().start(); // starts the code
 		world.printWorld();
 //		do{
 //			interpreter.executeOne();
@@ -771,6 +771,8 @@ public final class ButtonHandlers {
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {
+		Interpreter interpreter = new Interpreter(null, null);
+		interpreter.reset();
 		System.out.println("RESET_BUTTON_HANDLER CALLED");
 	}
 
