@@ -223,6 +223,18 @@ public final class ButtonHandlers {
 		System.out.println("campaignName = " + campaignName);
 		Campaign campaign = Load.loadCampaign(campaignName); 
 		
+		if(campaign.getLevels() != null && !campaign.getLevels().isEmpty()){
+			System.out.println(campaign.getLevels().size());
+			if(campaign.getLevels().get(0) == null){
+				System.out.println("ERROR: getWorld == null");
+				return;
+			}
+			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
+			GridWorld.getInstance().setWorld(campaign.getLevels().get(0).getWorld());
+		}else{
+			System.out.println("ERROR: campaign.getLevel == null");
+		}
+		
 		MainApp.changeScenes(AdventureModeScene.getInstance());
 		try {
 			AdventureModeScene.AdventureModePane.getInstance().add(
