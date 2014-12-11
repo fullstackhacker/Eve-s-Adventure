@@ -1,6 +1,5 @@
 bin/*
 docs/*
-data/*
 ./.DS_Store
 .classpath
 /bin/

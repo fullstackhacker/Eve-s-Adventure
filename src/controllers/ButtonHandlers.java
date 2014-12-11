@@ -77,6 +77,74 @@ public final class ButtonHandlers {
 		System.out.println("LOAD_SESSION_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadSessionScene.getInstance());
 	}
+	
+	public static final void LOAD_SANDBOX_SESSION_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("LOAD_SANDBOX_SESSION_BUTTON_HANDLER CALLED");
+		String levelName = LoadSessionScene.getInstance().getSelectedWorld(); 
+		
+		System.out.println("WORLD TO LOAD: " + levelName); 
+		
+		Level level = Load.loadLevel(levelName, null);
+		
+		if(sandbox){
+			SandboxScene.getInstance().setWorld(level.getWorld());
+			//SandboxScene.karelTable.setKarelCode(level.getKarelCode());
+			MainApp.changeScenes(SandboxScene.getInstance()); 
+			try {
+				SandboxScene.SandboxPane.getInstance().add(
+						GameTabs.getInstance(), 0, 1, 1, 3);
+				SandboxScene.SandboxPane.getInstance().add(
+						KarelTable.getInstance(), 1, 1, 1, 3);
+				SandboxScene.SandboxPane.getInstance().add(
+						ProTips.getInstance(), 0, 4, 2, 1);
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 10; j++) {
+						GridWorld.gridButtons[i][j].setDisable(false);
+					}
+				}
+				SandboxScene.SandboxPane.getInstance().add(
+						SandboxScene.gridWorld, 3, 3, 4, 2);
+
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().ITEMS_TAB);
+			GameTabs.getInstance().getTabs()
+					.add(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs()
+					.add(GameTabs.getInstance().ITEMS_TAB);
+		} else {
+			AdventureModeScene.getInstance().setWorld(level.getWorld());
+			MainApp.changeScenes(AdventureModeScene.getInstance());
+			try {
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						GameTabs.getInstance(), 0, 1, 1, 3);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						KarelTable.getInstance(), 1, 1, 1, 3);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						ProTips.getInstance(), 0, 4, 1, 1);
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 10; j++) {
+						GridWorld.gridButtons[i][j].setDisable(true);
+					}
+				}
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						AdventureModeScene.gridWorld, 3, 3, 4, 2);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						AdventureModeScene.objective, 1, 4, 1, 1);
+
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().CREATURES_TAB);
+			GameTabs.getInstance().getTabs()
+					.remove(GameTabs.getInstance().ITEMS_TAB);
+		}
+	}
 
 	public static final void NEW_SESSION_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("NEW_SESSION_BUTTON_HANDLER CALLED");
@@ -138,9 +206,52 @@ public final class ButtonHandlers {
 		}
 	}
 
-	public static final void LOAD_CAMPAIGN_BUTTON_HANDLER(ActionEvent e) {
+	public static final void LOAD_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("LOAD_CAMPAIGN_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadCampaignScene.getInstance());
+		try {
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					GameTabs.getInstance(), 0, 1, 1, 3);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					KarelTable.getInstance(), 1, 1, 1, 3);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					ProTips.getInstance(), 0, 4, 1, 1);
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 10; j++) {
+					GridWorld.gridButtons[i][j].setDisable(true);
+				}
+			}
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					AdventureModeScene.gridWorld, 3, 3, 4, 2);
+			AdventureModeScene.AdventureModePane.getInstance().add(
+					AdventureModeScene.objective, 1, 4, 1, 1);
+
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		GameTabs.getInstance().getTabs()
+				.remove(GameTabs.getInstance().CREATURES_TAB);
+		GameTabs.getInstance().getTabs()
+				.remove(GameTabs.getInstance().ITEMS_TAB);
+	}
+	
+	
+	public static final void NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("NEW_CAMPAIGN_BUTTON_HANDLER CALLED");
+	}
+	
+	//load campaign 
+	public static final void LOAD_ADVENTURE_SESSION_BUTTON_HANDLER(ActionEvent e){
+		System.out.println("LOAD_ADVENTURE_SESSION_BUTTON_HANDLER");
+		
+		String campaignName = LoadCampaignScene.getInstance().getSelectedCampaign();
+		
+		Campaign campaign = Load.loadCampaign(campaignName); 
+		
+		//AdventureModeScene.getInstance(); 
+		//AdventureModeScene.getInstance().setWorld(campaign.getLevels().get(campaign.getCurrentLevel()).getWorld());
+		MainApp.changeScenes(AdventureModeScene.getInstance());
+		
 	}
 
 	public static final void NEW_CAMPAIGN_BUTTON_HANDLER(ActionEvent e) {
@@ -1137,7 +1248,7 @@ public final class ButtonHandlers {
 				isPause = false;
 				return;
 			}
-			world = AdventureModeScene.getWorld();
+			world = AdventureModeScene.getInstance().getWorld();
 			AdventureModeScene
 					.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());

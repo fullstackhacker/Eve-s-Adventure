@@ -202,19 +202,19 @@ public final class AdventureModeScene extends Scene {
 		super(arg0, arg1, arg2);
 	}
 
-	public static void setWorld(World world1) {
+	public void setWorld(World world1) {
 		world = world1;
 	}
 
-	public static void setGridWorld(GridWorld gridworld1) {
+	public void setGridWorld(GridWorld gridworld1) {
 		gridWorld = gridworld1;
 	}
 
-	public static World getWorld() {
+	public World getWorld() {
 		return world;
 	}
 
-	public static GridWorld getGridWorld() {
+	public GridWorld getGridWorld() {
 		return gridWorld;
 	}
 

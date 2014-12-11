@@ -244,6 +244,7 @@ public class Interpreter {
 				+ this.karelCode.get(this.activeCodeBlock) + "active: "
 				+ this.activeCodeBlock);
 		instruction();
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		if (!validPosition()) {
 			timer.cancel();
 			if (ButtonHandlers.isSandboxMode()) {
@@ -278,6 +279,8 @@ public class Interpreter {
 
 		switch (this.karelCode.get(this.activeCodeBlock)) {
 		// end statements
+		case KarelCode.ELSESTATEMENT: 
+			return;
 		case KarelCode.ENDIF:
 		case KarelCode.ENDWHILE:
 		case KarelCode.ENDELSE:
@@ -295,7 +298,6 @@ public class Interpreter {
 			break;
 		// conditionals
 		case KarelCode.IFSTATEMENT:
-		case KarelCode.ELSESTATEMENT:
 			conditional();
 			this.next();
 			break;
@@ -382,6 +384,7 @@ public class Interpreter {
 
 	public void conditional() { // if statement
 		System.out.println("condtional CALLED");
+		System.out.println("this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
 		if (!this.karelCode.get(this.activeCodeBlock).equals(
 				KarelCode.IFSTATEMENT)){
 			System.out.println("1. if");
@@ -390,49 +393,37 @@ public class Interpreter {
 		if (!this.next()){
 			throw new IllegalValueException("Ill formed code");
 		}
-		/*if (!this.karelCode.get(this.activeCodeBlock).equals(
-				KarelCode.CLOSESTATEMENT)){
-			System.out.println("this.activeCodeBlock =" + this.karelCode.get(this.activeCodeBlock));
-			System.out.println("3. if");
-			return;
-		}*/
-		if (!this.next()){
-			throw new IllegalValueException("Ill formed code");
-		}
-		
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		boolean result = variable();
 		System.out.println("result = " + result);
+		if(!this.next()) throw new IllegalValueException("ill formed karel code");
 		if (result) {
-			if (!this.next())
-				throw new IllegalValueException("Ill formed Karel Code");
 			instructions();
 		} else {
-			System.out.println("TRUE");
+			System.out.println("FALSE");
 			do {
-				this.next();
-			} while (!this.karelCode.get(this.activeCodeBlock).equals(
-					KarelCode.ENDIF));
-			System.out.println("Conditional (variable false): "
-					+ this.karelCode.get(this.activeCodeBlock));
+				if(!this.next()) throw new IllegalValueException("ill formed karel code");
+			} while (!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDIF));
 		}
-		if (!this.next()){
-			return;
-		}
-		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT)&& !result) {
-			if (!this.next())
+		if(!validPosition()) return;
+		System.out.println("1this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
+		System.out.println("2this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
+		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && !result) {
+			if (!this.next()){
 				throw new IllegalValueException("Ill formed Karel Code");
+			}
+			System.out.println("instruction() CALLED-----------------");
 			instructions();
 		}
-		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result) {
-			do {
-				this.next();
-			} while (!this.karelCode.get(this.activeCodeBlock).equals(
-					KarelCode.ENDIF));
+		if(this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result){
+			do{
+				if(!this.next()) throw new IllegalValueException("mal formed karel code");
+			}while(this.karelCode.get(activeCodeBlock).equals(KarelCode.ENDELSE));
 		}
-
 	}
 
 	public void operation() {
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		if (!this.world.getEve().isAwake()) {
 			if (this.karelCode.get(this.activeCodeBlock).equals(
 					KarelCode.WAKEUP)) {
@@ -499,9 +490,9 @@ public class Interpreter {
 		case KarelCode.BAGISEMPTY:
 			return !this.world.getEve().hasBamboo();
 		case KarelCode.FACINGNORTH:
-			return this.world.getEve().getDirection() == Coordinate.UP;
-		case KarelCode.FACINGSOUTH:
 			return this.world.getEve().getDirection() == Coordinate.DOWN;
+		case KarelCode.FACINGSOUTH:
+			return this.world.getEve().getDirection() == Coordinate.UP;
 		case KarelCode.FACINGEAST:
 			return this.world.getEve().getDirection() == Coordinate.RIGHT;
 		case KarelCode.FACINGWEST:

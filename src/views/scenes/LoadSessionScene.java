@@ -44,7 +44,7 @@ public class LoadSessionScene extends Scene {
 			setupObjects();
 			this.setCenter(addVBox());
 			
-			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::LOAD_SESSION_BUTTON_HANDLER);
+			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::LOAD_SANDBOX_SESSION_BUTTON_HANDLER);
 			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLER);
 		}
 		
@@ -65,11 +65,15 @@ public class LoadSessionScene extends Scene {
 			CANCEL_BUTTON.setId("cancel-button");
 		}
 		
+		private String getSelectedWorld(){
+			return this.sessionsListView.getSelectionModel().getSelectedItem();
+		}
+		
 		private void addSessions(){
-			File worldsDir = new File(LoadSessionPane.WORLDDIR); 
-			if(!worldsDir.exists()) return;
+			File levelDir = new File(LoadSessionPane.LEVELDIR); 
+			if(!levelDir.exists()) return;
 			
-			File[] listOfFiles = worldsDir.listFiles();
+			File[] listOfFiles = levelDir.listFiles();
 			for (int i = 0; i < listOfFiles.length; i++) {
 			      if (listOfFiles[i].isFile()) {
 			        //System.out.println("File " + listOfFiles[i].getName());
@@ -110,6 +114,10 @@ public class LoadSessionScene extends Scene {
 		return (LoadSessionScene.instanceOfLoadSessionScene == null) ? instanceOfLoadSessionScene = 
 			new LoadSessionScene(LoadSessionPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
 			instanceOfLoadSessionScene;
+	}
+	
+	public String getSelectedWorld(){
+		return LoadSessionPane.getInstance().getSelectedWorld();
 	}
 	
 }
