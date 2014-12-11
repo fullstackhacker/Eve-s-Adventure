@@ -101,9 +101,9 @@ public class Interpreter {
 	 * Executes the current code block and then moves to the next one
 	 */
 	public void executeOne() {
-		if((activeCodeBlock >= 0 && activeCodeBlock < this.karelCode.size())){
+		if ((activeCodeBlock >= 0 && activeCodeBlock < this.karelCode.size())) {
 			KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
-			this.instruction();			
+			this.instruction();
 		}
 	}
 
@@ -126,17 +126,17 @@ public class Interpreter {
 		System.out.println("----- RESET WORLD -----");
 		this.world.printWorld();
 		this.world.overwrite(startWorld);
-		
+
 		System.out.println("----- RESET WORLD -----");
 		this.world.printWorld();
 
 		for (int row = 0; row < this.gridButtons.length; row++) {
 			for (int col = 0; col < this.gridButtons[row].length; col++) {
 				// going to be swapped with the images
-				try{
-					GridWorld.gridButtons[row][col].setGraphic(this.gridButtons[row][col].getGraphic());
-				}
-				catch(NullPointerException e){
+				try {
+					GridWorld.gridButtons[row][col]
+							.setGraphic(this.gridButtons[row][col].getGraphic());
+				} catch (NullPointerException e) {
 					GridWorld.gridButtons[row][col].setGraphic(null);
 				}
 			}
@@ -222,7 +222,8 @@ public class Interpreter {
 		if (!validPosition()) {
 			timer.cancel();
 			if (ButtonHandlers.isSandboxMode()) {
-				SandboxScene.PLAY.setDisable(false);;
+				SandboxScene.PLAY.setDisable(false);
+				;
 			} else {
 				AdventureModeScene.PLAY.setDisable(false);
 			}

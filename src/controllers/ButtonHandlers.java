@@ -1,16 +1,27 @@
 package controllers;
 
+import java.awt.List;
+import java.io.File;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Coordinate;
+import models.campaign.Campaign;
 import models.campaign.KarelCode;
 import models.campaign.Level;
 import models.campaign.World;
@@ -1167,18 +1178,63 @@ public final class ButtonHandlers {
 	}
 
 	public static final void SAVE_MENU_HANDLER(ActionEvent e) {
+		String DATADIR = "data" + File.separator;
+		String WORLDDIR = DATADIR + "worlds" + File.separator;
+		String LEVELDIR = DATADIR + "levels" + File.separator;
+		String CAMPAIGNDIR = DATADIR + "campaigns" + File.separator;
+		String WORLDEXT = ".world";
+		String NAMEFILENAME = "name.dat";
+		String DESCRIPTIONFILENAME = "description.dat";
+		String OBJECTIVEFILENAME = "objectives.dat";
+		String CURRENTLEVELFILENAME = "currentLevel.dat";
+		String KARELCODEFILENAME = "karelcode.dat";
+		String BAMBOOBJECTIVEFILENAME = "bambooObjective.dat";
+
 		String worldName = "";
 
 		final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		VBox dialogVbox = new VBox(20);
-		dialogVbox.getChildren().add(new Text("Name of world:"));
-		Scene dialogScene = new Scene(dialogVbox, 300, 200);
-		final Button REPLACE = new Button("Replace");
-		REPLACE.setMaxWidth(100);
+		dialogVbox.getChildren().add(new Text("Name of level:"));
+		Scene dialogScene = new Scene(dialogVbox, 400, 450);
+
+		ArrayList<String> campaigns = new ArrayList<String>();
+
+		if (SandboxScene.campaigns != null) {
+			for (int i = 0; i < SandboxScene.campaigns.size(); i++) {
+				campaigns.add(SandboxScene.campaigns.get(i).getName());
+			}
+		}
+
+		campaigns.add("NEW");
+		ObservableList<String> observableList = FXCollections
+				.observableList(campaigns);
+
+		final TextField NAME_TF = new TextField();
+		final Label DESCRIPTION_LABEL = new Label("Write a description");
+		final TextField DESCRIPTION_TF = new TextField();
+		final Label CAMPAIGN_LABEL = new Label("Choose a campaign");
+		final ComboBox<String> CAMPAIGN_CB = new ComboBox<String>(
+				observableList);
+		CAMPAIGN_CB.setEditable(true);
+		final Button SAVE = new Button("Save");
 		final Button CANCEL = new Button("Cancel");
-		REPLACE.setMaxWidth(100);
-		dialogVbox.getChildren().addAll(REPLACE, CANCEL);
+
+		NAME_TF.setPrefWidth(200);
+		NAME_TF.setMaxWidth(200);
+		DESCRIPTION_TF.setPrefWidth(200);
+		DESCRIPTION_TF.setMaxWidth(200);
+		CAMPAIGN_CB.setPrefWidth(200);
+		CAMPAIGN_CB.setMaxWidth(200);
+		SAVE.setPrefWidth(100);
+		SAVE.setMaxWidth(100);
+		CANCEL.setPrefWidth(100);
+		CANCEL.setMaxWidth(100);
+
+		dialogVbox.getChildren().addAll(NAME_TF, DESCRIPTION_LABEL,
+				DESCRIPTION_TF, CAMPAIGN_LABEL, CAMPAIGN_CB, SAVE, CANCEL);
+		dialogVbox.setAlignment(Pos.CENTER);
+		dialogVbox.setPadding(new Insets(10, 10, 10, 10));
 		dialog.setScene(dialogScene);
 		dialog.show();
 
@@ -1188,7 +1244,76 @@ public final class ButtonHandlers {
 			}
 		});
 
-		Save.saveWorld(SandboxScene.getWorld());
+		SAVE.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.out.println("Clicked on save");
+
+				if (NAME_TF.getText() == null || NAME_TF.getText().equals("")) {
+					System.out.println("REQUIRED to enter name");
+					return;
+				}
+
+				if (CAMPAIGN_CB.getValue().equals("NEW")) {
+					System.out.println("Selected value is NEW");
+
+					final Stage campaign_dialog = new Stage();
+					campaign_dialog.initModality(Modality.APPLICATION_MODAL);
+					VBox vbox = new VBox(20);
+					vbox.getChildren().add(new Text("Name of new campaign:"));
+					Scene dialScene = new Scene(vbox, 400, 300);
+
+					final TextField NAMECAMPAIGN_TF = new TextField();
+					final Button SUBMIT = new Button("SUBMIT");
+					final Button CANCEL = new Button("CANCEL");
+
+					NAMECAMPAIGN_TF.setPrefWidth(200);
+					NAMECAMPAIGN_TF.setMaxWidth(200);
+					SUBMIT.setPrefWidth(100);
+					SUBMIT.setMaxWidth(100);
+					CANCEL.setPrefWidth(100);
+					CANCEL.setMaxWidth(100);
+
+					vbox.getChildren().addAll(NAMECAMPAIGN_TF, SUBMIT, CANCEL);
+					vbox.setAlignment(Pos.CENTER);
+					vbox.setPadding(new Insets(10, 10, 10, 10));
+					campaign_dialog.setScene(dialScene);
+					campaign_dialog.show();
+
+					CANCEL.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent e) {
+							campaign_dialog.close();
+						}
+					});
+
+					SUBMIT.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent e) {
+							observableList.add(NAMECAMPAIGN_TF.getText());
+							CAMPAIGN_CB.setValue(NAMECAMPAIGN_TF.getText());
+							Save.saveCampaign(new Campaign(NAMECAMPAIGN_TF
+									.getText(), "Default Description"));
+							campaign_dialog.close();
+						}
+					});
+				} else {
+					// Add campaign
+					for (int i = 0; i < SandboxScene.campaigns.size(); i++) {
+						if (SandboxScene.campaigns.get(i).getName()
+								.equals(CAMPAIGN_CB.getValue())) {
+							SandboxScene.campaigns.get(i).addLevel(
+									new Level(SandboxScene.getWorld(),
+											DESCRIPTION_TF.getText()));
+							Save.saveCampaign(SandboxScene.campaigns.get(i));
+						}
+					}
+					Save.saveLevel(new Level(SandboxScene.getWorld(),
+							DESCRIPTION_TF.getText()), CAMPAIGNDIR
+							+ CAMPAIGN_CB.getValue());
+
+					dialog.close();
+				}
+			}
+		});
+
 		System.out.println("Saved!");
 	}
 }
