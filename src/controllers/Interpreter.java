@@ -270,7 +270,7 @@ public class Interpreter {
 			return;
 		}
 		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP)) {
-
+			
 			return;
 		}
 		instructions();
@@ -361,18 +361,17 @@ public class Interpreter {
 			if (!this.next())
 				throw new IllegalValueException("Ill formed Karel Code");
 			int times = positiveNumbers();
-			System.out.println("int times: " + times);
-			int currentInstruction = this.activeCodeBlock;
-			if (!this.next())
-				throw new IllegalValueException("Ill formed Karel Code");
+			System.out.println("activeCode Block: " + this.karelCode.get(this.activeCodeBlock));
+			int currentInstruction = this.activeCodeBlock-2;
 			if (this.currentLoopCounter < times) {
 				instructions();
 				this.currentLoopCounter++;
 				this.activeCodeBlock = currentInstruction;
+				System.out.println("LOOP FINISHED INSTRUCTIONS: AND RESET: " + this.karelCode.get(this.activeCodeBlock));
 			} else {
 				do {
 					if (!this.next())
-						throw new IllegalValueException("Ill formed Karel Code");
+						return;
 				} while (!this.karelCode.get(this.activeCodeBlock).equals(
 						KarelCode.ENDLOOP));
 			}
