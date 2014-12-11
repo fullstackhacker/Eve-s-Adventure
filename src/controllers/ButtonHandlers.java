@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -992,7 +993,6 @@ public final class ButtonHandlers {
 				.getYCoordinate()].setId("rightWall");
 	}
 
-	//shrub on shrub: nothing
 	//shrub on Eve: can co-exist, add shrub
 	//shrub on Friend: can co-exist, add shrub
 	//shrub on bamboo: add shrub that contains bamboo
@@ -1000,16 +1000,13 @@ public final class ButtonHandlers {
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("SHRUB_BUTTON_HANDLER");
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
-		//if there is a creature
-		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
-			continue; //would change graphic to something where you see both of them
-		//if Item is here
-		if (!GridWorld.getInstance().getWorld().hasItem(currentPosition)){
-			Item oldItem = GridWorld.getInstance().getWorld()
-					.ItemAt(currentPosition);
-			if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-			popup("Shrub");
+		//if there is a creature, would change graphic to something where you see both of them
+		//if there is item
+		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
+			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
+			
+			if (oldObject.getName().equals("Tree")) {
+			popup("Shrub", "Tree");
 		} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getShrubI());
@@ -1022,17 +1019,23 @@ public final class ButtonHandlers {
 		GridWorld.getInstance().getWorld().printWorld();
 	}
 }
+	//Tree on Eve - go
+	//Tree on Friend - go
+	//Tree on Shrub - ask to replace
+	//Tree on Bamboo - ask to replace
 	public static final void TREE_BUTTON_HANDLER(ActionEvent e) {
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Eve!"))
-			EvePop();
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		//if there is a creature, would change graphic to something where you see both of them
+		//if there is item
+		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
+			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-			popup("Tree");
-
-		} else {
+			if (oldObject.getName().equals("Shrub"))
+			popup("Tree", "Shrub");
+			else if (oldObject.equals("Bamboo"))
+				popup("Tree", "Bamboo");
+		} 
+			else {
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getTreeI());
 
@@ -1047,18 +1050,22 @@ public final class ButtonHandlers {
 		}
 	}
 
+//Bamboo on Eve - ?
+//Bamboo on Friend - ?
+//Bamboo on Tree - ask to replace
+//Bamboo on Shrub - increment value of bamboo in that shrub, let user know this happened
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e) {
 		GridWorld.getInstance().getWorld().incrementBambooObjective();
 		System.out.println("BAMBOO_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Eve!"))
-			EvePop();
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		//if there is a creature, would change graphic to something where you see both of them
+		//if there is item
+		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
+			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-			popup("Bamboo");
-		} else {
+			if (oldObject.getName().equals("Tree"))
+				popup("Bamboo", "Tree");
+		} 
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getBambooI());
 			Bamboo bamboo = new Bamboo(4);
@@ -1069,7 +1076,7 @@ public final class ButtonHandlers {
 			GridWorld.getInstance().getWorld().addItem(bamboo);
 			GridWorld.getInstance().getWorld().printWorld();
 		}
-	}
+	
 
 	/**
 	 * CreaturesTab.java
@@ -1077,7 +1084,7 @@ public final class ButtonHandlers {
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
-		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
+		if (GridWorld.getInstance().getWorld().hasCreature(currentPosition))
 			return;
 		//backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
@@ -1355,20 +1362,71 @@ public final class ButtonHandlers {
 
 	public static final void SAVES_MENU_HANDLER(ActionEvent e) {
 		System.out.println("SaveS Called!");
+		String DATADIR = "data" + File.separator;
+
+		final Stage dialog = new Stage();
+		dialog.initModality(Modality.APPLICATION_MODAL);
+		VBox dialogVbox = new VBox(20);
+		dialogVbox.getChildren().add(new Text("Name of level:"));
+		Scene dialogScene = new Scene(dialogVbox, 400, 450);
+
+		final TextField NAME_TF = new TextField();
+		final Label DESCRIPTION_LABEL = new Label("Write a description");
+		final TextField DESCRIPTION_TF = new TextField();
+		final Button SAVE = new Button("Save");
+		final Button CANCEL = new Button("Cancel");
+
+		NAME_TF.setPrefWidth(200);
+		NAME_TF.setMaxWidth(200);
+		DESCRIPTION_TF.setPrefWidth(200);
+		DESCRIPTION_TF.setMaxWidth(200);
+		SAVE.setPrefWidth(100);
+		SAVE.setMaxWidth(100);
+		CANCEL.setPrefWidth(100);
+		CANCEL.setMaxWidth(100);
+
+		dialogVbox.getChildren().addAll(NAME_TF, DESCRIPTION_LABEL,
+				DESCRIPTION_TF,
+				SAVE, CANCEL);
+		dialogVbox.setAlignment(Pos.CENTER);
+		dialogVbox.setPadding(new Insets(10, 10, 10, 10));
+		dialog.setScene(dialogScene);
+		dialog.show();
+
+		CANCEL.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				dialog.close();
+			}
+		});
+
+		SAVE.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.out.println("Clicked on save");
+				if (NAME_TF.getText() == null || NAME_TF.getText().equals("")) {
+					System.out.println("REQUIRED to enter name");
+					return;
+				}
+				
+				//Iterator<String> levelNames = Load.getLevels();
+				
+//				while(levelNames.hasNext()){
+//					if(levelNames.next().equals(NAME_TF.getText())){
+//						// TODO: POPUP message asking if user would like to overwrite
+//						return;
+//					}
+//				}
+				
+				SandboxScene.getWorld().setName(NAME_TF.getText());
+				Load.levels.add(new Level(SandboxScene.getWorld(), DESCRIPTION_TF.getText(), KarelTable.getInstance()
+						.getKarelCode()));
+				Save.saveLevel(new Level(SandboxScene.getWorld(), DESCRIPTION_TF.getText(), KarelTable.getInstance()
+						.getKarelCode()), null);
+			}
+		});
 	}
 
 	public static final void SAVEA_MENU_HANDLER(ActionEvent e) {
 		String DATADIR = "data" + File.separator;
-		String WORLDDIR = DATADIR + "worlds" + File.separator;
-		String LEVELDIR = DATADIR + "levels" + File.separator;
-		String CAMPAIGNDIR = DATADIR + "campaigns" + File.separator;
-		String WORLDEXT = ".world";
-		String NAMEFILENAME = "name.dat";
-		String DESCRIPTIONFILENAME = "description.dat";
-		String OBJECTIVEFILENAME = "objectives.dat";
-		String CURRENTLEVELFILENAME = "currentLevel.dat";
-		String KARELCODEFILENAME = "karelcode.dat";
-		String BAMBOOBJECTIVEFILENAME = "bambooObjective.dat";
 
 		final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
@@ -1377,13 +1435,12 @@ public final class ButtonHandlers {
 		Scene dialogScene = new Scene(dialogVbox, 400, 450);
 
 		ArrayList<String> campaigns = new ArrayList<String>();
-
-		if (SandboxScene.campaigns != null) {
-			for (int i = 0; i < SandboxScene.campaigns.size(); i++) {
-				campaigns.add(SandboxScene.campaigns.get(i).getName());
-			}
+		
+		Iterator<String> campaignsIterator = Load.getCampaigns();
+		if(campaignsIterator != null){
+			while(campaignsIterator.hasNext())
+				campaigns.add(campaignsIterator.next());
 		}
-
 		campaigns.add("NEW");
 		ObservableList<String> observableList = FXCollections
 				.observableList(campaigns);
@@ -1405,8 +1462,6 @@ public final class ButtonHandlers {
 				"Objective: "
 						+ (GridWorld.getInstance().getWorld().getFindObj() == true ? "Find Friend"
 								: "Collect all Bamboo"));
-		// final ComboBox<String> OBJECTIVES_CB = new
-		// ComboBox<String>(observableListObjectives);
 		final Button SAVE = new Button("Save");
 		final Button CANCEL = new Button("Cancel");
 
@@ -1489,23 +1544,25 @@ public final class ButtonHandlers {
 							Campaign campaign = new Campaign(NAMECAMPAIGN_TF
 									.getText(), "Default Description");
 							Save.saveCampaign(campaign);
-							SandboxScene.campaigns.add(campaign);
+							Load.campaigns.add(campaign);
 							campaign_dialog.close();
 						}
 					});
 				} else {
 					// Add campaign
-					for (int i = 0; i < SandboxScene.campaigns.size(); i++) {
-						if (SandboxScene.campaigns.get(i).getName()
+					for (int i = 0; i < Load.campaigns.size(); i++) {
+						if (Load.campaigns.get(i).getName()
 								.equals(CAMPAIGN_CB.getValue())) {
+							System.out.println("NAEMTF: " + NAME_TF.getText());
+							
 							SandboxScene.getWorld().setName(NAME_TF.getText());
 							Level level = new Level(SandboxScene.getWorld(),
 									DESCRIPTION_TF.getText());
 							level.getWorld().setFindObj(
 									GridWorld.getInstance().getWorld()
 											.getFindObj());
-							SandboxScene.campaigns.get(i).addLevel(level);
-							Save.saveCampaign(SandboxScene.campaigns.get(i));
+							Load.campaigns.get(i).addLevel(level);
+							Save.saveCampaign(Load.campaigns.get(i));
 							break;
 						}
 					}
@@ -1515,7 +1572,6 @@ public final class ButtonHandlers {
 			}
 		});
 
-		System.out.println("Saved!");
 	}
 
 	public static final void SAVE_MENU_HANDLER(ActionEvent e) {

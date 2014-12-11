@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import views.scenes.SandboxScene;
 import models.campaign.Campaign;
@@ -28,6 +29,9 @@ public class Load {
 	private static final String CURRENTLEVELFILENAME = "currentLevel.dat";
 	private static final String KARELCODEFILENAME = "karelcode.dat";
 	private static final String BAMBOOBJECTIVEFILENAME = "bambooObjective.dat";
+	
+	public static ArrayList<Level> levels = new ArrayList<Level>();
+	public static ArrayList<Campaign> campaigns = new ArrayList<Campaign>();
 
 	/**
 	 * Loads the serialized file, deserializes it, and creates the World
@@ -313,8 +317,24 @@ public class Load {
 	 * 
 	 * @return A list of level names
 	 */
-	public static ArrayList<String> getLevels() {
-		return null;
+	public static Iterator<String> getLevels() {
+		File levelsDir = new File("data" + File.separator + "levels"
+				+ File.separator);
+		if (!levelsDir.isDirectory())
+			return null;
+		File[] listOfFiles = levelsDir.listFiles();
+		ArrayList<String> Levels = new ArrayList<String>();
+
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isDirectory()) {
+					Levels.add(listOfFiles[i].getName());
+					levels.add(loadLevel(listOfFiles[i].getName(), null));
+				}
+			}
+		}
+		
+		return Levels.iterator();
 	}
 
 	/**
@@ -322,8 +342,24 @@ public class Load {
 	 * 
 	 * @return A list of campaign names
 	 */
-	public static ArrayList<String> getCampaigns() {
-		return null;
+	public static Iterator<String> getCampaigns() {
+		File campaignsDir = new File("data" + File.separator + "campaigns"
+				+ File.separator);
+		if (!campaignsDir.isDirectory())
+			return null;
+		File[] listOfFiles = campaignsDir.listFiles();
+		ArrayList<String> Campaigns = new ArrayList<String>();
+
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isDirectory()) {
+					Campaigns.add(listOfFiles[i].getName());
+					campaigns.add(loadCampaign(listOfFiles[i].getName()));
+				}
+			}
+		}
+		
+		return Campaigns.iterator();
 	}
 
 }

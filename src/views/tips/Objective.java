@@ -21,9 +21,9 @@ public final class Objective extends GridPane {
 		final Label header = new Label("Objective! - ");
 		final Label obj = new Label();
 		if(!GridWorld.getInstance().getWorld().getFindObj()){
-			obj.setText("Find and collect all the bamboo androids!");
+			obj.setText("Find and collect all the bamboo!");
 		} else {
-			obj.setText("Find Eve's friend and save her from certain death!");
+			obj.setText("Find Eve's friend and save her!");
 		}
 		
 		// this.getChildren().addAll(header, obj);

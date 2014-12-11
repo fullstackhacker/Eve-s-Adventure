@@ -57,6 +57,7 @@ public class Level implements Serializable {
 	 */
 	public Level(World world, String description, ArrayList<String> karelCode){
 		this.world = world;
+		this.name = world.getName();
 		this.description = description;
 		this.karelCode = karelCode;
 	}
