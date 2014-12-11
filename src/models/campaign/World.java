@@ -987,9 +987,14 @@ public class World implements Serializable {
 
 		if (!verifyCoordinate(front))
 			return false;
-
-		System.out.println("HERE");
-		return !this.getSquareAt(front).hasCreature();
+		
+		if(this.getSquareAt(front).hasItem() && this.getSquareAt(front).currentItem() instanceof Tree){
+			return false; 
+		}
+		
+		if(this.getSquareAt(front).hasCreature()) return false; 
+		
+		return true; 
 	}
 
 	/**

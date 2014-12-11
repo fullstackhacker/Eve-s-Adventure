@@ -48,6 +48,8 @@ public class Interpreter {
 	private int currentLoopCounter;
 
 	private boolean currentWhileResult;
+	
+	private boolean inRepetition;
 
 	/**
 	 * Constructor for the parser
@@ -273,7 +275,7 @@ public class Interpreter {
 			
 			return;
 		}
-		//instructions();
+		if(this.inRepetition) instructions();
 		// player.play();
 	}
 
@@ -344,6 +346,7 @@ public class Interpreter {
 				throw new IllegalValueException("Ill formed Karel Code");
 			this.currentWhileResult = variable();
 			if (this.currentWhileResult) {
+				this.inRepetition =  true;
 				if (!this.next())
 					return;
 				instructions();
@@ -351,6 +354,7 @@ public class Interpreter {
 			}
 			if (!this.currentWhileResult) {
 				do {
+					this.inRepetition = false;
 					if (!this.next())
 						throw new IllegalValueException("Ill formed Karel Code");
 				} while (!this.karelCode.get(this.activeCodeBlock).equals(
@@ -364,11 +368,13 @@ public class Interpreter {
 			System.out.println("activeCode Block: " + this.karelCode.get(this.activeCodeBlock));
 			int currentInstruction = this.activeCodeBlock-2;
 			if (this.currentLoopCounter < times) {
+				this.inRepetition = true;
 				instructions();
 				this.currentLoopCounter++;
 				this.activeCodeBlock = currentInstruction;
 				System.out.println("LOOP FINISHED INSTRUCTIONS: AND RESET: " + this.karelCode.get(this.activeCodeBlock));
 			} else {
+				this.inRepetition = false;
 				do {
 					if (!this.next())
 						return;
