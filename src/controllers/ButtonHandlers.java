@@ -778,11 +778,11 @@ public final class ButtonHandlers {
 		System.out.println("BACK_BUTTON_HANDLER CALLED");
 		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
 			if(AdventureModeScene.getInterpreter() != null){
-				AdventureModeScene.getInterpreter().reverseInstruction();
+				//AdventureModeScene.getInterpreter().reverseInstruction();
 			}
 		}else if((sandbox) && (SandboxScene.PLAY != null) && (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)){
 			if(SandboxScene.getInterpreter() != null){
-				SandboxScene.getInterpreter().reverseInstruction();
+				//SandboxScene.getInterpreter().reverseInstruction();
 			}
 		}
 	}

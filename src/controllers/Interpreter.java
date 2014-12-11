@@ -186,7 +186,7 @@ public class Interpreter {
 					}
 				});
 			}
-		}, 0, 2000);
+		}, 0, 1000);
 	}
 
 	/*
@@ -384,9 +384,8 @@ public class Interpreter {
 			if (this.karelCode.get(this.activeCodeBlock).equals(
 					KarelCode.WAKEUP)) {
 				this.world.getEve().setAwake(true);
-			} else {
-				return;
 			}
+			return;
 		}
 
 		switch (this.karelCode.get(this.activeCodeBlock)) {
@@ -470,7 +469,7 @@ public class Interpreter {
 
 	/* Reverser Instruction */
 	public void reverseInstruction() {
-		switch (this.karelCode.get(this.activeCodeBlock)) {
+		switch (this.karelCode.get(this.activeCodeBlock--)) {
 		case KarelCode.MOVE:
 		case KarelCode.TURNRIGHT:
 		case KarelCode.SLEEP:
