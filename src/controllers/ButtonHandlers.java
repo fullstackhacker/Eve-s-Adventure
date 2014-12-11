@@ -1175,6 +1175,14 @@ public final class ButtonHandlers {
 		GridWorld.getInstance().getWorld().setFindObj(true);
 		SandboxScene.getInstance().topMenu.collect.setDisable(false);
 		SandboxScene.getInstance().topMenu.find.setDisable(true);
+	} 
+	
+	public static final void SAVEA_MENU_HANDLER(ActionEvent e) {
+		System.out.println("SaveA Called!");
+	}
+	
+	public static final void SAVES_MENU_HANDLER(ActionEvent e) {
+		System.out.println("SaveS Called!");
 	}
 
 	public static final void SAVE_MENU_HANDLER(ActionEvent e) {
