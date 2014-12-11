@@ -1035,10 +1035,11 @@ public final class ButtonHandlers {
 		//if there is item
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
-			
-			if (oldObject.getName().equals("Tree")) {
+			if (oldObject.getName().equals("Tree"))
 			popup("Shrub", "Tree");
-		} else
+		} 
+		else{
+			System.out.println("IN THE ELSE");
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getShrubI());
 		Shrub shrub = new Shrub(4, false);
