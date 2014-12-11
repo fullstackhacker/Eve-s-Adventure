@@ -49,7 +49,7 @@ public final class AdventureModeScene extends Scene {
 	
 	public static final class AdventureModePane extends GridPane {
 
-		public static AdventureModePane instanceOfAdventurePane = new AdventureModePane();
+		public static AdventureModePane instanceOfAdventurePane = null;
 
 		//private ImageView imageBack = new ImageView(new Image(
 		//		"./Images/ArrowLeft.png"));
@@ -100,7 +100,7 @@ public final class AdventureModeScene extends Scene {
 			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			gridWorld = GridWorld.getInstance();
-			objective = Objective.getInstance();
+			//objective = Objective.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -213,12 +213,14 @@ public final class AdventureModeScene extends Scene {
 		}
 
 		public static AdventureModePane getInstance() {
+			if(instanceOfAdventurePane == null){
+				instanceOfAdventurePane = new AdventureModePane();
+			}
 			return instanceOfAdventurePane;
 		}
 	}
 
-	private static AdventureModeScene instanceOfAdventureModeScene = new AdventureModeScene(AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT);
-	
+	private static AdventureModeScene instanceOfAdventureModeScene = null; 
 	private AdventureModeScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
@@ -240,9 +242,12 @@ public final class AdventureModeScene extends Scene {
 	}
 
 	public static AdventureModeScene getInstance() {
-		return (AdventureModeScene.instanceOfAdventureModeScene == null) ? instanceOfAdventureModeScene = new AdventureModeScene(
-				AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH,
-				MainApp.WINDOW_HEIGHT) : instanceOfAdventureModeScene;
+		if(AdventureModeScene.instanceOfAdventureModeScene == null){
+			instanceOfAdventureModeScene = new AdventureModeScene(
+					AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH,
+					MainApp.WINDOW_HEIGHT);
+		}
+		return instanceOfAdventureModeScene;
 	}
 	public static Interpreter getInterpreter() {
 		return interpreter;
