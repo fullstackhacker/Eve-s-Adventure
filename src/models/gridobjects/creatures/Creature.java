@@ -209,7 +209,7 @@ public class Creature extends GridObject {
 	}
 	
 	public Creature copy(){
-		Creature creature = new Creature(this.getName(), this.getCoordinates()); 
+		Creature creature = new Creature(this.getName(), this.getCoordinates().copy()); 
 		creature.numberOfBamboo = this.numberOfBamboo; 
 		creature.direction = this.direction; 
 		creature.isAwake = this.isAwake; 

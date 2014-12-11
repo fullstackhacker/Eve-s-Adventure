@@ -118,15 +118,22 @@ public class Interpreter {
 	 */
 	public void reset() {
 		this.activeCodeBlock = 0;
+		System.out.println("----- RESET WORLD -----");
+		this.world.printWorld();
 		this.world.overwrite(startWorld);
+		
+		System.out.println("----- RESET WORLD -----");
+		this.world.printWorld();
 
-		for (int row = 0; row < gridButtons.length; row++) {
-			for (int col = 0; col < gridButtons[row].length; col++) {
+		for (int row = 0; row < this.gridButtons.length; row++) {
+			for (int col = 0; col < this.gridButtons[row].length; col++) {
 				// going to be swapped with the images
-				if (GridWorld.gridButtons[row][col] != null
-						&& gridButtons[row][col] != null)
-					GridWorld.gridButtons[row][col]
-							.setGraphic(gridButtons[row][col].getGraphic());
+				try{
+					GridWorld.gridButtons[row][col].setGraphic(this.gridButtons[row][col].getGraphic());
+				}
+				catch(NullPointerException e){
+					GridWorld.gridButtons[row][col].setGraphic(null);
+				}
 			}
 		}
 		
