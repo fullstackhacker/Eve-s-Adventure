@@ -667,21 +667,18 @@ public final class ButtonHandlers {
 	 * CreaturesTab.java
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-
+		
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
+		
+		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
+			return;
 		}
-		System.out.println("RMCREATURE_BUTTON_HANDLER");
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].setGraphic(null);
-		GridWorld
-				.getInstance()
-				.getWorld()
-				.removeCreature(
-						new Coordinate(GridWorld.getXCoordinate(), GridWorld
-								.getYCoordinate()));
+		
+		//remove from backend
+		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
+		
+		//remove from frontend
+		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
 	}
 
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e) {
