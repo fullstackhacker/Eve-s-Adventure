@@ -609,7 +609,7 @@ public final class KarelTable extends GridPane {
 	}
 	
 	public void setSelectedIndex(int index){
-		if(!karelCode.isEmpty() && (index >= 0 || index < karelCode.size())){
+		if(!karelCode.isEmpty() && (index >= 0 && index < karelCode.size())){
 			this.listView.getSelectionModel().clearAndSelect(index);
 		}
 	}

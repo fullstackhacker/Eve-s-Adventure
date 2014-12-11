@@ -82,6 +82,7 @@ public class Interpreter {
 	 */
 	public int previous() {
 		this.activeCodeBlock--;
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		return this.activeCodeBlock;
 	}
 
@@ -89,6 +90,8 @@ public class Interpreter {
 	 * Executes the current code block and then moves to the next one
 	 */
 	public void executeOne() {
+		//TODO Fix this
+		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
 		this.instruction();
 	}
 
@@ -124,6 +127,12 @@ public class Interpreter {
 		
 		KarelTable.getInstance().setSelectedIndex(0);
 		
+	}
+	
+	public void pause(){
+		if(timer != null){
+			timer.cancel();
+		}
 	}
 
 	/**
@@ -438,7 +447,7 @@ public class Interpreter {
 		case KarelCode.WAKEUP:
 		case KarelCode.PUTBAMBOO:
 		case KarelCode.PICKBAMBOO:
-			// reverseOperation();
+			reverseOperation();
 			return;
 		case KarelCode.ENDIF:
 		case KarelCode.ENDELSE: 
@@ -450,6 +459,16 @@ public class Interpreter {
 			return; 
 		default: 
 			throw new IllegalValueException("Illegal Set of Karel Code: " + this.karelCode.get(this.activeCodeBlock)); 
+		}
+	}
+	
+	private void reverseOperation(){
+		switch(this.karelCode.get(this.activeCodeBlock)){
+			case KarelCode.MOVE:
+				this.world.moveEve();
+				break;
+			default:
+				break;
 		}
 	}
 

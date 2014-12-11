@@ -771,10 +771,28 @@ public final class ButtonHandlers {
 
 	public static final void BACK_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("BACK_BUTTON_HANDLER CALLED");
+		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
+			if(AdventureModeScene.getInterpreter() != null){
+				AdventureModeScene.getInterpreter().reverseInstruction();
+			}
+		}else if((sandbox) && (SandboxScene.PLAY != null) && (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)){
+			if(SandboxScene.getInterpreter() != null){
+				SandboxScene.getInterpreter().reverseInstruction();
+			}
+		}
 	}
 
 	public static final void FORWARD_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("FORWARD_BUTTON_HANDLER CALLED");
+		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
+			if(AdventureModeScene.getInterpreter() != null){
+				AdventureModeScene.getInterpreter().executeOne();
+			}
+		}else if((sandbox) && (SandboxScene.PLAY != null) && (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)){
+			if(SandboxScene.getInterpreter() != null){
+				SandboxScene.getInterpreter().executeOne();
+			}
+		}
 	}
 
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e) {
@@ -791,7 +809,7 @@ public final class ButtonHandlers {
 				//TODO have a pause() in Interpreter
 				AdventureModeScene.PLAY.setGraphic(null);
 				AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePlay);
-				AdventureModeScene.getInterpreter().reset();
+				AdventureModeScene.getInterpreter().pause();;
 				return;
 			}
 			world = AdventureModeScene.getWorld();
@@ -806,7 +824,7 @@ public final class ButtonHandlers {
 				//TODO have a pause() in Interpreter
 				SandboxScene.PLAY.setGraphic(null);
 				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
-				SandboxScene.getInterpreter().reset();
+				SandboxScene.getInterpreter().pause();
 				return;
 			}
 			world = SandboxScene.getWorld();
