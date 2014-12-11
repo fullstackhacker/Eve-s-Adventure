@@ -251,6 +251,12 @@ public final class ButtonHandlers {
 				System.out.println("ERROR: getWorld == null");
 				return;
 			}
+			
+			if(campaign.getLevels().get(0).getKarelCode() != null){
+				campaign.getLevels().get(0).getKarelCode().add("if");
+				System.out.println(campaign.getLevels().get(0).getKarelCode());
+				KarelTable.getInstance().setKarelCode(campaign.getLevels().get(0).getKarelCode());
+			}
 			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
 			GridWorld.getInstance().setWorld(campaign.getLevels().get(0).getWorld());
 		}else{
