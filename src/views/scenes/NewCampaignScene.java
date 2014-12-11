@@ -45,7 +45,7 @@ public class NewCampaignScene extends Scene {
 			this.setCenter(addVBox());
 			
 			LOAD_SESSION_BUTTON.setOnAction(ButtonHandlers::NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER);
-			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLER);
+			CANCEL_BUTTON.setOnAction(ButtonHandlers::CANCEL_BUTTON_HANDLERA);
 		}
 		
 		private void setupObjects(){

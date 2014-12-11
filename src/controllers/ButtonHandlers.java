@@ -272,6 +272,11 @@ public final class ButtonHandlers {
 		System.out.println("CANCEL_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadMenuScene.getInstance());
 	}
+	
+	public static final void CANCEL_BUTTON_HANDLERA(ActionEvent e){
+		System.out.println("CANCEL_BUTTON_HANDLERA CALLED");
+		MainApp.changeScenes(LoadMenuSceneA.getInstance());
+	}
 
 	public static final void BACK_HOMESCREEN_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("BACK_HOMESCREEN_BUTTON_HANDLER CALLED");
