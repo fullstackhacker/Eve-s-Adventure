@@ -44,6 +44,8 @@ public final class AdventureModeScene extends Scene {
 
 	public static Button PLAY;
 	
+	public static Button PAUSE;
+	
 	public static ImageView imagePlay = new ImageView(new Image(
 			"./Images/PlayButton.png"));
 	
@@ -62,15 +64,15 @@ public final class AdventureModeScene extends Scene {
 		private ImageView imageReset = new ImageView(new Image(
 				"./Images/ResetButton.png"));
 
-		private Button BACK, FORWARD, RESET;
+		private Button FORWARD, RESET;
 
 		private AdventureModePane() {
 			this.getStylesheets().add("./sandbox_style.css");
 
 			buttonSetup();
 
-			GridPane.setFillWidth(BACK, true);
-			GridPane.setHalignment(BACK, HPos.CENTER);
+			GridPane.setFillWidth(PAUSE, true);
+			GridPane.setHalignment(PAUSE, HPos.CENTER);
 			GridPane.setFillWidth(FORWARD, true);
 			GridPane.setHalignment(FORWARD, HPos.CENTER);
 			GridPane.setFillWidth(PLAY, true);
@@ -91,7 +93,7 @@ public final class AdventureModeScene extends Scene {
 			Cols cols = Cols.getInstance();
 
 			this.add(topMenu, 0, 0, 7, 1);
-			this.add(BACK, 2, 1, 2, 1);
+			this.add(PAUSE, 2, 1, 2, 1);
 			this.add(FORWARD, 4, 1);
 			this.add(PLAY, 5, 1);
 			this.add(RESET, 6, 1);
@@ -176,16 +178,16 @@ public final class AdventureModeScene extends Scene {
 		}
 
 		private void buttonSetup() {
-			BACK = new Button();
+			PAUSE = new Button();
 			FORWARD = new Button();
 			PLAY = new Button();
 			RESET = new Button();
-			BACK.setGraphic(imageBack);
+			PAUSE.setGraphic(imageBack);
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
 			RESET.setGraphic(imageReset);
 
-			BACK.setOnAction(ButtonHandlers::BACK_BUTTON_HANDLER);
+			PAUSE.setOnAction(ButtonHandlers::PAUSE_BUTTON_HANDLER);
 			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);
 			PLAY.setOnAction(ButtonHandlers::PLAY_BUTTON_HANDLER);
 			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
