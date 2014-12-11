@@ -225,31 +225,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FRONTISCLEAR);
 			return;
 		}
-		
-		if(ButtonHandlers.isSandboxMode()){
+
+		if (ButtonHandlers.isSandboxMode()) {
 			SandboxScene.PLAY.setDisable(false);
-		}else{
+		} else {
 			AdventureModeScene.PLAY.setDisable(false);
 		}
-		
+
 		int line = KarelTable.getInstance().getLineSelectedLine();
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		String nextLine = karelCode.get(line + 1);
-		
-		switch(nextLine){
-			case KarelCode.FRONTISCLEAR:
-			case KarelCode.NEXTTOAFRIEND:
-			case KarelCode.FACINGNORTH:
-			case KarelCode.FACINGSOUTH:
-			case KarelCode.FACINGEAST:
-			case KarelCode.FACINGWEST:
-				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FRONTISCLEAR);
-				return;
-			default:
-				break;
+
+		switch (nextLine) {
+		case KarelCode.FRONTISCLEAR:
+		case KarelCode.NEXTTOAFRIEND:
+		case KarelCode.FACINGNORTH:
+		case KarelCode.FACINGSOUTH:
+		case KarelCode.FACINGEAST:
+		case KarelCode.FACINGWEST:
+			KarelTable.getInstance().replaceCode(line + 1,
+					KarelCode.FRONTISCLEAR);
+			return;
+		default:
+			break;
 		}
-		
-		
+
 		KarelTable.getInstance().addCode(KarelCode.FRONTISCLEAR);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -264,31 +264,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.NEXTTOAFRIEND);
 			return;
 		}
-		
-		if(ButtonHandlers.isSandboxMode()){
+
+		if (ButtonHandlers.isSandboxMode()) {
 			SandboxScene.PLAY.setDisable(false);
-		}else{
+		} else {
 			AdventureModeScene.PLAY.setDisable(false);
 		}
-		
-		
+
 		int line = KarelTable.getInstance().getLineSelectedLine();
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		String nextLine = karelCode.get(line + 1);
-		
-		switch(nextLine){
-			case KarelCode.FRONTISCLEAR:
-			case KarelCode.NEXTTOAFRIEND:
-			case KarelCode.FACINGNORTH:
-			case KarelCode.FACINGSOUTH:
-			case KarelCode.FACINGEAST:
-			case KarelCode.FACINGWEST:
-				KarelTable.getInstance().replaceCode(line + 1, KarelCode.NEXTTOAFRIEND);
-				return;
-			default:
-				break;
+
+		switch (nextLine) {
+		case KarelCode.FRONTISCLEAR:
+		case KarelCode.NEXTTOAFRIEND:
+		case KarelCode.FACINGNORTH:
+		case KarelCode.FACINGSOUTH:
+		case KarelCode.FACINGEAST:
+		case KarelCode.FACINGWEST:
+			KarelTable.getInstance().replaceCode(line + 1,
+					KarelCode.NEXTTOAFRIEND);
+			return;
+		default:
+			break;
 		}
-		
+
 		KarelTable.getInstance().addCode(KarelCode.NEXTTOAFRIEND);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -303,31 +303,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGNORTH);
 			return;
 		}
-		
-		if(ButtonHandlers.isSandboxMode()){
+
+		if (ButtonHandlers.isSandboxMode()) {
 			SandboxScene.PLAY.setDisable(false);
-		}else{
+		} else {
 			AdventureModeScene.PLAY.setDisable(false);
 		}
-		
-		
+
 		int line = KarelTable.getInstance().getLineSelectedLine();
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		String nextLine = karelCode.get(line + 1);
-		
-		switch(nextLine){
-			case KarelCode.FRONTISCLEAR:
-			case KarelCode.NEXTTOAFRIEND:
-			case KarelCode.FACINGNORTH:
-			case KarelCode.FACINGSOUTH:
-			case KarelCode.FACINGEAST:
-			case KarelCode.FACINGWEST:
-				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGNORTH);
-				return;
-			default:
-				break;
+
+		switch (nextLine) {
+		case KarelCode.FRONTISCLEAR:
+		case KarelCode.NEXTTOAFRIEND:
+		case KarelCode.FACINGNORTH:
+		case KarelCode.FACINGSOUTH:
+		case KarelCode.FACINGEAST:
+		case KarelCode.FACINGWEST:
+			KarelTable.getInstance().replaceCode(line + 1,
+					KarelCode.FACINGNORTH);
+			return;
+		default:
+			break;
 		}
-		
+
 		KarelTable.getInstance().addCode(KarelCode.FACINGNORTH);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -342,31 +342,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGSOUTH);
 			return;
 		}
-		
-		if(ButtonHandlers.isSandboxMode()){
+
+		if (ButtonHandlers.isSandboxMode()) {
 			SandboxScene.PLAY.setDisable(false);
-		}else{
+		} else {
 			AdventureModeScene.PLAY.setDisable(false);
 		}
-		
-		
+
 		int line = KarelTable.getInstance().getLineSelectedLine();
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		String nextLine = karelCode.get(line + 1);
-		
-		switch(nextLine){
-			case KarelCode.FRONTISCLEAR:
-			case KarelCode.NEXTTOAFRIEND:
-			case KarelCode.FACINGNORTH:
-			case KarelCode.FACINGSOUTH:
-			case KarelCode.FACINGEAST:
-			case KarelCode.FACINGWEST:
-				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGSOUTH);
-				return;
-			default:
-				break;
+
+		switch (nextLine) {
+		case KarelCode.FRONTISCLEAR:
+		case KarelCode.NEXTTOAFRIEND:
+		case KarelCode.FACINGNORTH:
+		case KarelCode.FACINGSOUTH:
+		case KarelCode.FACINGEAST:
+		case KarelCode.FACINGWEST:
+			KarelTable.getInstance().replaceCode(line + 1,
+					KarelCode.FACINGSOUTH);
+			return;
+		default:
+			break;
 		}
-		
+
 		KarelTable.getInstance().addCode(KarelCode.FACINGSOUTH);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -381,31 +381,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGEAST);
 			return;
 		}
-		
-		if(ButtonHandlers.isSandboxMode()){
+
+		if (ButtonHandlers.isSandboxMode()) {
 			SandboxScene.PLAY.setDisable(false);
-		}else{
+		} else {
 			AdventureModeScene.PLAY.setDisable(false);
 		}
-		
-		
+
 		int line = KarelTable.getInstance().getLineSelectedLine();
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		String nextLine = karelCode.get(line + 1);
-		
-		switch(nextLine){
-			case KarelCode.FRONTISCLEAR:
-			case KarelCode.NEXTTOAFRIEND:
-			case KarelCode.FACINGNORTH:
-			case KarelCode.FACINGSOUTH:
-			case KarelCode.FACINGEAST:
-			case KarelCode.FACINGWEST:
-				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGEAST);
-				return;
-			default:
-				break;
+
+		switch (nextLine) {
+		case KarelCode.FRONTISCLEAR:
+		case KarelCode.NEXTTOAFRIEND:
+		case KarelCode.FACINGNORTH:
+		case KarelCode.FACINGSOUTH:
+		case KarelCode.FACINGEAST:
+		case KarelCode.FACINGWEST:
+			KarelTable.getInstance()
+					.replaceCode(line + 1, KarelCode.FACINGEAST);
+			return;
+		default:
+			break;
 		}
-		
+
 		KarelTable.getInstance().addCode(KarelCode.FACINGEAST);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -420,31 +420,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.FACINGWEST);
 			return;
 		}
-		
-		if(ButtonHandlers.isSandboxMode()){
+
+		if (ButtonHandlers.isSandboxMode()) {
 			SandboxScene.PLAY.setDisable(false);
-		}else{
+		} else {
 			AdventureModeScene.PLAY.setDisable(false);
 		}
-		
-		
+
 		int line = KarelTable.getInstance().getLineSelectedLine();
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		String nextLine = karelCode.get(line + 1);
-		
-		switch(nextLine){
-			case KarelCode.FRONTISCLEAR:
-			case KarelCode.NEXTTOAFRIEND:
-			case KarelCode.FACINGNORTH:
-			case KarelCode.FACINGSOUTH:
-			case KarelCode.FACINGEAST:
-			case KarelCode.FACINGWEST:
-				KarelTable.getInstance().replaceCode(line + 1, KarelCode.FACINGWEST);
-				return;
-			default:
-				break;
+
+		switch (nextLine) {
+		case KarelCode.FRONTISCLEAR:
+		case KarelCode.NEXTTOAFRIEND:
+		case KarelCode.FACINGNORTH:
+		case KarelCode.FACINGSOUTH:
+		case KarelCode.FACINGEAST:
+		case KarelCode.FACINGWEST:
+			KarelTable.getInstance()
+					.replaceCode(line + 1, KarelCode.FACINGWEST);
+			return;
+		default:
+			break;
 		}
-		
+
 		KarelTable.getInstance().addCode(KarelCode.FACINGWEST);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -459,31 +459,31 @@ public final class ButtonHandlers {
 			KarelTable.getInstance().replaceCode(KarelCode.BAGISEMPTY);
 			return;
 		}
-		
-		if(ButtonHandlers.isSandboxMode()){
+
+		if (ButtonHandlers.isSandboxMode()) {
 			SandboxScene.PLAY.setDisable(false);
-		}else{
+		} else {
 			AdventureModeScene.PLAY.setDisable(false);
 		}
-		
-		
+
 		int line = KarelTable.getInstance().getLineSelectedLine();
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		String nextLine = karelCode.get(line + 1);
-		
-		switch(nextLine){
-			case KarelCode.FRONTISCLEAR:
-			case KarelCode.NEXTTOAFRIEND:
-			case KarelCode.FACINGNORTH:
-			case KarelCode.FACINGSOUTH:
-			case KarelCode.FACINGEAST:
-			case KarelCode.FACINGWEST:
-				KarelTable.getInstance().replaceCode(line + 1, KarelCode.BAGISEMPTY);
-				return;
-			default:
-				break;
+
+		switch (nextLine) {
+		case KarelCode.FRONTISCLEAR:
+		case KarelCode.NEXTTOAFRIEND:
+		case KarelCode.FACINGNORTH:
+		case KarelCode.FACINGSOUTH:
+		case KarelCode.FACINGEAST:
+		case KarelCode.FACINGWEST:
+			KarelTable.getInstance()
+					.replaceCode(line + 1, KarelCode.BAGISEMPTY);
+			return;
+		default:
+			break;
 		}
-		
+
 		KarelTable.getInstance().addCode(KarelCode.BAGISEMPTY);
 
 		GameTabs.getInstance().disableTab(GameTabs.CONDITIONS_TAB_VALUE);
@@ -709,13 +709,15 @@ public final class ButtonHandlers {
 	 */
 	public static final void RMITEM_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RMITEM_BUTTON_HANDLER");
-		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
-		if(!GridWorld.getInstance().getWorld().hasItem(currentPosition))
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
+		if (!GridWorld.getInstance().getWorld().hasItem(currentPosition))
 			return;
-		//remove from backend
+		// remove from backend
 		GridWorld.getInstance().getWorld().removeItem(currentPosition);
-		//remove from frontend
-		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
+		// remove from frontend
+		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()]
+				.setGraphic(null);
 	}
 
 	public static final void RMWALL_BUTTON_HANDLER(ActionEvent e) {
@@ -730,11 +732,23 @@ public final class ButtonHandlers {
 				.getYCoordinate()].setId("WorldButton");
 	}
 
-	//TODO
+	// TODO
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLT_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
+		if (GridWorld.getInstance().getWorld().hasDownWall(cords)
+				|| GridWorld.getInstance().getWorld().hasUpWall(cords)
+				|| GridWorld.getInstance().getWorld().hasLeftWall(cords)
+				|| GridWorld.getInstance().getWorld().hasRightWall(cords)) {
+			GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.UP);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.DOWN);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.LEFT);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.RIGHT);
+		}
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
 		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].setId("upWall");
@@ -745,6 +759,18 @@ public final class ButtonHandlers {
 		System.out.println("WALLB_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
+		if (GridWorld.getInstance().getWorld().hasDownWall(cords)
+				|| GridWorld.getInstance().getWorld().hasUpWall(cords)
+				|| GridWorld.getInstance().getWorld().hasLeftWall(cords)
+				|| GridWorld.getInstance().getWorld().hasRightWall(cords)) {
+			GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.UP);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.DOWN);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.LEFT);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.RIGHT);
+		}
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.DOWN);
 		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].setId("downWall");
@@ -754,6 +780,18 @@ public final class ButtonHandlers {
 		System.out.println("WALLL_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
+		if (GridWorld.getInstance().getWorld().hasDownWall(cords)
+				|| GridWorld.getInstance().getWorld().hasUpWall(cords)
+				|| GridWorld.getInstance().getWorld().hasLeftWall(cords)
+				|| GridWorld.getInstance().getWorld().hasRightWall(cords)) {
+			GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.UP);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.DOWN);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.LEFT);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.RIGHT);
+		}
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
 		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].setId("leftWall");
@@ -763,6 +801,18 @@ public final class ButtonHandlers {
 		System.out.println("WALLR_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
+		if (GridWorld.getInstance().getWorld().hasDownWall(cords)
+				|| GridWorld.getInstance().getWorld().hasUpWall(cords)
+				|| GridWorld.getInstance().getWorld().hasLeftWall(cords)
+				|| GridWorld.getInstance().getWorld().hasRightWall(cords)) {
+			GridWorld.getInstance().getWorld().removeWall(cords, Coordinate.UP);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.DOWN);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.LEFT);
+			GridWorld.getInstance().getWorld()
+					.removeWall(cords, Coordinate.RIGHT);
+		}
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
 		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].setId("rightWall");
@@ -837,14 +887,15 @@ public final class ButtonHandlers {
 			GridWorld.getInstance().getWorld().addItem(bamboo);
 			GridWorld.getInstance().getWorld().printWorld();
 		}
-	} 
+	}
 
 	/**
 	 * CreaturesTab.java
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
-		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
-		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
+		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
 			return;
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
 		// remove from frontend
@@ -854,42 +905,42 @@ public final class ButtonHandlers {
 
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("EVE_BUTTON_HANDLER");
-		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
-		//eve not in world yet
-		if(GridWorld.getInstance().getWorld().getEve() == null){
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(),
+				GridWorld.getYCoordinate());
+		// eve not in world yet
+		if (GridWorld.getInstance().getWorld().getEve() == null) {
 			Creature eve = new Creature("Eve", currentPosition);
 			GridWorld.getInstance().getWorld().addCreature(eve);
 			return;
 		}
-		//she is in the world somewhere, find her
-		Creature eve = GridWorld.getInstance().getWorld().getEve(); 
-		Coordinate eveLocation = eve.getCoordinates(); 
-		
+		// she is in the world somewhere, find her
+		Creature eve = GridWorld.getInstance().getWorld().getEve();
+		Coordinate eveLocation = eve.getCoordinates();
+
 		System.out.println("Location " + eveLocation);
 		System.out.println("current " + currentPosition);
-	
-		
-		//check if there is something in the new space already
-		if(GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
-			Creature creature = GridWorld.getInstance().getWorld().creatureAt(currentPosition);
-				if(creature.isEve()){
-					return;
-				}
-				else{ //friend is there
-					return;
-				}
-		}
-		else{
+
+		// check if there is something in the new space already
+		if (GridWorld.getInstance().getWorld().hasCreature(currentPosition)) {
+			Creature creature = GridWorld.getInstance().getWorld()
+					.creatureAt(currentPosition);
+			if (creature.isEve()) {
+				return;
+			} else { // friend is there
+				return;
+			}
+		} else {
 			eve.setCoordinates(currentPosition);
 			GridWorld.getInstance().getWorld().addCreature(eve);
 			GridWorld.getInstance().getWorld().removeCreature(eveLocation);
 			GridWorld.getInstance().getWorld().findEve();
-			//front end
-			GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()]
-					.setGraphic(GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()].getGraphic());
-			GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()].setGraphic(null);
+			// front end
+			GridWorld.gridButtons[currentPosition.getX()][currentPosition
+					.getY()].setGraphic(GridWorld.gridButtons[eveLocation
+					.getX()][eveLocation.getY()].getGraphic());
+			GridWorld.gridButtons[eveLocation.getX()][eveLocation.getY()]
+					.setGraphic(null);
 		}
-		
 
 	}
 
@@ -920,8 +971,10 @@ public final class ButtonHandlers {
 
 	public static final void PAUSE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("PAUSE_BUTTON_HANDLER CALLED");
-		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
-			if(AdventureModeScene.getInterpreter() != null){
+		if ((!sandbox)
+				&& (AdventureModeScene.PLAY != null)
+				&& (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)) {
+			if (AdventureModeScene.getInterpreter() != null) {
 				AdventureModeScene.getInterpreter().pause();
 				AdventureModeScene.PLAY.setDisable(false);
 				isPause = true;
@@ -941,18 +994,22 @@ public final class ButtonHandlers {
 	public static final void FORWARD_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("FORWARD_BUTTON_HANDLER CALLED");
 		if (!sandbox) {
-			try{
-				AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
-				AdventureModeScene.AdventureModePane.getInstance().add(Running.getInstance(), 0, 1, 1, 3);
-			}catch(IllegalArgumentException e1){
-				//e1.printStackTrace();
+			try {
+				AdventureModeScene.AdventureModePane.getInstance()
+						.getChildren().remove(AdventureModeScene.gametabs);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						Running.getInstance(), 0, 1, 1, 3);
+			} catch (IllegalArgumentException e1) {
+				// e1.printStackTrace();
 			}
 		} else if (sandbox) {
-			try{
-				SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
-				SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),0, 1, 1, 3);
-			}catch(IllegalArgumentException e2){
-				//e2.printStackTrace();
+			try {
+				SandboxScene.SandboxPane.getInstance().getChildren()
+						.remove(SandboxScene.gametabs);
+				SandboxScene.SandboxPane.getInstance().add(
+						Running.getInstance(), 0, 1, 1, 3);
+			} catch (IllegalArgumentException e2) {
+				// e2.printStackTrace();
 			}
 		}
 		KarelTable.getInstance().DELETE_BUTTON.setDisable(true);
@@ -975,18 +1032,22 @@ public final class ButtonHandlers {
 
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e) {
 		if (!sandbox) {
-			try{
-				AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
-				AdventureModeScene.AdventureModePane.getInstance().add(Running.getInstance(), 0, 1, 1, 3);
-			}catch(Exception e1){
-				//e1.printStackTrace();
+			try {
+				AdventureModeScene.AdventureModePane.getInstance()
+						.getChildren().remove(AdventureModeScene.gametabs);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						Running.getInstance(), 0, 1, 1, 3);
+			} catch (Exception e1) {
+				// e1.printStackTrace();
 			}
 		} else if (sandbox) {
-			try{
-				SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
-				SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),0, 1, 1, 3);
-			}catch(Exception e2){
-				//e2.printStackTrace();
+			try {
+				SandboxScene.SandboxPane.getInstance().getChildren()
+						.remove(SandboxScene.gametabs);
+				SandboxScene.SandboxPane.getInstance().add(
+						Running.getInstance(), 0, 1, 1, 3);
+			} catch (Exception e2) {
+				// e2.printStackTrace();
 			}
 		}
 		KarelTable.getInstance().DELETE_BUTTON.setDisable(true);
@@ -1001,15 +1062,16 @@ public final class ButtonHandlers {
 		System.out.println("PLAY_BUTTON_HANDLER CALLED");
 		World world = null;
 		if (!sandbox) {
-			AdventureModeScene.PLAY.setDisable(true);		
+			AdventureModeScene.PLAY.setDisable(true);
 			if (isPause) {
-				//TODO fix!
+				// TODO fix!
 				AdventureModeScene.getInterpreter().start();
 				isPause = false;
 				return;
 			}
 			world = AdventureModeScene.getWorld();
-			AdventureModeScene.setInterpreter(new Interpreter(karelCode, world));
+			AdventureModeScene
+					.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());
 			world.printWorld();
 			AdventureModeScene.getInterpreter().start(); // starts the code
@@ -1044,18 +1106,22 @@ public final class ButtonHandlers {
 		System.out.println("RESET_BUTTON_HANDLER CALLED");
 		isPause = false;
 		if (!sandbox) {
-			try{
-				AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(Running.getInstance());
-				AdventureModeScene.AdventureModePane.getInstance().add(AdventureModeScene.gametabs, 0, 1, 1, 3);
-			}catch(Exception e1){
-				//e1.printStackTrace();
+			try {
+				AdventureModeScene.AdventureModePane.getInstance()
+						.getChildren().remove(Running.getInstance());
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						AdventureModeScene.gametabs, 0, 1, 1, 3);
+			} catch (Exception e1) {
+				// e1.printStackTrace();
 			}
 		} else if (sandbox) {
-			try{
-				SandboxScene.SandboxPane.getInstance().getChildren().remove(Running.getInstance());
-				SandboxScene.SandboxPane.getInstance().add(SandboxScene.gametabs,0, 1, 1, 3);
-			}catch(Exception e2){
-				//e2.printStackTrace();
+			try {
+				SandboxScene.SandboxPane.getInstance().getChildren()
+						.remove(Running.getInstance());
+				SandboxScene.SandboxPane.getInstance().add(
+						SandboxScene.gametabs, 0, 1, 1, 3);
+			} catch (Exception e2) {
+				// e2.printStackTrace();
 			}
 		}
 		KarelTable.getInstance().DELETE_BUTTON.setDisable(false);
