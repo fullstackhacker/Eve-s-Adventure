@@ -42,6 +42,8 @@ public class Interpreter {
 	private ToggleButton[][] gridButtons; 
 	
 	private Timer timer;
+	
+	private int currentLoopCounter; 
 
 	/**
 	 * Constructor for the parser
@@ -56,6 +58,7 @@ public class Interpreter {
 		this.world = world;
 		AGridWorld.getInstance().setWorld(this.world);
 		this.startWorld = world.copyWorld();
+		this.currentLoopCounter = 0; 
 	}
 
 	/**
@@ -239,7 +242,7 @@ public class Interpreter {
 				throw new IllegalValueException("Ill formed Karel Code");
 			int variableCode = this.activeCodeBlock;
 			boolean result = variable();
-			while (result) {
+			if (result) {
 				if (!this.next())
 					return;
 				instructions();
@@ -260,9 +263,16 @@ public class Interpreter {
 			int times = positiveNumbers();
 			System.out.println("int times: " + times);
 			int currentInstruction = this.activeCodeBlock;
-			for (int counter = 0; counter < times; counter++) {
-				this.activeCodeBlock = currentInstruction;
-				instructions();
+			if(!this.next()) throw new IllegalValueException("Ill formed Karel Code"); 
+			if(this.currentLoopCounter < times){
+				instructions(); 
+				this.currentLoopCounter++;
+				this.activeCodeBlock = currentInstruction; 
+			}
+			else{
+				do{
+					if(!this.next()) throw new IllegalValueException("Ill formed Karel Code");
+				}while(!this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ENDLOOP));
 			}
 			break;
 		default:
@@ -401,6 +411,13 @@ public class Interpreter {
 		case KarelCode.ENDIF:
 		case KarelCode.ENDELSE: 
 			//reverseConditional();
+			return;
+		case KarelCode.ENDWHILE: 
+		case KarelCode.ENDLOOP:
+			//reverseReptition(); 
+			return; 
+		default: 
+			throw new IllegalValueException("Illegal Set of Karel Code: " + this.karelCode.get(this.activeCodeBlock)); 
 		}
 	}
 	
