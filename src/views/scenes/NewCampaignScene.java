@@ -17,6 +17,10 @@ import javafx.scene.layout.VBox;
 
 public class NewCampaignScene extends Scene {
 
+	public static ObservableList<String> sessions;
+	
+	public static ListView<String> sessionsListView;
+	
 	private static final class NewCampaignPane extends BorderPane{
 		
 		/**
@@ -25,9 +29,6 @@ public class NewCampaignScene extends Scene {
 		private static NewCampaignPane instanceOfNewCampaignPane = null;
 		
 		private Button LOAD_SESSION_BUTTON, CANCEL_BUTTON;
-		
-		private ObservableList<String> sessions;
-		private ListView<String> sessionsListView;
 		
 		private static final String DATADIR = "data" + File.separator; 
 		private static final String WORLDDIR = NewCampaignPane.DATADIR + "worlds" + File.separator; 

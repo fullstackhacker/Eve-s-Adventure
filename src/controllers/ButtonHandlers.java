@@ -185,9 +185,9 @@ public final class ButtonHandlers {
 	
 	
 	public static final void NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e){
-		System.out.println("NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLE");
+		System.out.println("NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER");
 		
-		String campaignName = NewCampaignScene.getInstance().getSelectedCampaign();
+		String campaignName = NewCampaignScene.getInstance().sessionsListView.getSelectionModel().getSelectedItem();
 		
 		System.out.println("campaignName = " + campaignName);
 		Campaign campaign = Load.loadCampaign(campaignName); 
