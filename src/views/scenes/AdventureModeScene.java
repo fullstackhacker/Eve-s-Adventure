@@ -6,6 +6,7 @@ import models.gridobjects.creatures.Creature;
 import controllers.ButtonHandlers;
 import views.MainApp;
 import views.ATopMenu;
+import views.grid.AGridWorld;
 import views.grid.Cols;
 import views.grid.GridWorld;
 import views.grid.Rows;
@@ -13,6 +14,7 @@ import views.karel.KarelTable;
 import views.tabs.GameTabs;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,7 +30,7 @@ public final class AdventureModeScene extends Scene {
 
 	private static World world;
 
-	private static GridWorld gridWorld;
+	private static AGridWorld gridWorld;
 	
 	 public static GameTabs gametabs = null;
 	 public static ProTips protips = null;
@@ -38,7 +40,7 @@ public final class AdventureModeScene extends Scene {
 
 	public static final class AdventureModePane extends GridPane {
 
-		public static AdventureModePane instanceOfMainMenuPane = null;
+		public static AdventureModePane instanceOfMainMenuPane = new AdventureModePane();
 
 		private ImageView imageBack = new ImageView(new Image(
 				"./Images/ArrowLeft.png"));
@@ -71,7 +73,7 @@ public final class AdventureModeScene extends Scene {
 			protips = ProTips.getInstance();
 			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
-			gridWorld = GridWorld.getInstance();
+			gridWorld = AGridWorld.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -81,12 +83,12 @@ public final class AdventureModeScene extends Scene {
 			this.add(FORWARD, 4, 1);
 			this.add(PLAY, 5, 1);
 			this.add(RESET, 6, 1);
-			this.add(gametabs, 0, 1, 1, 3);
-			this.add(karelTable, 1, 1, 1, 3);
+			//this.add(gametabs, 0, 1, 1, 3);
+			//this.add(karelTable, 1, 1, 1, 3);
 			this.add(cols, 3, 2, 4, 1);
 			this.add(rows, 2, 3, 1, 2);
 			this.add(gridWorld, 3, 3, 4, 2);
-			this.add(protips, 0, 4, 2, 1);
+			//this.add(protips, 0, 4, 2, 1);
 
 			GridPane.setHalignment(rows, HPos.RIGHT);
 
@@ -178,13 +180,12 @@ public final class AdventureModeScene extends Scene {
 		}
 
 		public static AdventureModePane getInstance() {
-			return (instanceOfMainMenuPane == null) ? instanceOfMainMenuPane = new AdventureModePane()
-					: instanceOfMainMenuPane;
+			return instanceOfMainMenuPane;
 		}
 	}
 
-	private static AdventureModeScene instanceOfSandboxScene = null;
-
+	private static AdventureModeScene instanceOfSandboxScene = new AdventureModeScene(AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT);
+	
 	private AdventureModeScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
@@ -193,7 +194,7 @@ public final class AdventureModeScene extends Scene {
 		world = world1;
 	}
 
-	public static void setGridWorld(GridWorld gridworld1) {
+	public static void setGridWorld(AGridWorld gridworld1) {
 		gridWorld = gridworld1;
 	}
 
@@ -201,13 +202,11 @@ public final class AdventureModeScene extends Scene {
 		return world;
 	}
 
-	public static GridWorld getGridWorld() {
+	public static AGridWorld getGridWorld() {
 		return gridWorld;
 	}
 
 	public static AdventureModeScene getInstance() {
-		return (AdventureModeScene.instanceOfSandboxScene == null) ? instanceOfSandboxScene = new AdventureModeScene(
-				AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH,
-				MainApp.WINDOW_HEIGHT) : instanceOfSandboxScene;
+		return instanceOfSandboxScene;
 	}
 }

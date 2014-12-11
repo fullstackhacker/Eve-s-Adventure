@@ -60,7 +60,7 @@ public final class SandboxScene extends Scene {
 	public static final class SandboxPane extends GridPane {
 		
 
-		private static SandboxPane instanceOfMainMenuPane = null;
+		private static SandboxPane instanceOfMainMenuPane = new SandboxPane();
 
 		private ImageView imageBack = new ImageView(new Image(
 				"./Images/ArrowLeft.png"));
@@ -105,12 +105,12 @@ public final class SandboxScene extends Scene {
 			this.add(FORWARD, 4, 1);
 			this.add(PLAY, 5, 1);
 			this.add(RESET, 6, 1);
-			this.add(gametabs, 0, 1, 1, 3);
-			this.add(karelTable, 1, 1, 1, 3);
+			//this.add(gametabs, 0, 1, 1, 3);
+			//this.add(karelTable, 1, 1, 1, 3);
 			this.add(cols, 3, 2, 4, 1);
 			this.add(rows, 2, 3, 1, 2);
 			this.add(gridWorld, 3, 3, 4, 2);
-			this.add(protips, 0, 4, 2, 1);
+			//this.add(protips, 0, 4, 2, 1);
 			GridPane.setHalignment(rows, HPos.RIGHT);
 
 			ColumnConstraints column1 = new ColumnConstraints();
@@ -208,8 +208,7 @@ public final class SandboxScene extends Scene {
 		}
 
 		public static SandboxPane getInstance() {
-			return (instanceOfMainMenuPane == null) ? instanceOfMainMenuPane = new SandboxPane()
-					: instanceOfMainMenuPane;
+			return instanceOfMainMenuPane;
 		}
 		
 		/*@SuppressWarnings("unused")
@@ -218,7 +217,7 @@ public final class SandboxScene extends Scene {
 		}*/
 	}
 
-	private static SandboxScene instanceOfSandboxScene = null;
+	private static SandboxScene instanceOfSandboxScene = new SandboxScene(SandboxPane.getInstance(), MainApp.WINDOW_WIDTH,MainApp.WINDOW_HEIGHT);
 
 	/*public static SandboxPane getSandbox(){
 		return 
@@ -245,8 +244,6 @@ public final class SandboxScene extends Scene {
 	}
 
 	public static SandboxScene getInstance() {
-		return (SandboxScene.instanceOfSandboxScene == null) ? instanceOfSandboxScene = new SandboxScene(
-				SandboxPane.getInstance(), MainApp.WINDOW_WIDTH,
-				MainApp.WINDOW_HEIGHT) : instanceOfSandboxScene;
+		return instanceOfSandboxScene;
 	}
 }

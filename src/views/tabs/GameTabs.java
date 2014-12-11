@@ -64,15 +64,54 @@ public final class GameTabs extends TabPane {
 	}
 
 	public void switchTab(int tab) {
-		this.getSelectionModel().select(tab);
+		//TODO Clean UP
+				if(tab == NUMBERS_TAB_VALUE){
+					for(int i = 0; i < this.getTabs().size(); i++){
+						if(this.getTabs().get(i).getText().equals("NUMBERS")){
+							this.getSelectionModel().select(i);
+							return;						
+						}
+					}
+				}
+				this.getSelectionModel().select(tab);
 	}
 
 	public void enableTab(int tab) {
-		this.getTabs().get(tab).setDisable(false);
+		System.out.println("enableTab");
+		try{
+			//TODO Clean UP
+			if(tab == NUMBERS_TAB_VALUE){
+				for(int i = 0; i < this.getTabs().size(); i++){
+					if(this.getTabs().get(i).getText().equals("NUMBERS")){
+						this.getTabs().get(i).setDisable(false);
+						return;						
+					}
+				}
+			}
+			this.getTabs().get(tab).setDisable(false);
+		}catch(Exception e){
+			/* Do Nothing */
+			System.out.println("tab == " + tab);
+		}
 	}
 
 	public void disableTab(int tab) {
-		this.getTabs().get(tab).setDisable(true);
+		System.out.println("disableTab");
+		try{
+			//TODO Clean UP
+			if(tab == NUMBERS_TAB_VALUE){
+				for(int i = 0; i < this.getTabs().size(); i++){
+					if(this.getTabs().get(i).getText().equals("NUMBERS")){
+						this.getTabs().get(i).setDisable(true);
+						return;						
+					}
+				}
+			}
+			this.getTabs().get(tab).setDisable(true);
+		}catch(Exception e){
+			/* Do Nothing */
+			System.out.println("tab == " + tab);
+		}
 	}
 
 	public static GameTabs getInstance() {
