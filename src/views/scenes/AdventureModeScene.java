@@ -12,6 +12,7 @@ import views.grid.GridWorld;
 import views.grid.Rows;
 import views.karel.KarelTable;
 import views.tabs.GameTabs;
+import views.tips.Objective;
 import views.tips.ProTips;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
@@ -35,6 +36,7 @@ public final class AdventureModeScene extends Scene {
 	 public static GameTabs gametabs = null;
 	 public static ProTips protips = null;
 	 public static KarelTable karelTable = null;
+	 public static Objective objective = null;
 	
 	private static Interpreter interpreter;
 	
@@ -76,6 +78,7 @@ public final class AdventureModeScene extends Scene {
 			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			gridWorld = GridWorld.getInstance();
+			objective = Objective.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -89,7 +92,7 @@ public final class AdventureModeScene extends Scene {
 			//this.add(karelTable, 1, 1, 1, 3);
 			this.add(cols, 3, 2, 4, 1);
 			this.add(rows, 2, 3, 1, 2);
-			this.add(gridWorld, 3, 3, 4, 2);
+			//this.add(gridWorld, 3, 3, 4, 2);
 			//this.add(protips, 0, 4, 2, 1);
 
 			GridPane.setHalignment(rows, HPos.RIGHT);

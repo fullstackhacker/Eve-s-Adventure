@@ -104,7 +104,7 @@ public final class SandboxScene extends Scene {
 			//this.add(karelTable, 1, 1, 1, 3);
 			this.add(cols, 3, 2, 4, 1);
 			this.add(rows, 2, 3, 1, 2);
-			this.add(gridWorld, 3, 3, 4, 2);
+			//this.add(gridWorld, 3, 3, 4, 2);
 			//this.add(protips, 0, 4, 2, 1);
 			GridPane.setHalignment(rows, HPos.RIGHT);
 

@@ -31,7 +31,7 @@ public class World implements Serializable {
 	 *
 	 */
 	
-	
+	public static int bambooCount = 0;
 	
 	private class Square implements Serializable {
 		/**

@@ -36,9 +36,9 @@ public final class ProTips extends GridPane {
 		this.add(TFTips, 1, 0);
 
 		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(10);
+		column1.setPercentWidth(20);
 		ColumnConstraints column2 = new ColumnConstraints();
-		column2.setPercentWidth(90);
+		column2.setPercentWidth(80);
 		this.getColumnConstraints().addAll(column1, column2);
 
 		GridPane.setHalignment(LTips, HPos.LEFT);
