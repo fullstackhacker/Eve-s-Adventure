@@ -203,11 +203,11 @@ public class Level implements Serializable {
 		}
 	}
 	
-	public void setObjective(boolean obj){
+	public static void setObjective(boolean obj){
 		findObj = obj;
 	}
 	
-	public String getObjective(){
+	public static String getObjective(){
 		if (findObj){
 			return "find";
 		} else {

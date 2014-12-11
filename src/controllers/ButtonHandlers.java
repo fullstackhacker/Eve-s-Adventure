@@ -12,6 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Coordinate;
 import models.campaign.KarelCode;
+import models.campaign.Level;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import models.gridobjects.items.Bamboo;
@@ -67,15 +68,16 @@ public final class ButtonHandlers {
 						KarelTable.getInstance(), 1, 1, 1, 3);
 				SandboxScene.SandboxPane.getInstance().add(
 						ProTips.getInstance(), 0, 4, 2, 1);
-				SandboxScene.SandboxPane.getInstance().add(
-						SandboxScene.gridWorld, 3, 3, 4, 2);
 				for (int i = 0; i < 5; i++) {
 					for (int j = 0; j < 10; j++) {
 						GridWorld.gridButtons[i][j].setDisable(false);
 					}
 				}
+				SandboxScene.SandboxPane.getInstance().add(
+						SandboxScene.gridWorld, 3, 3, 4, 2);
+				
 			} catch (Exception e1) {
-				System.out.println("LOL");
+				e1.printStackTrace();
 			}
 			GameTabs.getInstance().getTabs()
 					.remove(GameTabs.getInstance().CREATURES_TAB);
@@ -93,16 +95,19 @@ public final class ButtonHandlers {
 				AdventureModeScene.AdventureModePane.getInstance().add(
 						KarelTable.getInstance(), 1, 1, 1, 3);
 				AdventureModeScene.AdventureModePane.getInstance().add(
-						ProTips.getInstance(), 0, 4, 2, 1);
-				AdventureModeScene.AdventureModePane.getInstance().add(
-						AdventureModeScene.gridWorld, 3, 3, 4, 2);
+						ProTips.getInstance(), 0, 4, 1, 1);
 				for (int i = 0; i < 5; i++) {
 					for (int j = 0; j < 10; j++) {
 						GridWorld.gridButtons[i][j].setDisable(true);
 					}
 				}
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						AdventureModeScene.gridWorld, 3, 3, 4, 2);
+				AdventureModeScene.AdventureModePane.getInstance().add(
+						AdventureModeScene.objective, 1, 4, 1, 1);
+				
 			} catch (Exception e2) {
-				System.out.println("");
+				e2.printStackTrace();
 			}
 			GameTabs.getInstance().getTabs()
 					.remove(GameTabs.getInstance().CREATURES_TAB);
@@ -646,7 +651,7 @@ public final class ButtonHandlers {
 	}
 
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e) {
-
+		GridWorld.getInstance().getWorld().incrementBambooObjective();
 		System.out.println("BAMBOO_BUTTON_HANDLER");
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].getText();
@@ -673,16 +678,12 @@ public final class ButtonHandlers {
 	 * CreaturesTab.java
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
-		
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
-		
 		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
 			return;
 		}
-		
 		//remove from backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
-		
 		//remove from frontend
 		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
 	}
@@ -866,7 +867,7 @@ public final class ButtonHandlers {
 	public static final void COLLECT_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Collect)!");
 		// World world = AdventureModeScene.getWorld();
-		// Level.setObjective(false);
+		Level.setObjective(false);
 		SandboxScene.getInstance().topMenu.collect.setDisable(true);
 		SandboxScene.getInstance().topMenu.find.setDisable(false);
 	}
@@ -874,7 +875,7 @@ public final class ButtonHandlers {
 	public static final void FIND_MENU_HANDLER(ActionEvent e) {
 		System.out.println("Added an objective (Find)!");
 		// World world = AdventureModeScene.getWorld();
-		// Level.setObjective(true);
+		Level.setObjective(true);
 		SandboxScene.getInstance().topMenu.collect.setDisable(false);
 		SandboxScene.getInstance().topMenu.find.setDisable(true);
 	}
