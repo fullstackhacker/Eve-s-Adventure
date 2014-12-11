@@ -115,5 +115,15 @@ public class Coordinate {
 	public Coordinate copy(){
 		return new Coordinate(this.x, this.y);
 	}
+	
+	public boolean equals(Object object){
+		if(!(object instanceof Coordinate)) return false;
+		Coordinate coordinate = (Coordinate)object;
+		
+		if(coordinate.getX() == this.getX() && coordinate.getY() == this.getY()){
+			return true; 
+		}
+		return false;
+	}
 }
 

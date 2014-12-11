@@ -1333,6 +1333,9 @@ public class World implements Serializable {
 		System.out.println("World.eve.cooridnates: "
 				+ world.eve.getCoordinates());
 		this.getEve().setCoordinates(world.eve.getCoordinates());
+		this.getEve().setDirection(world.getEve().getDirection());
+		this.getEve().setAwake(world.getEve().isAwake());
+		this.getEve().setBamboo(world.getEve().getNumberOfBamboo());
 		this.bambooObjective = world.bambooObjective;
 
 		// copy the world
