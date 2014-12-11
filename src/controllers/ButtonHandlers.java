@@ -40,6 +40,10 @@ public final class ButtonHandlers {
 
 	private static boolean sandbox = false;
 
+	public static boolean isSandboxMode(){
+		return sandbox;
+	}
+	
 	public static final void SANDBOX_MODE_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("SANDBOX_MODE_BUTTON_HANDLER CALLED");
 		MainApp.changeScenes(LoadMenuScene.getInstance());
@@ -796,6 +800,8 @@ public final class ButtonHandlers {
 		}
 	}
 
+	private static boolean isPause = false;
+	
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e) {
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		if (karelCode.isEmpty()) {
@@ -811,6 +817,13 @@ public final class ButtonHandlers {
 				AdventureModeScene.PLAY.setGraphic(null);
 				AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePlay);
 				AdventureModeScene.getInterpreter().pause();;
+				isPause = true;
+				return;
+			}
+			
+			if(isPause){
+				AdventureModeScene.getInterpreter().start();
+				isPause = false;
 				return;
 			}
 			world = AdventureModeScene.getWorld();
@@ -826,8 +839,16 @@ public final class ButtonHandlers {
 				SandboxScene.PLAY.setGraphic(null);
 				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
 				SandboxScene.getInterpreter().pause();
+				isPause = true;
 				return;
 			}
+			
+			if(isPause){
+				SandboxScene.getInterpreter().start();
+				isPause = false;
+				return;
+			}
+			
 			world = SandboxScene.getWorld();
 			SandboxScene.PLAY.setGraphic(null);
 			SandboxScene.PLAY.setGraphic(SandboxScene.imagePause);
