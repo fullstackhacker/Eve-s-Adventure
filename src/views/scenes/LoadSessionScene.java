@@ -43,7 +43,7 @@ public class LoadSessionScene extends Scene {
 		 * textfields, and more. 
 		 */
 		private LoadSessionPane(){
-			this.getStylesheets().add("./loadsession_style.css");
+			this.getStylesheets().add(LoadSessionScene.class.getResource("/loadsession_style.css").toExternalForm());
 			setupObjects();
 			this.setCenter(addVBox());
 			

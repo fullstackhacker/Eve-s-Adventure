@@ -42,7 +42,7 @@ public class NewLevelScene extends Scene {
 		 * textfields, and more. 
 		 */
 		private NewLevelSessionPane(){
-			this.getStylesheets().add("./loadsession_style.css");
+			this.getStylesheets().add(NewLevelScene.class.getResource("/loadsession_style.css").toExternalForm());
 			setupObjects();
 			this.setCenter(addVBox());
 			

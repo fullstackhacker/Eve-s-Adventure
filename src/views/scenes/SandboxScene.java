@@ -1,5 +1,6 @@
 package views.scenes;
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -46,48 +47,35 @@ public final class SandboxScene extends Scene {
 	private static Interpreter interpreter;
 
 	public static TopMenu topMenu = null;
+	
+	public static ImageView EveUp = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/eve_up.png")));
 
-	private static ImageView EveUp = new ImageView(new Image(
-			"./Images/eve_up.png"));
-	private static ImageView EveRight = new ImageView(new Image(
-			"./Images/eve_right.png"));
-	private static ImageView EveDown = new ImageView(new Image(
-			"./Images/eve_down2.png"));
-	private static ImageView EveLeft = new ImageView(new Image(
-			"./Images/eve_left.png"));
-	private static ImageView Bush = new ImageView(
-			new Image("./Images/bush.png"));
-	private static ImageView Bamboo = new ImageView(new Image(
-			"./Images/bamboo.png"));
-	private static ImageView Friend = new ImageView(new Image(
-			"./Images/friend.png"));
-	private static ImageView Tree = new ImageView(
-			new Image("./Images/tree.png"));
-
+	public static ImageView EveDown = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/eve_down.png")));
+	
+	public static ImageView EveRight = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/eve_right.png")));
+	
+	public static ImageView EveLeft = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/eve_left.png")));
+	
 	public static Button PLAY, PAUSE, FORWARD, RESET;
 
-	public static ImageView imagePlay = new ImageView(new Image(
-			"./Images/PlayButton.png"));
+	public static ImageView imagePlay = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/PlayButton.png")));
+	
+	public static ImageView imagePause = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/pause.png")));
 
-	public static ImageView imagePause = new ImageView(new Image(
-			"./Images/pause.png"));
+	public static ImageView imageRight = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/ArrowRight.png")));
+	
+	public static ImageView imageReset = new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/ResetButton.png")));
 
 	public static final class SandboxPane extends GridPane {
 
 		private static SandboxPane instanceOfSandboxPane = new SandboxPane();
 
-		// private ImageView imageBack = new ImageView(new Image(
-		// "./Images/ArrowLeft.png"));
-		private ImageView imageRight = new ImageView(new Image(
-				"./Images/ArrowRight.png"));
-		private ImageView imageReset = new ImageView(new Image(
-				"./Images/ResetButton.png"));
-
+	
 		// private ImageView imageEve = new ImageView(new
 		// Image("./Images/Eve.png"));
 
 		private SandboxPane() {
-			this.getStylesheets().add("./sandbox_style.css");
+			this.getStylesheets().add(SandboxScene.class.getResource("/sandbox_style.css").toExternalForm());
 
 			buttonSetup();
 			loadUpCampaigns();
@@ -251,35 +239,35 @@ public final class SandboxScene extends Scene {
 	 */
 
 	public static ImageView getEveUpI() {
-		return new ImageView(new Image("./Images/eve_up.png"));
+		return SandboxScene.EveUp;
 	}
 
 	public static ImageView getEveDownI() {
-		return new ImageView(new Image("./Images/eve_down2.png"));
+		return SandboxScene.EveDown;
 	}
 
 	public static ImageView getEveLeftI() {
-		return new ImageView(new Image("./Images/eve_left.png"));
+		return SandboxScene.EveLeft;
 	}
 
 	public static ImageView getEveRightI() {
-		return new ImageView(new Image("./Images/eve_right.png"));
+		return SandboxScene.EveRight;
 	}
 
 	public static ImageView getShrubI() {
-		return new ImageView(new Image("./Images/bush.png"));
+		return new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/bush.png")));
 	}
 
 	public static ImageView getBambooI() {
-		return new ImageView(new Image("./Images/bamboo.png"));
+		return new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/bamboo.png")));
 	}
 
 	public static ImageView getFriendI() {
-		return new ImageView(new Image("./Images/friend.png"));
+		return new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/friend.png")));
 	}
 
 	public static ImageView getTreeI() {
-		return new ImageView(new Image("./Images/tree.png"));
+		return new ImageView(new Image(SandboxScene.class.getResourceAsStream("/Images/tree.png")));
 	}
 
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
