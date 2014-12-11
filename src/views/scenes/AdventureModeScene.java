@@ -42,9 +42,7 @@ public final class AdventureModeScene extends Scene {
 	
 	public static ToggleButton Eve = new ToggleButton("Eve!");
 
-	public static Button PLAY;
-	
-	public static Button PAUSE;
+	public static Button PLAY, PAUSE, FORWARD, RESET;
 	
 	public static ImageView imagePlay = new ImageView(new Image(
 			"./Images/PlayButton.png"));
@@ -62,8 +60,6 @@ public final class AdventureModeScene extends Scene {
 				"./Images/ArrowRight.png"));
 		private ImageView imageReset = new ImageView(new Image(
 				"./Images/ResetButton.png"));
-
-		private Button FORWARD, RESET;
 
 		private AdventureModePane() {
 			this.getStylesheets().add("./sandbox_style.css");
@@ -185,6 +181,9 @@ public final class AdventureModeScene extends Scene {
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
 			RESET.setGraphic(imageReset);
+			
+			PAUSE.setDisable(true);
+			FORWARD.setDisable(true);
 
 			PAUSE.setOnAction(ButtonHandlers::PAUSE_BUTTON_HANDLER);
 			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);

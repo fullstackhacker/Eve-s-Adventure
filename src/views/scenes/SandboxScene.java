@@ -53,7 +53,7 @@ public final class SandboxScene extends Scene {
 	private static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
 	private static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
 
-	public static Button PLAY;
+	public static Button PLAY, PAUSE, FORWARD, RESET;
 	
 	public static ImageView imagePlay = new ImageView(new Image(
 			"./Images/PlayButton.png"));
@@ -74,8 +74,6 @@ public final class SandboxScene extends Scene {
 				"./Images/ResetButton.png"));
 		
 		//private ImageView imageEve = new ImageView(new Image("./Images/Eve.png"));
-
-		private Button PAUSE, FORWARD, RESET;
 
 		private SandboxPane() {
 			this.getStylesheets().add("./sandbox_style.css");
@@ -205,6 +203,9 @@ public final class SandboxScene extends Scene {
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
 			RESET.setGraphic(imageReset);
+			
+			PAUSE.setDisable(true);
+			FORWARD.setDisable(true);
 
 			PAUSE.setOnAction(ButtonHandlers::PAUSE_BUTTON_HANDLER);
 			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);

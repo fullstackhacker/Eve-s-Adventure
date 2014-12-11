@@ -99,9 +99,10 @@ public class Interpreter {
 	 * Executes the current code block and then moves to the next one
 	 */
 	public void executeOne() {
-		// TODO Fix this
-		KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
-		this.instruction();
+		if((activeCodeBlock >= 0 && activeCodeBlock < this.karelCode.size())){
+			KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
+			this.instruction();			
+		}
 	}
 
 	/**
@@ -219,10 +220,9 @@ public class Interpreter {
 		if (!validPosition()) {
 			timer.cancel();
 			if (ButtonHandlers.isSandboxMode()) {
-				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
+				SandboxScene.PLAY.setDisable(false);;
 			} else {
-				AdventureModeScene.PLAY
-						.setGraphic(AdventureModeScene.imagePlay);
+				AdventureModeScene.PLAY.setDisable(false);
 			}
 			return;
 		}
@@ -431,6 +431,8 @@ public class Interpreter {
 			return;
 		case KarelCode.SLEEP:
 			this.world.getEve().setAwake(false);
+			return;
+		case KarelCode.WAKEUP:
 			return;
 		case KarelCode.PUTBAMBOO:
 			this.world.evePutBamboo();

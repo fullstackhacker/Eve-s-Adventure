@@ -918,12 +918,18 @@ public final class ButtonHandlers {
 		System.out.println("PAUSE_BUTTON_HANDLER CALLED");
 		if((!sandbox) && (AdventureModeScene.PLAY != null) && (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePlay)){
 			if(AdventureModeScene.getInterpreter() != null){
-				//AdventureModeScene.getInterpreter().reverseInstruction();
+				AdventureModeScene.getInterpreter().pause();
+				AdventureModeScene.PLAY.setDisable(false);
+				isPause = true;
+				return;
 			}
 		} else if ((sandbox) && (SandboxScene.PLAY != null)
 				&& (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePlay)) {
 			if (SandboxScene.getInterpreter() != null) {
-				// SandboxScene.getInterpreter().reverseInstruction();
+				SandboxScene.getInterpreter().pause();
+				SandboxScene.PLAY.setDisable(false);
+				isPause = true;
+				return;
 			}
 		}
 	}
@@ -931,13 +937,19 @@ public final class ButtonHandlers {
 	public static final void FORWARD_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("FORWARD_BUTTON_HANDLER CALLED");
 		if (!sandbox) {
-			AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
-			AdventureModeScene.AdventureModePane.getInstance().add(
-					Running.getInstance(), 0, 1, 1, 3);
+			try{
+				AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
+				AdventureModeScene.AdventureModePane.getInstance().add(Running.getInstance(), 0, 1, 1, 3);
+			}catch(IllegalArgumentException e1){
+				//e1.printStackTrace();
+			}
 		} else if (sandbox) {
-			SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
-			SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),
-					0, 1, 1, 3);
+			try{
+				SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
+				SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),0, 1, 1, 3);
+			}catch(IllegalArgumentException e2){
+				//e2.printStackTrace();
+			}
 		}
 		KarelTable.getInstance().DELETE_BUTTON.setDisable(true);
 		KarelTable.getInstance().REPLACE_BUTTON.setDisable(true);
@@ -959,13 +971,19 @@ public final class ButtonHandlers {
 
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e) {
 		if (!sandbox) {
-			AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
-			AdventureModeScene.AdventureModePane.getInstance().add(
-					Running.getInstance(), 0, 1, 1, 3);
+			try{
+				AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(AdventureModeScene.gametabs);
+				AdventureModeScene.AdventureModePane.getInstance().add(Running.getInstance(), 0, 1, 1, 3);
+			}catch(Exception e1){
+				//e1.printStackTrace();
+			}
 		} else if (sandbox) {
-			SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
-			SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),
-					0, 1, 1, 3);
+			try{
+				SandboxScene.SandboxPane.getInstance().getChildren().remove(SandboxScene.gametabs);
+				SandboxScene.SandboxPane.getInstance().add(Running.getInstance(),0, 1, 1, 3);
+			}catch(Exception e2){
+				//e2.printStackTrace();
+			}
 		}
 		KarelTable.getInstance().DELETE_BUTTON.setDisable(true);
 		KarelTable.getInstance().REPLACE_BUTTON.setDisable(true);
@@ -979,53 +997,35 @@ public final class ButtonHandlers {
 		System.out.println("PLAY_BUTTON_HANDLER CALLED");
 		World world = null;
 		if (!sandbox) {
-			if (AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePause) {
-				// TODO have a pause() in Interpreter
-				AdventureModeScene.PLAY.setGraphic(null);
-				AdventureModeScene.PLAY
-						.setGraphic(AdventureModeScene.imagePlay);
-				AdventureModeScene.getInterpreter().pause();
-				;
-				isPause = true;
-				return;
-			}
-
+			AdventureModeScene.PLAY.setDisable(true);		
 			if (isPause) {
+				//TODO fix!
 				AdventureModeScene.getInterpreter().start();
 				isPause = false;
 				return;
 			}
 			world = AdventureModeScene.getWorld();
-			AdventureModeScene.PLAY.setGraphic(null);
-			AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePause);
-			AdventureModeScene
-					.setInterpreter(new Interpreter(karelCode, world));
+			AdventureModeScene.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());
 			world.printWorld();
 			AdventureModeScene.getInterpreter().start(); // starts the code
+			AdventureModeScene.PAUSE.setDisable(false);
+			AdventureModeScene.FORWARD.setDisable(false);
 		} else {
-			if (SandboxScene.PLAY.getGraphic() == SandboxScene.imagePause) {
-				// TODO have a pause() in Interpreter
-				SandboxScene.PLAY.setGraphic(null);
-				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
-				SandboxScene.getInterpreter().pause();
-				isPause = true;
-				return;
-			}
-
+			SandboxScene.PLAY.setDisable(true);
 			if (isPause) {
 				SandboxScene.getInterpreter().start();
 				isPause = false;
 				return;
 			}
-
 			world = SandboxScene.getWorld();
-			SandboxScene.PLAY.setGraphic(null);
-			SandboxScene.PLAY.setGraphic(SandboxScene.imagePause);
 			SandboxScene.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());
 			world.printWorld();
 			SandboxScene.getInterpreter().start(); // starts the code
+			SandboxScene.PAUSE.setDisable(false);
+			SandboxScene.FORWARD.setDisable(false);
+
 		}
 
 		world.printWorld();
@@ -1038,23 +1038,36 @@ public final class ButtonHandlers {
 	// TODO
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RESET_BUTTON_HANDLER CALLED");
+		isPause = false;
 		if (!sandbox) {
-			AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(Running.getInstance());
-			AdventureModeScene.AdventureModePane.getInstance().add(
-					AdventureModeScene.gametabs, 0, 1, 1, 3);
+			try{
+				AdventureModeScene.AdventureModePane.getInstance().getChildren().remove(Running.getInstance());
+				AdventureModeScene.AdventureModePane.getInstance().add(AdventureModeScene.gametabs, 0, 1, 1, 3);
+			}catch(Exception e1){
+				//e1.printStackTrace();
+			}
 		} else if (sandbox) {
-			SandboxScene.SandboxPane.getInstance().getChildren().remove(Running.getInstance());
-			SandboxScene.SandboxPane.getInstance().add(SandboxScene.gametabs,
-					0, 1, 1, 3);
+			try{
+				SandboxScene.SandboxPane.getInstance().getChildren().remove(Running.getInstance());
+				SandboxScene.SandboxPane.getInstance().add(SandboxScene.gametabs,0, 1, 1, 3);
+			}catch(Exception e2){
+				//e2.printStackTrace();
+			}
 		}
 		KarelTable.getInstance().DELETE_BUTTON.setDisable(false);
 		KarelTable.getInstance().REPLACE_BUTTON.setDisable(false);
 		if (!sandbox) {
 			if (AdventureModeScene.getInterpreter() != null) {
 				AdventureModeScene.getInterpreter().reset();
+				AdventureModeScene.PLAY.setDisable(false);
+				AdventureModeScene.PAUSE.setDisable(true);
+				AdventureModeScene.FORWARD.setDisable(true);
 			}
 		} else {
 			SandboxScene.getInterpreter().reset();
+			SandboxScene.PLAY.setDisable(false);
+			SandboxScene.PAUSE.setDisable(true);
+			SandboxScene.FORWARD.setDisable(true);
 		}
 	}
 
