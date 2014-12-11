@@ -1035,7 +1035,7 @@ public final class ButtonHandlers {
 		//if there is item
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
-			if (oldObject.getName().equals("Tree"))
+			if (oldObject instanceof Tree)
 			popup("Shrub", "Tree");
 		} 
 		else{
@@ -1062,9 +1062,9 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-			if (oldObject.getName().equals("Shrub"))
+			if (oldObject instanceof Shrub)
 			popup("Tree", "Shrub");
-			else if (oldObject.equals("Bamboo"))
+			else if (oldObject instanceof Bamboo)
 				popup("Tree", "Bamboo");
 		} 
 			else {
@@ -1103,7 +1103,7 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
 			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-			if (oldObject.getName().equals("Tree"))
+			if (oldObject instanceof Tree)
 				popup("Bamboo", "Tree");
 			if (oldObject instanceof Shrub)
 				popup("Bamboo", "Shrub");
@@ -1201,6 +1201,7 @@ public final class ButtonHandlers {
 
 	}
 
+	//Friend on Eve - ask
 	public static final void FRIENDS_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("FRIENDS_BUTTON_HANDLER");
 		// String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
