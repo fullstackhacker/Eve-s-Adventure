@@ -1175,17 +1175,13 @@ public final class ButtonHandlers {
 		GridWorld.getInstance().getWorld().setFindObj(true);
 		SandboxScene.getInstance().topMenu.collect.setDisable(false);
 		SandboxScene.getInstance().topMenu.find.setDisable(true);
-	} 
-	
-	public static final void SAVEA_MENU_HANDLER(ActionEvent e) {
-		System.out.println("SaveA Called!");
 	}
-	
+
 	public static final void SAVES_MENU_HANDLER(ActionEvent e) {
 		System.out.println("SaveS Called!");
 	}
 
-	public static final void SAVE_MENU_HANDLER(ActionEvent e) {
+	public static final void SAVEA_MENU_HANDLER(ActionEvent e) {
 		String DATADIR = "data" + File.separator;
 		String WORLDDIR = DATADIR + "worlds" + File.separator;
 		String LEVELDIR = DATADIR + "levels" + File.separator;
@@ -1197,8 +1193,6 @@ public final class ButtonHandlers {
 		String CURRENTLEVELFILENAME = "currentLevel.dat";
 		String KARELCODEFILENAME = "karelcode.dat";
 		String BAMBOOBJECTIVEFILENAME = "bambooObjective.dat";
-
-		String worldName = "";
 
 		final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
@@ -1223,7 +1217,7 @@ public final class ButtonHandlers {
 		objectives.add("Find Friend");
 		ObservableList<String> observableListObjectives = FXCollections
 				.observableList(objectives);
-		
+
 		final TextField NAME_TF = new TextField();
 		final Label DESCRIPTION_LABEL = new Label("Write a description");
 		final TextField DESCRIPTION_TF = new TextField();
@@ -1231,8 +1225,12 @@ public final class ButtonHandlers {
 		final ComboBox<String> CAMPAIGN_CB = new ComboBox<String>(
 				observableList);
 		CAMPAIGN_CB.setEditable(true);
-		final Label OBJECTIVE_LABEL = new Label("Objective");
-		final ComboBox<String> OBJECTIVES_CB = new ComboBox<String>(observableListObjectives);
+		final Label OBJECTIVE_LABEL = new Label(
+				"Objective: "
+						+ (GridWorld.getInstance().getWorld().getFindObj() == true ? "Find Friend"
+								: "Collect all Bamboo"));
+		// final ComboBox<String> OBJECTIVES_CB = new
+		// ComboBox<String>(observableListObjectives);
 		final Button SAVE = new Button("Save");
 		final Button CANCEL = new Button("Cancel");
 
@@ -1242,15 +1240,14 @@ public final class ButtonHandlers {
 		DESCRIPTION_TF.setMaxWidth(200);
 		CAMPAIGN_CB.setPrefWidth(200);
 		CAMPAIGN_CB.setMaxWidth(200);
-		OBJECTIVES_CB.setPrefWidth(200);
-		OBJECTIVES_CB.setMaxWidth(200);
 		SAVE.setPrefWidth(100);
 		SAVE.setMaxWidth(100);
 		CANCEL.setPrefWidth(100);
 		CANCEL.setMaxWidth(100);
 
 		dialogVbox.getChildren().addAll(NAME_TF, DESCRIPTION_LABEL,
-				DESCRIPTION_TF, CAMPAIGN_LABEL, CAMPAIGN_CB, OBJECTIVE_LABEL, OBJECTIVES_CB, SAVE, CANCEL);
+				DESCRIPTION_TF, CAMPAIGN_LABEL, CAMPAIGN_CB, OBJECTIVE_LABEL,
+				SAVE, CANCEL);
 		dialogVbox.setAlignment(Pos.CENTER);
 		dialogVbox.setPadding(new Insets(10, 10, 10, 10));
 		dialog.setScene(dialogScene);
@@ -1281,7 +1278,8 @@ public final class ButtonHandlers {
 					Scene dialScene = new Scene(vbox, 400, 300);
 
 					final TextField NAMECAMPAIGN_TF = new TextField();
-					final Label DESCRIPTION_LABEL = new Label("Campaign description:");
+					final Label DESCRIPTION_LABEL = new Label(
+							"Campaign description:");
 					final TextField DESCCAMPAIGN_TF = new TextField();
 					final Button SUBMIT = new Button("SUBMIT");
 					final Button CANCEL = new Button("CANCEL");
@@ -1312,8 +1310,10 @@ public final class ButtonHandlers {
 						public void handle(ActionEvent e) {
 							observableList.add(NAMECAMPAIGN_TF.getText());
 							CAMPAIGN_CB.setValue(NAMECAMPAIGN_TF.getText());
-							Save.saveCampaign(new Campaign(NAMECAMPAIGN_TF
-									.getText(), "Default Description"));
+							Campaign campaign = new Campaign(NAMECAMPAIGN_TF
+									.getText(), "Default Description");
+							Save.saveCampaign(campaign);
+							SandboxScene.campaigns.add(campaign);
 							campaign_dialog.close();
 						}
 					});
@@ -1323,9 +1323,12 @@ public final class ButtonHandlers {
 						if (SandboxScene.campaigns.get(i).getName()
 								.equals(CAMPAIGN_CB.getValue())) {
 							SandboxScene.getWorld().setName(NAME_TF.getText());
-							SandboxScene.campaigns.get(i).addLevel(
-									new Level(SandboxScene.getWorld(),
-											DESCRIPTION_TF.getText()));
+							Level level = new Level(SandboxScene.getWorld(),
+									DESCRIPTION_TF.getText());
+							level.getWorld().setFindObj(
+									GridWorld.getInstance().getWorld()
+											.getFindObj());
+							SandboxScene.campaigns.get(i).addLevel(level);
 							Save.saveCampaign(SandboxScene.campaigns.get(i));
 							break;
 						}
@@ -1337,5 +1340,9 @@ public final class ButtonHandlers {
 		});
 
 		System.out.println("Saved!");
+	}
+
+	public static final void SAVE_MENU_HANDLER(ActionEvent e) {
+
 	}
 }
