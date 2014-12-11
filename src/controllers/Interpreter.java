@@ -267,6 +267,7 @@ public class Interpreter {
 			break;
 		// conditionals
 		case KarelCode.IFSTATEMENT:
+		case KarelCode.ELSESTATEMENT:
 			conditional();
 			this.next();
 			break;

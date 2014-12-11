@@ -2,10 +2,13 @@ package views.scenes;
 
 import java.util.ArrayList;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -203,6 +206,12 @@ public final class SandboxScene extends Scene {
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
 			RESET.setGraphic(imageReset);
+			
+			PAUSE.setTooltip(new Tooltip("PAUSE"));
+			FORWARD.setTooltip(new Tooltip("FORWARD"));
+			RESET.setTooltip(new Tooltip("RESET"));
+			PLAY.setTooltip(new Tooltip("PLAY"));
+			
 			
 			PAUSE.setDisable(true);
 			FORWARD.setDisable(true);
