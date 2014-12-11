@@ -49,7 +49,7 @@ public final class AdventureModeScene extends Scene {
 	
 	public static final class AdventureModePane extends GridPane {
 
-		public static AdventureModePane instanceOfAdventurePane = new AdventureModePane();
+		public static AdventureModePane instanceOfAdventurePane = null;
 
 		//private ImageView imageBack = new ImageView(new Image(
 		//		"./Images/ArrowLeft.png"));
@@ -59,7 +59,30 @@ public final class AdventureModeScene extends Scene {
 		private AdventureModePane() {
 			this.getStylesheets().add(AdventureModeScene.class.getResource("/sandbox_style.css").toExternalForm());
 
-			buttonSetup();
+			//buttonSetup();
+			
+			PLAY = new Button();
+			PAUSE = new Button();
+			FORWARD = new Button();
+			RESET = new Button();
+			
+			PAUSE.setGraphic(imagePause);
+			FORWARD.setGraphic(imageRight);
+			PLAY.setGraphic(imagePlay);
+			RESET.setGraphic(imageReset);
+			
+			PAUSE.setTooltip(new Tooltip("PAUSE"));
+			FORWARD.setTooltip(new Tooltip("FORWARD"));
+			RESET.setTooltip(new Tooltip("RESET"));
+			PLAY.setTooltip(new Tooltip("PLAY"));
+			
+			PAUSE.setDisable(true);
+			FORWARD.setDisable(true);
+
+			PAUSE.setOnAction(ButtonHandlers::PAUSE_BUTTON_HANDLER);
+			FORWARD.setOnAction(ButtonHandlers::FORWARD_BUTTON_HANDLER);
+			PLAY.setOnAction(ButtonHandlers::PLAY_BUTTON_HANDLER);
+			RESET.setOnAction(ButtonHandlers::RESET_BUTTON_HANDLER);
 
 			GridPane.setFillWidth(PAUSE, true);
 			GridPane.setHalignment(PAUSE, HPos.CENTER);
@@ -77,7 +100,7 @@ public final class AdventureModeScene extends Scene {
 			karelTable = KarelTable.getInstance();
 			protips.setId("protips");
 			gridWorld = GridWorld.getInstance();
-			objective = Objective.getInstance();
+			//objective = Objective.getInstance();
 
 			Rows rows = Rows.getInstance();
 			Cols cols = Cols.getInstance();
@@ -169,9 +192,7 @@ public final class AdventureModeScene extends Scene {
 
 		private void buttonSetup() {
 			PAUSE = new Button();
-			FORWARD = new Button();
-			PLAY = new Button();
-			RESET = new Button();
+			
 			PAUSE.setGraphic(imagePause);
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
@@ -192,12 +213,14 @@ public final class AdventureModeScene extends Scene {
 		}
 
 		public static AdventureModePane getInstance() {
+			if(instanceOfAdventurePane == null){
+				instanceOfAdventurePane = new AdventureModePane();
+			}
 			return instanceOfAdventurePane;
 		}
 	}
 
-	private static AdventureModeScene instanceOfAdventureModeScene = new AdventureModeScene(AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT);
-	
+	private static AdventureModeScene instanceOfAdventureModeScene = null; 
 	private AdventureModeScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
@@ -219,9 +242,12 @@ public final class AdventureModeScene extends Scene {
 	}
 
 	public static AdventureModeScene getInstance() {
-		return (AdventureModeScene.instanceOfAdventureModeScene == null) ? instanceOfAdventureModeScene = new AdventureModeScene(
-				AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH,
-				MainApp.WINDOW_HEIGHT) : instanceOfAdventureModeScene;
+		if(AdventureModeScene.instanceOfAdventureModeScene == null){
+			instanceOfAdventureModeScene = new AdventureModeScene(
+					AdventureModePane.getInstance(), MainApp.WINDOW_WIDTH,
+					MainApp.WINDOW_HEIGHT);
+		}
+		return instanceOfAdventureModeScene;
 	}
 	public static Interpreter getInterpreter() {
 		return interpreter;

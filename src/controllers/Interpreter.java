@@ -131,6 +131,7 @@ public class Interpreter {
 				
 				//set graphic to creature
 				if(this.world.hasCreature(currentPosition) && this.world.creatureAt(currentPosition).isEve()){
+					System.out.println("------- Changing eve graphic! ------" + this.world.getEve().getDirection());
 					switch(this.world.getEve().getDirection()){
 					case Coordinate.UP: 
 						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveDownI());
@@ -139,10 +140,10 @@ public class Interpreter {
 						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveUpI());
 						break;
 					case Coordinate.LEFT:
-						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveRightI());
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveLeftI());
 						break;
 					case Coordinate.RIGHT: 
-						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveLeftI()); 
+						GridWorld.gridButtons[col][row].setGraphic(SandboxScene.getEveRightI()); 
 						break;
 					default: 
 						throw new IllegalValueException("Eve is facing an illegal direction");

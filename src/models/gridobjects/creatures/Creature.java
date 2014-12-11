@@ -135,6 +135,10 @@ public class Creature extends GridObject {
 		if(this.numberOfBamboo > 0) this.numberOfBamboo--;
 	}
 	
+	public void setBamboo(int numberOfBamboo){
+		this.numberOfBamboo = numberOfBamboo; 
+	}
+	
 	/**
 	 * Set the direction of the creature.
 	 * @param direction  the (new) direction of the creature
