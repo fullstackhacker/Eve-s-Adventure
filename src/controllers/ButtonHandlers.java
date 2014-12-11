@@ -569,6 +569,9 @@ public final class ButtonHandlers {
 
 	public static final void RMWALL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("RMWALL_BUTTON_HANDLER");
+		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.UP);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("WorldButton");
 	}
 
 	public static final void WALLT_BUTTON_HANDLER(ActionEvent e) {
@@ -583,18 +586,21 @@ public final class ButtonHandlers {
 		System.out.println("WALLB_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.DOWN);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("downWall");
 	}
 
 	public static final void WALLL_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLL_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.LEFT);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("leftWall");
 	}
 
 	public static final void WALLR_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("WALLR_BUTTON_HANDLER");
 		Coordinate cords = new Coordinate (GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
 		GridWorld.getInstance().getWorld().addWall(cords, Coordinate.RIGHT);
+		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld.getYCoordinate()].setId("rightWall");
 	}
 
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
@@ -672,21 +678,18 @@ public final class ButtonHandlers {
 	 * CreaturesTab.java
 	 */
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-
+		
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate()); 
+		
+		if(!GridWorld.getInstance().getWorld().hasCreature(currentPosition)){
+			return;
 		}
-		System.out.println("RMCREATURE_BUTTON_HANDLER");
-		GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].setGraphic(null);
-		GridWorld
-				.getInstance()
-				.getWorld()
-				.removeCreature(
-						new Coordinate(GridWorld.getXCoordinate(), GridWorld
-								.getYCoordinate()));
+		
+		//remove from backend
+		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
+		
+		//remove from frontend
+		GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()].setGraphic(null);
 	}
 
 	public static final void EVE_BUTTON_HANDLER(ActionEvent e) {
@@ -780,22 +783,40 @@ public final class ButtonHandlers {
 	}
 
 	public static final void PLAY_BUTTON_HANDLER(ActionEvent e) {
-
-		System.out.println("PLAY_BUTTON_HANDLER CALLED");
 		ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
 		if (karelCode.isEmpty()) {
 			System.out.println("karelCode is empty!");
 			return;
 		}
+		
+		System.out.println("PLAY_BUTTON_HANDLER CALLED");
 		World world = null;
 		if (!sandbox) {
+			if(AdventureModeScene.PLAY.getGraphic() == AdventureModeScene.imagePause){
+				//TODO have a pause() in Interpreter
+				AdventureModeScene.PLAY.setGraphic(null);
+				AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePlay);
+				AdventureModeScene.getInterpreter().reset();
+				return;
+			}
 			world = AdventureModeScene.getWorld();
+			AdventureModeScene.PLAY.setGraphic(null);
+			AdventureModeScene.PLAY.setGraphic(AdventureModeScene.imagePause);
 			AdventureModeScene.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());
 			world.printWorld();
 			AdventureModeScene.getInterpreter().start(); // starts the code
 		}else{
+			if(SandboxScene.PLAY.getGraphic() == SandboxScene.imagePause){
+				//TODO have a pause() in Interpreter
+				SandboxScene.PLAY.setGraphic(null);
+				SandboxScene.PLAY.setGraphic(SandboxScene.imagePlay);
+				SandboxScene.getInterpreter().reset();
+				return;
+			}
 			world = SandboxScene.getWorld();
+			SandboxScene.PLAY.setGraphic(null);
+			SandboxScene.PLAY.setGraphic(SandboxScene.imagePause);
 			SandboxScene.setInterpreter(new Interpreter(karelCode, world));
 			System.out.println(KarelTable.getInstance().getKarelCode());
 			world.printWorld();
@@ -810,12 +831,14 @@ public final class ButtonHandlers {
 	}
 
 	public static final void RESET_BUTTON_HANDLER(ActionEvent e) {
+		System.out.println("RESET_BUTTON_HANDLER CALLED");
 		if(!sandbox){
-			AdventureModeScene.getInterpreter().reset();
+			if(AdventureModeScene.getInterpreter() != null){
+				AdventureModeScene.getInterpreter().reset();
+			}
 		}else{
 			SandboxScene.getInterpreter().reset();
 		}
-		System.out.println("RESET_BUTTON_HANDLER CALLED");
 	}
 
 	public static final void REPLACE_BUTTON_HANDLER(ActionEvent e) {

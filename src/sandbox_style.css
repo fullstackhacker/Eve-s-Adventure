@@ -17,7 +17,31 @@
 }
 
 #upWall{
-	-fx-border-width: 300, 0, 0, 0;
+	-fx-background-color: white;
+	-fx-border-style: solid;
+	-fx-border-width: 5 0 0 0;
+	-fx-border-color: #222;
+}
+
+#rightWall{
+	-fx-background-color: white;
+	-fx-border-style: solid;
+	-fx-border-width: 0 5 0 0;
+	-fx-border-color: #222;
+}
+
+#downWall{
+	-fx-background-color: white;
+	-fx-border-style: solid;
+	-fx-border-width: 0 0 5 0;
+	-fx-border-color: #222;
+}
+
+#leftWall{
+	-fx-background-color: white;
+	-fx-border-style: solid;
+	-fx-border-width: 0 0 0 5;
+	-fx-border-color: #222;
 }
 
 #WorldButton{

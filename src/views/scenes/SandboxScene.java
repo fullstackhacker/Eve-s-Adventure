@@ -43,6 +43,7 @@ public final class SandboxScene extends Scene {
 	
 	public static TopMenu topMenu = null;
 	
+
 	private static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
 	private static ImageView EveRight = new ImageView(new Image("./Images/eve_right.png"));
 	private static ImageView EveDown = new ImageView(new Image("./Images/eve_down2.png"));
@@ -52,6 +53,15 @@ public final class SandboxScene extends Scene {
 	private static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
 	private static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
 
+	public static Button PLAY;
+	
+	public static ImageView imagePlay = new ImageView(new Image(
+			"./Images/PlayButton.png"));
+	
+	//TODO Change this link
+	public static ImageView imagePause = new ImageView(new Image(
+			"./Images/ResetButton.png"));
+	
 	public static final class SandboxPane extends GridPane {
 		
 
@@ -61,14 +71,12 @@ public final class SandboxScene extends Scene {
 				"./Images/ArrowLeft.png"));
 		private ImageView imageRight = new ImageView(new Image(
 				"./Images/ArrowRight.png"));
-		private ImageView imagePlay = new ImageView(new Image(
-				"./Images/PlayButton.png"));
 		private ImageView imageReset = new ImageView(new Image(
 				"./Images/ResetButton.png"));
 		
 		//private ImageView imageEve = new ImageView(new Image("./Images/Eve.png"));
 
-		private Button BACK, FORWARD, PLAY, RESET;
+		private Button BACK, FORWARD, RESET;
 
 		private SandboxPane() {
 			this.getStylesheets().add("./sandbox_style.css");
