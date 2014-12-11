@@ -65,6 +65,7 @@ public class Interpreter {
 		this.gridButtons = new ToggleButton[5][10];
 		for(int row = 0; row < this.gridButtons.length; row++){
 			for(int col = 0; col < this.gridButtons.length; col++){
+				this.gridButtons[row][col] = new ToggleButton();
 				this.gridButtons[row][col].setGraphic(GridWorld.gridButtons[row][col].getGraphic()); 
 			}
 		}
@@ -252,7 +253,7 @@ public class Interpreter {
 			operation();
 			// add an objective check
 			if (Level.getObjective().equals("collect")
-					&& world.bambooCount == GridWorld.getInstance().getWorld()
+					&& this.world.getBambooObjective() == GridWorld.getInstance().getWorld()
 							.getEve().getNumberOfBamboo()) {
 				this.activeCodeBlock = this.karelCode.size();
 			} /*else if (Level.getObjective().equals("find")

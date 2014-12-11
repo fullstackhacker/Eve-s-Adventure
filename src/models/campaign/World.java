@@ -30,9 +30,6 @@ public class World implements Serializable {
 	 * Eve, one her friends, a stick of bamboo, a wall, or a shrub
 	 *
 	 */
-	
-	public static int bambooCount = 0;
-	
 	private class Square implements Serializable {
 		/**
 		 * Serial ID
@@ -294,13 +291,13 @@ public class World implements Serializable {
 	 * Serializable ID for saving
 	 */
 	private static final long serialVersionUID = 2L;
+	
+	private int bambooObjective; 
 
 	/**
 	 * Grid of Squares
 	 */
 	private Square[][] world;
-
-	private Stack<Coordinate> evesMoves;
 	/**
 	 * Constructor for the world
 	 * 
@@ -321,6 +318,7 @@ public class World implements Serializable {
 			}
 		}
 		findEve();
+		this.bambooObjective = -1; 
 	}
 
 	/**
@@ -341,7 +339,32 @@ public class World implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getBambooObjective(){
+		return this.bambooObjective;
+	}
 
+	public void setBambooObjective(int bambooObjective){
+		this.bambooObjective = bambooObjective; 
+	}
+	
+	public void incrementBambooObjective(){
+		if(this.bambooObjective == -1){
+			this.bambooObjective = 1; 
+			return;
+		}
+		this.bambooObjective++;
+	}
+	
+	public void decrementBambooObjective(){
+		if(this.bambooObjective == 1){
+			this.bambooObjective = -1;
+			return;
+		}
+		this.bambooObjective--;
+	}
+	
+	
 	/**
 	 * Retrieves the item at the given coordinate
 	 * 
