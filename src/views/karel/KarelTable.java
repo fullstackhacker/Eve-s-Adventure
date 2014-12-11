@@ -660,6 +660,10 @@ public final class KarelTable extends GridPane {
 		return karelCodeArrayList;
 	}
 	
+	public void setKarelCode(ArrayList<String> karelCode){
+		this.karelCode = FXCollections.observableArrayList(karelCode);
+	}
+	
 	public int getLineSelectedLine(){
 		return this.listView.getSelectionModel().getSelectedIndex();
 	}

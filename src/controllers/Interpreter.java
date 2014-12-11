@@ -381,22 +381,33 @@ public class Interpreter {
 	}
 
 	public void conditional() { // if statement
+		System.out.println("condtional CALLED");
 		if (!this.karelCode.get(this.activeCodeBlock).equals(
-				KarelCode.IFSTATEMENT))
+				KarelCode.IFSTATEMENT)){
+			System.out.println("1. if");
 			return; // error
-		if (!this.next())
+		}
+		if (!this.next()){
 			throw new IllegalValueException("Ill formed code");
-		if (!this.karelCode.get(this.activeCodeBlock).equals(
-				KarelCode.CLOSESTATEMENT))
+		}
+		/*if (!this.karelCode.get(this.activeCodeBlock).equals(
+				KarelCode.CLOSESTATEMENT)){
+			System.out.println("this.activeCodeBlock =" + this.karelCode.get(this.activeCodeBlock));
+			System.out.println("3. if");
 			return;
-		if (!this.next())
+		}*/
+		if (!this.next()){
 			throw new IllegalValueException("Ill formed code");
+		}
+		
 		boolean result = variable();
+		System.out.println("result = " + result);
 		if (result) {
 			if (!this.next())
 				throw new IllegalValueException("Ill formed Karel Code");
 			instructions();
 		} else {
+			System.out.println("TRUE");
 			do {
 				this.next();
 			} while (!this.karelCode.get(this.activeCodeBlock).equals(
@@ -404,18 +415,15 @@ public class Interpreter {
 			System.out.println("Conditional (variable false): "
 					+ this.karelCode.get(this.activeCodeBlock));
 		}
-		if (!this.next())
+		if (!this.next()){
 			return;
-		if (this.karelCode.get(this.activeCodeBlock).equals(
-				KarelCode.ELSESTATEMENT)
-				&& !result) {
+		}
+		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT)&& !result) {
 			if (!this.next())
 				throw new IllegalValueException("Ill formed Karel Code");
 			instructions();
 		}
-		if (this.karelCode.get(this.activeCodeBlock).equals(
-				KarelCode.ELSESTATEMENT)
-				&& result) {
+		if (this.karelCode.get(this.activeCodeBlock).equals(KarelCode.ELSESTATEMENT) && result) {
 			do {
 				this.next();
 			} while (!this.karelCode.get(this.activeCodeBlock).equals(
@@ -477,14 +485,16 @@ public class Interpreter {
 	}
 
 	public boolean variable() {
-
+		System.out.println("variable CALLED");
 		System.out.println("VARIABLE: CURRENT DIRECTION: "
 				+ this.world.getEve().getDirection());
 		System.out.println("VARIABLE: CURRENT LOCATION: "
 				+ this.world.getEve().getCoordinates());
 
+		System.out.println("this.activeCodeBlock = " + this.karelCode.get(this.activeCodeBlock));
 		switch (this.karelCode.get(this.activeCodeBlock)) {
 		case KarelCode.FRONTISCLEAR:
+			System.out.println("frontIsClear" +this.world.frontIsClear());
 			return this.world.frontIsClear();
 		case KarelCode.BAGISEMPTY:
 			return !this.world.getEve().hasBamboo();
