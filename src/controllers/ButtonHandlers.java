@@ -984,7 +984,6 @@ public final class ButtonHandlers {
 				.getYCoordinate()].setId("rightWall");
 	}
 
-	//shrub on shrub: nothing
 	//shrub on Eve: can co-exist, add shrub
 	//shrub on Friend: can co-exist, add shrub
 	//shrub on bamboo: add shrub that contains bamboo
@@ -992,16 +991,13 @@ public final class ButtonHandlers {
 	public static final void SHRUB_BUTTON_HANDLER(ActionEvent e) {
 		System.out.println("SHRUB_BUTTON_HANDLER");
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
-		//if there is a creature
-		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
-			continue; //would change graphic to something where you see both of them
-		//if Item is here
+		//if there is a creature, would change graphic to something where you see both of them
+		//if there is item
 		if (!GridWorld.getInstance().getWorld().hasItem(currentPosition)){
-			Item oldItem = GridWorld.getInstance().getWorld()
-					.ItemAt(currentPosition);
-			if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-			popup("Shrub");
+			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
+			
+			if (oldObject.getName().equals("Tree")) {
+			popup("Shrub", "Tree");
 		} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getShrubI());
@@ -1014,17 +1010,23 @@ public final class ButtonHandlers {
 		GridWorld.getInstance().getWorld().printWorld();
 	}
 }
+	//Tree on Eve - go
+	//Tree on Friend - go
+	//Tree on Shrub - ask to replace
+	//Tree on Bamboo - ask to replace
 	public static final void TREE_BUTTON_HANDLER(ActionEvent e) {
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Eve!"))
-			EvePop();
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		//if there is a creature, would change graphic to something where you see both of them
+		//if there is item
+		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
+			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-			popup("Tree");
-
-		} else {
+			if (oldObject.getName().equals("Shrub"))
+			popup("Tree", "Shrub");
+			else if (oldObject.equals("Bamboo"))
+				popup("Tree", "Bamboo");
+		} 
+			else {
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getTreeI());
 
@@ -1039,18 +1041,22 @@ public final class ButtonHandlers {
 		}
 	}
 
+//Bamboo on Eve - ?
+//Bamboo on Friend - ?
+//Bamboo on Tree - ask to replace
+//Bamboo on Shrub - increment value of bamboo in that shrub, let user know this happened
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e) {
 		GridWorld.getInstance().getWorld().incrementBambooObjective();
 		System.out.println("BAMBOO_BUTTON_HANDLER");
-		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-				.getYCoordinate()].getText();
-		if (oldObject.equals("Eve!"))
-			EvePop();
+		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(), GridWorld.getYCoordinate());
+		//if there is a creature, would change graphic to something where you see both of them
+		//if there is item
+		if (GridWorld.getInstance().getWorld().hasItem(currentPosition)){
+			Item oldObject = GridWorld.getInstance().getWorld().itemAt(currentPosition);
 
-		else if (oldObject.equals("Tree") || oldObject.equals("Shrub")
-				|| oldObject.equals("Bamboo") || oldObject.equals("Friend")) {
-			popup("Bamboo");
-		} else {
+			if (oldObject.getName().equals("Tree"))
+				popup("Bamboo", "Tree");
+		} 
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 					.getYCoordinate()].setGraphic(SandboxScene.getBambooI());
 			Bamboo bamboo = new Bamboo(4);
@@ -1061,7 +1067,7 @@ public final class ButtonHandlers {
 			GridWorld.getInstance().getWorld().addItem(bamboo);
 			GridWorld.getInstance().getWorld().printWorld();
 		}
-	}
+	
 
 	/**
 	 * CreaturesTab.java
@@ -1069,7 +1075,7 @@ public final class ButtonHandlers {
 	public static final void RMCREATURE_BUTTON_HANDLER(ActionEvent e) {
 		Coordinate currentPosition = new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate());
-		if (!GridWorld.getInstance().getWorld().hasCreature(currentPosition))
+		if (GridWorld.getInstance().getWorld().hasCreature(currentPosition))
 			return;
 		//backend
 		GridWorld.getInstance().getWorld().removeCreature(currentPosition);
