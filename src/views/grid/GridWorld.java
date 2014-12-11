@@ -150,7 +150,7 @@ public final class GridWorld extends GridPane {
 			}
 		}
 
-		gridButtons[2][2].setText("Eve!");
+		//gridButtons[2][2].setText("Eve!");
 		gridButtons[2][2].getTransforms().add(new Rotate(180, 28, 32.5));
 
 		// gridButtons[2][2].setText("Eve!");
@@ -167,8 +167,6 @@ public final class GridWorld extends GridPane {
 	public World getWorld() {
 		return world;
 	}
-	
-	
 
 	public static int getXCoordinate(){
 		for(int y = 0; y < gridButtons.length; y++){
