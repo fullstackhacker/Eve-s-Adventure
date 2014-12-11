@@ -651,7 +651,7 @@ public final class ButtonHandlers {
 	}
 
 	public static final void BAMBOO_BUTTON_HANDLER(ActionEvent e) {
-
+		World.bambooCount++;
 		System.out.println("BAMBOO_BUTTON_HANDLER");
 		String oldObject = GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
 				.getYCoordinate()].getText();
