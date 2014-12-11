@@ -253,7 +253,6 @@ public final class ButtonHandlers {
 			}
 			
 			if(campaign.getLevels().get(0).getKarelCode() != null){
-				campaign.getLevels().get(0).getKarelCode().add("if");
 				System.out.println(campaign.getLevels().get(0).getKarelCode());
 				KarelTable.getInstance().setKarelCode(campaign.getLevels().get(0).getKarelCode());
 			}
