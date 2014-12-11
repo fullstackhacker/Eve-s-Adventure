@@ -39,7 +39,7 @@ public final class MainMenuScene extends Scene {
 		
 		private Button SANDBOX_MODE_BUTTON, ADVENTURE_MODE_BUTTON;
 		
-		private ImageView LOGO = new ImageView(new Image("./Images/Eve.png"));
+		private ImageView LOGO = new ImageView(new Image(MainMenuScene.class.getResourceAsStream("/Images/Eve.png")));
 		//private ImageView LOGO;
 		private Label TITLE_LABEL;
 		
@@ -50,7 +50,7 @@ public final class MainMenuScene extends Scene {
 		 * textfields, and more. 
 		 */
 		private MainMenuPane(){
-			this.getStylesheets().add("./homescreen_style.css");
+			this.getStylesheets().add(MainMenuScene.class.getResource("/homescreen_style.css").toExternalForm());
 			
 			setupObjects();
 			this.setCenter(addVBox());

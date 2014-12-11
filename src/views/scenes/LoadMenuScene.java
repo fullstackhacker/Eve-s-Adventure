@@ -40,7 +40,7 @@ public final class LoadMenuScene extends Scene {
 		 * This will generate all the buttons, textfields, and more.
 		 */
 		private LoadMenuPane() {
-			this.getStylesheets().add("./loadmenu_style.css");
+			this.getStylesheets().add(LoadMenuScene.class.getResource("/loadmenu_style.css").toExternalForm());
 			setupObjects();
 			this.setCenter(addVBox());
 			this.setBottom(addHBox());

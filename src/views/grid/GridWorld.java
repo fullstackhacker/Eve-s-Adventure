@@ -30,7 +30,7 @@ public final class GridWorld extends GridPane {
 	private World world;
 
 	private GridWorld() {
-		this.getStylesheets().add("./sandbox_style.css");
+		this.getStylesheets().add(GridWorld.class.getResource("/sandbox_style.css").toExternalForm());
 
 		this.setGridLinesVisible(true);
 

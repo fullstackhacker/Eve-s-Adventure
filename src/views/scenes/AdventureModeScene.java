@@ -45,11 +45,9 @@ public final class AdventureModeScene extends Scene {
 
 	public static Button PLAY, PAUSE, FORWARD, RESET;
 	
-	public static ImageView imagePlay = new ImageView(new Image(
-			"./Images/PlayButton.png"));
+	public static ImageView imagePlay = new ImageView(new Image(AdventureModeScene.class.getResourceAsStream("/Images/PlayButton.png")));
 	
-	public static ImageView imagePause = new ImageView(new Image(
-			"./Images/pause.png"));
+	public static ImageView imagePause = new ImageView(new Image(AdventureModeScene.class.getResourceAsStream("/Images/pause.png")));
 	
 	public static final class AdventureModePane extends GridPane {
 
@@ -57,13 +55,11 @@ public final class AdventureModeScene extends Scene {
 
 		//private ImageView imageBack = new ImageView(new Image(
 		//		"./Images/ArrowLeft.png"));
-		private ImageView imageRight = new ImageView(new Image(
-				"./Images/ArrowRight.png"));
-		private ImageView imageReset = new ImageView(new Image(
-				"./Images/ResetButton.png"));
+		private ImageView imageRight = new ImageView(new Image(AdventureModeScene.class.getResourceAsStream("/Images/ArrowRight.png")));
+		private ImageView imageReset = new ImageView(new Image(AdventureModeScene.class.getResourceAsStream("/Images/ResetButton.png")));
 
 		private AdventureModePane() {
-			this.getStylesheets().add("./sandbox_style.css");
+			this.getStylesheets().add(AdventureModeScene.class.getResource("/sandbox_style.css").toExternalForm());
 
 			buttonSetup();
 
