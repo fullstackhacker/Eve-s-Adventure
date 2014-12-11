@@ -49,8 +49,6 @@ public final class SandboxScene extends Scene {
 	public static ToggleButton Eve = new ToggleButton("Eve!");
 
 	public static TopMenu topMenu = null;
-
-	public static final class SandboxPane extends GridPane {
 	
 	public static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
 	public static ImageView EveRight = new ImageView(new Image("./Images/eve_right.png"));
@@ -58,7 +56,9 @@ public final class SandboxScene extends Scene {
 	public static ImageView EveLeft = new ImageView(new Image("./Images/eve_left.png"));
 	public static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
 	public static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
-	
+
+	public static final class SandboxPane extends GridPane {
+		
 
 		private static SandboxPane instanceOfMainMenuPane = null;
 
@@ -161,12 +161,12 @@ public final class SandboxScene extends Scene {
 			// Label Eve = new Label("Eve!");
 			// GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
-			GridWorld.gridButtons[2][2].setText("Eve!");
+			//GridWorld.gridButtons[2][2].setText("Eve!");
 			Eve.setVisible(true);
 
 			//GridWorld.gridButtons[2][2].setText("Eve!");
 			GridWorld.gridButtons[2][2].setText("");
-			GridWorld.gridButtons[2][2].setGraphic(Bush);
+			GridWorld.gridButtons[2][2].setGraphic(EveDown);
 			//imageEve.setId("Eve!");
 			//GridWorld.gridButtons[2][2].setGraphic(imageEve);
 			//Eve.setVisible(true);

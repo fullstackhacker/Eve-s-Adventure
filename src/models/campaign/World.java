@@ -14,7 +14,8 @@ import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import models.gridobjects.items.Wall;
-import views.grid.AGridWorld;
+import views.grid.GridWorld;
+import views.scenes.SandboxScene;
 import exceptions.IllegalValueException;
 
 /**
@@ -595,24 +596,17 @@ public class World implements Serializable {
 				return;
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
 					.getY() + 1]
-					.setText(AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].getText());
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-					.getY() + 1]
-					.getTransforms()
-					.addAll(AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].getTransforms());
+					.setGraphic(GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].getGraphic());
 			if (!this.getSquareAt(currentEveLocation).hasItem())
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("   ");
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("Bamboo");
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-					.getY()].getTransforms().clear();
-			AGridWorld.getInstance().setVisible(true);
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(SandboxScene.Bamboo);
+			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.DOWN:
 			if (this.getSquareAt(currentEveLocation).hasDownWall())
@@ -624,24 +618,17 @@ public class World implements Serializable {
 				return;
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+			GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
 					.getY() - 1]
-					.setText(AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].getText());
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-					.getY() - 1]
-					.getTransforms()
-					.addAll(AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].getTransforms());
+					.setGraphic(GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+							.getY()].getGraphic());
 			if (!this.getSquareAt(currentEveLocation).hasItem())
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("   ");
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("Bamboo");
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-					.getY()].getTransforms().clear();
-			AGridWorld.getInstance().setVisible(true);
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(SandboxScene.Bamboo);
+			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.LEFT:
 			if (this.getSquareAt(currentEveLocation).hasLeftWall())
@@ -652,23 +639,16 @@ public class World implements Serializable {
 				return;
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
-			AGridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
-					.getY()].setText(AGridWorld.gridButtons[currentEveLocation
-					.getX()][currentEveLocation.getY()].getText());
-			AGridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
-					.getY()]
-					.getTransforms()
-					.addAll(AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].getTransforms());
+			GridWorld.gridButtons[currentEveLocation.getX() - 1][currentEveLocation
+					.getY()].setGraphic(GridWorld.gridButtons[currentEveLocation
+					.getX()][currentEveLocation.getY()].getGraphic());
 			if (!this.getSquareAt(currentEveLocation).hasItem())
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("   ");
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("Bamboo");
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-					.getY()].getTransforms().clear();
-			AGridWorld.getInstance().setVisible(true);
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(SandboxScene.Bamboo);
+			GridWorld.getInstance().setVisible(true);
 			break;
 		case Coordinate.RIGHT:
 			if (this.getSquareAt(currentEveLocation).hasRightWall())
@@ -679,23 +659,16 @@ public class World implements Serializable {
 				return;
 			if (this.getSquareAt(newEveLocation).hasCreature())
 				return;
-			AGridWorld.gridButtons[currentEveLocation.getX() + 1][currentEveLocation
-					.getY()].setText(AGridWorld.gridButtons[currentEveLocation
-					.getX()][currentEveLocation.getY()].getText());
-			AGridWorld.gridButtons[currentEveLocation.getX() + 1][currentEveLocation
-					.getY()]
-					.getTransforms()
-					.addAll(AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-							.getY()].getTransforms());
+			GridWorld.gridButtons[currentEveLocation.getX() + 1][currentEveLocation
+					.getY()].setGraphic(GridWorld.gridButtons[currentEveLocation
+					.getX()][currentEveLocation.getY()].getGraphic());
 			if (!this.getSquareAt(currentEveLocation).hasItem())
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("   ");
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(null);
 			if ((this.getSquareAt(currentEveLocation).currentItem() instanceof Bamboo))
-				AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-						.getY()].setText("Bamboo");
-			AGridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
-					.getY()].getTransforms().clear();
-			AGridWorld.getInstance().setVisible(true);
+				GridWorld.gridButtons[currentEveLocation.getX()][currentEveLocation
+						.getY()].setGraphic(SandboxScene.Bamboo);
+			GridWorld.getInstance().setVisible(true);
 			break;
 		default:
 			throw new IllegalValueException("Eve facing illegal direction");
