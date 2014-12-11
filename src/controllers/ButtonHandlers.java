@@ -1148,6 +1148,8 @@ public final class ButtonHandlers {
 		if (GridWorld.getInstance().getWorld().getEve() == null) {
 			Creature eve = new Creature("Eve", currentPosition);
 			GridWorld.getInstance().getWorld().addCreature(eve);
+			GridWorld.gridButtons[currentPosition.getX()][currentPosition.getY()]
+					.setGraphic(SandboxScene.EveDown);
 			return;
 		}
 		// she is in the world somewhere, find her
