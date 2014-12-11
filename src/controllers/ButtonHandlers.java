@@ -185,9 +185,30 @@ public final class ButtonHandlers {
 	
 	
 	public static final void NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLER(ActionEvent e){
-		System.out.println("NEW_CAMPAIGN_BUTTON_HANDLER CALLED");
-		AdventureModeScene.AdventureModePane.getInstance();
-		AdventureModeScene.getInstance();
+		System.out.println("NEW_CAMPAIGN_ADVENTURE_BUTTON_HANDLE");
+		
+		String campaignName = NewCampaignScene.getInstance().getSelectedCampaign();
+		
+		System.out.println("campaignName = " + campaignName);
+		Campaign campaign = Load.loadCampaign(campaignName); 
+		
+		if(campaign == null){
+			System.out.println("campaign == null");
+			return;
+		}
+		
+		if(campaign.getLevels() != null && !campaign.getLevels().isEmpty()){
+			System.out.println(campaign.getLevels().size());
+			if(campaign.getLevels().get(0) == null){
+				System.out.println("ERROR: getWorld == null");
+				return;
+			}
+			AdventureModeScene.setWorld(campaign.getLevels().get(0).getWorld());
+			GridWorld.getInstance().setWorld(campaign.getLevels().get(0).getWorld());
+		}else{
+			System.out.println("ERROR: campaign.getLevel == null");
+		}
+		
 		MainApp.changeScenes(AdventureModeScene.getInstance());
 		try {
 			AdventureModeScene.AdventureModePane.getInstance().add(

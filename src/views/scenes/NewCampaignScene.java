@@ -100,8 +100,10 @@ public class NewCampaignScene extends Scene {
 		
 		
 		private static NewCampaignPane getInstance(){
-			return (instanceOfNewCampaignPane == null) ?instanceOfNewCampaignPane = new NewCampaignPane() : instanceOfNewCampaignPane;
-		
+			if(instanceOfNewCampaignPane == null){
+				instanceOfNewCampaignPane = new NewCampaignPane();	
+			}
+			return instanceOfNewCampaignPane;
 		}
 	}
 	
@@ -112,13 +114,14 @@ public class NewCampaignScene extends Scene {
 	}
 	
 	public String getSelectedCampaign(){
-		return instanceOfNewCampaignScene.getSelectedCampaign();
+		return NewCampaignScene.instanceOfNewCampaignScene.getSelectedCampaign();
 	}
 	
 	public static NewCampaignScene getInstance(){
-		return (NewCampaignScene.instanceOfNewCampaignScene == null) ? instanceOfNewCampaignScene = 
-			new NewCampaignScene(NewCampaignPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT) : 
-				instanceOfNewCampaignScene;
+		if(NewCampaignScene.instanceOfNewCampaignScene == null){
+			return instanceOfNewCampaignScene = new NewCampaignScene(NewCampaignPane.getInstance(), MainApp.WINDOW_WIDTH, MainApp.WINDOW_HEIGHT);
+		}
+		return instanceOfNewCampaignScene;
 	}
 	
 }
