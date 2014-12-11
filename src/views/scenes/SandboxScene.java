@@ -1,5 +1,7 @@
 package views.scenes;
 
+import java.util.ArrayList;
+
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -166,17 +168,15 @@ public final class SandboxScene extends Scene {
 			// Label Eve = new Label("Eve!");
 			// GridPane.setHalignment(Eve, HPos.CENTER);
 			System.out.println("Sandbox Scene things");
-<<<<<<< HEAD
-			//GridWorld.gridButtons[2][2].setText("Eve!");
-			Eve.setVisible(true);
-=======
+
 			GridWorld.gridButtons[2][2].setText("Eve!");
 			//Eve.setVisible(true);
->>>>>>> interpreter stuff
 
 			//GridWorld.gridButtons[2][2].setText("Eve!");
 			GridWorld.gridButtons[2][2].setText("");
 			GridWorld.gridButtons[2][2].setGraphic(EveDown);
+			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+			interpreter = new Interpreter(karelCode, getWorld());
 			//imageEve.setId("Eve!");
 			//GridWorld.gridButtons[2][2].setGraphic(imageEve);
 			//Eve.setVisible(true);
