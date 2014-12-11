@@ -2,8 +2,8 @@ package models.gridobjects.items;
 
 import java.io.Serializable;
 
-import exceptions.IllegalValueException;
 import models.Coordinate;
+import exceptions.IllegalValueException;
 
 /**
  * The Wall object extends Item and acts as a pure obstruction in the grid
@@ -49,5 +49,9 @@ public class Wall extends Item implements Serializable {
 	public String toString() {
 		return "W";
 
+	}
+	
+	public Wall copy(){
+		return new Wall(this.getId(), this.side);
 	}
 }

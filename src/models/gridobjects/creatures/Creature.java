@@ -175,10 +175,19 @@ public class Creature extends GridObject {
 		return super.getName().equals("Eve");
 	}
 	
+	@Override
 	/**
 	 * Returns the identifier. 
 	 */
 	public String toString(){
 		return String.valueOf(Character.toUpperCase(this.getName().charAt(0)));
+	}
+	
+	public Creature copy(){
+		Creature creature = new Creature(this.getName(), this.getCoordinates()); 
+		creature.numberOfBamboo = this.numberOfBamboo; 
+		creature.direction = this.direction; 
+		creature.isAwake = this.isAwake; 
+		return creature; 
 	}
 }

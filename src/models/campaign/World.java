@@ -4,14 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Stack;
 
-import javafx.geometry.HPos;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.transform.Rotate;
-import views.grid.AGridWorld;
-import views.scenes.AdventureModeScene;
 import models.Coordinate;
 import models.gridobjects.GridObject;
 import models.gridobjects.creatures.Creature;
@@ -20,6 +14,7 @@ import models.gridobjects.items.Item;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
 import models.gridobjects.items.Wall;
+import views.grid.AGridWorld;
 import exceptions.IllegalValueException;
 
 /**
@@ -213,7 +208,22 @@ public class World implements Serializable {
 		private void removeRightWall() {
 			this.rightWall = null;
 		}
-
+		
+		private Wall currentUpWall(){
+			return this.upWall; 
+		}
+		
+		private Wall currentDownWall(){
+			return this.downWall;
+		}
+		
+		private Wall currentLeftWall(){
+			return this.leftWall; 
+		}
+		
+		private Wall currentRightWall(){
+			return this.rightWall; 
+		}
 		/**
 		 * 
 		 * Check if the square has an item
@@ -289,6 +299,7 @@ public class World implements Serializable {
 	 */
 	private Square[][] world;
 
+	private Stack<Coordinate> evesMoves;
 	/**
 	 * Constructor for the world
 	 * 
@@ -1032,6 +1043,68 @@ public class World implements Serializable {
 		System.out.print(this);
 	}
 	
+	@Override
+	/**
+	 * 
+	 */
+	protected Object clone(){
+		World world = new World(this.name, this.getHeight(), this.getWidth()); 
+		//add things to the world
+		for(int row = 0; row < this.getHeight(); row++){
+			for(int col = 0; col < this.getWidth(); col++){
+				Coordinate currentPosition = new Coordinate(col, row); 
+				if(this.getSquareAt(currentPosition).hasCreature()) world.getSquareAt(currentPosition).addCreature(this.getSquareAt(currentPosition).currentCreature().copy());
+				if(this.getSquareAt(currentPosition).hasItem()) world.getSquareAt(currentPosition).addItem(this.getSquareAt(currentPosition).currentItem().copy());
+				if(this.getSquareAt(currentPosition).hasUpWall()) world.getSquareAt(currentPosition).addUpWall(this.getSquareAt(currentPosition).currentUpWall().copy());
+				if(this.getSquareAt(currentPosition).hasDownWall()) world.getSquareAt(currentPosition).addDownWall(this.getSquareAt(currentPosition).currentDownWall().copy());
+				if(this.getSquareAt(currentPosition).hasRightWall()) world.getSquareAt(currentPosition).addRightWall(this.getSquareAt(currentPosition).currentRightWall().copy());
+				if(this.getSquareAt(currentPosition).hasLeftWall()) world.getSquareAt(currentPosition).addLeftWall(this.getSquareAt(currentPosition).currentLeftWall().copy());
+			}
+		}
+		return world;
+	}
+	
+	public World copyWorld(){
+		return (World)this.clone();
+	}
+
+	public void overwrite(World world){
+		for(int row = 0; row < this.getHeight(); row++){
+			for(int col = 0; col < this.getWidth(); col++){
+				Coordinate currentPosition = new Coordinate(col, row);
+				
+				//overwrite the creatures
+				if(world.getSquareAt(currentPosition).hasCreature() && !this.getSquareAt(currentPosition).hasCreature()) 
+					this.getSquareAt(currentPosition).addCreature(world.getSquareAt(currentPosition).currentCreature()); 
+				else if(world.getSquareAt(currentPosition).hasCreature() && this.getSquareAt(currentPosition).hasCreature())
+					this.getSquareAt(currentPosition).replaceCreature(world.getSquareAt(currentPosition).currentCreature());
+				else
+					this.getSquareAt(currentPosition).removeCreature(); 
+				
+				//overwrite the items
+				if(world.getSquareAt(currentPosition).hasItem() && !this.getSquareAt(currentPosition).hasItem())
+					this.getSquareAt(currentPosition).addItem(world.getSquareAt(currentPosition).currentItem()); 
+				else if(world.getSquareAt(currentPosition).hasItem() && this.getSquareAt(currentPosition).hasItem())
+					this.getSquareAt(currentPosition).replaceItem(world.getSquareAt(currentPosition).currentItem());
+				else
+					this.getSquareAt(currentPosition).removeItem();
+					
+				//overwrite the walls
+				this.getSquareAt(currentPosition).removeUpWall(); 
+				this.getSquareAt(currentPosition).removeDownWall(); 
+				this.getSquareAt(currentPosition).removeRightWall(); 
+				this.getSquareAt(currentPosition).removeLeftWall(); 
+				if(world.getSquareAt(currentPosition).hasUpWall())
+					this.getSquareAt(currentPosition).addUpWall(world.getSquareAt(currentPosition).upWall.copy());
+				if(world.getSquareAt(currentPosition).hasDownWall())
+					this.getSquareAt(currentPosition).addDownWall(world.getSquareAt(currentPosition).downWall.copy());
+				if(world.getSquareAt(currentPosition).hasLeftWall())
+					this.getSquareAt(currentPosition).addLeftWall(world.getSquareAt(currentPosition).leftWall.copy()); 
+				if(world.getSquareAt(currentPosition).hasRightWall())
+					this.getSquareAt(currentPosition).addRightWall(world.getSquareAt(currentPosition).rightWall.copy()); 
+			}
+		}
+	}
 
 	@Override
 	/**

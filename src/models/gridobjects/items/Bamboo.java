@@ -29,4 +29,8 @@ public class Bamboo extends Item implements Serializable{
 		return "B";
 
 	}
+	
+	public Item copy(){
+		return new Bamboo(this.getId());
+	}
 }
