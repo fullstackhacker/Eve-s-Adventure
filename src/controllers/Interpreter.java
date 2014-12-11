@@ -12,6 +12,7 @@ import models.campaign.World;
 import models.gridobjects.items.Bamboo;
 import models.gridobjects.items.Shrub;
 import models.gridobjects.items.Tree;
+import views.Running;
 import views.grid.GridWorld;
 import views.karel.KarelTable;
 import views.scenes.AdventureModeScene;
@@ -90,9 +91,9 @@ public class Interpreter {
 	 * Executes the current code block and then moves to the next one
 	 */
 	public void executeOne() {
-		if((activeCodeBlock >= 0 && activeCodeBlock < this.karelCode.size())){
+		if ((activeCodeBlock >= 0 && activeCodeBlock < this.karelCode.size())) {
 			KarelTable.getInstance().setSelectedIndex(activeCodeBlock);
-			this.instruction();			
+			this.instruction();
 		}
 	}
 
@@ -115,7 +116,7 @@ public class Interpreter {
 		System.out.println("----- RESET WORLD -----");
 		this.world.printWorld();
 		this.world.overwrite(startWorld);
-		
+
 		System.out.println("----- RESET WORLD -----");
 		this.world.printWorld();
 		
@@ -246,7 +247,8 @@ public class Interpreter {
 		if (!validPosition()) {
 			timer.cancel();
 			if (ButtonHandlers.isSandboxMode()) {
-				SandboxScene.PLAY.setDisable(false);;
+				SandboxScene.PLAY.setDisable(false);
+				;
 			} else {
 				AdventureModeScene.PLAY.setDisable(false);
 			}
@@ -311,9 +313,11 @@ public class Interpreter {
 							.getInstance().getWorld().getEve()
 							.getNumberOfBamboo()) {
 				this.activeCodeBlock = this.karelCode.size();
+				Running.getInstance().setText("YOU WIN!!!!");
 			} else if (Level.getObjective().equals("find")
 					&& GridWorld.getInstance().getWorld().eveNearFriend()) {
 				this.activeCodeBlock = this.karelCode.size();
+				Running.getInstance().setText("YOU WIN!!!!");
 			}
 			this.next();
 			break;

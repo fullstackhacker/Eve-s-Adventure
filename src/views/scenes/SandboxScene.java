@@ -1,5 +1,6 @@
 package views.scenes;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import com.sun.org.apache.regexp.internal.RE;
@@ -15,6 +16,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import models.Coordinate;
+import models.campaign.Campaign;
 import models.campaign.World;
 import models.gridobjects.creatures.Creature;
 import views.MainApp;
@@ -27,6 +29,7 @@ import views.tabs.GameTabs;
 import views.tips.ProTips;
 import controllers.ButtonHandlers;
 import controllers.Interpreter;
+import controllers.Save;
 
 public final class SandboxScene extends Scene {
 
@@ -38,50 +41,56 @@ public final class SandboxScene extends Scene {
 	public static ProTips protips = null;
 	public static KarelTable karelTable = null;
 
-	//public static ToggleButton Eve = new ToggleButton("Eve!");
+	public static ArrayList<Campaign> campaigns = new ArrayList<Campaign>();
 
 	private static Interpreter interpreter;
-	
-	//public static ToggleButton Eve = new ToggleButton("Eve!");
-	
-	public static TopMenu topMenu = null;
-	
 
-	private static ImageView EveUp = new ImageView(new Image("./Images/eve_up.png"));
-	private static ImageView EveRight = new ImageView(new Image("./Images/eve_right.png"));
-	private static ImageView EveDown = new ImageView(new Image("./Images/eve_down2.png"));
-	private static ImageView EveLeft = new ImageView(new Image("./Images/eve_left.png"));
-	private static ImageView Bush = new ImageView(new Image("./Images/bush.png"));
-	private static ImageView Bamboo = new ImageView(new Image("./Images/bamboo.png"));
-	private static ImageView Friend = new ImageView(new Image("./Images/friend.png"));
-	private static ImageView Tree = new ImageView(new Image("./Images/tree.png"));
+	public static TopMenu topMenu = null;
+
+	private static ImageView EveUp = new ImageView(new Image(
+			"./Images/eve_up.png"));
+	private static ImageView EveRight = new ImageView(new Image(
+			"./Images/eve_right.png"));
+	private static ImageView EveDown = new ImageView(new Image(
+			"./Images/eve_down2.png"));
+	private static ImageView EveLeft = new ImageView(new Image(
+			"./Images/eve_left.png"));
+	private static ImageView Bush = new ImageView(
+			new Image("./Images/bush.png"));
+	private static ImageView Bamboo = new ImageView(new Image(
+			"./Images/bamboo.png"));
+	private static ImageView Friend = new ImageView(new Image(
+			"./Images/friend.png"));
+	private static ImageView Tree = new ImageView(
+			new Image("./Images/tree.png"));
 
 	public static Button PLAY, PAUSE, FORWARD, RESET;
-	
+
 	public static ImageView imagePlay = new ImageView(new Image(
 			"./Images/PlayButton.png"));
-	
+
 	public static ImageView imagePause = new ImageView(new Image(
 			"./Images/pause.png"));
-	
+
 	public static final class SandboxPane extends GridPane {
-		
 
-		private static SandboxPane instanceOfMainMenuPane = new SandboxPane();
+		private static SandboxPane instanceOfSandboxPane = new SandboxPane();
 
-		//private ImageView imageBack = new ImageView(new Image(
-		//		"./Images/ArrowLeft.png"));
+		// private ImageView imageBack = new ImageView(new Image(
+		// "./Images/ArrowLeft.png"));
 		private ImageView imageRight = new ImageView(new Image(
 				"./Images/ArrowRight.png"));
 		private ImageView imageReset = new ImageView(new Image(
 				"./Images/ResetButton.png"));
-		
-		//private ImageView imageEve = new ImageView(new Image("./Images/Eve.png"));
+
+		// private ImageView imageEve = new ImageView(new
+		// Image("./Images/Eve.png"));
 
 		private SandboxPane() {
 			this.getStylesheets().add("./sandbox_style.css");
 
 			buttonSetup();
+			loadUpCampaigns();
 
 			GridPane.setFillWidth(PAUSE, true);
 			GridPane.setHalignment(PAUSE, HPos.CENTER);
@@ -108,12 +117,12 @@ public final class SandboxScene extends Scene {
 			this.add(FORWARD, 4, 1);
 			this.add(PLAY, 5, 1);
 			this.add(RESET, 6, 1);
-			//this.add(gametabs, 0, 1, 1, 3);
-			//this.add(karelTable, 1, 1, 1, 3);
+			// this.add(gametabs, 0, 1, 1, 3);
+			// this.add(karelTable, 1, 1, 1, 3);
 			this.add(cols, 3, 2, 4, 1);
 			this.add(rows, 2, 3, 1, 2);
-			//this.add(gridWorld, 3, 3, 4, 2);
-			//this.add(protips, 0, 4, 2, 1);
+			// this.add(gridWorld, 3, 3, 4, 2);
+			// this.add(protips, 0, 4, 2, 1);
 			GridPane.setHalignment(rows, HPos.RIGHT);
 
 			ColumnConstraints column1 = new ColumnConstraints();
@@ -166,18 +175,18 @@ public final class SandboxScene extends Scene {
 			System.out.println("Sandbox Scene things");
 
 			GridWorld.gridButtons[2][2].setText("Eve!");
-			//Eve.setVisible(true);
+			// Eve.setVisible(true);
 
-			//GridWorld.gridButtons[2][2].setText("Eve!");
+			// GridWorld.gridButtons[2][2].setText("Eve!");
 			GridWorld.gridButtons[2][2].setText("");
 			GridWorld.gridButtons[2][2].setGraphic(EveDown);
-			ArrayList<String> karelCode = KarelTable.getInstance().getKarelCode();
+			ArrayList<String> karelCode = KarelTable.getInstance()
+					.getKarelCode();
 			interpreter = new Interpreter(karelCode, getWorld());
-			//imageEve.setId("Eve!");
-			//GridWorld.gridButtons[2][2].setGraphic(imageEve);
-			//Eve.setVisible(true);
-			
-			
+			// imageEve.setId("Eve!");
+			// GridWorld.gridButtons[2][2].setGraphic(imageEve);
+			// Eve.setVisible(true);
+
 			//
 			// //world.moveEveEast();
 			// world.moveEve();
@@ -206,13 +215,12 @@ public final class SandboxScene extends Scene {
 			FORWARD.setGraphic(imageRight);
 			PLAY.setGraphic(imagePlay);
 			RESET.setGraphic(imageReset);
-			
+
 			PAUSE.setTooltip(new Tooltip("PAUSE"));
 			FORWARD.setTooltip(new Tooltip("FORWARD"));
 			RESET.setTooltip(new Tooltip("RESET"));
 			PLAY.setTooltip(new Tooltip("PLAY"));
-			
-			
+
 			PAUSE.setDisable(true);
 			FORWARD.setDisable(true);
 
@@ -223,54 +231,57 @@ public final class SandboxScene extends Scene {
 		}
 
 		public static SandboxPane getInstance() {
-			return instanceOfMainMenuPane;
+			return instanceOfSandboxPane;
 		}
-		
-		/*@SuppressWarnings("unused")
-		public static void addToScene(Node child, int i, int j, int k, int l){
-			
-		}*/
+
+		/*
+		 * @SuppressWarnings("unused") public static void addToScene(Node child,
+		 * int i, int j, int k, int l){
+		 * 
+		 * }
+		 */
 	}
 
-	private static SandboxScene instanceOfSandboxScene = new SandboxScene(SandboxPane.getInstance(), MainApp.WINDOW_WIDTH,MainApp.WINDOW_HEIGHT);
+	private static SandboxScene instanceOfSandboxScene = new SandboxScene(
+			SandboxPane.getInstance(), MainApp.WINDOW_WIDTH,
+			MainApp.WINDOW_HEIGHT);
 
-	/*public static SandboxPane getSandbox(){
-		return 
-	}*/
-	
-	public static ImageView getEveUpI(){
-		return new ImageView(new Image("./Images/eve_up.png")); 
+	/*
+	 * public static SandboxPane getSandbox(){ return }
+	 */
+
+	public static ImageView getEveUpI() {
+		return new ImageView(new Image("./Images/eve_up.png"));
 	}
-	
-	public static ImageView getEveDownI(){
-		return new ImageView(new Image("./Images/eve_down2.png")); 
+
+	public static ImageView getEveDownI() {
+		return new ImageView(new Image("./Images/eve_down2.png"));
 	}
-	
-	public static ImageView getEveLeftI(){
-		return new ImageView(new Image("./Images/eve_left.png")); 
+
+	public static ImageView getEveLeftI() {
+		return new ImageView(new Image("./Images/eve_left.png"));
 	}
-	
-	public static ImageView getEveRightI(){
-		return new ImageView(new Image("./Images/eve_right.png")); 
-	} 
-	
-	public static ImageView getShrubI(){
+
+	public static ImageView getEveRightI() {
+		return new ImageView(new Image("./Images/eve_right.png"));
+	}
+
+	public static ImageView getShrubI() {
 		return new ImageView(new Image("./Images/bush.png"));
 	}
-	
-	public static ImageView getBambooI(){
-		return new ImageView(new Image("./Images/bamboo.png")); 
+
+	public static ImageView getBambooI() {
+		return new ImageView(new Image("./Images/bamboo.png"));
 	}
-	
-	public static ImageView getFriendI(){
-		return new ImageView(new Image("./Images/friend.png")); 
+
+	public static ImageView getFriendI() {
+		return new ImageView(new Image("./Images/friend.png"));
 	}
-	
-	public static ImageView getTreeI(){
+
+	public static ImageView getTreeI() {
 		return new ImageView(new Image("./Images/tree.png"));
 	}
-	
-	
+
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
@@ -301,5 +312,26 @@ public final class SandboxScene extends Scene {
 
 	public static void setInterpreter(Interpreter interpreter) {
 		SandboxScene.interpreter = interpreter;
+	}
+
+	public static void loadUpCampaigns() {
+		File campaignsDir = new File("data" + File.separator + "campaigns"
+				+ File.separator);
+		if (!campaignsDir.isDirectory())
+			return;
+		File[] listOfFiles = campaignsDir.listFiles();
+		ArrayList<String> Campaigns = new ArrayList<String>();
+
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (!listOfFiles[i].isDirectory()
+						&& listOfFiles[i].getName().contains("SandboxWorld")) {
+					Campaigns.add(listOfFiles[i].getName());
+					campaigns.add(new Campaign(listOfFiles[i].getName(),
+							"Default description."));
+				}
+			}
+		}
+
 	}
 }
