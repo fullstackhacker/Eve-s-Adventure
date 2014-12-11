@@ -67,7 +67,7 @@ public final class SandboxScene extends Scene {
 	public static final class SandboxPane extends GridPane {
 		
 
-		private static SandboxPane instanceOfMainMenuPane = new SandboxPane();
+		private static SandboxPane instanceOfSandboxPane = new SandboxPane();
 
 		//private ImageView imageBack = new ImageView(new Image(
 		//		"./Images/ArrowLeft.png"));
@@ -223,7 +223,7 @@ public final class SandboxScene extends Scene {
 		}
 
 		public static SandboxPane getInstance() {
-			return instanceOfMainMenuPane;
+			return instanceOfSandboxPane;
 		}
 		
 		/*@SuppressWarnings("unused")

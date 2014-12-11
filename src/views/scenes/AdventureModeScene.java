@@ -53,7 +53,7 @@ public final class AdventureModeScene extends Scene {
 	
 	public static final class AdventureModePane extends GridPane {
 
-		public static AdventureModePane instanceOfMainMenuPane = new AdventureModePane();
+		public static AdventureModePane instanceOfAdventurePane = new AdventureModePane();
 
 		//private ImageView imageBack = new ImageView(new Image(
 		//		"./Images/ArrowLeft.png"));
@@ -198,7 +198,7 @@ public final class AdventureModeScene extends Scene {
 		}
 
 		public static AdventureModePane getInstance() {
-			return instanceOfMainMenuPane;
+			return instanceOfAdventurePane;
 		}
 	}
 
