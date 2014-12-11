@@ -825,20 +825,28 @@ public class World implements Serializable {
 		
 		switch(this.eve.getDirection()){
 		case Coordinate.UP:
-			
+			if(this.getSquareAt(eveLocation).hasUpWall()) return false;
+			possibleFriendLocation = new Coordinate(eveLocation.getX(), eveLocation.getY() + 1);
 			break; 
 		case Coordinate.DOWN:
-			
+			if(this.getSquareAt(eveLocation).hasDownWall()) return false; 
+			possibleFriendLocation = new Coordinate(eveLocation.getX(), eveLocation.getY() - 1);
 			break; 
 		case Coordinate.RIGHT: 
-			
+			if(this.getSquareAt(eveLocation).hasRightWall()) return false; 
+			possibleFriendLocation = new Coordinate(eveLocation.getX() + 1, eveLocation.getY());
 			break; 
 		case Coordinate.LEFT: 
-			
+			if(this.getSquareAt(eveLocation).hasLeftWall()) return false;
+			possibleFriendLocation = new Coordinate(eveLocation.getX() - 1, eveLocation.getY());
 			break;
 		default: 
-			return false; 
+			throw new IllegalValueException("Eve is facing in an invalid direction");
 		}
+		
+		if(!verifyCoordinate(possibleFriendLocation)) return false; 
+		
+		if(this.getSquareAt(possibleFriendLocation).hasCreature()) return true;
 		return false; 
 	}
 
