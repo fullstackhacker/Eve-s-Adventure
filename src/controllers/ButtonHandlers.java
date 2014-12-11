@@ -604,7 +604,7 @@ public final class ButtonHandlers {
 			popup("Shrub");
 		} else
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setGraphic(SandboxScene.Bush);
+					.getYCoordinate()].setGraphic(SandboxScene.getShrubI());
 		Shrub shrub = new Shrub(4, false);
 		shrub.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
 				GridWorld.getYCoordinate()));
@@ -652,7 +652,7 @@ public final class ButtonHandlers {
 			popup("Bamboo");
 		} else {
 			GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-					.getYCoordinate()].setGraphic(SandboxScene.Bamboo);
+					.getYCoordinate()].setGraphic(SandboxScene.getBambooI());
 			Bamboo bamboo = new Bamboo(4);
 			bamboo.setCoordinates(new Coordinate(GridWorld.getXCoordinate(),
 					GridWorld.getYCoordinate()));
@@ -714,18 +714,18 @@ public final class ButtonHandlers {
 		} else {
 			if (GridWorld.getInstance().getWorld().getEve().getDirection() == Coordinate.UP) {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.EveDown);
+						.getYCoordinate()].setGraphic(SandboxScene.getEveDownI());
 			} else if (GridWorld.getInstance().getWorld().getEve()
 					.getDirection() == Coordinate.LEFT) {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.EveLeft);
+						.getYCoordinate()].setGraphic(SandboxScene.getEveLeftI());
 			} else if (GridWorld.getInstance().getWorld().getEve()
 					.getDirection() == Coordinate.RIGHT) {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.EveRight);
+						.getYCoordinate()].setGraphic(SandboxScene.getEveRightI());
 			} else {
 				GridWorld.gridButtons[GridWorld.getXCoordinate()][GridWorld
-						.getYCoordinate()].setGraphic(SandboxScene.EveUp);
+						.getYCoordinate()].setGraphic(SandboxScene.getEveUpI());
 			}
 
 			Coordinate cords = new Coordinate(GridWorld.getXCoordinate(),

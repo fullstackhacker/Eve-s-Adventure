@@ -233,6 +233,30 @@ public final class SandboxScene extends Scene {
 		return 
 	}*/
 	
+	public static ImageView getEveUpI(){
+		return new ImageView(new Image("./Images/eve_up.png")); 
+	}
+	
+	public static ImageView getEveDownI(){
+		return new ImageView(new Image("./Images/eve_down2.png")); 
+	}
+	
+	public static ImageView getEveLeftI(){
+		return new ImageView(new Image("./Images/eve_left.png")); 
+	}
+	
+	public static ImageView getEveRightI(){
+		return new ImageView(new Image("./Images/eve_right.png")); 
+	} 
+	
+	public static ImageView getShrubI(){
+		return new ImageView(new Image("./Images/bush.png"));
+	}
+	
+	public static ImageView getBambooI(){
+		return new ImageView(new Image("./Images/bamboo.png")); 
+	}
+	
 	private SandboxScene(Parent arg0, double arg1, double arg2) {
 		super(arg0, arg1, arg2);
 	}
